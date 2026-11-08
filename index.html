@@ -164,14 +164,17 @@
       ["Axia", "Hatchback ekonomi"], ["Bezza", "Sedan jimat"], ["Myvi", "Hatchback popular"],
       ["Ativa", "SUV kompak"], ["Alza", "MPV 7 tempat duduk"], ["Aruz", "SUV 7 tempat duduk"],
     ];
+    const PAGES = { Axia: "axia/" };   // model yang ada laman sendiri
     // ==================================
     const wa = (msg) => `https://wa.me/${WA}?text=${encodeURIComponent(msg)}`;
     document.querySelectorAll("[data-wa]").forEach((a) => { a.href = wa(a.dataset.wa); a.target = "_blank"; a.rel = "noopener"; });
     for (const k in LINKS) { const a = document.getElementById(k); a.href = LINKS[k]; a.target = "_blank"; a.rel = "noopener"; }
     const box = document.getElementById("models");
     MODELS.forEach(([n, d]) => {
-      const a = document.createElement("a"); a.className = "model"; a.href = wa(`Salam Shah, saya nak tanya harga & promo Perodua ${n}.`); a.target = "_blank"; a.rel = "noopener";
-      a.innerHTML = `<b>${n}</b><small>${d}</small><span>Tanya harga →</span>`; box.appendChild(a);
+      const page = PAGES[n];
+      const a = document.createElement("a"); a.className = "model";
+      if (page) { a.href = page; } else { a.href = wa(`Salam Shah, saya nak tanya harga & promo Perodua ${n}.`); a.target = "_blank"; a.rel = "noopener"; }
+      a.innerHTML = `<b>${n}</b><small>${d}</small><span>${page ? "Lihat harga →" : "Tanya harga →"}</span>`; box.appendChild(a);
     });
     const $ = (id) => document.getElementById(id);
     const rm = (v) => "RM" + Math.round(v).toLocaleString("en-US");
