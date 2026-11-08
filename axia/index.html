@@ -193,7 +193,7 @@
     // ===========================================================
     const inst = (loan, yrs, rate = RATE) => loan * (1 + rate / 100 * yrs) / (yrs * 12);
     VARIANTS.forEach((v) => {
-      v.noins = v.body + FEES.roadtax + FEES.reg + FEES.claim;   // OTR tanpa insurans
+      v.rt = v.rt ?? FEES.roadtax; v.noins = v.body + v.rt + FEES.reg + FEES.claim;   // OTR tanpa insurans
       v.otr = Math.round((v.noins + v.ins) * 100) / 100;          // OTR anggaran
       v.dep = Math.round(v.otr * 10) / 100;                       // deposit 10%
       v.m9 = inst(v.loan, 9); v.m7 = inst(v.loan, 7); v.mfull = inst(v.otr, 9);
@@ -223,7 +223,7 @@
       el.innerHTML = `<div class="vh"><div class="vn">${v.name}</div>${v.hot ? `<span class="tag">${v.hot}</span>` : ""}</div>
         <div class="bd">
           <div><span>Harga body</span><b>${rm(v.body, 2)}</b></div>
-          <div><span>Road tax (1 tahun)</span><b>${rm(FEES.roadtax, 2)}</b></div>
+          <div><span>Road tax (1 tahun)</span><b>${rm(v.rt, 2)}</b></div>
           <div><span>Registration fee</span><b>${rm(FEES.reg, 2)}</b></div>
           <div><span>Ownership claim</span><b>${rm(FEES.claim, 2)}</b></div>
           <div class="sub"><span>OTR tanpa insurans</span><b>${rm(v.noins, 2)}</b></div>
