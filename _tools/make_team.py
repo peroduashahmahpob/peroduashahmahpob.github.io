@@ -2,13 +2,14 @@
 Guna: python3 _tools/make_team.py   (dijalankan dari folder repo). Tambah ahli baru dalam TEAM di bawah."""
 import os, re, sys
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-MODELS = [d for d in ("axia", "bezza", "myvi", "ativa", "traz", "alza", "aruz") if os.path.isfile(f"{ROOT}/{d}/index.html")]
+MODELS = [d for d in ("axia", "bezza", "myvi", "ativa", "traz", "alza", "aruz", "kalkulator") if os.path.isfile(f"{ROOT}/{d}/index.html")]
 TEAM = [
     dict(slug="aisyah", first="Aisyah", full="AISYAH", wa="60182031020", photo="img/aisyah.jpg", tagline="PAKAR LOAN ANDA"),
     dict(slug="fendi", first="Fendi", full="FENDI", wa="60189038194", photo="img/fendi.jpg", tagline="PAKAR LOAN ANDA"),
 ]
 def common(s, m):
     s = s.replace("60137258194", m["wa"])
+    s = s.replace('const ADVISOR = "Shah";', f'const ADVISOR = "{m["first"]}";')
     s = s.replace("Salam Shah,", f"Salam {m['first']},").replace("WhatsApp Shah", f"WhatsApp {m['first']}")
     s = s.replace("| Shah Mahpob</title>", f"| {m['first']} · Team Shah Mahpob</title>")
     s = s.replace("Tanya Shah Mahpob, Sales Advisor Perodua, terus di WhatsApp.", f"Tanya {m['first']} (Team Shah Mahpob), Sales Advisor Perodua, terus di WhatsApp.")
