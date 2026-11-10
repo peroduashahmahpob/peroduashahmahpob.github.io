@@ -59,6 +59,14 @@
     .btn { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; min-height: 54px; border-radius: 16px; font-weight: 800; font-size: 16px; border: 0; cursor: pointer; text-align: center; padding: 10px 16px; }
     .btn.wa { background: var(--gr); color: #06290f; } .btn.ghost { background: var(--card); border: 2px solid var(--ln); color: var(--w); }
     .acts { display: grid; gap: 10px; margin-top: 16px; }
+    .pk { font-size: 13px; font-weight: 800; letter-spacing: .1em; color: var(--g); text-transform: uppercase; }
+    .pk b { color: var(--y); }
+    .exp { display: grid; grid-template-columns: 64px minmax(0,1fr); gap: 12px; align-items: center; padding: 14px; border-radius: 18px; background: #26211e; border: 2px solid var(--ln); }
+    .exp img { width: 64px; height: 64px; border-radius: 16px; object-fit: cover; }
+    .exp small { display: block; font-size: 11px; font-weight: 900; letter-spacing: .12em; color: var(--o); text-transform: uppercase; }
+    .exp b { display: block; font-size: 20px; font-weight: 900; }
+    .exp div a { font-size: 12px; font-weight: 700; color: var(--g); text-decoration: underline; word-break: break-all; }
+    .exp .btn { grid-column: 1 / -1; min-height: 50px; font-size: 15px; }
     .note { margin-top: 14px; font-size: 12px; color: var(--g); }
     footer { margin-top: 36px; padding: 22px 0 10px; border-top: 2px solid var(--ln); text-align: center; color: var(--g); font-size: 12px; }
     footer b { color: var(--w); letter-spacing: .12em; }
@@ -104,7 +112,17 @@
       </div>
       <div class="save" id="save"></div>
       <div class="acts">
-        <a class="btn wa" id="waCalc" href="#" target="_blank" rel="noopener">Hantar kiraan ni ke WhatsApp Fendi</a>
+        <div class="pk">Hantar kiraan ni kepada <b>Pakar Loan Anda</b></div>
+        <div class="exp">
+          <img src="/aisyah/img/aisyah.jpg" alt="Aisyah" width="64" height="64" />
+          <div><small>Pakar Loan Anda</small><b>AISYAH</b><a href="https://is.gd/aisyahteamshahmahpob" target="_blank" rel="noopener">Lihat laman Aisyah ↗</a></div>
+          <a class="btn wa" id="waA" href="#" target="_blank" rel="noopener">Hantar kiraan ke WhatsApp Aisyah</a>
+        </div>
+        <div class="exp">
+          <img src="/fendi/img/fendi.jpg" alt="Fendi" width="64" height="64" />
+          <div><small>Pakar Loan Anda</small><b>FENDI</b><a href="https://is.gd/fenditeamshahmahpob" target="_blank" rel="noopener">Lihat laman Fendi ↗</a></div>
+          <a class="btn wa" id="waF" href="#" target="_blank" rel="noopener">Hantar kiraan ke WhatsApp Fendi</a>
+        </div>
         <a class="btn ghost" id="pageLink" href="#">Lihat laman model →</a>
       </div>
       <p class="note">Anggaran sahaja. Profit bank dikira dengan kadar rata (flat rate): loan × kadar × tahun. Kadar sebenar ikut bank dan kelayakan (scoring) awak. Insurans dan OTR ialah anggaran.</p>
@@ -157,7 +175,9 @@
       [7, 9].forEach((y) => { const p = loan * r / 100 * y, t = loan + p, mo = t / (y * 12); out[y] = { p, t, mo };
         $("m" + y).innerHTML = `${rm(mo)}<small>/bln</small>`; $("p" + y).textContent = rm(p); $("t" + y).textContent = rm(t); });
       $("save").innerHTML = loan > 0 ? `Pilih <b>7 tahun</b>: bulanan lebih ${rm(out[7].mo - out[9].mo)}, tapi <b>jimat profit bank ${rm(out[9].p - out[7].p)}</b> berbanding 9 tahun.` : "Tiada loan, tiada profit bank. 👍";
-      $("waCalc").href = wa(`Salam ${ADVISOR}, saya guna Loan Calculator: Perodua ${v.name}, OTR anggaran ${rm(v.otr, 2)}, downpayment ${rm(dp)}, loan ${rm(loan)}, kadar ${r}%.\n• 7 tahun: ${rm(out[7].mo)}/bulan (profit bank ${rm(out[7].p)})\n• 9 tahun: ${rm(out[9].mo)}/bulan (profit bank ${rm(out[9].p)})\nBoleh semak kelayakan saya?`);
+      const msg = (nm) => `Salam ${nm}, saya guna Loan Calculator: Perodua ${v.name}, OTR anggaran ${rm(v.otr, 2)}, downpayment ${rm(dp)}, loan ${rm(loan)}, kadar ${r}%.\n• 7 tahun: ${rm(out[7].mo)}/bulan (profit bank ${rm(out[7].p)})\n• 9 tahun: ${rm(out[9].mo)}/bulan (profit bank ${rm(out[9].p)})\nBoleh semak kelayakan saya?`;
+      $("waA").href = `https://wa.me/60182031020?text=${encodeURIComponent(msg("Aisyah"))}`;
+      $("waF").href = `https://wa.me/60189038194?text=${encodeURIComponent(msg("Fendi"))}`;
     }
     $("vsel").addEventListener("input", () => pickVariant(true));
     $("dp").addEventListener("input", calc);
