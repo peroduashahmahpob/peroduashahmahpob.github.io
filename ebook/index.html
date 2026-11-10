@@ -1,0 +1,484 @@
+<!doctype html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Rahsia & Panduan Loan Approved! | Ebook Shah Mahpob</title>
+  <meta name="description" content="Ebook percuma Shah Mahpob: rahsia & panduan loan kereta lulus, 23 topik dari bank terbaik hingga CCRIS, dokumen, NCD, trade-in, dan bonus cara elak di scam." />
+  <meta property="og:title" content="Rahsia & Panduan Loan APPROVED!" />
+  <meta property="og:description" content="Ebook pertama bocor rahsia loan lulus dengan cemerlang · Bonus: cara elak di scam · Shah Mahpob" />
+  <meta property="og:image" content="../img/shah.jpg" />
+  <meta name="theme-color" content="#0a1430" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    :root { --bg: #0a1430; --bg2: #0f1d44; --card: #13244f; --ln: #23396f; --y: #ffd23f; --b: #4f8cff; --w: #f3f6ff; --g: #a8b5d6; --r: #ff5a5f; --gr: #2fd27a; --o: #ff9f43; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--w); font-family: "Montserrat", system-ui, sans-serif; line-height: 1.55; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+    a { color: inherit; }
+    .bebas { font-family: "Bebas Neue", "Montserrat", sans-serif; letter-spacing: .02em; font-weight: 400; }
+    /* top bar */
+    .bar { position: fixed; top: 0; left: 0; right: 0; z-index: 30; display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 10px 16px; background: rgba(10,20,48,.86); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--ln); transform: translateY(-100%); transition: transform .35s; }
+    .bar.show { transform: none; }
+    .bar b { font-family: "Bebas Neue", sans-serif; font-weight: 400; font-size: 20px; letter-spacing: .04em; } .bar b span { color: var(--y); }
+    .bar button { border: 0; background: var(--y); color: #10204a; font: 800 13px "Montserrat", sans-serif; padding: 8px 14px; border-radius: 999px; cursor: pointer; }
+    .prog { position: fixed; top: 0; left: 0; height: 4px; width: 100%; background: linear-gradient(90deg, var(--y), var(--o)); transform-origin: 0 50%; transform: scaleX(0); z-index: 31; }
+    /* toc overlay */
+    .toc { position: fixed; inset: 0; z-index: 40; background: rgba(6,12,30,.97); padding: 70px 20px 30px; overflow-y: auto; opacity: 0; pointer-events: none; transition: opacity .3s; }
+    .toc.open { opacity: 1; pointer-events: auto; }
+    .toc h2 { font-family: "Bebas Neue", sans-serif; font-weight: 400; font-size: 40px; color: var(--y); }
+    .toc ol { list-style: none; margin-top: 12px; display: grid; gap: 6px; max-width: 520px; }
+    .toc a { display: flex; gap: 12px; align-items: center; padding: 10px 12px; border-radius: 12px; background: var(--card); text-decoration: none; font-weight: 700; font-size: 14px; }
+    .toc a span { flex: none; width: 30px; height: 30px; border-radius: 8px; background: var(--y); color: #10204a; display: grid; place-items: center; font-weight: 900; font-size: 13px; }
+    .toc .x { position: fixed; top: 14px; right: 16px; border: 0; background: var(--card); color: var(--w); width: 42px; height: 42px; border-radius: 50%; font-size: 20px; cursor: pointer; }
+    /* cover */
+    .cover { position: relative; min-height: 100svh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 40px 20px 60px; overflow: hidden; background: radial-gradient(ellipse 90% 60% at 50% 30%, #1c3f9a 0%, #0a1430 70%); }
+    .cover::before { content: ""; position: absolute; inset: -20%; background: repeating-linear-gradient(115deg, rgba(79,140,255,.07) 0 2px, transparent 2px 40px); animation: drift 14s linear infinite; }
+    @keyframes drift { to { transform: translateX(80px); } }
+    .beam { position: absolute; top: 18%; width: 140%; height: 120px; left: -20%; background: linear-gradient(90deg, transparent, rgba(79,140,255,.35), transparent); filter: blur(30px); animation: beam 5s ease-in-out infinite; }
+    @keyframes beam { 0%, 100% { transform: translateX(-30%) rotate(-8deg); } 50% { transform: translateX(30%) rotate(-8deg); } }
+    .cover > * { position: relative; }
+    .cv-k { font-weight: 900; font-size: 13px; letter-spacing: .24em; color: var(--g); opacity: 0; animation: up .7s .2s forwards; }
+    .cv-t { margin-top: 8px; font-family: "Bebas Neue", sans-serif; font-weight: 400; font-size: 54px; line-height: .95; opacity: 0; animation: up .8s .4s forwards; }
+    .stamp { margin-top: 6px; font-family: "Bebas Neue", sans-serif; font-size: 92px; line-height: 1; color: var(--y); text-shadow: 0 0 30px rgba(255,210,63,.55); opacity: 0; animation: slam .55s 1.1s cubic-bezier(.2,1.6,.4,1) forwards; }
+    @keyframes slam { 0% { opacity: 0; transform: scale(3) rotate(-14deg); } 100% { opacity: 1; transform: scale(1) rotate(-4deg); } }
+    .cv-s { margin-top: 10px; font-weight: 800; font-size: 14px; letter-spacing: .1em; color: var(--w); opacity: 0; animation: up .7s 1.6s forwards; }
+    .cv-p { margin-top: 26px; width: 150px; height: 150px; border-radius: 50%; object-fit: cover; border: 5px solid var(--y); box-shadow: 0 0 0 10px rgba(255,210,63,.15), 0 20px 50px rgba(0,0,0,.5); opacity: 0; animation: pop .7s 1.9s cubic-bezier(.2,1.5,.4,1) forwards; }
+    .cv-n { margin-top: 12px; font-family: "Bebas Neue", sans-serif; font-size: 28px; letter-spacing: .08em; opacity: 0; animation: up .6s 2.2s forwards; }
+    .bonus { margin-top: 16px; display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; border-radius: 999px; background: var(--r); font-weight: 900; font-size: 14px; letter-spacing: .06em; opacity: 0; animation: up .6s 2.5s forwards, pulse 1.8s 3.1s ease-in-out infinite; }
+    @keyframes pulse { 50% { box-shadow: 0 0 0 10px rgba(255,90,95,0); transform: scale(1.04); } 0%, 100% { box-shadow: 0 0 0 0 rgba(255,90,95,.6); } }
+    .go { margin-top: 30px; display: inline-flex; flex-direction: column; align-items: center; gap: 4px; text-decoration: none; font-weight: 800; font-size: 13px; color: var(--g); opacity: 0; animation: up .6s 2.8s forwards; }
+    .go i { font-style: normal; font-size: 26px; animation: bob 1.4s ease-in-out infinite; }
+    @keyframes up { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
+    @keyframes pop { from { opacity: 0; transform: scale(.4); } to { opacity: 1; transform: none; } }
+    @keyframes bob { 50% { transform: translateY(6px); } }
+    /* pages */
+    main { max-width: 560px; margin: 0 auto; padding: 0 16px 40px; }
+    .page { position: relative; margin-top: 26px; padding: 26px 20px 24px; border-radius: 26px; background: linear-gradient(170deg, var(--bg2), var(--card)); border: 1px solid var(--ln); overflow: hidden; scroll-margin-top: 70px; }
+    .num { position: absolute; top: -6px; right: 10px; font-family: "Bebas Neue", sans-serif; font-size: 96px; line-height: 1; color: rgba(255,210,63,.13); pointer-events: none; }
+    .tag { display: inline-block; padding: 5px 12px; border-radius: 999px; background: var(--y); color: #10204a; font-size: 11px; font-weight: 900; letter-spacing: .14em; }
+    .page h2 { margin-top: 10px; font-family: "Bebas Neue", sans-serif; font-weight: 400; font-size: 38px; line-height: 1; letter-spacing: .02em; }
+    .page h2 em { font-style: normal; color: var(--y); }
+    .lead { margin-top: 10px; font-weight: 800; color: var(--y); font-size: 15px; }
+    .page p { margin-top: 10px; font-size: 15px; color: #dbe3f7; }
+    .page p b, .page li b { color: var(--w); }
+    .ani { opacity: 0; transform: translateY(22px); transition: opacity .6s ease, transform .6s cubic-bezier(.2,.9,.3,1.2); transition-delay: calc(var(--i, 0) * 90ms); }
+    .page.in .ani { opacity: 1; transform: none; }
+    .box { margin-top: 14px; padding: 14px 16px; border-radius: 18px; background: rgba(255,255,255,.04); border: 1px solid var(--ln); }
+    .box h4 { font-size: 15px; font-weight: 900; }
+    .box p { margin-top: 6px; font-size: 14px; }
+    .tip { margin-top: 14px; padding: 14px 16px 14px 48px; position: relative; border-radius: 16px; background: rgba(255,210,63,.1); border: 1px solid rgba(255,210,63,.4); font-size: 14px; font-weight: 600; }
+    .tip::before { content: "💡"; position: absolute; left: 16px; top: 13px; font-size: 18px; }
+    .warn { margin-top: 14px; padding: 14px 16px 14px 48px; position: relative; border-radius: 16px; background: rgba(255,90,95,.1); border: 1px solid rgba(255,90,95,.45); font-size: 14px; font-weight: 600; }
+    .warn::before { content: "⚠️"; position: absolute; left: 16px; top: 13px; font-size: 18px; }
+    ul.ck, ul.xx { list-style: none; margin-top: 12px; display: grid; gap: 8px; }
+    ul.ck li, ul.xx li { position: relative; padding: 10px 12px 10px 44px; border-radius: 14px; background: rgba(255,255,255,.04); font-size: 14px; font-weight: 600; }
+    ul.ck li::before, ul.xx li::before { position: absolute; left: 12px; top: 9px; width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; font-size: 13px; font-weight: 900; }
+    ul.ck li::before { content: "✓"; background: var(--gr); color: #06301a; }
+    ul.xx li::before { content: "✕"; background: var(--r); color: #fff; }
+    .page.in ul.xx li::before { animation: shake .5s calc(var(--i, 0) * 90ms + .4s); }
+    @keyframes shake { 20%, 60% { transform: rotate(-14deg); } 40%, 80% { transform: rotate(14deg); } }
+    .grid2 { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 10px; margin-top: 12px; }
+    .medal { margin-top: 12px; display: grid; grid-template-columns: 56px minmax(0,1fr); gap: 12px; align-items: start; padding: 14px; border-radius: 18px; background: rgba(255,255,255,.04); border: 1px solid var(--ln); }
+    .medal .m { font-size: 40px; line-height: 1; text-align: center; }
+    .page.in .medal .m { animation: spin .9s calc(var(--i, 0) * 90ms + .2s) cubic-bezier(.2,1.4,.4,1) both; }
+    @keyframes spin { from { transform: rotateY(180deg) scale(.4); opacity: 0; } to { transform: none; opacity: 1; } }
+    .medal h4 { font-size: 15px; font-weight: 900; } .medal p { margin-top: 4px; font-size: 13px; }
+    .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+    .chips span { padding: 5px 10px; border-radius: 999px; background: rgba(79,140,255,.18); border: 1px solid rgba(79,140,255,.4); font-size: 12px; font-weight: 800; }
+    .flow { display: flex; align-items: center; gap: 8px; margin-top: 14px; }
+    .flow div { flex: 1; text-align: center; padding: 12px 6px; border-radius: 14px; background: rgba(255,255,255,.05); border: 1px solid var(--ln); font-size: 13px; font-weight: 800; }
+    .flow i { font-style: normal; color: var(--y); font-weight: 900; }
+    .flow .bad { border-color: var(--r); color: #ffb3b5; } .flow .good { border-color: var(--gr); color: #9ff0c4; }
+    .scale { display: grid; grid-template-columns: repeat(7, minmax(0,1fr)); gap: 4px; margin-top: 14px; }
+    .scale div { text-align: center; padding: 10px 0; border-radius: 10px; font-family: "Bebas Neue", sans-serif; font-size: 26px; transform: scale(.3); opacity: 0; transition: transform .5s cubic-bezier(.2,1.6,.4,1), opacity .4s; transition-delay: calc(var(--k) * 110ms + .3s); }
+    .page.in .scale div { transform: none; opacity: 1; }
+    .scale + small { display: flex; justify-content: space-between; margin-top: 6px; font-size: 11px; font-weight: 800; color: var(--g); }
+    .vs { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 10px; margin-top: 14px; }
+    .vs > div { padding: 14px 12px; border-radius: 18px; background: rgba(255,255,255,.04); border: 1px solid var(--ln); }
+    .vs h4 { font-family: "Bebas Neue", sans-serif; font-weight: 400; font-size: 24px; }
+    .vs ul { list-style: none; margin-top: 6px; display: grid; gap: 6px; font-size: 13px; font-weight: 600; }
+    .vs .l h4 { color: #ffb3b5; } .vs .r h4 { color: #9ff0c4; }
+    .vs .l li::before { content: "✕ "; color: var(--r); font-weight: 900; } .vs .r li::before { content: "✓ "; color: var(--gr); font-weight: 900; }
+    .bars { margin-top: 14px; display: grid; gap: 8px; }
+    .bars .row { display: grid; grid-template-columns: 96px minmax(0,1fr); gap: 10px; align-items: center; font-size: 13px; font-weight: 800; }
+    .bars .t { height: 30px; border-radius: 10px; background: rgba(255,255,255,.06); overflow: hidden; }
+    .bars .f { height: 100%; width: 0; border-radius: 10px; display: flex; align-items: center; padding-left: 10px; font-size: 12px; font-weight: 900; color: #10204a; white-space: nowrap; transition: width 1s cubic-bezier(.2,.9,.3,1); transition-delay: calc(var(--k) * 120ms + .3s); }
+    .tabs { display: flex; gap: 6px; margin-top: 14px; flex-wrap: wrap; }
+    .tabs button { flex: 1; min-width: 90px; padding: 10px 8px; border-radius: 12px; border: 1px solid var(--ln); background: rgba(255,255,255,.04); color: var(--w); font: 800 12px "Montserrat", sans-serif; cursor: pointer; }
+    .tabs button[aria-selected="true"] { background: var(--y); color: #10204a; border-color: var(--y); }
+    .tabp { display: none; margin-top: 10px; padding: 14px 16px; border-radius: 16px; background: rgba(255,255,255,.04); border: 1px solid var(--ln); font-size: 14px; animation: up .4s; }
+    .tabp.on { display: block; }
+    .steps { counter-reset: s; list-style: none; margin-top: 12px; display: grid; gap: 8px; position: relative; }
+    .steps li { position: relative; padding: 10px 12px 10px 52px; border-radius: 14px; background: rgba(255,255,255,.04); font-size: 14px; font-weight: 600; }
+    .steps li::before { counter-increment: s; content: counter(s); position: absolute; left: 12px; top: 8px; width: 28px; height: 28px; border-radius: 9px; background: var(--b); color: #fff; display: grid; place-items: center; font-weight: 900; font-size: 13px; }
+    .stack { position: relative; height: 210px; margin-top: 16px; }
+    .stack div { position: absolute; left: 50%; width: 78%; height: 46px; margin-left: -39%; border-radius: 12px; display: flex; align-items: center; gap: 10px; padding: 0 14px; font-weight: 900; font-size: 14px; color: #10204a; box-shadow: 0 8px 18px rgba(0,0,0,.35); opacity: 0; transform: translateY(-80px) rotate(-6deg); transition: all .6s cubic-bezier(.2,1.3,.4,1); transition-delay: calc(var(--k) * 260ms + .3s); }
+    .page.in .stack div { opacity: 1; transform: none; }
+    .mini { margin-top: 14px; padding: 16px; border-radius: 20px; background: rgba(0,0,0,.25); border: 2px solid var(--y); }
+    .mini label { display: block; margin-top: 10px; font-size: 11px; font-weight: 900; letter-spacing: .12em; color: var(--g); text-transform: uppercase; }
+    .mini label:first-child { margin-top: 0; }
+    .mini input, .mini select { width: 100%; margin-top: 4px; min-height: 48px; padding: 0 12px; border-radius: 12px; border: 1px solid var(--ln); background: var(--bg); color: var(--w); font: 800 16px "Montserrat", sans-serif; -webkit-appearance: none; appearance: none; }
+    .mini input:focus, .mini select:focus { outline: none; border-color: var(--y); }
+    .mres { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 8px; margin-top: 14px; }
+    .mres div { padding: 12px; border-radius: 14px; background: var(--card); text-align: center; }
+    .mres small { display: block; font-size: 11px; font-weight: 800; color: var(--g); letter-spacing: .08em; }
+    .mres b { font-family: "Bebas Neue", sans-serif; font-weight: 400; font-size: 32px; color: var(--y); }
+    .sal { margin-top: 14px; display: grid; gap: 6px; }
+    .sal .r { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 6px; transition: transform .3s; }
+    .sal .r span { padding: 9px 12px; border-radius: 10px; background: rgba(255,255,255,.05); font-size: 13px; font-weight: 800; }
+    .sal .r span:last-child { color: var(--y); }
+    .sal .r.hd span { background: var(--b); color: #fff; font-size: 11px; letter-spacing: .1em; }
+    .sal .r.hit span { background: var(--y); color: #10204a; } .sal .r.hit { transform: scale(1.03); }
+    .tick { list-style: none; margin-top: 12px; display: grid; gap: 8px; }
+    .tick li { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-radius: 14px; background: rgba(255,255,255,.04); border: 1px solid var(--ln); font-size: 14px; font-weight: 700; cursor: pointer; user-select: none; transition: background .25s, border-color .25s; }
+    .tick li i { flex: none; width: 26px; height: 26px; border-radius: 8px; border: 2px solid var(--g); display: grid; place-items: center; font-style: normal; font-weight: 900; color: transparent; transition: all .25s cubic-bezier(.2,1.6,.4,1); }
+    .tick li.on { background: rgba(47,210,122,.12); border-color: var(--gr); }
+    .tick li.on i { background: var(--gr); border-color: var(--gr); color: #06301a; transform: scale(1.15); }
+    .tick-c { margin-top: 8px; font-size: 13px; font-weight: 800; color: var(--g); }
+    .lcalc { margin-top: 14px; display: flex; gap: 14px; align-items: center; padding: 18px; border-radius: 22px; text-decoration: none; background: linear-gradient(135deg, #ffd23f, #ff9f43); color: #10204a; box-shadow: 0 14px 40px rgba(255,159,67,.35); }
+    .page.in .lcalc { animation: glowp 2.2s 1s ease-in-out infinite; }
+    @keyframes glowp { 50% { box-shadow: 0 14px 50px rgba(255,210,63,.65); transform: translateY(-2px); } }
+    .lcalc > span { font-size: 44px; } .lcalc small { font-size: 11px; font-weight: 900; letter-spacing: .14em; }
+    .lcalc b { display: block; font-family: "Bebas Neue", sans-serif; font-weight: 400; font-size: 30px; line-height: .95; margin-top: 2px; } .lcalc em { display: block; margin-top: 6px; font-style: normal; font-size: 12px; font-weight: 800; }
+    .pk { margin-top: 10px; display: grid; grid-template-columns: 72px minmax(0,1fr); gap: 12px; align-items: center; padding: 14px; border-radius: 20px; background: rgba(255,255,255,.05); border: 1px solid var(--ln); }
+    .pk img { width: 72px; height: 72px; border-radius: 50%; object-fit: cover; border: 3px solid var(--y); }
+    .pk small { font-size: 10px; font-weight: 900; letter-spacing: .14em; color: var(--y); } .pk b { display: block; font-family: "Bebas Neue", sans-serif; font-weight: 400; font-size: 30px; line-height: 1; } .pk span { font-size: 12px; font-weight: 700; color: var(--g); }
+    .pk .btn { grid-column: 1 / -1; margin-top: 2px; min-height: 46px; }
+    .formula { margin-top: 14px; padding: 16px; border-radius: 18px; background: #0a1430; border: 2px dashed var(--y); text-align: center; font-weight: 900; font-size: 15px; line-height: 1.7; }
+    .formula span { color: var(--y); } .formula em { font-style: normal; color: var(--r); }
+    .flag { margin-top: 12px; padding: 14px 16px; border-radius: 18px; background: rgba(255,90,95,.08); border: 1px solid rgba(255,90,95,.4); }
+    .flag h4 { font-size: 15px; font-weight: 900; color: #ffb3b5; } .flag p { font-size: 14px; margin-top: 6px; }
+    .page.in .flag h4::before { content: "🚩 "; display: inline-block; animation: wave 1s .4s ease-in-out 2; }
+    @keyframes wave { 50% { transform: rotate(-20deg); } }
+    .btn { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; min-height: 52px; margin-top: 12px; padding: 10px 16px; border-radius: 16px; font-weight: 900; font-size: 15px; text-decoration: none; text-align: center; border: 0; cursor: pointer; }
+    .btn.y { background: var(--y); color: #10204a; } .btn.wa { background: #25d366; color: #06290f; } .btn.gh { background: rgba(255,255,255,.06); border: 1px solid var(--ln); color: var(--w); }
+    .end { text-align: center; }
+    .end .sig { margin-top: 16px; font-family: "Bebas Neue", sans-serif; font-size: 36px; color: var(--y); }
+    footer { text-align: center; color: var(--g); font-size: 12px; padding: 30px 16px 50px; }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } .ani, .scale div, .stack div, .cv-k, .cv-t, .stamp, .cv-s, .cv-p, .cv-n, .bonus, .go { opacity: 1 !important; transform: none !important; } .bars .f { width: var(--w) !important; } }
+  </style>
+</head>
+<body>
+  <div class="prog" id="prog"></div>
+  <div class="bar" id="bar"><b>LOAN <span>APPROVED!</span></b><button id="tocBtn" type="button">☰ Isi kandungan</button></div>
+  <nav class="toc" id="toc" aria-label="Isi kandungan"><button class="x" id="tocX" type="button" aria-label="Tutup">✕</button><h2>Isi Kandungan</h2><ol id="tocList"></ol></nav>
+
+  <header class="cover">
+    <div class="beam"></div>
+    <div class="cv-k">EBOOK SHAH MAHPOB</div>
+    <h1 class="cv-t">RAHSIA DAN PANDUAN<br>LOAN</h1>
+    <div class="stamp">APPROVED!</div>
+    <div class="cv-s">EBOOK PERTAMA BOCOR RAHSIA LOAN<br>LULUS DENGAN CEMERLANG</div>
+    <img class="cv-p" src="../img/shah.jpg" alt="Shah Mahpob" width="150" height="150" />
+    <div class="cv-n">SHAH MAHPOB</div>
+    <div class="bonus">⚠️ BONUS: CARA ELAK DI SCAM</div>
+    <a class="go" href="#intro">Mula baca<i>↓</i></a>
+  </header>
+
+  <main>
+    <section class="page" id="intro" data-t="Pengenalan">
+      <div class="num">00</div>
+      <span class="tag ani">PENGENALAN</span>
+      <h2 class="ani">Assalamualaikum &amp; <em>salam sejahtera</em></h2>
+      <p class="ani">Nama saya <b>Shah Mahpob</b>. Saya dah berkecimpung dalam industri automotif selama <b>15 tahun</b>. Saya tak kata saya pakar, tapi pengalaman selama ini buat saya faham susah senang membantu <b>ribuan pelanggan</b> dapatkan kereta mereka.</p>
+      <p class="ani">Ebook ini lahir daripada pengalaman sebenar berurusan dengan pelanggan bergaji rendah, bekerja sendiri, hingga penjawat awam. Setiap kisah mengajar saya tentang disiplin, kesabaran dan strategi.</p>
+      <p class="ani">Harapan saya, anda bukan sahaja dapat maklumat, tapi juga <b>keyakinan</b>: merancang kewangan dengan bijak, faham selok-belok loan kereta dengan SA dan bank, elak ditipu, dan tak salah langkah memilih hutang baik atau jahat.</p>
+      <div class="tip ani">Ini bukan sekadar ebook. Ini perkongsian pengalaman, prinsip dan panduan seorang Sales Advisor.</div>
+    </section>
+
+    <section class="page" data-t="Bank mana yang terbaik?">
+      <div class="num">01</div>
+      <span class="tag ani">BAB 1</span>
+      <h2 class="ani">Bank mana yang <em>terbaik?</em></h2>
+      <div class="medal ani"><div class="m">🥇</div><div><h4>Grad A: Pilihan premium</h4><p>Interest rendah, reputasi kukuh. Tapi lagi bagus bank, lagi ketat syaratnya. <b>Good bank for good customer.</b></p><div class="chips"><span>Bank Rakyat</span><span>Maybank</span><span>Public Bank</span><span>Affin</span><span>RHB</span><span>Bank Islam</span><span>BSN</span></div></div></div>
+      <div class="medal ani"><div class="m">🥈</div><div><h4>Grad B: Seimbang</h4><p>Pilihan kedua kalau ditolak bank Grad A. Syarat scoring tak terlalu ketat, tapi interest sedikit tinggi. Lebih baik daripada kena reject atau diminta deposit tinggi / penjamin.</p><div class="chips"><span>CIMB</span><span>Hong Leong</span><span>AmBank</span></div></div></div>
+      <div class="medal ani"><div class="m">🥉</div><div><h4>Grad C: Alternatif</h4><p>Credit financial, jalan terakhir bila scoring lemah. Interest lebih kurang <b>3.2% – 4.9%</b> setahun, biasanya perlu sekurang-kurangnya 10% deposit. <b>Better than nothing.</b></p><div class="chips"><span>Toyota Capital</span><span>AEON Credit</span></div></div></div>
+    </section>
+
+    <section class="page" data-t="Submit banyak bank serentak?">
+      <div class="num">02</div>
+      <span class="tag ani">BAB 2</span>
+      <h2 class="ani">Boleh submit banyak bank <em>serentak?</em></h2>
+      <p class="lead ani">Ada SA submit loan anda membuta tuli ke lebih 3 bank sekali gus. Ini berisiko.</p>
+      <p class="ani">Bank akan tengok semua hutang dalam <b>CCRIS report</b>. Bila banyak bank disubmit, nama anda terpapar di ruangan permohonan CCRIS dan boleh jejaskan credit scoring. Kalau 4 bank lulus serentak, rekod lulus tu kekal untuk tempoh tertentu dan boleh menyusahkan bila nak buat loan rumah nanti.</p>
+      <div class="flow ani"><div class="bad">Bank A<br>✕ tak lulus</div><i>→</i><div>Baru masuk<br>Bank B</div><i>→</i><div class="good">✓ Lulus</div></div>
+      <div class="tip ani">Submit <b>satu per satu</b>. Kongsi CCRIS report anda dengan SA (semak di <a href="https://www.bnm.gov.my/ccris" target="_blank" rel="noopener">bnm.gov.my/ccris</a>), atau semak skor CTOS di Touch 'n Go.</div>
+    </section>
+
+    <section class="page" data-t="Blacklisted CCRIS, CTOS & SAA">
+      <div class="num">03</div>
+      <span class="tag ani">BAB 3</span>
+      <h2 class="ani">Apa itu blacklisted <em>CCRIS, CTOS &amp; SAA?</em></h2>
+      <p class="lead ani">Ramai salah faham. Ada yang blacklisted CTOS tapi loan boleh lulus.</p>
+      <div class="box ani"><h4>CCRIS: hutang dengan bank</h4><p>Hutang kereta, rumah, personal loan yang tak dibayar konsisten sampai CCRIS tunjuk angka <b>2 hingga 6</b>, automatik loan kena reject.</p></div>
+      <div class="scale ani"><div style="--k:0;background:#2fd27a;color:#06301a">0</div><div style="--k:1;background:#8be06b;color:#10204a">1</div><div style="--k:2;background:#ffd23f;color:#10204a">2</div><div style="--k:3;background:#ffb340;color:#10204a">3</div><div style="--k:4;background:#ff8a3d">4</div><div style="--k:5;background:#ff5a5f">5</div><div style="--k:6;background:#d62839">6</div></div>
+      <small class="ani"><span>✓ bayar ikut masa</span><span>bulan tertunggak ✕</span></small>
+      <div class="box ani"><h4>SAA: Special Attention Account</h4><p>Bank nampak akaun tu berisiko jadi NPL (Non-Performing Loan). Ada dalam CCRIS, sama macam blacklisted. <b>Wajib selesaikan</b> dulu sebelum buat loan baru.</p></div>
+      <div class="box ani"><h4>CTOS: Credit Tip-Off Service</h4><p>Tak melibatkan bank: telco, Singer, Courts, Coway, Cuckoo, kedai motor, credit kereta. Ada kes boleh lulus kalau blacklisted CTOS <b>bawah RM3k</b>. Semak di <a href="https://ctosid.ctos.com.my/" target="_blank" rel="noopener">ctosid.ctos.com.my</a>.</p></div>
+    </section>
+
+    <section class="page" data-t="Full loan vs deposit?">
+      <div class="num">04</div>
+      <span class="tag ani">BAB 4</span>
+      <h2 class="ani">Full loan <em>vs</em> deposit?</h2>
+      <p class="ani">Ikut bajet anda. Tapi pada saya, sediakan downpayment untuk bantu naikkan scoring dan bulanan lebih rendah. Tiada salah atau betul.</p>
+      <div class="vs ani"><div class="l"><h4>Full loan</h4><ul><li>Rugi kadar interest</li><li>Road tax &amp; insurans pun jadi hutang</li><li>Nak trade-in nanti, hutang masih tinggi</li></ul></div><div class="r"><h4>Deposit 10%+</h4><ul><li>Bank nampak kewangan kuat</li><li>Trade-in tak terbeban</li><li>Interest lebih rendah</li><li>Boleh fight interest</li><li>Boleh ikat 7/5/3 tahun</li></ul></div></div>
+      <div class="tip ani">Kalau nak full loan, buat pada <b>harga body sahaja</b>. Road tax &amp; insurans bayar tunai. Contoh Axia: road tax RM20 + insurans RM1,300 = <b>RM1,320 jangan buat loan</b>.</div>
+    </section>
+
+    <section class="page" data-t="Gaji basic atau gaji bersih?">
+      <div class="num">05</div>
+      <span class="tag ani">BAB 5</span>
+      <h2 class="ani">Bank tengok gaji <em>basic</em> atau <em>bersih?</em></h2>
+      <p class="ani">Untuk masuk bank Grad A, <b>gaji asas</b> dinilai dulu. Makin lama kerja dan makin tinggi jawatan, makin kuat kedudukan anda. Tapi faktor utama tetap <b>gaji kasar dan gaji bersih</b>.</p>
+      <div class="bars ani">
+        <div class="row"><span>Gaji basic</span><div class="t"><div class="f" style="--k:0;--w:57%;background:#4f8cff;color:#fff">RM1,700</div></div></div>
+        <div class="row"><span>+ OT prorate</span><div class="t"><div class="f" style="--k:1;--w:27%;background:#ff9f43">RM800</div></div></div>
+        <div class="row"><span>Gaji bersih</span><div class="t"><div class="f" style="--k:2;--w:77%;background:#ffd23f">RM2,300 ✓ layak</div></div></div>
+      </div>
+      <p class="ani">Contoh: basic RM1,700 + OT RM800, gaji bersih selepas tolak EPF, advance dan lain-lain ialah RM2,300. Itu melayakkan anda beli kereta, tapi belum ditolak loan di luar payslip.</p>
+      <div class="tip ani">Cara mudah: <b>gaji rendah = downpayment</b>, gaji tinggi = full loan. Minta SA congak dulu sebelum loan disubmit.</div>
+    </section>
+
+    <section class="page" data-t="Baru kerja 2 bulan?">
+      <div class="num">06</div>
+      <span class="tag ani">BAB 6</span>
+      <h2 class="ani">Baru kerja 2 bulan, <em>boleh apply?</em></h2>
+      <div class="tabs ani" role="tablist" data-tabs>
+        <button role="tab" aria-selected="true">Fresh grad</button><button role="tab" aria-selected="false">Pindah kerja</button><button role="tab" aria-selected="false">Belum tetap</button>
+      </div>
+      <div class="tabp on"><b>Baru kerja 2 bulan (fresh graduate):</b> boleh. SA akan masukkan ke <b>Bank Islam, Skim Graduan</b>. Tiada payslip pun tak apa, janji ada <b>offer letter</b> dan <b>skrol / surat tamat belajar</b>.</div>
+      <div class="tabp"><b>Baru kerja 2–5 bulan sebab pindah kerja:</b> contohnya kerja lama RM2,500, kerja baru RM3,000. Boleh apply. Pastikan jarak kerja lama dan baru lebih kurang sebulan. Kebanyakan kes macam ni lulus.</div>
+      <div class="tabp"><b>Baru kerja 2–5 bulan, belum tetap (kerja pertama, bukan Skim Graduan):</b> dua pilihan, sama ada tunggu sampai disahkan jawatan, atau sediakan <b>penjamin</b> yang bekerja tetap dari kalangan ahli keluarga.</div>
+    </section>
+
+    <section class="page" data-t="Skim graduan & student">
+      <div class="num">07</div>
+      <span class="tag ani">BAB 7</span>
+      <h2 class="ani">Skim graduan &amp; <em>student</em> pun boleh?</h2>
+      <p class="lead ani">Skim graduan boleh apply tanpa payslip, walaupun masih dalam probation.</p>
+      <div class="grid2 ani"><div class="box" style="margin:0"><h4>🎓 Fresh grad (Bank Islam)</h4><ul class="ck"><li>IC &amp; lesen</li><li>Offer letter</li><li>Skrol / surat tamat belajar</li></ul></div><div class="box" style="margin:0"><h4>📚 Student</h4><ul class="ck"><li>IC, lesen &amp; kad pelajar</li><li>Penjamin ahli keluarga: IC, slip gaji, penyata bank</li></ul></div></div>
+      <div class="tip ani">Share offer letter dulu supaya SA boleh semak syarikat dan gaji yang ditawarkan. Student pula, jangan ambil kereta spec tinggi ya!</div>
+    </section>
+
+    <section class="page" data-t="Tiada lesen boleh apply?">
+      <div class="num">08</div>
+      <span class="tag ani">BAB 8</span>
+      <h2 class="ani">Takde lesen, <em>boleh apply?</em></h2>
+      <div class="tabs ani" role="tablist" data-tabs>
+        <button role="tab" aria-selected="true">&lt; RM2k</button><button role="tab" aria-selected="false">&gt; RM2.5k</button><button role="tab" aria-selected="false">&gt; RM2.5k + depo</button><button role="tab" aria-selected="false">Penjamin tak kerja</button>
+      </div>
+      <div class="tabp on"><b>Gaji basic bawah RM2,000:</b> boleh apply tanpa lesen, tapi <b>wajib ada penjamin</b> yang bekerja dan ada lesen.</div>
+      <div class="tabp"><b>Gaji basic atas RM2,500:</b> boleh apply tanpa lesen dan <b>tak perlu penjamin</b> di bawah Bank Rakyat.</div>
+      <div class="tabp"><b>Gaji basic atas RM2,500 + downpayment 30% ke atas:</b> boleh apply tanpa lesen dan tanpa penjamin di bawah Maybank.</div>
+      <div class="tabp"><b>Gaji basic bawah RM2,000, penjamin tak bekerja:</b> boleh, tapi gaji bersih anda wajib atas RM2,000. Penjamin cuma perlu beri lesen, contohnya lesen ayah atau ibu.</div>
+    </section>
+
+    <section class="page" data-t="Ar-Rahnu & loan reject">
+      <div class="num">09</div>
+      <span class="tag ani">BAB 9</span>
+      <h2 class="ani">Ar-Rahnu berisiko <em>loan reject?</em></h2>
+      <p class="lead ani">Banyak kes kena reject bila masuk Ar-Rahnu.</p>
+      <div class="vs ani"><div class="r"><h4>Koperasi / kedai</h4><ul><li>Tiada masalah</li><li>Tak ganggu proses loan</li></ul></div><div class="l"><h4>Di bawah bank</h4><ul><li>Direkod dalam CCRIS</li><li>Bank anggap ada masalah aliran tunai</li><li>Loan tak akan berjaya</li></ul></div></div>
+      <div class="tip ani"><b>Penyelesaian:</b> keluarkan emas dari pajak gadai bank, dan masukkan semula ke pajak gadai koperasi.</div>
+    </section>
+
+    <section class="page" data-t="NCD murahkan harga kereta?">
+      <div class="num">10</div>
+      <span class="tag ani">BAB 10</span>
+      <h2 class="ani">NCD <em>murahkan</em> harga kereta?</h2>
+      <p class="lead ani">Betul! NCD boleh kurangkan duit downpayment. Ramai tak transfer sebab tak tahu, padahal sangat mudah.</p>
+      <ol class="steps ani"><li>Nama A kepada A sahaja</li><li>Kalau jual kereta = <b>cancel</b> NCD</li><li>Kalau masih pakai = <b>withdraw</b> NCD</li><li>Boleh transfer walaupun dah jual 4 tahun lepas</li><li>Hubungi insurans kereta lama (email / walk-in / call) untuk withdraw atau cancel</li><li>Beri surat cancel / withdraw NCD kepada SA</li></ol>
+      <div class="tip ani">Beritahu SA sebelum proceed loan. Boleh buat masa beli (downpayment lebih murah) atau selepas dapat kereta (dapat refund daripada insurans kereta baru). Pastikan dapat <b>quotation insurans</b> sebelum bayar apa-apa. Semak NCD di <a href="https://www.mycarinfo.com.my/NCDCheck/Online" target="_blank" rel="noopener">MyCarInfo</a>.</div>
+    </section>
+
+    <section class="page" data-t="Kesilapan punca loan reject">
+      <div class="num">11</div>
+      <span class="tag ani">BAB 11</span>
+      <h2 class="ani">Kesilapan yang buat <em>loan reject</em></h2>
+      <ul class="xx"><li class="ani">Nama blacklisted CCRIS</li><li class="ani">Gaji rendah, apply kereta mahal</li><li class="ani">Gaji tunai dan tiada EPF</li><li class="ani">Payslip tak padan dengan penyata bank</li><li class="ani">Dokumen diedit</li><li class="ani">Kad kredit over limit (lebih 75% daripada had)</li><li class="ani">Blacklisted sebab jadi penjamin orang lain</li><li class="ani">DSR tinggi: gaji RM3k, bayar hutang RM2.5k</li><li class="ani">Majikan tak daftar SSM</li><li class="ani">Penjamin ada blacklisted</li><li class="ani">Buat personal loan masa loan kereta baru diluluskan</li></ul>
+      <div class="warn ani">Ada kes dah lulus, tapi bila renew semula terus kena reject. Berhati-hati!</div>
+    </section>
+
+    <section class="page" data-t="Dokumen yang diperlukan">
+      <div class="num">12</div>
+      <span class="tag ani">BAB 12</span>
+      <h2 class="ani">Dokumen <em>wajib</em> disediakan</h2>
+      <p class="lead ani">Ramai dapat approval lambat sebab malas sediakan dokumen lengkap.</p>
+      <div class="tabs ani" role="tablist" data-tabs>
+        <button role="tab" aria-selected="true">Swasta / kerajaan</button><button role="tab" aria-selected="false">Berniaga</button><button role="tab" aria-selected="false">E-hailing</button><button role="tab" aria-selected="false">Student / grad</button>
+      </div>
+      <div class="tabp on"><b>Kerja swasta &amp; kerajaan:</b> IC, lesen, slip gaji 3 bulan, penyata bank 3 bulan.</div>
+      <div class="tabp"><b>Berniaga:</b> IC, lesen, SSM 3 keping, penyata bank 6 bulan.</div>
+      <div class="tabp"><b>E-hailing:</b> IC, lesen, penyata e-hailing 6 bulan, penyata bank 6 bulan.</div>
+      <div class="tabp"><b>Student:</b> IC, lesen, kad pelajar + penjamin.<br><b>Fresh grad:</b> IC, lesen, skrol, offer letter.</div>
+      <div class="warn ani">Kalau gaji ada OT / komisen / trip, <b>wajib</b> sediakan payslip dan penyata bank <b>6 bulan</b> terkini.</div>
+    </section>
+
+    <section class="page" data-t="Cara susun dokumen">
+      <div class="num">13</div>
+      <span class="tag ani">BAB 13</span>
+      <h2 class="ani">Cara susun dokumen supaya <em>cepat lulus</em></h2>
+      <p class="lead ani">Lagi tersusun dokumen, lagi bank suka, lagi cepat proses loan.</p>
+      <div class="stack ani"><div style="--k:3;top:150px;background:#9fc0ff">🏦 4 · Penyata bank</div><div style="--k:2;top:100px;background:#ffd23f">📄 3 · Slip gaji</div><div style="--k:1;top:50px;background:#ff9f43">🚗 2 · Lesen</div><div style="--k:0;top:0;background:#2fd27a">🪪 1 · IC</div></div>
+      <ul class="xx"><li class="ani">Hantar satu-satu</li><li class="ani">Gambar tak jelas (IC kabur, payslip carbon tak nampak nama &amp; gaji)</li><li class="ani">Berterabur tak ikut susunan</li><li class="ani">Tak lengkap, contohnya minta 6 bulan tapi beri 5</li><li class="ani">Butiran yang SA minta tak diisi lengkap</li></ul>
+      <div class="tip ani">Susun ikut tertib <b>IC + lesen + slip gaji + penyata bank</b>, kemudian compile dalam satu folder guna app <b>CamScanner</b> (percuma).</div>
+    </section>
+
+    <section class="page" data-t="Cara beli nombor plat">
+      <div class="num">14</div>
+      <span class="tag ani">BAB 14</span>
+      <h2 class="ani">Cara beli <em>nombor plat</em></h2>
+      <div class="vs ani"><div class="r"><h4>MySikap</h4><ul><li>Dapat on the spot</li><li>Nombor biasa</li><li>Semak sini dulu</li></ul></div><div class="r"><h4>JPJeBid</h4><ul><li>Bidding ambil masa</li><li>Nombor cantik / popular</li><li>Lagi cantik, lagi mahal</li></ul></div></div>
+      <ul class="ck"><li class="ani">Pastikan <b>penama sama</b>. Kereta nama Ali, beli guna nama Ali</li><li class="ani">Dah berjaya bidding? Share slip kepada SA untuk direkod dalam fail</li><li class="ani">Nombor yang dibeli ada yang luput dalam 6–12 bulan</li></ul>
+      <a class="btn gh ani" href="https://public.jpj.gov.my/public/login.zul" target="_blank" rel="noopener">🔢 Buka portal awam JPJ (JPJeBid)</a>
+    </section>
+
+    <section class="page" data-t="Interchange nombor">
+      <div class="num">15</div>
+      <span class="tag ani">BAB 15</span>
+      <h2 class="ani"><em>Interchange:</em> plat lama ke kereta baru</h2>
+      <p class="lead ani">Biasanya sebab sentimental value. Client boleh buat sendiri.</p>
+      <ol class="steps ani"><li>Bawa kereta lama ke <b>Puspakom</b> untuk inspection</li><li>Booking slot di website Puspakom</li><li>Dah berjaya, share slip dengan SA</li><li>SA beri hak milik kereta baru, cover insurans, JPJ K1. Bawa hard copy semua ni + salinan IC ke cawangan JPJ</li><li>Road tax, registration fee (RM150) dan ownership claim (RM50) dibayar di kaunter JPJ guna kad, bukan tunai</li></ol>
+      <div class="tip ani">Anda akan dapat geran asal di JPJ. Hantar gambar geran baru kepada SA.</div>
+    </section>
+
+    <section class="page" data-t="Trade-in">
+      <div class="num">16</div>
+      <span class="tag ani">BAB 16</span>
+      <h2 class="ani"><em>Trade-in:</em> jangan salah langkah</h2>
+      <div class="warn ani">Ada SA suruh anda jual kereta dulu tanpa buat loan, tanpa anggaran bila dapat kereta baru. ✕✕✕</div>
+      <p class="ani">Dapatkan anggaran harga dulu untuk congak loan kereta baru. Share geran kereta trade-in dengan SA untuk semakan harga.</p>
+      <div class="medal ani"><div class="m">🏭</div><div><h4>1. Trade-in dengan car maker</h4><p>Perodua ada sistem POV yang sah. Serah kereta lama masa ambil kereta baru.</p></div></div>
+      <div class="medal ani"><div class="m">📱</div><div><h4>2. Jual ke Carro / Carsome</h4><p>Ada pro dan kontra. Kena serah kereta dalam 5 hari. Kalau kereta baru tiada stok, akan bermasalah.</p></div></div>
+      <div class="medal ani"><div class="m">🤝</div><div><h4>3. Jual sendiri</h4><p>Agak pening sebab kena layan kerenah pembeli yang menekan-nekan.</p></div></div>
+    </section>
+
+    <section class="page" data-t="Kira bulanan & Pakar Loan">
+      <div class="num">17</div>
+      <span class="tag ani">BAB 17</span>
+      <h2 class="ani">Cara mudah <em>kira bulanan</em> sendiri</h2>
+      <p class="lead ani">Tak perlu buang masa. Guna kalkulator team kami: letak harga kereta, deposit dan interest, terus dapat bulanan &amp; jumlah interest.</p>
+      <a class="lcalc ani" href="../kalkulator/"><span>🧮</span><div><small>SEMUA MODEL PERODUA</small><b>LOAN CALCULATOR<br>TEAM SHAH MAHPOB</b><em>Downpayment dalam RM · profit bank 7 &amp; 9 tahun →</em></div></a>
+      <p class="ani" style="font-weight:900;color:var(--y);margin-top:18px">Nak semak kelayakan? Hantar kiraan kepada Pakar Loan kami:</p>
+      <div class="pk ani"><img src="../aisyah/img/aisyah.jpg" alt="Aisyah, Pakar Loan" width="72" height="72" /><div><small>PAKAR LOAN ANDA</small><b>AISYAH</b><span>Team Shah Mahpob</span></div><a class="btn wa" href="https://wa.me/60182031020?text=Salam%20Aisyah%2C%20saya%20baca%20ebook%20Loan%20Approved.%20Boleh%20bantu%20kira%20loan%20kereta%20saya%3F" target="_blank" rel="noopener">💬 WhatsApp Aisyah</a></div>
+      <div class="pk ani"><img src="../fendi/img/fendi.jpg" alt="Fendi, Pakar Loan" width="72" height="72" /><div><small>PAKAR LOAN ANDA</small><b>FENDI</b><span>Team Shah Mahpob</span></div><a class="btn wa" href="https://wa.me/60189038194?text=Salam%20Fendi%2C%20saya%20baca%20ebook%20Loan%20Approved.%20Boleh%20bantu%20kira%20loan%20kereta%20saya%3F" target="_blank" rel="noopener">💬 WhatsApp Fendi</a></div>
+    </section>
+
+    <section class="page" data-t="Gaji saya = kereta apa?">
+      <div class="num">18</div>
+      <span class="tag ani">BAB 18</span>
+      <h2 class="ani">Gaji saya = <em>kereta apa?</em></h2>
+      <p class="lead ani">Jangan berangan dulu ya. Janganlah gaji RM1,700 nak beli Alza. Jom semak!</p>
+      <div class="mini ani"><label for="gaji">Gaji bersih saya (RM)</label><input id="gaji" type="number" inputmode="numeric" placeholder="Contoh: 2500" min="0" step="100" /></div>
+      <div class="sal ani" id="sal">
+        <div class="r hd"><span>GAJI BERSIH</span><span>HARGA KERETA</span></div>
+      </div>
+      <p class="ani" style="font-size:12px;color:var(--g)">*Kadar gaji bersih belum tolak DSR.</p>
+    </section>
+
+    <section class="page" data-t="Lawan interest rate">
+      <div class="num">19</div>
+      <span class="tag ani">BAB 19</span>
+      <h2 class="ani">Macam mana nak <em>lawan interest rate?</em></h2>
+      <p class="lead ani">Part ni jarang dibincangkan. Jom tengok cara bank berfikir (scoring).</p>
+      <ol class="steps ani"><li>Pump downpayment atas 10%</li><li>Ikat pendek, contohnya 7 atau 6 tahun</li><li>Masuk bank yang anda dah ada existing loan</li><li>Minta SA pujuk banker kurangkan interest</li><li>Masa bank call verify, tanya dan <b>minta interest rendah</b></li><li>Letak supporting income: ASB, FD, simpanan</li></ol>
+      <div class="tip ani">Semua tertakluk pada NDI dan DSR anda.</div>
+    </section>
+
+    <section class="page" data-t="Fix rate vs variable rate">
+      <div class="num">20</div>
+      <span class="tag ani">BAB 20</span>
+      <h2 class="ani">Fix rate <em>vs</em> variable rate?</h2>
+      <div class="vs ani"><div class="r"><h4>Fix rate</h4><ul><li>Paling popular</li><li>Bulanan tetap, tak berubah</li></ul></div><div class="r"><h4>Variable rate</h4><ul><li>Bulanan naik turun macam loan rumah</li><li>Disukai orang bisnes: boleh bayar prinsipal awal, makin jimat</li></ul></div></div>
+      <p class="ani">Bagus atau tak bergantung pada "game" anda. Lagi cepat dan banyak bayar prinsipal, lagi kurang untung bank, makin jimat pelanggan.</p>
+      <div class="warn ani">Dasar dijangka berubah: pada masa depan, pembiayaan kereta mungkin beralih ke <b>variable rate</b>. Tanya SA status terkini sebelum sign.</div>
+    </section>
+
+    <section class="page" data-t="Checklist sebelum terima kereta">
+      <div class="num">21</div>
+      <span class="tag ani">BAB 21</span>
+      <h2 class="ani">Checklist sebelum <em>terima kereta</em></h2>
+      <p class="lead ani">Tekan setiap item untuk tanda ✓</p>
+      <ul class="tick ani" data-ck="terima"><li><i>✓</i>Semak nombor casis</li><li><i>✓</i>Semak warna kereta</li><li><i>✓</i>Pastikan aksesori lengkap</li><li><i>✓</i>Periksa mileage</li><li><i>✓</i>Periksa varian / spec</li><li><i>✓</i>Semak geran</li><li><i>✓</i>Uji aircond &amp; radio</li><li><i>✓</i>Pastikan insurans aktif</li></ul>
+      <div class="tick-c" data-cnt="terima"></div>
+    </section>
+
+    <section class="page" data-t="Checklist sebelum sign agreement">
+      <div class="num">22</div>
+      <span class="tag ani">BAB 22</span>
+      <h2 class="ani">Checklist sebelum <em>sign agreement</em></h2>
+      <p class="lead ani">Tekan setiap item untuk tanda ✓</p>
+      <ul class="tick ani" data-ck="sign"><li><i>✓</i>Semak interest rate</li><li><i>✓</i>Semak jumlah loan</li><li><i>✓</i>Fix rate atau variable rate?</li><li><i>✓</i>Beli autolife?</li><li><i>✓</i>Semak alamat</li><li><i>✓</i>Tanya tarikh due bayaran</li></ul>
+      <div class="tick-c" data-cnt="sign"></div>
+    </section>
+
+    <section class="page" data-t="BONUS: Tanda anda akan ditipu" style="border-color:rgba(255,90,95,.5)">
+      <div class="num" style="color:rgba(255,90,95,.18)">!!</div>
+      <span class="tag ani" style="background:var(--r);color:#fff">BONUS · BAB 23</span>
+      <h2 class="ani">Tanda-tanda anda <em style="color:var(--r)">akan ditipu</em></h2>
+      <p class="lead ani">Topik panas. Scammer takkan senang duduk bila cara operasi mereka dibocorkan.</p>
+      <p class="ani">SA / broker ialah manusia biasa, tak lari daripada buat salah. Cara atasinya: ikut SOP. <b>Jangan longgarkan skru (SOP) yang dah ketat.</b></p>
+      <div class="flag ani"><h4>1. Bayaran ke akaun peribadi</h4><p>Booking, downpayment atau insurans disuruh transfer ke akaun personal SA, atau akaun SSM seller. Inilah red flag sebenar.</p></div>
+      <div class="flag ani"><h4>2. Kiraan caca-merba</h4><p>Mesti ada kiraan tepat hitam putih: harga body, insurans, quotation insurans (wajib), loan lulus, bayaran booking.</p></div>
+      <div class="formula ani"><span>HARGA BODY</span> + <span>INSURANS</span> − <span>LOAN LULUS</span> − <span>BOOKING FEE</span> = <em>JUMLAH BAYAR</em></div>
+      <div class="flag ani"><h4>3. Manipulasi insurans</h4><p>Anda transfer NCD, tapi seller suruh bayar penuh tanpa tarik NCD, ke akaun peribadi. Insurans wajib ada quotation dan bayar ke akaun syarikat.</p></div>
+      <div class="flag ani"><h4>4. Minta downpayment sebelum loan lulus</h4><p>Belum lulus tapi dah minta deposit atau jumlah besar, ke akaun personal seller.</p></div>
+      <div class="flag ani"><h4>5. Processing / handling fee</h4><p>Kes paling kerap: seller minta lebih kurang RM600 "handling fee". Tiada istilah client kena bayar handling fee.</p></div>
+      <div class="flag ani"><h4>6. Jaminan padam blacklisted</h4><p>Paling mengarut: seller minta duit untuk "padam" rekod blacklisted.</p></div>
+    </section>
+
+    <section class="page" data-t="BONUS: Cara elak di scam" style="border-color:rgba(47,210,122,.5)">
+      <div class="num" style="color:rgba(47,210,122,.16)">✓</div>
+      <span class="tag ani" style="background:var(--gr);color:#06301a">BONUS</span>
+      <h2 class="ani">Cara untuk <em style="color:var(--gr)">elak di scam</em></h2>
+      <ul class="ck"><li class="ani">Semua transaksi ke <b>akaun syarikat kereta</b></li><li class="ani">Buat kiraan sendiri. Dapatkan harga body tanpa insurans di website car maker</li><li class="ani">Wajib dapatkan <b>quotation insurans</b> yang dijana sistem, bukan tulisan tangan atau Excel</li><li class="ani">Elak bayar tunai. Kalau terpaksa, dapatkan resit</li><li class="ani">Jangan bayar tanpa quotation tepat. Jangan percaya satu kiraan typing di WhatsApp sahaja</li><li class="ani">Simpan semua rekod perbualan WhatsApp sebagai bukti</li><li class="ani">Jangan mudah terpedaya dengan iklan free gift pelik-pelik</li><li class="ani">Jangan mudah terpedaya dengan rebate berlebihan (sales psikologi)</li><li class="ani">Berurusan dengan <b>Sales Advisor berdaftar</b>. Kalau berlaku penipuan, mudah dikesan</li><li class="ani">Kalau ragu-ragu, terus hubungi customer service car maker atau office untuk berhubung dengan admin jualan</li></ul>
+    </section>
+
+    <section class="page end" id="penutup" data-t="Penutup">
+      <span class="tag ani">PENUTUP</span>
+      <h2 class="ani">Belilah dengan <em>ilmu</em></h2>
+      <p class="ani">Diharapkan anda faham flow pembelian kereta baru. Ebook ini praktikal untuk pembelian semua jenis kenderaan. Semoga anda membeli dengan ilmu dan tahu dengan tepat hak anda sebagai pembeli.</p>
+      <p class="ani"><b>Enjoy your new car!</b></p>
+      <div class="sig ani">Yang benar, Shah Mahpob</div>
+      <a class="btn wa ani" href="https://wa.me/60137258194?text=Salam%20Shah%2C%20saya%20dah%20baca%20ebook%20Rahsia%20%26%20Panduan%20Loan%20Approved.%20Saya%20nak%20tanya%20pasal%20loan%20kereta." target="_blank" rel="noopener">💬 WhatsApp Shah · 013-725 8194</a>
+      <a class="btn y ani" href="https://peroduasmart.my/chat/" target="_blank" rel="noopener">🤖 Tanya MAYA 24 jam (ratusan soalan lazim)</a>
+      <a class="btn gh ani" href="../kalkulator/">🧮 Loan Calculator Team Shah Mahpob</a>
+      <a class="btn gh ani" href="../team/">⭐ Kenapa beli dengan Team Shah Mahpob</a>
+      <p class="ani" style="margin-top:18px;font-weight:900;color:var(--y)">"Kami attend client satu Malaysia"<br>"We delivered integrity and professionalism"</p>
+    </section>
+  </main>
+  <footer>© Shah Mahpob · Ebook Rahsia &amp; Panduan Loan Approved<br>Panduan umum berdasarkan pengalaman. Syarat bank boleh berubah; semak dengan SA dan bank anda.<br>Laman peribadi Sales Advisor. Bukan laman rasmi Perodua.</footer>
+
+  <script>
+    const $ = (s, el = document) => el.querySelector(s), $$ = (s, el = document) => [...el.querySelectorAll(s)];
+    const rm = (v) => "RM" + Math.round(v).toLocaleString("en-US");
+    // stagger index for animated children
+    $$(".page").forEach((p) => $$(".ani", p).forEach((el, i) => el.style.setProperty("--i", i)));
+    // reveal pages
+    const io = "IntersectionObserver" in window ? new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("in"); $$(".bars .f", e.target).forEach((f) => (f.style.width = f.style.getPropertyValue("--w"))); } }), { threshold: 0.15 }) : null;
+    $$(".page").forEach((p) => (io ? io.observe(p) : p.classList.add("in")));
+    // progress + bar
+    const prog = $("#prog"), bar = $("#bar");
+    const onScroll = () => { const h = document.documentElement; const r = h.scrollTop / Math.max(1, h.scrollHeight - h.clientHeight); prog.style.transform = `scaleX(${r})`; bar.classList.toggle("show", h.scrollTop > window.innerHeight * 0.7); };
+    addEventListener("scroll", onScroll, { passive: true }); onScroll();
+    // toc
+    const tl = $("#tocList");
+    $$(".page").forEach((p, i) => { if (!p.id) p.id = "bab" + i; const li = document.createElement("li"); li.innerHTML = `<a href="#${p.id}"><span>${i === 0 ? "★" : i}</span>${p.dataset.t}</a>`; tl.appendChild(li); });
+    const toc = $("#toc"); $("#tocBtn").onclick = () => toc.classList.add("open"); $("#tocX").onclick = () => toc.classList.remove("open"); tl.addEventListener("click", () => toc.classList.remove("open"));
+    // tabs
+    $$("[data-tabs]").forEach((t) => { const btns = $$("button", t); let el = t.nextElementSibling; const panes = []; while (el && el.classList.contains("tabp")) { panes.push(el); el = el.nextElementSibling; }
+      btns.forEach((b, i) => (b.onclick = () => { btns.forEach((x, j) => x.setAttribute("aria-selected", i === j)); panes.forEach((p, j) => p.classList.toggle("on", i === j)); })); });
+    // salary table
+    const SAL = [[1700, 2000, "RM1.7K – RM2K", "< RM45K"], [2000, 2700, "RM2K – RM2.7K", "RM45K – RM50K"], [2700, 3200, "RM2.7K – RM3.2K", "RM50K – RM70K"], [3000, 4000, "RM3K – RM4K", "RM70K – RM80K"], [4000, 5000, "RM4K – RM5K", "RM80K – RM90K"], [5000, 6000, "RM5K – RM6K", "RM90K – RM100K"], [6000, 7000, "RM6K – RM7K", "RM100K – RM110K"], [7000, 8000, "RM7K – RM8K", "RM110K – RM130K"], [8000, 10000, "RM8K – RM10K", "RM130K – RM200K"]];
+    const sal = $("#sal"); SAL.forEach((s) => { const r = document.createElement("div"); r.className = "r"; r.innerHTML = `<span>${s[2]}</span><span>${s[3]}</span>`; sal.appendChild(r); s.el = r; });
+    $("#gaji").addEventListener("input", (e) => { const g = +e.target.value || 0; let hit = null; SAL.forEach((s) => { if (g >= s[0] && g <= s[1]) hit = s; }); if (!hit && g > 10000) hit = SAL[SAL.length - 1]; SAL.forEach((s) => s.el.classList.toggle("hit", s === hit)); });
+    // checklists (remember ticks on this device)
+    $$("[data-ck]").forEach((ul) => { const key = "ebook-ck-" + ul.dataset.ck, items = $$("li", ul), cnt = $(`[data-cnt="${ul.dataset.ck}"]`); let saved = []; try { saved = JSON.parse(localStorage.getItem(key) || "[]"); } catch (e) {}
+      const upd = () => { const on = items.filter((li) => li.classList.contains("on")).length; cnt.textContent = on === items.length ? "🎉 Semua dah semak. Tahniah!" : `${on} / ${items.length} dah semak`; try { localStorage.setItem(key, JSON.stringify(items.map((li) => li.classList.contains("on")))); } catch (e) {} };
+      items.forEach((li, i) => { if (saved[i]) li.classList.add("on"); li.onclick = () => { li.classList.toggle("on"); upd(); }; }); upd(); });
+  </script>
+</body>
+</html>
