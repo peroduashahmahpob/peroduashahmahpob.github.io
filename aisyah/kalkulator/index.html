@@ -67,11 +67,21 @@
     .exp b { display: block; font-size: 20px; font-weight: 900; }
     .exp div a { font-size: 12px; font-weight: 700; color: var(--g); text-decoration: underline; word-break: break-all; }
     .exp .btn { grid-column: 1 / -1; min-height: 50px; font-size: 15px; }
+    .bd .rb span, .bd .rb b { color: var(--gr); font-weight: 800; }
+    .elig { margin-top: 14px; padding: 14px; border-radius: 18px; border: 2px solid var(--ln); background: #26211e; }
+    .elig[data-lv="tinggi"] { border-color: var(--gr); } .elig[data-lv="sederhana"] { border-color: var(--y); } .elig[data-lv="rendah"] { border-color: #ff6b5e; }
+    .elig .pl { display: inline-block; padding: 6px 12px; border-radius: 999px; font-size: 12px; font-weight: 900; letter-spacing: .12em; background: var(--ln); color: #fff; }
+    .elig[data-lv="tinggi"] .pl { background: var(--gr); color: #06290f; } .elig[data-lv="sederhana"] .pl { background: var(--y); color: #241a00; } .elig[data-lv="rendah"] .pl { background: #ff6b5e; }
+    .elig .kv { display: flex; justify-content: space-between; gap: 10px; margin-top: 8px; font-size: 14px; color: var(--g); font-weight: 600; } .elig .kv b { color: var(--w); }
+    .elig .gb { margin-top: 10px; height: 10px; border-radius: 99px; background: var(--ln); overflow: hidden; } .elig .gb i { display: block; height: 100%; background: var(--o); border-radius: 99px; }
+    .elig p { margin-top: 8px; font-size: 13px; font-weight: 600; }
     .note { margin-top: 14px; font-size: 12px; color: var(--g); }
     footer { margin-top: 36px; padding: 22px 0 10px; border-top: 2px solid var(--ln); text-align: center; color: var(--g); font-size: 12px; }
     footer b { color: var(--w); letter-spacing: .12em; }
     .sticky { position: fixed; left: 0; right: 0; bottom: 0; padding: 12px 18px calc(12px + env(safe-area-inset-bottom)); background: linear-gradient(180deg, rgba(20,17,16,0), rgba(20,17,16,.96) 30%); z-index: 10; }
     .sticky .btn { max-width: 484px; margin: 0 auto; box-shadow: 0 10px 30px rgba(37,211,102,.35); }
+    .plogo { display: inline-flex; align-items: center; justify-content: center; padding: 8px 14px; border-radius: 14px; background: #fff; box-shadow: 0 6px 20px rgba(0,0,0,.35); }
+    .plogo img { display: block; height: 40px; width: auto; }
   </style>
 </head>
 <body>
@@ -79,9 +89,11 @@
   <main class="wrap">
     <nav class="top"><a href="../">← LAMAN UTAMA</a><span>AISYAH · TEAM SHAH</span></nav>
     <header>
+      <div style="margin-bottom:14px"><span class="plogo"><img src="/img/perodua-logo.png" alt="Perodua" width="59" height="40" /></span></div>
       <div class="kick">Semua model Perodua 2026</div>
       <h1>LOAN CALCULATOR<span>TEAM SHAH MAHPOB</span></h1>
     </header>
+    <a data-rebate-cd href="#bd"></a>
 
     <div class="card">
       <div class="step"><i>1</i>Pilih model</div>
@@ -111,6 +123,17 @@
           <dl><dt>Profit bank</dt><dd class="p" id="p9">RM0</dd><dt>Jumlah bayar balik</dt><dd id="t9">RM0</dd></dl></div>
       </div>
       <div class="save" id="save"></div>
+      <div class="step" style="margin-top:20px"><i>4</i>Semak peluang lulus</div>
+      <div class="row2">
+        <div><label for="net">Gaji bersih (RM)</label><input id="net" type="number" inputmode="numeric" min="0" step="100" value="2800" /></div>
+        <div><label for="comm">Komitmen lain (RM)</label><input id="comm" type="number" inputmode="numeric" min="0" step="50" value="300" /></div>
+      </div>
+      <p class="note" style="margin-top:6px">Gaji bersih = lepas KWSP, PERKESO, cukai. Komitmen = PTPTN, kad kredit, rumah, personal loan.</p>
+      <div class="elig" id="elig" data-lv="tinggi"><span class="pl" id="elPill">PELUANG TINGGI</span>
+        <div class="kv"><span>DSR (bulanan 9 thn + komitmen ÷ gaji)</span><b id="elDsr">0%</b></div>
+        <div class="kv"><span>Baki sara hidup (NDI)</span><b id="elNdi">RM0</b></div>
+        <div class="gb"><i id="elBar" style="width:0%"></i></div>
+        <p id="elNote"></p></div>
       <div class="acts">
         <div class="pk">Hantar kiraan ni kepada <b>Pakar Loan Anda</b></div>
         <div class="exp">
@@ -120,7 +143,7 @@
         </div>
         <a class="btn ghost" id="pageLink" href="#">Lihat laman model →</a>
       </div>
-      <p class="note">Anggaran sahaja. Profit bank dikira dengan kadar rata (flat rate): loan × kadar × tahun. Kadar sebenar ikut bank dan kelayakan (scoring) awak. Insurans dan OTR ialah anggaran.</p>
+      <p class="note">Anggaran sahaja. Rebate ikut senarai bulan semasa dan tertakluk terma Perodua. Peluang lulus hanya panduan; keputusan sebenar ikut bank, CCRIS & CTOS. Profit bank dikira dengan kadar rata (flat rate): loan × kadar × tahun. Kadar sebenar ikut bank dan kelayakan (scoring) awak. Insurans dan OTR ialah anggaran.</p>
     </div>
 
     <footer><b>TEAM SHAH MAHPOB</b><br>Sales &amp; Loan · Perodua<br><br>Laman peribadi team Sales Advisor. Bukan laman rasmi Perodua.</footer>
@@ -128,6 +151,7 @@
   <div class="sticky"><a class="btn wa" data-wa="Salam Aisyah, saya nak tanya pasal loan kereta Perodua." href="#">💬 WhatsApp Aisyah</a></div>
 
   <script src="/kalkulator/data.js"></script>
+  <script src="/rebate.js"></script>
   <script>
     const WA = "60182031020";
     const ADVISOR = "Aisyah";
@@ -152,30 +176,39 @@
       pickVariant(true);
     }
     function pickVariant(resetDp) {
-      const v = D[mi].variants[+$("vsel").value];
-      $("bd").innerHTML = `<div><span>Harga body</span><b>${rm(v.body, 2)}</b></div><div><span>Road tax + pendaftaran + claim</span><b>${rm(v.rt + v.reg + v.claim, 2)}</b></div><div><span>Insurans <i>(anggaran)</i></span><b>${rm(v.ins, 2)}</b></div><div class="tot"><span>OTR <i>(anggaran)</i></span><b>${rm(v.otr, 2)}</b></div>`;
+      const v = D[mi].variants[+$("vsel").value], rb = window.rebateFor ? window.rebateFor(v.name) : 0, net = v.otr - rb;
+      $("bd").innerHTML = `<div><span>Harga body</span><b>${rm(v.body, 2)}</b></div><div><span>Road tax + pendaftaran + claim</span><b>${rm(v.rt + v.reg + v.claim, 2)}</b></div><div><span>Insurans <i>(anggaran)</i></span><b>${rm(v.ins, 2)}</b></div><div class="tot"><span>OTR <i>(anggaran)</i></span><b>${rm(v.otr, 2)}</b></div>` + (rb ? `<div class="rb"><span>Rebate ${window.REBATE.bulan.toLowerCase()}</span><b>− ${rm(rb)}</b></div><div class="tot"><span>Harga lepas rebate</span><b>${rm(v.otr - rb, 2)}</b></div>` : "");
       const q = $("quick"); q.innerHTML = "";
-      [0, 3000, 5000, Math.round(v.otr * 0.1 / 100) * 100, 10000].filter((x, i, a) => a.indexOf(x) === i && x < v.otr).sort((a, b) => a - b).forEach((x) => {
+      [0, 3000, 5000, Math.round(net * 0.1 / 100) * 100, 10000].filter((x, i, a) => a.indexOf(x) === i && x < net).sort((a, b) => a - b).forEach((x) => {
         const b = document.createElement("button"); b.type = "button"; b.textContent = x === 0 ? "Full loan (RM0)" : rm(x); b.onclick = () => { $("dp").value = x; calc(); }; q.appendChild(b); });
-      if (resetDp) $("dp").value = Math.round(v.otr * 0.1 / 100) * 100;
+      if (resetDp) $("dp").value = Math.round(net * 0.1 / 100) * 100;
       calc();
     }
     function calc() {
       const m = D[mi], v = m.variants[+$("vsel").value];
       let dp = Math.max(0, +$("dp").value || 0); const r = Math.max(0, +$("rate").value || 0);
+      const rb = window.rebateFor ? window.rebateFor(v.name) : 0, price = v.otr - rb;
       const warn = $("warn");
-      if (dp >= v.otr) { warn.style.display = "block"; warn.textContent = "Downpayment melebihi harga OTR. Awak boleh bayar tunai penuh!"; dp = v.otr; } else warn.style.display = "none";
-      const loan = v.otr - dp; $("loan").textContent = rm(loan, 2);
+      if (dp >= price) { warn.style.display = "block"; warn.textContent = "Downpayment melebihi harga lepas rebate. Awak boleh bayar tunai penuh!"; dp = price; } else warn.style.display = "none";
+      const loan = price - dp; $("loan").textContent = rm(loan, 2);
       const out = {};
       [7, 9].forEach((y) => { const p = loan * r / 100 * y, t = loan + p, mo = t / (y * 12); out[y] = { p, t, mo };
         $("m" + y).innerHTML = `${rm(mo)}<small>/bln</small>`; $("p" + y).textContent = rm(p); $("t" + y).textContent = rm(t); });
       $("save").innerHTML = loan > 0 ? `Pilih <b>7 tahun</b>: bulanan lebih ${rm(out[7].mo - out[9].mo)}, tapi <b>jimat profit bank ${rm(out[9].p - out[7].p)}</b> berbanding 9 tahun.` : "Tiada loan, tiada profit bank. 👍";
-      const msg = (nm) => `Salam ${nm}, saya guna Loan Calculator: Perodua ${v.name}, OTR anggaran ${rm(v.otr, 2)}, downpayment ${rm(dp)}, loan ${rm(loan)}, kadar ${r}%.\n• 7 tahun: ${rm(out[7].mo)}/bulan (profit bank ${rm(out[7].p)})\n• 9 tahun: ${rm(out[9].mo)}/bulan (profit bank ${rm(out[9].p)})\nBoleh semak kelayakan saya?`;
+      const inc = Math.max(0, +$("net").value || 0), cm = Math.max(0, +$("comm").value || 0);
+      const dsr = inc ? (cm + out[9].mo) / inc * 100 : 0, ndi = inc - cm - out[9].mo;
+      let lv = "rendah", nt = "Agak ketat. Cuba downpayment lebih tinggi atau varian lebih rendah. WhatsApp untuk pilihan lain.";
+      if (!inc) nt = "Masukkan gaji bersih untuk semak.";
+      else if (ndi >= 1600 && dsr <= 60) { lv = "tinggi"; nt = "Baki sara hidup melepasi RM1,600 dan DSR bawah 60%."; }
+      else if (ndi >= 1300 && dsr <= 70) { lv = "sederhana"; nt = "Boleh cuba. Tambah downpayment atau kurangkan komitmen untuk peluang lebih baik."; }
+      $("elig").dataset.lv = lv; $("elPill").textContent = "PELUANG " + lv.toUpperCase(); $("elDsr").textContent = Math.round(dsr) + "%";
+      $("elNdi").textContent = rm(ndi); $("elBar").style.width = Math.min(100, dsr) + "%"; $("elNote").textContent = nt;
+      const msg = (nm) => `Salam ${nm}, saya guna Loan Calculator: Perodua ${v.name}, OTR anggaran ${rm(v.otr, 2)}${rb ? `, rebate ${rm(rb)} (harga ${rm(price, 2)})` : ""}, downpayment ${rm(dp)}, loan ${rm(loan)}, kadar ${r}%.\n• 7 tahun: ${rm(out[7].mo)}/bulan (profit bank ${rm(out[7].p)})\n• 9 tahun: ${rm(out[9].mo)}/bulan (profit bank ${rm(out[9].p)})\nGaji bersih ${rm(inc)}, komitmen ${rm(cm)} · peluang ${lv.toUpperCase()}.\nBoleh semak kelayakan saya?`;
       if ($("waA")) $("waA").href = `https://wa.me/60182031020?text=${encodeURIComponent(msg("Aisyah"))}`;
       if ($("waF")) $("waF").href = `https://wa.me/60189038194?text=${encodeURIComponent(msg("Fendi"))}`;
     }
     $("vsel").addEventListener("input", () => pickVariant(true));
-    $("dp").addEventListener("input", calc);
+    $("dp").addEventListener("input", calc); $("net").addEventListener("input", calc); $("comm").addEventListener("input", calc);
     $("rate").addEventListener("input", () => { rateTouched = true; calc(); });
     if (D.length) pickModel();
   </script>

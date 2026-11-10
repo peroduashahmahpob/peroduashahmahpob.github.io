@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Kuiz Kereta Perodua | Fendi · Team Shah Mahpob</title>
+  <meta name="description" content="5 soalan ringkas: Perodua mana paling sesuai dengan hidup awak? Axia, Bezza, Myvi, Ativa, Traz, Alza atau Aruz." />
+  <meta property="og:title" content="Perodua mana yang ngam dengan awak?" />
+  <meta property="og:description" content="Kuiz 5 soalan · PERODUA TEAM SHAH MAHPOB" />
+  <meta name="theme-color" content="#141110" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    :root { --bg: #141110; --card: #1e1a18; --ln: #312b28; --o: #ee7a4c; --y: #f5c542; --w: #f4efe9; --g: #a59f99; --gr: #25d366; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: var(--bg); color: var(--w); font-family: "Montserrat", system-ui, sans-serif; line-height: 1.45; -webkit-font-smoothing: antialiased; padding-bottom: 96px; }
+    a { color: inherit; text-decoration: none; }
+    .wrap { max-width: 520px; margin: 0 auto; padding: 0 18px; }
+    .glow { position: fixed; inset: 0; pointer-events: none; background: radial-gradient(ellipse 80% 40% at 50% 0%, rgba(238,122,76,.2), transparent 70%); z-index: -1; }
+    .top { display: flex; justify-content: space-between; align-items: center; padding: 16px 0 4px; font-size: 13px; font-weight: 800; letter-spacing: .08em; }
+    .top a { color: var(--g); } .top span { color: var(--o); }
+    header { padding-top: 18px; }
+    .kick { font-size: 12px; font-weight: 800; letter-spacing: .2em; color: var(--g); text-transform: uppercase; }
+    h1 { margin-top: 4px; font-size: 36px; font-weight: 900; line-height: 1; letter-spacing: -.02em; }
+    h1 span { color: var(--o); display: block; font-size: 24px; letter-spacing: 0; margin-top: 6px; }
+    .card { margin-top: 18px; padding: 18px; background: var(--card); border: 2px solid var(--ln); border-radius: 22px; }
+    .qh { display: flex; justify-content: space-between; align-items: center; font-size: 12px; font-weight: 800; letter-spacing: .14em; color: var(--g); }
+    .dots { display: flex; gap: 6px; } .dots i { width: 24px; height: 6px; border-radius: 9px; background: var(--ln); } .dots i.on { background: var(--o); }
+    h2 { margin: 14px 0 14px; font-size: 22px; font-weight: 900; line-height: 1.2; }
+    .opts { display: grid; gap: 10px; }
+    .opt { display: flex; align-items: center; gap: 14px; width: 100%; min-height: 62px; padding: 12px 16px; border-radius: 18px; border: 2px solid var(--ln); background: #26211e; color: var(--w); font: 700 16px "Montserrat", sans-serif; text-align: left; cursor: pointer; transition: transform .12s, border-color .12s; }
+    .opt:hover { border-color: var(--o); } .opt:active { transform: scale(.98); }
+    .opt span { font-size: 26px; flex: none; }
+    .opt:focus-visible, .btn:focus-visible { outline: 3px solid var(--y); outline-offset: 2px; }
+    .win .tag { font-size: 12px; font-weight: 900; letter-spacing: .18em; color: var(--o); }
+    .win h3 { margin-top: 6px; font-size: 44px; font-weight: 900; line-height: 1; letter-spacing: -.03em; }
+    .win h3 small { display: block; font-size: 15px; color: var(--g); font-weight: 700; letter-spacing: 0; margin-top: 6px; }
+    .win ul { margin: 14px 0 0 20px; display: grid; gap: 6px; font-weight: 600; }
+    .alt { margin-top: 12px; font-size: 14px; color: var(--g); font-weight: 600; } .alt b { color: var(--w); }
+    .btn { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; min-height: 54px; border-radius: 16px; font-weight: 800; font-size: 16px; border: 0; cursor: pointer; text-align: center; padding: 10px 16px; font-family: inherit; }
+    .btn.wa { background: var(--gr); color: #06290f; } .btn.ghost { background: var(--card); border: 2px solid var(--ln); color: var(--w); } .btn.or { background: var(--o); color: #fff; }
+    .acts { display: grid; gap: 10px; margin-top: 18px; }
+    .note { margin-top: 14px; font-size: 12px; color: var(--g); }
+    footer { margin-top: 36px; padding: 22px 0 10px; border-top: 2px solid var(--ln); text-align: center; color: var(--g); font-size: 12px; }
+    footer b { color: var(--w); letter-spacing: .12em; }
+    .sticky { position: fixed; left: 0; right: 0; bottom: 0; padding: 12px 18px calc(12px + env(safe-area-inset-bottom)); background: linear-gradient(180deg, rgba(20,17,16,0), rgba(20,17,16,.96) 30%); z-index: 10; }
+    .sticky .btn { max-width: 484px; margin: 0 auto; box-shadow: 0 10px 30px rgba(37,211,102,.35); }
+    .plogo { display: inline-flex; align-items: center; justify-content: center; padding: 8px 14px; border-radius: 14px; background: #fff; box-shadow: 0 6px 20px rgba(0,0,0,.35); }
+    .plogo img { display: block; height: 40px; width: auto; }
+  </style>
+</head>
+<body>
+  <div class="glow"></div>
+  <main class="wrap">
+    <nav class="top"><a href="../">← LAMAN UTAMA</a><span>FENDI · TEAM SHAH</span></nav>
+    <header>
+      <div style="margin-bottom:14px"><span class="plogo"><img src="/img/perodua-logo.png" alt="Perodua" width="59" height="40" /></span></div>
+      <div class="kick">Kuiz 5 soalan · 30 saat</div>
+      <h1>PERODUA<span>TEAM SHAH MAHPOB</span></h1>
+    </header>
+    <a data-rebate-cd href="../kalkulator/"></a>
+    <div class="card" id="quiz" aria-live="polite"></div>
+    <footer><b>FENDI</b><br>Pakar Loan Anda · Team Shah Mahpob<br><br>Laman peribadi Sales Advisor. Bukan laman rasmi Perodua.</footer>
+  </main>
+  <div class="sticky"><a class="btn wa" data-wa="Salam Fendi, saya nak tanya pasal kereta Perodua." href="#">💬 WhatsApp Fendi</a></div>
+
+  <script src="/rebate.js"></script>
+  <script>
+    const WA = "60189038194";
+    const ADVISOR = "Fendi";
+    const wa = (msg) => `https://wa.me/${WA}?text=${encodeURIComponent(msg)}`;
+    document.querySelectorAll("[data-wa]").forEach((a) => { a.href = wa(a.dataset.wa); a.target = "_blank"; a.rel = "noopener"; });
+    const CARS = {
+      Axia: { t: "Hatchback ekonomi", page: "../axia/", why: ["Paling jimat minyak & senang parking", "Sesuai first car dan kerja dalam bandar", "Bulanan paling rendah dalam keluarga Perodua"] },
+      Bezza: { t: "Sedan jimat", page: "../bezza/", why: ["Sedan dengan boot 508 liter", "Selesa untuk balik kampung & perjalanan jauh", "Jimat minyak, cukup ruang untuk family kecil"] },
+      Myvi: { t: "Hatchback popular", page: "../myvi/", why: ["Hatchback paling laris, nilai jual semula tinggi", "Lincah dalam bandar, selesa di highway", "Banyak pilihan varian & warna"] },
+      Ativa: { t: "SUV kompak turbo", page: "../ativa/", why: ["SUV kompak, kedudukan duduk tinggi", "Enjin turbo, rasa lebih bertenaga", "Gaya moden untuk orang bekerja"] },
+      Traz: { t: "SUV 1.5L baharu", page: "../traz/", why: ["SUV 1.5L paling baharu Perodua", "Ruang kabin lebih besar & selesa", "Ciri keselamatan lengkap"] },
+      Alza: { t: "MPV 7 tempat duduk", page: "../alza/", why: ["MPV 7 tempat duduk", "Sesuai family besar dan bawa ramai", "Ruang kaki & barang paling luas"] },
+      Aruz: { t: "SUV 7 tempat duduk", page: null, why: ["SUV 7 tempat duduk", "Ground clearance tinggi, sesuai jalan kampung", "Untuk family besar yang suka gaya SUV"] },
+    };
+    const ORDER = Object.keys(CARS);
+    const Q = [
+      { q: "Siapa yang selalu naik kereta dengan awak?", o: [["🧍", "Saya seorang / berdua", { Axia: 2, Myvi: 2, Ativa: 1 }], ["👪", "Family kecil (3–4 orang)", { Bezza: 2, Myvi: 1, Ativa: 1, Traz: 1 }], ["🚐", "Family besar (5–7 orang)", { Alza: 3, Aruz: 2 }]] },
+      { q: "Bajet bulanan yang selesa untuk awak?", o: [["💵", "Bawah RM450", { Axia: 3, Bezza: 1 }], ["💰", "RM450 – RM650", { Bezza: 2, Myvi: 2 }], ["💎", "RM650 ke atas", { Ativa: 2, Traz: 2, Alza: 2, Aruz: 1 }]] },
+      { q: "Paling banyak drive kat mana?", o: [["🏙️", "Dalam bandar, jem", { Axia: 2, Myvi: 2 }], ["🛣️", "Highway / balik kampung jauh", { Bezza: 2, Traz: 1, Alza: 1, Ativa: 1 }], ["⛰️", "Jalan kampung / bukit", { Aruz: 2, Ativa: 2, Traz: 1 }]] },
+      { q: "Benda paling penting untuk awak?", o: [["⛽", "Jimat minyak", { Axia: 2, Bezza: 2 }], ["🧳", "Ruang barang besar", { Bezza: 2, Alza: 2, Aruz: 1 }], ["😎", "Gaya & rasa bertenaga", { Ativa: 2, Traz: 2, Myvi: 1 }]] },
+      { q: "Ini kereta ke berapa untuk awak?", o: [["🥇", "Kereta pertama", { Axia: 2, Myvi: 1, Bezza: 1 }], ["🔁", "Tukar / upgrade kereta lama", { Myvi: 1, Ativa: 1, Traz: 1, Alza: 1 }], ["➕", "Kereta kedua keluarga", { Axia: 1, Bezza: 1 }]] },
+    ];
+    let qi = 0, score = {};
+    const box = document.getElementById("quiz");
+    function draw() {
+      if (qi < Q.length) {
+        const s = Q[qi];
+        box.innerHTML = `<div class="qh"><span>SOALAN ${qi + 1} / ${Q.length}</span><span class="dots">${Q.map((_, i) => `<i class="${i <= qi ? "on" : ""}"></i>`).join("")}</span></div><h2></h2><div class="opts"></div>`;
+        box.querySelector("h2").textContent = s.q;
+        s.o.forEach(([e, t, w]) => {
+          const b = document.createElement("button"); b.type = "button"; b.className = "opt";
+          b.innerHTML = `<span aria-hidden="true">${e}</span>`; b.append(t);
+          b.onclick = () => { for (const k in w) score[k] = (score[k] || 0) + w[k]; qi++; draw(); };
+          box.querySelector(".opts").appendChild(b);
+        });
+        return;
+      }
+      const rank = ORDER.map((k) => [k, score[k] || 0]).sort((a, b) => b[1] - a[1]);
+      const top = rank[0][0], second = rank[1][0], c = CARS[top];
+      box.innerHTML = `<div class="win"><div class="tag">AWAK PALING SESUAI</div><h3>Perodua ${top}<small>${c.t}</small></h3>
+        <ul>${c.why.map((w) => `<li>${w}</li>`).join("")}</ul>
+        <div class="alt">Pilihan kedua: <b>${second}</b></div>
+        <div class="acts">
+          <a class="btn wa" target="_blank" rel="noopener" href="${wa(`Salam ${ADVISOR}, saya buat kuiz kereta. Keputusan saya: Perodua ${top} (pilihan kedua ${second}). Boleh kira bulanan untuk saya?`)}">Tanya ${ADVISOR} harga ${top}</a>
+          ${c.page ? `<a class="btn or" href="${c.page}">Lihat harga & warna ${top} →</a>` : ""}
+          <a class="btn ghost" href="../kalkulator/">🧮 Kira bulanan sendiri</a>
+          <button class="btn ghost" type="button" id="again">↺ Buat semula kuiz</button>
+        </div>
+        <p class="note">Screenshot keputusan ni dan komen kat TikTok: kereta apa awak dapat? 😄</p></div>`;
+      document.getElementById("again").onclick = () => { qi = 0; score = {}; draw(); scrollTo({ top: 0 }); };
+    }
+    draw();
+  </script>
+</body>
+</html>

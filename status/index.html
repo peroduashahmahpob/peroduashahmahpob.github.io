@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Status Kereta Saya | Shah Mahpob</title>
+  <meta name="description" content="Semak status tempahan kereta Perodua awak bersama Team Shah Mahpob." />
+  <meta property="og:title" content="Status kereta Perodua awak" />
+  <meta property="og:description" content="PERODUA TEAM SHAH MAHPOB · dari tempahan sampai serah kunci" />
+  <meta name="robots" content="noindex" />
+  <meta name="theme-color" content="#141110" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    :root { --bg: #141110; --card: #1e1a18; --ln: #312b28; --o: #ee7a4c; --y: #f5c542; --w: #f4efe9; --g: #a59f99; --gr: #25d366; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: var(--bg); color: var(--w); font-family: "Montserrat", system-ui, sans-serif; line-height: 1.45; -webkit-font-smoothing: antialiased; padding-bottom: 96px; }
+    a { color: inherit; text-decoration: none; }
+    .wrap { max-width: 520px; margin: 0 auto; padding: 0 18px; }
+    .glow { position: fixed; inset: 0; pointer-events: none; background: radial-gradient(ellipse 80% 40% at 50% 0%, rgba(238,122,76,.2), transparent 70%); z-index: -1; }
+    .top { display: flex; justify-content: space-between; align-items: center; padding: 16px 0 4px; font-size: 13px; font-weight: 800; letter-spacing: .08em; }
+    .top a { color: var(--g); } .top span { color: var(--o); }
+    header { padding-top: 18px; }
+    .kick { font-size: 12px; font-weight: 800; letter-spacing: .2em; color: var(--g); text-transform: uppercase; }
+    h1 { margin-top: 4px; font-size: 36px; font-weight: 900; line-height: 1; letter-spacing: -.02em; }
+    h1 span { color: var(--o); display: block; font-size: 24px; letter-spacing: 0; margin-top: 6px; }
+    .card { margin-top: 18px; padding: 18px; background: var(--card); border: 2px solid var(--ln); border-radius: 22px; }
+    .demo { display: inline-block; margin-bottom: 10px; padding: 5px 10px; border-radius: 999px; background: var(--ln); color: var(--g); font-size: 11px; font-weight: 800; letter-spacing: .12em; }
+    .hello { font-size: 24px; font-weight: 900; line-height: 1.15; }
+    .hello span { color: var(--o); }
+    .prog { margin-top: 14px; height: 10px; border-radius: 99px; background: var(--ln); overflow: hidden; } .prog i { display: block; height: 100%; border-radius: 99px; background: linear-gradient(90deg, var(--o), var(--y)); }
+    .eta { display: flex; justify-content: space-between; gap: 10px; margin-top: 14px; padding: 12px 14px; border-radius: 14px; background: #26211e; font-size: 14px; font-weight: 700; } .eta span { color: var(--g); }
+    .track { margin-top: 18px; }
+    .st { display: grid; grid-template-columns: 36px minmax(0,1fr); gap: 12px; position: relative; padding-bottom: 18px; }
+    .st:last-child { padding-bottom: 0; }
+    .st::before { content: ""; position: absolute; left: 17px; top: 36px; bottom: 0; width: 2px; background: var(--ln); }
+    .st:last-child::before { display: none; }
+    .dot { width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; font-weight: 900; font-size: 14px; background: #26211e; border: 2px solid var(--ln); color: var(--g); position: relative; z-index: 1; }
+    .st.done .dot { background: var(--gr); border-color: var(--gr); color: #06290f; } .st.done::before { background: var(--gr); }
+    .st.now .dot { background: var(--o); border-color: var(--o); color: #fff; box-shadow: 0 0 0 6px rgba(238,122,76,.22); }
+    .st h4 { margin-top: 6px; font-size: 16px; font-weight: 800; } .st p { font-size: 13px; color: var(--g); font-weight: 500; }
+    .st.now h4 { color: var(--o); } .st:not(.done):not(.now) h4 { color: var(--g); }
+    .btn { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; min-height: 54px; border-radius: 16px; font-weight: 800; font-size: 16px; border: 0; cursor: pointer; text-align: center; padding: 10px 16px; font-family: inherit; margin-top: 16px; }
+    .btn.wa { background: var(--gr); color: #06290f; } .btn.or { background: var(--o); color: #fff; }
+    details { margin-top: 18px; padding: 16px 18px; background: var(--card); border: 2px dashed var(--ln); border-radius: 22px; }
+    summary { cursor: pointer; font-size: 13px; font-weight: 800; letter-spacing: .08em; color: var(--g); }
+    label { display: block; margin-top: 12px; font-size: 12px; font-weight: 800; letter-spacing: .12em; color: var(--g); text-transform: uppercase; }
+    select, input { width: 100%; margin-top: 6px; min-height: 50px; padding: 0 14px; border-radius: 14px; background: #26211e; border: 2px solid var(--ln); color: var(--w); font: 700 16px "Montserrat", sans-serif; -webkit-appearance: none; appearance: none; color-scheme: dark; }
+    select:focus, input:focus { outline: none; border-color: var(--o); }
+    .btn:focus-visible, summary:focus-visible { outline: 3px solid var(--y); outline-offset: 2px; }
+    .row2 { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 10px; }
+    .out { margin-top: 14px; padding: 12px; border-radius: 12px; background: #26211e; border: 2px solid var(--ln); font: 700 13px ui-monospace, Menlo, monospace; word-break: break-all; user-select: all; }
+    .note { margin-top: 10px; font-size: 12px; color: var(--g); }
+    footer { margin-top: 36px; padding: 22px 0 10px; border-top: 2px solid var(--ln); text-align: center; color: var(--g); font-size: 12px; }
+    footer b { color: var(--w); letter-spacing: .12em; }
+    .sticky { position: fixed; left: 0; right: 0; bottom: 0; padding: 12px 18px calc(12px + env(safe-area-inset-bottom)); background: linear-gradient(180deg, rgba(20,17,16,0), rgba(20,17,16,.96) 30%); z-index: 10; }
+    .sticky .btn { max-width: 484px; margin: 0 auto; box-shadow: 0 10px 30px rgba(37,211,102,.35); }
+    .plogo { display: inline-flex; align-items: center; justify-content: center; padding: 8px 14px; border-radius: 14px; background: #fff; box-shadow: 0 6px 20px rgba(0,0,0,.35); }
+    .plogo img { display: block; height: 40px; width: auto; }
+  </style>
+</head>
+<body>
+  <div class="glow"></div>
+  <main class="wrap">
+    <nav class="top"><a href="../">← LAMAN UTAMA</a><span>SHAH MAHPOB</span></nav>
+    <header>
+      <div style="margin-bottom:14px"><span class="plogo"><img src="/img/perodua-logo.png" alt="Perodua" width="59" height="40" /></span></div>
+      <div class="kick">Status kereta saya</div>
+      <h1>PERODUA<span>TEAM SHAH MAHPOB</span></h1>
+    </header>
+    <div class="card" id="trk" aria-live="polite"></div>
+
+    <details id="adm">
+      <summary>🔧 UNTUK TEAM: buat link status customer</summary>
+      <div class="row2">
+        <div><label for="gName">Nama customer</label><input id="gName" value="Aisyah" maxlength="20" /></div>
+        <div><label for="gModel">Model</label><select id="gModel"></select></div>
+      </div>
+      <div class="row2">
+        <div><label for="gStep">Tahap sekarang</label><select id="gStep"></select></div>
+        <div><label for="gEta">Anggaran serah</label><input id="gEta" type="date" value="2026-11-28" /></div>
+      </div>
+      <div class="out" id="gOut"></div>
+      <button class="btn or" id="gCopy" type="button">Salin link</button>
+      <a class="btn wa" id="gSend" href="#" target="_blank" rel="noopener">Hantar terus ke WhatsApp customer</a>
+      <label for="gPhone">No. telefon customer (untuk butang hijau)</label><input id="gPhone" inputmode="tel" placeholder="cth 0123456789" />
+      <p class="note" id="gMsg">Buat link baru dan hantar setiap kali status bertukar. Link lama kekal tunjuk status lama.</p>
+    </details>
+
+    <footer><b>SHAH MAHPOB</b><br>Sales Advisor Perodua<br><br>Laman peribadi Sales Advisor. Bukan laman rasmi Perodua.</footer>
+  </main>
+  <div class="sticky"><a class="btn wa" data-wa="Salam Shah, saya nak tanya status kereta saya." href="#">💬 WhatsApp Shah</a></div>
+
+  <script>
+    const WA = "60137258194";
+    const ADVISOR = "Shah";
+    const $ = (id) => document.getElementById(id);
+    const wa = (msg, to = WA) => `https://wa.me/${to}?text=${encodeURIComponent(msg)}`;
+    document.querySelectorAll("[data-wa]").forEach((a) => { a.href = wa(a.dataset.wa); a.target = "_blank"; a.rel = "noopener"; });
+    const STEPS = [
+      ["Tempahan & dokumen", "Booking diterima, dokumen sedang disemak"],
+      ["Loan diproses", "Permohonan dihantar ke bank"],
+      ["Loan lulus", "Tahniah! Bank dah luluskan"],
+      ["Sign agreement", "Tandatangan di tempat awak"],
+      ["Kereta diperuntukkan", "Kereta awak dah ada nombor casis"],
+      ["Pendaftaran JPJ", "Nombor plat sedang didaftar"],
+      ["Atas lori", "Kereta dalam perjalanan ke awak"],
+      ["Serah kunci", "Kereta sampai. Selamat memandu!"],
+    ];
+    const MODELS = ["Axia", "Bezza", "Myvi", "Ativa", "Traz", "Alza", "Aruz"];
+    const MON = ["Jan", "Feb", "Mac", "Apr", "Mei", "Jun", "Jul", "Ogos", "Sep", "Okt", "Nov", "Dis"];
+    // link: /status/#<Nama>-<model>-<tahap 1-8>-<ddmm>
+    function parse(h) {
+      const m = /^([A-Za-z0-9]{1,20})-([a-z]+)-([1-8])-([0-9]{4})$/i.exec(h || "");
+      if (!m) return null;
+      const name = m[1].replace(/([a-z])([A-Z])/g, "$1 $2");
+      return { name: name.charAt(0).toUpperCase() + name.slice(1), model: MODELS.find((x) => x.toLowerCase() === m[2].toLowerCase()) || m[2], step: +m[3], eta: m[4] };
+    }
+    function draw() {
+      const real = parse(decodeURIComponent(location.hash.slice(1)));
+      const s = real || { name: "Aisyah", model: "Bezza", step: 4, eta: "2811" };
+      const eta = `${+s.eta.slice(0, 2)} ${MON[+s.eta.slice(2) - 1] || ""}`;
+      $("trk").innerHTML = `${real ? "" : '<span class="demo">CONTOH · customer akan dapat link peribadi</span>'}
+        <p class="hello"></p>
+        <div class="prog"><i style="width:${(s.step / 8) * 100}%"></i></div>
+        <div class="eta"><span>Anggaran serah kunci</span><b>${eta}</b></div>
+        <div class="track">${STEPS.map(([h, p], i) => { const n = i + 1, c = n < s.step ? "done" : n === s.step ? "now" : ""; return `<div class="st ${c}"><span class="dot">${n < s.step ? "✓" : n}</span><div><h4>${h}</h4><p>${p}</p></div></div>`; }).join("")}</div>
+        <a class="btn wa" target="_blank" rel="noopener" href="${wa(`Salam ${ADVISOR}, ${s.name} sini. Nak tanya pasal status Perodua ${s.model} saya.`)}">Tanya ${ADVISOR} pasal status</a>`;
+      $("trk").querySelector(".hello").innerHTML = `Hai <span></span>, Perodua ${s.model} awak di tahap <span>${s.step}/8</span>`;
+      $("trk").querySelector(".hello span").textContent = s.name;
+      $("adm").hidden = !!real;
+    }
+    MODELS.forEach((m) => $("gModel").add(new Option(m, m)));
+    STEPS.forEach(([h], i) => $("gStep").add(new Option(`${i + 1}. ${h}`, i + 1)));
+    $("gModel").value = "Bezza"; $("gStep").value = "4";
+    function gen() {
+      const nm = ($("gName").value || "customer").normalize("NFD").replace(/[^A-Za-z0-9]/g, "").slice(0, 20) || "customer";
+      const d = $("gEta").value.split("-"), ddmm = d.length === 3 ? d[2] + d[1] : "0101";
+      const link = `${location.origin}${location.pathname}#${nm}-${$("gModel").value.toLowerCase()}-${$("gStep").value}-${ddmm}`;
+      $("gOut").textContent = link;
+      let ph = ($("gPhone").value || "").replace(/\D/g, ""); if (ph.startsWith("0")) ph = "6" + ph;
+      const step = STEPS[+$("gStep").value - 1][0];
+      $("gSend").href = wa(`Salam ${$("gName").value || ""}, update kereta Perodua ${$("gModel").value} awak: *${step}* (tahap ${$("gStep").value}/8). Semak status di sini:\n${link}`, ph || "");
+      return link;
+    }
+    ["gName", "gModel", "gStep", "gEta", "gPhone"].forEach((id) => $(id).addEventListener("input", gen));
+    $("gCopy").onclick = () => { const t = gen(); (navigator.clipboard ? navigator.clipboard.writeText(t) : Promise.reject()).then(() => { $("gMsg").textContent = "✓ Link disalin. Tampal dalam WhatsApp customer."; }, () => { const r = document.createRange(); r.selectNodeContents($("gOut")); const sel = getSelection(); sel.removeAllRanges(); sel.addRange(r); $("gMsg").textContent = "Tekan lama pada link dan pilih Copy."; }); };
+    addEventListener("hashchange", draw);
+    gen(); draw();
+  </script>
+</body>
+</html>
