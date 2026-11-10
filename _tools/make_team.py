@@ -4,7 +4,7 @@ import os, re, sys
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 MODELS = [d for d in ("axia", "bezza", "myvi", "ativa", "traz", "alza", "aruz") if os.path.isfile(f"{ROOT}/{d}/index.html")]
 TEAM = [
-    dict(slug="aisyah", first="Aisyah", full="AISYAH", wa="60182031020", photo="img/aisyah.jpg"),
+    dict(slug="aisyah", first="Aisyah", full="AISYAH", wa="60182031020", photo="img/aisyah.jpg", tagline="PAKAR LOAN ANDA"),
     dict(slug="fendi", first="Fendi", full="FENDI", wa="60189038194", photo="img/fendi.jpg", tagline="PAKAR LOAN ANDA"),
 ]
 def common(s, m):

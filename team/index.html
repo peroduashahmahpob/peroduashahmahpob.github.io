@@ -55,6 +55,7 @@
     .offer small { display: block; margin-top: 3px; color: var(--g); font-size: 13px; font-weight: 500; }
     .checks { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 16px; }
     .check { padding: 16px 14px; border-radius: 18px; background: linear-gradient(160deg, rgba(245,197,66,.16), rgba(245,197,66,.04)); border: 2px solid rgba(245,197,66,.35); }
+    .check.wide { grid-column: 1 / -1; }
     .check i { font-style: normal; display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: var(--gr); color: #06290f; font-weight: 900; }
     .check b { display: block; margin-top: 10px; font-size: 15px; font-weight: 900; line-height: 1.2; color: var(--y); }
     .check small { display: block; margin-top: 4px; font-size: 12px; color: var(--g); font-weight: 600; }
@@ -67,6 +68,8 @@
     .cmh small { display: block; font-size: 11px; color: var(--g); font-weight: 700; letter-spacing: .06em; }
     .cm p { margin-top: 10px; font-size: 15px; font-weight: 600; line-height: 1.45; }
     .cm .likes { margin-top: 8px; font-size: 12px; color: var(--g); font-weight: 700; }
+    .cm.star { border-color: rgba(37,211,102,.5); background: rgba(37,211,102,.07); }
+    .goodtag { display: inline-block; margin-bottom: 8px; padding: 4px 10px; border-radius: 8px; background: var(--gr); color: #06290f; font-size: 11px; font-weight: 800; letter-spacing: .08em; }
     .badtag { display: inline-block; margin-bottom: 8px; padding: 4px 10px; border-radius: 8px; background: var(--r); color: #fff; font-size: 11px; font-weight: 800; letter-spacing: .08em; }
     .maya { margin-top: 16px; padding: 18px; border-radius: 22px; background: linear-gradient(160deg, #1d2440, #141110); border: 2px solid #2f3a66; }
     .maya b { font-size: 22px; font-weight: 900; letter-spacing: .08em; color: var(--y); }
@@ -84,6 +87,9 @@
     .member .btn { grid-column: 1 / -1; margin-top: 2px; }
     .member .two { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
     .member .two .btn { min-height: 48px; font-size: 14px; }
+    .links2 { display: grid; gap: 10px; margin-top: 16px; }
+    .lk { display: flex; align-items: center; gap: 14px; padding: 16px; background: var(--card); border: 2px solid var(--ln); border-radius: 18px; }
+    .lk span { font-size: 26px; } .lk div { flex: 1; } .lk b { display: block; font-size: 16px; font-weight: 900; } .lk small { color: var(--g); font-size: 12px; font-weight: 700; } .lk em { font-style: normal; color: var(--y); font-weight: 900; font-size: 20px; }
     .docs { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 16px; }
     .doc { padding: 14px; background: var(--card); border: 2px solid var(--ln); border-radius: 16px; font-size: 14px; font-weight: 800; }
     .doc span { display: block; font-size: 22px; }
@@ -104,7 +110,7 @@
       <h1>Beli kereta tanpa rasa <mark>ditipu</mark></h1>
       <p class="sub">&amp; rahsia loan lulus dalam masa <b>yang pantas</b></p>
       <div class="faces">
-        <figure><img src="../aisyah/img/aisyah.jpg" alt="Aisyah" width="96" height="96" /><figcaption>AISYAH<small>Sales Advisor</small></figcaption></figure>
+        <figure><img src="../aisyah/img/aisyah.jpg" alt="Aisyah" width="96" height="96" /><figcaption>AISYAH<small>Pakar Loan</small></figcaption></figure>
         <figure class="lead"><img src="../img/shah.jpg" alt="Shah Mahpob" width="116" height="116" /><figcaption>SHAH MAHPOB<small>Ketua Team</small></figcaption></figure>
         <figure><img src="../fendi/img/fendi.jpg" alt="Fendi" width="96" height="96" /><figcaption>FENDI<small>Pakar Loan</small></figcaption></figure>
       </div>
@@ -134,18 +140,18 @@
         <div class="check"><i>✓</i><b>Team sales &amp; loan</b><small>Bukan seorang diri</small></div>
         <div class="check"><i>✓</i><b>Akses satu Malaysia</b><small>Urus dari mana-mana negeri</small></div>
         <div class="check"><i>✓</i><b>Hubungan baik dengan bank</b></div>
+        <div class="check wide"><i>🚚</i><b>Penghantaran naik lori satu Malaysia tanpa caj</b><small>Kereta sampai ke depan rumah awak, dari Perlis sampai Johor, Sabah &amp; Sarawak</small></div>
       </div>
     </section>
 
     <section class="reveal">
-      <h2>Feedback di TikTok</h2>
+      <h2>Feedback pelanggan &amp; TikTok</h2>
       <h3>Belilah dengan <span>ilmu</span></h3>
       <div class="fb">
-        <div class="cm bad">
-          <span class="badtag">⚠ PENGALAMAN DENGAN SA LAIN</span>
-          <div class="cmh"><div class="av" style="background:#9b2c2c">M</div><div><b>Mal The Giant</b><small>KOMEN DI TIKTOK</small></div></div>
-          <p>"baru terkena. bila nak sign agreement, tengok harga kereta naik melonjak seperti macam² add on yg kita tak mintak. terus tak jadi nak deal."</p>
-          <div class="likes">♡ 1,470</div>
+        <div class="cm star">
+          <span class="goodtag">★★★★★ PELANGGAN KAMI</span>
+          <div class="cmh"><div class="av" style="background:#2f8f5b">P</div><div><b>Pelanggan</b><small>PULAU PINANG</small></div></div>
+          <p>"Mudah berurusan dengan team Shah Mahpob ni, hantar kereta naik lori walaupun saya duduk dekat Penang."</p>
         </div>
         <div class="cm">
           <div class="cmh"><div class="av" style="background:#2b7a8c">B</div><div><b>best la</b><small>KOMEN DI TIKTOK</small></div></div>
@@ -185,7 +191,7 @@
       <div class="team">
         <div class="member">
           <img src="../aisyah/img/aisyah.jpg" alt="Aisyah, Team Shah Mahpob" width="96" height="96" />
-          <div><small>Team Shah Mahpob</small><b>AISYAH</b><br><span class="tag">SALES ADVISOR</span></div>
+          <div><small>Team Shah Mahpob</small><b>AISYAH</b><br><span class="tag">PAKAR LOAN ANDA</span></div>
           <a class="btn y" href="https://is.gd/aisyahteamshahmahpob" target="_blank" rel="noopener">Proceed pembelian &amp; survey harga dengan Aisyah →</a>
         </div>
         <div class="member">
@@ -193,6 +199,15 @@
           <div><small>Team Shah Mahpob</small><b>FENDI</b><br><span class="tag">PAKAR LOAN ANDA</span></div>
           <a class="btn y" href="https://is.gd/fenditeamshahmahpob" target="_blank" rel="noopener">Proceed pembelian &amp; survey harga dengan Fendi →</a>
         </div>
+      </div>
+    </section>
+
+    <section class="reveal">
+      <h2>Pautan berguna</h2>
+      <h3>Semak &amp; urus <span>sendiri</span></h3>
+      <div class="links2">
+        <a class="lk" href="https://public.jpj.gov.my/public/login.zul" target="_blank" rel="noopener"><span>🔢</span><div><b>Beli nombor plat</b><small>Portal awam JPJ (JPJeBid)</small></div><em>→</em></a>
+        <a class="lk" href="https://www.mycarinfo.com.my/NCDCheck/Online" target="_blank" rel="noopener"><span>🛡️</span><div><b>Semak NCD kereta</b><small>MyCarInfo · NCD Check</small></div><em>→</em></a>
       </div>
     </section>
 
@@ -210,7 +225,7 @@
 
     <footer>
       <b>TEAM SHAH MAHPOB</b><br>Sales &amp; Loan · Perodua<br><br>
-      Komen diambil dari ruangan komen TikTok @salesteamperodua. Statistik TikTok pada masa senarai ini dibuat.<br>
+      Komen TikTok diambil dari ruangan komen @salesteamperodua. Statistik TikTok pada masa senarai ini dibuat.<br>
       Laman peribadi team Sales Advisor. Bukan laman rasmi Perodua.
     </footer>
   </main>
