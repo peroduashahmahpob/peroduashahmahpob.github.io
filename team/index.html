@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Kenapa Beli Dengan Team Shah Mahpob | Perodua</title>
+  <meta name="description" content="Beli kereta Perodua tanpa rasa ditipu. Team sales & loan Shah Mahpob: telus, proses loan teliti, penghantaran percuma satu Malaysia, khidmat nasihat DSR & NDI." />
+  <meta property="og:title" content="Kenapa Beli Dengan Team Shah Mahpob" />
+  <meta property="og:description" content="Beli kereta tanpa rasa ditipu · Loan lulus pantas · Penghantaran percuma satu Malaysia" />
+  <meta property="og:image" content="../img/shah.jpg" />
+  <meta name="theme-color" content="#141110" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    :root { --bg: #141110; --card: #1e1a18; --ln: #312b28; --o: #ee7a4c; --y: #f5c542; --w: #f4efe9; --g: #a59f99; --gr: #25d366; --r: #e05a4f; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--w); font-family: "Montserrat", system-ui, sans-serif; line-height: 1.45; -webkit-font-smoothing: antialiased; padding-bottom: 40px; }
+    a { color: inherit; text-decoration: none; }
+    .wrap { max-width: 520px; margin: 0 auto; padding: 0 18px; }
+    .glow { position: fixed; inset: 0; pointer-events: none; background: radial-gradient(ellipse 90% 40% at 50% 0%, rgba(245,197,66,.16), transparent 70%); z-index: -1; }
+    .top { display: flex; justify-content: space-between; align-items: center; padding: 16px 0 4px; font-size: 13px; font-weight: 800; letter-spacing: .08em; }
+    .top a { color: var(--g); } .top span { color: var(--y); }
+    .hero { padding-top: 22px; text-align: center; }
+    .kick { font-size: 12px; font-weight: 800; letter-spacing: .2em; color: var(--g); text-transform: uppercase; }
+    h1 { margin-top: 8px; font-size: 34px; font-weight: 900; line-height: 1.08; letter-spacing: -.01em; }
+    h1 mark { background: none; color: var(--y); text-decoration: underline; text-decoration-thickness: 5px; text-underline-offset: 6px; }
+    .sub { margin-top: 12px; font-size: 16px; font-weight: 700; color: var(--w); }
+    .sub b { color: var(--o); }
+    .faces { display: flex; justify-content: center; align-items: flex-start; gap: 4px; margin-top: 22px; }
+    .faces figure { margin: 0; width: 108px; text-align: center; }
+    .faces figure.lead { width: 128px; }
+    .faces img { margin: 0 auto; width: 88px; height: 88px; border-radius: 50%; object-fit: cover; border: 4px solid var(--bg); box-shadow: 0 0 0 3px var(--y); display: block; }
+    .faces figure.lead img { width: 116px; height: 116px; box-shadow: 0 0 0 3px var(--o); }
+    .faces figcaption { margin-top: 8px; font-size: 11px; font-weight: 800; letter-spacing: .1em; }
+    .faces figcaption small { display: block; color: var(--g); font-weight: 700; letter-spacing: .04em; }
+    .stats { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 22px; }
+    .stat { background: var(--card); border: 2px solid var(--ln); border-radius: 18px; padding: 14px 10px; text-align: center; }
+    .stat b { display: block; font-size: 26px; font-weight: 900; color: var(--y); }
+    .stat span { font-size: 12px; font-weight: 700; color: var(--g); }
+    .btn { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; min-height: 54px; border-radius: 16px; font-weight: 800; font-size: 16px; border: 0; cursor: pointer; text-align: center; padding: 10px 16px; line-height: 1.25; }
+    .btn:active { transform: scale(.97); }
+    .btn.y { background: var(--y); color: #1c1606; }
+    .btn.wa { background: var(--gr); color: #06290f; }
+    .btn.ghost { background: var(--card); border: 2px solid var(--ln); color: var(--w); }
+    .hero .btn { margin-top: 18px; }
+    section { margin-top: 40px; }
+    h2 { font-size: 13px; font-weight: 800; letter-spacing: .18em; color: var(--g); text-transform: uppercase; }
+    h3 { margin-top: 6px; font-size: 27px; font-weight: 900; line-height: 1.1; }
+    h3 span { color: var(--y); }
+    .offers { counter-reset: n; display: grid; gap: 10px; margin-top: 16px; }
+    .offer { position: relative; padding: 16px 16px 16px 66px; background: var(--card); border: 2px solid var(--ln); border-radius: 18px; }
+    .offer::before { counter-increment: n; content: counter(n); position: absolute; left: 16px; top: 16px; width: 36px; height: 36px; border-radius: 11px; background: var(--y); color: #1c1606; display: grid; place-items: center; font-weight: 900; font-size: 18px; }
+    .offer b { display: block; font-size: 16px; font-weight: 800; }
+    .offer small { display: block; margin-top: 3px; color: var(--g); font-size: 13px; font-weight: 500; }
+    .checks { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 16px; }
+    .check { padding: 16px 14px; border-radius: 18px; background: linear-gradient(160deg, rgba(245,197,66,.16), rgba(245,197,66,.04)); border: 2px solid rgba(245,197,66,.35); }
+    .check i { font-style: normal; display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: var(--gr); color: #06290f; font-weight: 900; }
+    .check b { display: block; margin-top: 10px; font-size: 15px; font-weight: 900; line-height: 1.2; color: var(--y); }
+    .check small { display: block; margin-top: 4px; font-size: 12px; color: var(--g); font-weight: 600; }
+    .fb { display: grid; gap: 12px; margin-top: 16px; }
+    .cm { padding: 16px; background: var(--card); border: 2px solid var(--ln); border-radius: 20px; }
+    .cm.bad { border-color: rgba(224,90,79,.5); background: rgba(224,90,79,.08); }
+    .cmh { display: flex; align-items: center; gap: 10px; }
+    .av { width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center; font-weight: 900; color: #fff; flex: none; }
+    .cmh b { font-size: 14px; font-weight: 800; }
+    .cmh small { display: block; font-size: 11px; color: var(--g); font-weight: 700; letter-spacing: .06em; }
+    .cm p { margin-top: 10px; font-size: 15px; font-weight: 600; line-height: 1.45; }
+    .cm .likes { margin-top: 8px; font-size: 12px; color: var(--g); font-weight: 700; }
+    .badtag { display: inline-block; margin-bottom: 8px; padding: 4px 10px; border-radius: 8px; background: var(--r); color: #fff; font-size: 11px; font-weight: 800; letter-spacing: .08em; }
+    .maya { margin-top: 16px; padding: 18px; border-radius: 22px; background: linear-gradient(160deg, #1d2440, #141110); border: 2px solid #2f3a66; }
+    .maya b { font-size: 22px; font-weight: 900; letter-spacing: .08em; color: var(--y); }
+    .maya p { margin-top: 6px; font-size: 14px; color: #c9cbe0; font-weight: 600; }
+    .maya ul { list-style: none; margin-top: 12px; display: grid; gap: 6px; }
+    .maya li { font-size: 14px; font-weight: 600; padding-left: 22px; position: relative; }
+    .maya li::before { content: "✓"; position: absolute; left: 0; color: var(--y); font-weight: 900; }
+    .maya .btn { margin-top: 16px; }
+    .team { display: grid; gap: 14px; margin-top: 16px; }
+    .member { display: grid; grid-template-columns: 96px 1fr; gap: 14px; align-items: center; padding: 16px; background: var(--card); border: 2px solid var(--ln); border-radius: 22px; }
+    .member img { width: 96px; height: 96px; border-radius: 20px; object-fit: cover; }
+    .member b { font-size: 22px; font-weight: 900; }
+    .member small { display: block; font-size: 12px; font-weight: 800; letter-spacing: .1em; color: var(--o); text-transform: uppercase; }
+    .member .tag { display: inline-block; margin-top: 6px; padding: 4px 10px; border-radius: 999px; background: var(--o); color: #fff; font-size: 11px; font-weight: 900; letter-spacing: .1em; }
+    .member .btn { grid-column: 1 / -1; margin-top: 2px; }
+    .member .two { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .member .two .btn { min-height: 48px; font-size: 14px; }
+    .docs { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 16px; }
+    .doc { padding: 14px; background: var(--card); border: 2px solid var(--ln); border-radius: 16px; font-size: 14px; font-weight: 800; }
+    .doc span { display: block; font-size: 22px; }
+    footer { margin-top: 44px; padding: 24px 0 10px; border-top: 2px solid var(--ln); text-align: center; color: var(--g); font-size: 12px; }
+    footer b { color: var(--w); letter-spacing: .12em; }
+    .reveal { opacity: 0; transform: translateY(18px); transition: opacity .5s ease, transform .5s ease; }
+    .reveal.on { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } html { scroll-behavior: auto; } }
+  </style>
+</head>
+<body>
+  <div class="glow"></div>
+  <main class="wrap">
+    <nav class="top"><a href="../">← LAMAN UTAMA</a><span>TEAM SHAH MAHPOB</span></nav>
+
+    <header class="hero">
+      <div class="kick">Kenapa beli dengan kami</div>
+      <h1>Beli kereta tanpa rasa <mark>ditipu</mark></h1>
+      <p class="sub">&amp; rahsia loan lulus dalam masa <b>yang pantas</b></p>
+      <div class="faces">
+        <figure><img src="../aisyah/img/aisyah.jpg" alt="Aisyah" width="96" height="96" /><figcaption>AISYAH<small>Sales Advisor</small></figcaption></figure>
+        <figure class="lead"><img src="../img/shah.jpg" alt="Shah Mahpob" width="116" height="116" /><figcaption>SHAH MAHPOB<small>Ketua Team</small></figcaption></figure>
+        <figure><img src="../fendi/img/fendi.jpg" alt="Fendi" width="96" height="96" /><figcaption>FENDI<small>Pakar Loan</small></figcaption></figure>
+      </div>
+      <div class="stats">
+        <div class="stat"><b>138.6K</b><span>pengikut TikTok</span></div>
+        <div class="stat"><b>2.3J</b><span>likes di TikTok</span></div>
+      </div>
+      <a class="btn y" href="#team">Proceed pembelian / survey harga ↓</a>
+    </header>
+
+    <section class="reveal">
+      <h2>Apa yang kami tawarkan</h2>
+      <h3>Urusan <span>telus</span>, dari mula sampai kunci</h3>
+      <div class="offers">
+        <div class="offer"><b>Telus &amp; berintegriti</b><small>Setiap kos diterangkan, tiada add-on yang awak tak minta.</small></div>
+        <div class="offer"><b>Proses loan yang teliti</b><small>Tanpa caca-merba yang boleh rosakkan credit scoring awak.</small></div>
+        <div class="offer"><b>Penghantaran percuma satu Malaysia</b><small>Sign agreement di tempat awak.</small></div>
+        <div class="offer"><b>Khidmat nasihat kewangan</b><small>Berdasarkan DSR &amp; NDI, oleh team loan kami.</small></div>
+      </div>
+    </section>
+
+    <section class="reveal">
+      <h2>Kelebihan kami</h2>
+      <h3>Kenapa <span>team kami</span></h3>
+      <div class="checks">
+        <div class="check"><i>✓</i><b>Direct HQ Perodua</b></div>
+        <div class="check"><i>✓</i><b>Team sales &amp; loan</b><small>Bukan seorang diri</small></div>
+        <div class="check"><i>✓</i><b>Akses satu Malaysia</b><small>Urus dari mana-mana negeri</small></div>
+        <div class="check"><i>✓</i><b>Hubungan baik dengan bank</b></div>
+      </div>
+    </section>
+
+    <section class="reveal">
+      <h2>Feedback di TikTok</h2>
+      <h3>Belilah dengan <span>ilmu</span></h3>
+      <div class="fb">
+        <div class="cm bad">
+          <span class="badtag">⚠ PENGALAMAN DENGAN SA LAIN</span>
+          <div class="cmh"><div class="av" style="background:#9b2c2c">M</div><div><b>Mal The Giant</b><small>KOMEN DI TIKTOK</small></div></div>
+          <p>"baru terkena. bila nak sign agreement, tengok harga kereta naik melonjak seperti macam² add on yg kita tak mintak. terus tak jadi nak deal."</p>
+          <div class="likes">♡ 1,470</div>
+        </div>
+        <div class="cm">
+          <div class="cmh"><div class="av" style="background:#2b7a8c">B</div><div><b>best la</b><small>KOMEN DI TIKTOK</small></div></div>
+          <p>"saya repost and save. nak beli kereta produa in future akan cari bro ni. jujur telus mcmni, u have gain my trust."</p>
+        </div>
+        <div class="cm">
+          <div class="cmh"><div class="av" style="background:#6b5b3e">A</div><div><b>aminzawawi</b><small>KOMEN DI TIKTOK</small></div></div>
+          <p>"ya terima kasih utk sharing ilmu utk elak kena scam dgn SA bang"</p>
+        </div>
+        <div class="cm">
+          <div class="cmh"><div class="av" style="background:#4a5a8c">M</div><div><b>MuhammadHamizi</b><small>KOMEN DI TIKTOK</small></div></div>
+          <p>"Sbb abg suka share benda2 jujur mcm ni jadi saya follow and repost hehehe"</p>
+          <div class="likes">♡ 443</div>
+        </div>
+      </div>
+      <a class="btn ghost" style="margin-top:12px" href="https://www.tiktok.com/@salesteamperodua" target="_blank" rel="noopener">Tengok video kami di TikTok @salesteamperodua</a>
+    </section>
+
+    <section class="reveal">
+      <h2>Personal assistant 24 jam</h2>
+      <h3>Jom chat dengan <span>MAYA</span></h3>
+      <div class="maya">
+        <b>MAYA</b>
+        <p>Beratus soalan lazim dijawab oleh MAYA, 24 jam, di Peroduasmart.my.</p>
+        <ul>
+          <li>Bandingkan harga standard setiap model</li>
+          <li>Senarai harga &amp; brochure semua model</li>
+          <li>Soalan lazim: trade-in, loan, booking, insurans</li>
+        </ul>
+        <a class="btn y" href="https://peroduasmart.my/chat/" target="_blank" rel="noopener">Chat dengan MAYA sekarang</a>
+      </div>
+    </section>
+
+    <section class="reveal" id="team">
+      <h2>Nak proceed pembelian &amp; survey harga?</h2>
+      <h3>Pilih <span>team kami</span></h3>
+      <div class="team">
+        <div class="member">
+          <img src="../aisyah/img/aisyah.jpg" alt="Aisyah, Team Shah Mahpob" width="96" height="96" />
+          <div><small>Team Shah Mahpob</small><b>AISYAH</b><br><span class="tag">SALES ADVISOR</span></div>
+          <a class="btn y" href="https://is.gd/aisyahteamshahmahpob" target="_blank" rel="noopener">Proceed pembelian &amp; survey harga dengan Aisyah →</a>
+        </div>
+        <div class="member">
+          <img src="../fendi/img/fendi.jpg" alt="Fendi, Team Shah Mahpob" width="96" height="96" />
+          <div><small>Team Shah Mahpob</small><b>FENDI</b><br><span class="tag">PAKAR LOAN ANDA</span></div>
+          <a class="btn y" href="https://is.gd/fenditeamshahmahpob" target="_blank" rel="noopener">Proceed pembelian &amp; survey harga dengan Fendi →</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="reveal">
+      <h2>Dokumen yang diperlukan</h2>
+      <h3>Sediakan <span>4 benda</span> ni</h3>
+      <div class="docs">
+        <div class="doc"><span>🪪</span>Kad pengenalan</div>
+        <div class="doc"><span>🚗</span>Lesen memandu</div>
+        <div class="doc"><span>📄</span>Slip gaji 3 bulan terkini</div>
+        <div class="doc"><span>🏦</span>Penyata bank 3 bulan terkini</div>
+      </div>
+      <p style="margin-top:16px;text-align:center;font-weight:800;font-size:16px">Enjoy your journey. Just get back to us! 🤝</p>
+    </section>
+
+    <footer>
+      <b>TEAM SHAH MAHPOB</b><br>Sales &amp; Loan · Perodua<br><br>
+      Komen diambil dari ruangan komen TikTok @salesteamperodua. Statistik TikTok pada masa senarai ini dibuat.<br>
+      Laman peribadi team Sales Advisor. Bukan laman rasmi Perodua.
+    </footer>
+  </main>
+  <script>
+    const io = "IntersectionObserver" in window ? new IntersectionObserver((es) => es.forEach((e) => e.isIntersecting && e.target.classList.add("on")), { threshold: 0.1 }) : null;
+    document.querySelectorAll(".reveal").forEach((el) => (io ? io.observe(el) : el.classList.add("on")));
+  </script>
+</body>
+</html>
