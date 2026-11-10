@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Fendi · Team Shah Mahpob | Sales Advisor Perodua</title>
+  <meta name="description" content="Fendi (Team Shah Mahpob), Pakar Loan Anda. Sales Advisor Perodua. Tanya harga, promo, kiraan bulanan dan loan terus di WhatsApp. Penghantaran satu Malaysia." />
+  <meta property="og:title" content="FENDI · Team Shah Mahpob" />
+  <meta property="og:description" content="Sales Advisor Perodua · Penghantaran satu Malaysia · Tiada hidden cost" />
+  <meta property="og:image" content="img/fendi.jpg" />
+  <meta name="theme-color" content="#141110" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    :root { --bg: #141110; --card: #1e1a18; --ln: #312b28; --o: #ee7a4c; --od: #cc5a2c; --w: #f4efe9; --g: #a59f99; --gr: #25d366; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--w); font-family: "Montserrat", system-ui, sans-serif; line-height: 1.45; -webkit-font-smoothing: antialiased; padding-bottom: 96px; }
+    a { color: inherit; text-decoration: none; }
+    .wrap { max-width: 520px; margin: 0 auto; padding: 0 18px; }
+    .glow { position: fixed; inset: 0; pointer-events: none; background: radial-gradient(ellipse 80% 40% at 50% 0%, rgba(238,122,76,.22), transparent 70%); z-index: -1; }
+    /* hero */
+    .hero { text-align: center; padding: 42px 0 26px; }
+    .photo { width: 132px; height: 132px; border-radius: 50%; object-fit: cover; border: 4px solid var(--o); box-shadow: 0 10px 40px rgba(238,122,76,.35); }
+    .kick { margin-top: 18px; font-size: 12px; font-weight: 800; letter-spacing: .2em; color: var(--g); text-transform: uppercase; }
+    h1 { margin-top: 6px; font-size: 34px; font-weight: 900; line-height: 1.05; letter-spacing: -.01em; }
+    h1 span { color: var(--o); }
+    .sub { margin-top: 10px; color: var(--g); font-size: 15px; font-weight: 500; }
+    .btn { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; min-height: 56px; border-radius: 16px; font-weight: 800; font-size: 16px; letter-spacing: .02em; border: 0; cursor: pointer; transition: transform .12s; }
+    .btn:active { transform: scale(.97); }
+    .btn.wa { background: var(--gr); color: #06290f; }
+    .btn.ghost { background: var(--card); border: 2px solid var(--ln); color: var(--w); }
+    .btn svg { width: 22px; height: 22px; flex: none; }
+    .cta { display: grid; gap: 10px; margin-top: 22px; }
+    .socials { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    .socials .btn { min-height: 48px; font-size: 14px; }
+    /* sections */
+    section { margin-top: 34px; }
+    h2 { font-size: 13px; font-weight: 800; letter-spacing: .18em; color: var(--g); text-transform: uppercase; }
+    h3 { margin-top: 6px; font-size: 26px; font-weight: 900; line-height: 1.1; }
+    h3 span { color: var(--o); }
+    .perks { display: grid; gap: 10px; margin-top: 16px; }
+    .perk { display: flex; gap: 14px; align-items: center; padding: 14px 16px; background: var(--card); border: 2px solid var(--ln); border-radius: 18px; }
+    .perk i { flex: none; width: 44px; height: 44px; border-radius: 50%; background: var(--o); display: grid; place-items: center; font-style: normal; font-size: 22px; }
+    .perk b { display: block; font-size: 16px; font-weight: 800; }
+    .perk small { color: var(--g); font-size: 13px; font-weight: 500; }
+    .models { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 16px; }
+    .model { padding: 16px 14px; background: var(--card); border: 2px solid var(--ln); border-radius: 18px; display: flex; flex-direction: column; gap: 4px; }
+    .model b { font-size: 19px; font-weight: 900; }
+    .model small { color: var(--g); font-size: 12px; font-weight: 600; }
+    .model span { margin-top: 8px; font-size: 13px; font-weight: 800; color: var(--o); }
+    /* calculator */
+    .calc { margin-top: 16px; padding: 18px; background: var(--card); border: 2px solid var(--ln); border-radius: 22px; }
+    .bar { display: flex; gap: 7px; margin-bottom: 14px; }
+    .bar i { width: 11px; height: 11px; border-radius: 50%; background: #e05a4f; } .bar i:nth-child(2) { background: #f2c94c; } .bar i:nth-child(3) { background: #7fc78a; }
+    label { display: block; margin-top: 12px; font-size: 12px; font-weight: 800; letter-spacing: .12em; color: var(--g); text-transform: uppercase; }
+    input, select { width: 100%; margin-top: 6px; min-height: 52px; padding: 0 14px; border-radius: 14px; background: #26211e; border: 2px solid var(--ln); color: var(--w); font: 700 18px "Montserrat", sans-serif; -webkit-appearance: none; appearance: none; }
+    input:focus, select:focus { outline: none; border-color: var(--o); }
+    .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .result { margin-top: 18px; padding-top: 16px; border-top: 2px solid var(--ln); }
+    .result .lbl { font-size: 12px; font-weight: 800; letter-spacing: .14em; color: var(--g); text-transform: uppercase; }
+    .result .big { font-size: 46px; font-weight: 900; color: var(--o); letter-spacing: -.02em; line-height: 1.1; }
+    .result .mini { display: flex; justify-content: space-between; margin-top: 6px; font-size: 14px; color: var(--g); font-weight: 600; }
+    .result .mini b { color: var(--w); }
+    .note { margin-top: 12px; font-size: 12px; color: var(--g); }
+    .calc .btn { margin-top: 16px; }
+    /* steps */
+    .steps { counter-reset: s; display: grid; gap: 10px; margin-top: 16px; }
+    .step { position: relative; padding: 14px 16px 14px 62px; background: var(--card); border: 2px solid var(--ln); border-radius: 18px; font-weight: 700; font-size: 15px; }
+    .step::before { counter-increment: s; content: counter(s); position: absolute; left: 16px; top: 50%; transform: translateY(-50%); width: 32px; height: 32px; border-radius: 10px; background: var(--w); color: var(--bg); display: grid; place-items: center; font-weight: 900; }
+    .step small { display: block; color: var(--g); font-weight: 500; font-size: 13px; }
+    footer { margin-top: 40px; padding: 24px 0 10px; border-top: 2px solid var(--ln); text-align: center; color: var(--g); font-size: 12px; }
+    footer b { color: var(--w); letter-spacing: .12em; }
+    /* sticky WhatsApp bar */
+    .sticky { position: fixed; left: 0; right: 0; bottom: 0; padding: 12px 18px calc(12px + env(safe-area-inset-bottom)); background: linear-gradient(180deg, rgba(20,17,16,0), rgba(20,17,16,.96) 30%); z-index: 10; }
+    .sticky .btn { max-width: 484px; margin: 0 auto; box-shadow: 0 10px 30px rgba(37,211,102,.35); }
+    .reveal { opacity: 0; transform: translateY(18px); transition: opacity .5s ease, transform .5s ease; }
+    .reveal.on { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } html { scroll-behavior: auto; } }
+  </style>
+</head>
+<body>
+  <div class="glow"></div>
+  <main class="wrap">
+    <header class="hero">
+      <img class="photo" src="img/fendi.jpg" alt="Fendi, Sales Advisor Perodua" width="132" height="132" />
+      <div class="kick">Sales Advisor Perodua</div>
+      <h1>FENDI<br><span>TEAM SHAH MAHPOB</span></h1><p style="display:inline-block;margin-top:12px;padding:8px 16px;border-radius:999px;background:var(--o);color:#fff;font-weight:900;font-size:15px;letter-spacing:.14em">PAKAR LOAN ANDA</p>
+      <p class="sub" id="branch">Perodua Malaysia · Urusan &amp; penghantaran seluruh Malaysia</p>
+      <div class="cta">
+        <a class="btn wa" data-wa="Salam Fendi, saya nak tanya pasal kereta Perodua." href="#">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.4.8 3.2.6a2.8 2.8 0 0 0 1.8-1.3 2.3 2.3 0 0 0 .2-1.3c-.1-.1-.3-.2-.5-.3Z"/></svg>
+          WhatsApp Saya Sekarang
+        </a>
+        <a class="btn ghost" id="tt" href="#"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.6 5.8A4.3 4.3 0 0 1 15.5 3h-3.2v12.4a2.6 2.6 0 1 1-1.8-2.5V9.6a5.8 5.8 0 1 0 5 5.8V9.1a7.4 7.4 0 0 0 4.3 1.4V7.3a4.3 4.3 0 0 1-3.2-1.5Z"/></svg>TikTok @salesteamperodua</a>
+      </div>
+    </header>
+
+    <section class="reveal">
+      <h2>Kenapa beli dengan saya</h2>
+      <h3>Urusan <span>senang</span>,<br>tiada kejutan</h3>
+      <div class="perks">
+        <div class="perk"><i>🚚</i><div><b>Penghantaran satu Malaysia</b><small>Kereta dihantar naik lori ke tempat awak</small></div></div>
+        <div class="perk"><i>✓</i><div><b>Tiada hidden cost</b><small>Semua kos diterangkan satu-satu</small></div></div>
+        <div class="perk"><i>📄</i><div><b>Quotation insurans terperinci</b><small>Tahu setiap sen sebelum bayar</small></div></div>
+        <div class="perk"><i>🛡️</i><div><b>Bantu transfer NCD</b><small>Jimat premium insurans kereta baru</small></div></div>
+      </div>
+    </section>
+
+    <section class="reveal">
+      <h2>Pilih model</h2>
+      <h3>Tanya harga &amp; <span>promo bulan ini</span></h3>
+      <div class="models" id="models"></div>
+    </section>
+
+    <section class="reveal" id="kira">
+      <h2>Kalkulator</h2>
+      <h3>Anggar <span>bulanan</span> awak</h3>
+      <div class="calc">
+        <div class="bar"><i></i><i></i><i></i></div>
+        <label for="price">Harga kereta (RM)</label>
+        <input id="price" type="number" inputmode="numeric" value="45000" min="0" step="100" />
+        <div class="row2">
+          <div><label for="dep">Deposit (%)</label><input id="dep" type="number" inputmode="decimal" value="10" min="0" max="90" step="1" /></div>
+          <div><label for="rate">Kadar %</label><input id="rate" type="number" inputmode="decimal" value="2.8" min="0" max="10" step="0.05" /></div>
+        </div>
+        <label for="yrs">Tempoh</label>
+        <select id="yrs"><option value="5">5 tahun</option><option value="6">6 tahun</option><option value="7">7 tahun</option><option value="8">8 tahun</option><option value="9" selected>9 tahun</option></select>
+        <div class="result">
+          <div class="lbl">Anggaran bulanan</div>
+          <div class="big" id="monthly">RM0</div>
+          <div class="mini"><span>Deposit</span><b id="dpv">RM0</b></div>
+          <div class="mini"><span>Jumlah loan</span><b id="loan">RM0</b></div>
+        </div>
+        <p class="note">Anggaran sahaja (kadar rata / flat rate). Kadar sebenar ikut bank dan kelayakan awak. WhatsApp saya untuk kiraan tepat.</p>
+        <a class="btn wa" id="waCalc" href="#">Hantar kiraan ini ke WhatsApp</a>
+      </div>
+    </section>
+
+    <section class="reveal">
+      <h2>Cara beli</h2>
+      <h3>4 langkah <span>mudah</span></h3>
+      <div class="steps">
+        <div class="step">WhatsApp saya<small>Beritahu model &amp; bajet awak</small></div>
+        <div class="step">Semak kelayakan loan<small>Saya bantu kira bulanan &amp; dokumen</small></div>
+        <div class="step">Booking &amp; quotation<small>Semua kos jelas, tiada hidden cost</small></div>
+        <div class="step">Terima kunci<small>Ambil di cawangan atau dihantar ke rumah</small></div>
+      </div>
+    </section>
+
+    <footer>
+      <b>FENDI</b><br>Pakar Loan Anda · Team Shah Mahpob<br><br>
+      Laman peribadi Sales Advisor. Bukan laman rasmi Perodua.<br>Harga, rebate &amp; promo tertakluk pada terma semasa.
+    </footer>
+  </main>
+
+  <div class="sticky"><a class="btn wa" data-wa="Salam Fendi, saya nak tanya pasal kereta Perodua." href="#">💬 WhatsApp Fendi</a></div>
+
+  <script>
+    // ====== ISI MAKLUMAT DI SINI ======
+    const WA = "60189038194";               // nombor WhatsApp format 60123456789 (tanpa + dan sengkang)
+    const LINKS = { tt: "https://www.tiktok.com/@salesteamperodua" };
+    const MODELS = [
+      ["Axia", "Hatchback ekonomi"], ["Bezza", "Sedan jimat"], ["Myvi", "Hatchback popular"],
+      ["Ativa", "SUV kompak"], ["Traz", "SUV 1.5L baharu"], ["Alza", "MPV 7 tempat duduk"], ["Aruz", "SUV 7 tempat duduk"],
+    ];
+    const PAGES = { Axia: "axia/", Bezza: "bezza/", Alza: "alza/", Myvi: "myvi/", Traz: "traz/", Ativa: "ativa/" };   // model yang ada laman sendiri
+    // ==================================
+    const wa = (msg) => `https://wa.me/${WA}?text=${encodeURIComponent(msg)}`;
+    document.querySelectorAll("[data-wa]").forEach((a) => { a.href = wa(a.dataset.wa); a.target = "_blank"; a.rel = "noopener"; });
+    for (const k in LINKS) { const a = document.getElementById(k); a.href = LINKS[k]; a.target = "_blank"; a.rel = "noopener"; }
+    const box = document.getElementById("models");
+    MODELS.forEach(([n, d]) => {
+      const page = PAGES[n];
+      const a = document.createElement("a"); a.className = "model";
+      if (page) { a.href = page; } else { a.href = wa(`Salam Fendi, saya nak tanya harga & promo Perodua ${n}.`); a.target = "_blank"; a.rel = "noopener"; }
+      a.innerHTML = `<b>${n}</b><small>${d}</small><span>${page ? "Lihat harga →" : "Tanya harga →"}</span>`; box.appendChild(a);
+    });
+    const $ = (id) => document.getElementById(id);
+    const rm = (v) => "RM" + Math.round(v).toLocaleString("en-US");
+    function calc() {
+      const p = Math.max(0, +$("price").value || 0), d = Math.min(90, Math.max(0, +$("dep").value || 0)), r = Math.max(0, +$("rate").value || 0), y = +$("yrs").value;
+      const dp = p * d / 100, loan = p - dp, m = loan * (1 + r / 100 * y) / (y * 12);
+      $("monthly").textContent = rm(m); $("dpv").textContent = rm(dp); $("loan").textContent = rm(loan);
+      $("waCalc").href = wa(`Salam Fendi, saya kira: harga ${rm(p)}, deposit ${d}% (${rm(dp)}), ${y} tahun, kadar ${r}% = bulanan lebih kurang ${rm(m)}. Boleh semak untuk saya?`);
+      $("waCalc").target = "_blank";
+    }
+    ["price", "dep", "rate", "yrs"].forEach((id) => $(id).addEventListener("input", calc)); calc();
+    const io = "IntersectionObserver" in window ? new IntersectionObserver((es) => es.forEach((e) => e.isIntersecting && e.target.classList.add("on")), { threshold: 0.12 }) : null;
+    document.querySelectorAll(".reveal").forEach((el) => (io ? io.observe(el) : el.classList.add("on")));
+  </script>
+</body>
+</html>

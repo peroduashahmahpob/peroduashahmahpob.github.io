@@ -5,6 +5,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 MODELS = [d for d in ("axia", "bezza", "myvi", "ativa", "traz", "alza", "aruz") if os.path.isfile(f"{ROOT}/{d}/index.html")]
 TEAM = [
     dict(slug="aisyah", first="Aisyah", full="AISYAH", wa="60182031020", photo="img/aisyah.jpg"),
+    dict(slug="fendi", first="Fendi", full="FENDI", wa="60189038194", photo="img/fendi.jpg", tagline="PAKAR LOAN ANDA"),
 ]
 def common(s, m):
     s = s.replace("60137258194", m["wa"])
@@ -13,7 +14,8 @@ def common(s, m):
     s = s.replace("Tanya Shah Mahpob, Sales Advisor Perodua, terus di WhatsApp.", f"Tanya {m['first']} (Team Shah Mahpob), Sales Advisor Perodua, terus di WhatsApp.")
     s = s.replace("· WhatsApp Shah Mahpob", f"· WhatsApp {m['first']}")
     s = s.replace("sila tanya Shah", f"sila tanya {m['first']}").replace("Tanya Shah untuk", f"Tanya {m['first']} untuk")
-    s = s.replace("<b>SHAH MAHPOB</b><br>Sales Advisor Perodua", f"<b>{m['full']}</b><br>Team Shah Mahpob · Sales Advisor Perodua")
+    role = f"{m['tagline'].title()} · Team Shah Mahpob" if m.get("tagline") else "Team Shah Mahpob · Sales Advisor Perodua"
+    s = s.replace("<b>SHAH MAHPOB</b><br>Sales Advisor Perodua", f"<b>{m['full']}</b><br>{role}")
     return s
 for m in TEAM:
     out = f"{ROOT}/{m['slug']}"; os.makedirs(out, exist_ok=True)
@@ -22,7 +24,10 @@ for m in TEAM:
     s = s.replace('content="Shah Mahpob, Sales Advisor Perodua.', f'content="{m["first"]} (Team Shah Mahpob), Sales Advisor Perodua.')
     s = s.replace('<meta property="og:title" content="Perodua Shah Mahpob" />', f'<meta property="og:title" content="{m["full"]} · Team Shah Mahpob" />')
     s = s.replace("img/shah.jpg", m["photo"]).replace('alt="Shah Mahpob, Sales Advisor Perodua"', f'alt="{m["first"]}, Sales Advisor Perodua"')
-    s = s.replace("<h1>PERODUA<br><span>SHAH MAHPOB</span></h1>", f"<h1>{m['full']}<br><span>TEAM SHAH MAHPOB</span></h1>")
+    tag = (f'<p style="display:inline-block;margin-top:12px;padding:8px 16px;border-radius:999px;background:var(--o);color:#fff;font-weight:900;font-size:15px;letter-spacing:.14em">{m["tagline"]}</p>') if m.get("tagline") else ""
+    s = s.replace("<h1>PERODUA<br><span>SHAH MAHPOB</span></h1>", f"<h1>{m['full']}<br><span>TEAM SHAH MAHPOB</span></h1>{tag}")
+    if m.get("tagline"):
+        s = s.replace(f'content="{m["first"]} (Team Shah Mahpob), Sales Advisor Perodua.', f'content="{m["first"]} (Team Shah Mahpob), {m["tagline"].title()}. Sales Advisor Perodua.')
     open(f"{out}/index.html", "w").write(s)
     for d in MODELS:
         s = common(open(f"{ROOT}/{d}/index.html").read(), m)
