@@ -35,6 +35,10 @@ for m in TEAM:
         s = s.replace('<span>SHAH MAHPOB</span></nav>', f'<span>{m["full"]} · TEAM SHAH</span></nav>')
         s = re.sub(r'(src|content)="img/', rf'\1="../../{d}/img/', s)
         s = s.replace("img.src = `img/", f"img.src = `../../{d}/img/")
+        if d == "kalkulator":   # kalkulator ahli team: tunjuk kad ahli itu sahaja
+            for other in ("aisyah", "fendi"):
+                if other != m["slug"]:
+                    s = re.sub(r'        <div class="exp">\n          <img src="/' + other + r'/img/.*?\n        </div>\n', "", s, flags=re.S)
         os.makedirs(f"{out}/{d}", exist_ok=True); open(f"{out}/{d}/index.html", "w").write(s)
     left = []
     for f in [f"{out}/index.html"] + [f"{out}/{d}/index.html" for d in MODELS]:

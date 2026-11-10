@@ -114,11 +114,6 @@
       <div class="acts">
         <div class="pk">Hantar kiraan ni kepada <b>Pakar Loan Anda</b></div>
         <div class="exp">
-          <img src="/aisyah/img/aisyah.jpg" alt="Aisyah" width="64" height="64" />
-          <div><small>Pakar Loan Anda</small><b>AISYAH</b><a href="https://is.gd/aisyahteamshahmahpob" target="_blank" rel="noopener">Lihat laman Aisyah ↗</a></div>
-          <a class="btn wa" id="waA" href="#" target="_blank" rel="noopener">Hantar kiraan ke WhatsApp Aisyah</a>
-        </div>
-        <div class="exp">
           <img src="/fendi/img/fendi.jpg" alt="Fendi" width="64" height="64" />
           <div><small>Pakar Loan Anda</small><b>FENDI</b><a href="https://is.gd/fenditeamshahmahpob" target="_blank" rel="noopener">Lihat laman Fendi ↗</a></div>
           <a class="btn wa" id="waF" href="#" target="_blank" rel="noopener">Hantar kiraan ke WhatsApp Fendi</a>
@@ -176,8 +171,8 @@
         $("m" + y).innerHTML = `${rm(mo)}<small>/bln</small>`; $("p" + y).textContent = rm(p); $("t" + y).textContent = rm(t); });
       $("save").innerHTML = loan > 0 ? `Pilih <b>7 tahun</b>: bulanan lebih ${rm(out[7].mo - out[9].mo)}, tapi <b>jimat profit bank ${rm(out[9].p - out[7].p)}</b> berbanding 9 tahun.` : "Tiada loan, tiada profit bank. 👍";
       const msg = (nm) => `Salam ${nm}, saya guna Loan Calculator: Perodua ${v.name}, OTR anggaran ${rm(v.otr, 2)}, downpayment ${rm(dp)}, loan ${rm(loan)}, kadar ${r}%.\n• 7 tahun: ${rm(out[7].mo)}/bulan (profit bank ${rm(out[7].p)})\n• 9 tahun: ${rm(out[9].mo)}/bulan (profit bank ${rm(out[9].p)})\nBoleh semak kelayakan saya?`;
-      $("waA").href = `https://wa.me/60182031020?text=${encodeURIComponent(msg("Aisyah"))}`;
-      $("waF").href = `https://wa.me/60189038194?text=${encodeURIComponent(msg("Fendi"))}`;
+      if ($("waA")) $("waA").href = `https://wa.me/60182031020?text=${encodeURIComponent(msg("Aisyah"))}`;
+      if ($("waF")) $("waF").href = `https://wa.me/60189038194?text=${encodeURIComponent(msg("Fendi"))}`;
     }
     $("vsel").addEventListener("input", () => pickVariant(true));
     $("dp").addEventListener("input", calc);
