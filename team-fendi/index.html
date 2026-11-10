@@ -98,6 +98,36 @@
     .reveal { opacity: 0; transform: translateY(18px); transition: opacity .5s ease, transform .5s ease; }
     .reveal.on { opacity: 1; transform: none; }
     @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } html { scroll-behavior: auto; } }
+
+    /* ===== Car Loan Calculator (Fendi) ===== */
+    .lc { margin-top: 16px; padding: 18px; border-radius: 24px; background: linear-gradient(165deg, rgba(238,122,76,.22), rgba(245,197,66,.08) 60%, #1e1a18); border: 3px solid var(--o); box-shadow: 0 0 0 6px rgba(238,122,76,.12), 0 20px 50px rgba(0,0,0,.4); }
+    .lc-hd { display: flex; align-items: center; gap: 12px; }
+    .lc-hd img { width: 56px; height: 56px; border-radius: 50%; object-fit: cover; border: 3px solid var(--y); }
+    .lc-hd b { display: block; font-size: 20px; font-weight: 900; line-height: 1.1; }
+    .lc-hd small { font-size: 11px; font-weight: 900; letter-spacing: .12em; color: var(--y); }
+    .lc label { display: block; margin-top: 14px; font-size: 12px; font-weight: 800; letter-spacing: .12em; color: var(--g); text-transform: uppercase; }
+    .lc select, .lc input { width: 100%; margin-top: 6px; min-height: 52px; padding: 0 14px; border-radius: 14px; background: #26211e; border: 2px solid var(--ln); color: var(--w); font: 700 16px "Montserrat", sans-serif; -webkit-appearance: none; appearance: none; }
+    .lc select:focus, .lc input:focus { outline: none; border-color: var(--o); }
+    .lc-models { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 8px; margin-top: 8px; }
+    .lc-models button { min-height: 44px; border-radius: 12px; border: 2px solid var(--ln); background: #26211e; color: var(--w); font: 800 14px "Montserrat", sans-serif; cursor: pointer; }
+    .lc-models button[aria-pressed="true"] { background: var(--o); border-color: var(--o); color: #fff; }
+    .lc-rm { position: relative; } .lc-rm::before { content: "RM"; position: absolute; left: 14px; top: 50%; transform: translateY(-50%); margin-top: 3px; font-weight: 900; color: var(--o); }
+    .lc-rm input { padding-left: 52px; font-size: 22px; font-weight: 900; }
+    .lc-quick { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+    .lc-quick button { padding: 7px 11px; border-radius: 999px; border: 2px solid var(--ln); background: transparent; color: var(--w); font: 700 12px "Montserrat", sans-serif; cursor: pointer; }
+    .lc-line { display: flex; justify-content: space-between; gap: 10px; margin-top: 12px; padding: 10px 12px; border-radius: 12px; background: #26211e; font-size: 14px; }
+    .lc-line span { color: var(--g); font-weight: 700; } .lc-line b { font-weight: 900; } .lc-line.y b { color: var(--y); font-size: 17px; }
+    .lc-res { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 10px; margin-top: 12px; }
+    .lc-yr { min-width: 0; padding: 14px 12px; border-radius: 18px; background: #26211e; border: 2px solid var(--ln); }
+    .lc-yr.hl { border-color: var(--o); background: rgba(238,122,76,.12); }
+    .lc-yr h4 { font-size: 12px; font-weight: 900; letter-spacing: .14em; color: var(--g); }
+    .lc-yr .m { margin-top: 4px; font-size: 27px; font-weight: 900; color: var(--o); line-height: 1.05; }
+    .lc-yr .m small { font-size: 12px; color: var(--g); font-weight: 700; }
+    .lc-yr dt { margin-top: 8px; font-size: 10px; font-weight: 800; letter-spacing: .1em; color: var(--g); text-transform: uppercase; }
+    .lc-yr dd { font-size: 15px; font-weight: 900; } .lc-yr dd.p { color: var(--y); }
+    .lc-save { margin-top: 10px; font-size: 13px; font-weight: 700; color: var(--w); } .lc-save b { color: var(--gr); }
+    .lc .btn { margin-top: 14px; }
+    .lc-note { margin-top: 10px; font-size: 11px; color: var(--g); }
   </style>
 </head>
 <body>
@@ -118,8 +148,34 @@
         <div class="stat"><b>2.3J</b><span>likes di TikTok</span></div>
       </div>
       <a class="btn y" href="#team">Proceed pembelian / survey harga ↓</a>
-      <a class="btn ghost" href="../fendi/kalkulator/" style="margin-top:10px">🧮 Kira bulanan &amp; profit bank</a>
+      <a class="btn" href="#kira" style="margin-top:10px;background:var(--o);color:#fff">🧮 Car Loan Calculator · Kira dengan Fendi ↓</a>
     </header>
+
+    <section id="kira">
+      <h2>Car Loan Calculator</h2>
+      <h3>Kira loan awak dengan <span>Fendi</span></h3>
+      <div class="lc">
+        <div class="lc-hd"><img src="../fendi/img/fendi.jpg" alt="Fendi" width="56" height="56" /><div><small>PAKAR LOAN ANDA</small><b>Fendi · Team Shah Mahpob</b></div></div>
+        <label>Pilih model</label>
+        <div class="lc-models" id="lcModels"></div>
+        <label for="lcVar">Varian</label>
+        <select id="lcVar"></select>
+        <div class="lc-line"><span>OTR (anggaran)</span><b id="lcOtr">RM0</b></div>
+        <label for="lcDp">Downpayment (RM)</label>
+        <div class="lc-rm"><input id="lcDp" type="number" inputmode="numeric" min="0" step="100" value="5000" /></div>
+        <div class="lc-quick" id="lcQuick"></div>
+        <label for="lcRate">Kadar faedah bank (% setahun)</label>
+        <input id="lcRate" type="number" inputmode="decimal" min="0" max="10" step="0.05" value="2.8" />
+        <div class="lc-line y"><span>Jumlah loan</span><b id="lcLoan">RM0</b></div>
+        <div class="lc-res">
+          <div class="lc-yr"><h4>7 TAHUN</h4><div class="m" id="lcM7">RM0</div><dl><dt>Profit bank</dt><dd class="p" id="lcP7">RM0</dd><dt>Jumlah bayar</dt><dd id="lcT7">RM0</dd></dl></div>
+          <div class="lc-yr hl"><h4>9 TAHUN</h4><div class="m" id="lcM9">RM0</div><dl><dt>Profit bank</dt><dd class="p" id="lcP9">RM0</dd><dt>Jumlah bayar</dt><dd id="lcT9">RM0</dd></dl></div>
+        </div>
+        <div class="lc-save" id="lcSave"></div>
+        <a class="btn wa" id="lcWa" href="#" target="_blank" rel="noopener">💬 Hantar kiraan ke WhatsApp Fendi (018-903 8194)</a>
+        <p class="lc-note">Anggaran sahaja. Profit bank = loan × kadar × tahun (kadar rata). Kadar sebenar ikut bank dan kelayakan awak. Insurans &amp; OTR ialah anggaran.</p>
+      </div>
+    </section>
 
     <section class="reveal">
       <h2>Apa yang kami tawarkan</h2>
@@ -225,6 +281,39 @@
       Laman peribadi team Sales Advisor. Bukan laman rasmi Perodua.
     </footer>
   </main>
+  <script src="/kalkulator/data.js"></script>
+  <script>
+    (function () {
+      const D = window.HARGA || []; if (!D.length) return;
+      const FENDI = "60189038194", $ = (id) => document.getElementById(id);
+      const rm = (v, d = 0) => "RM" + Number(v).toLocaleString("en-US", { minimumFractionDigits: d, maximumFractionDigits: d });
+      let mi = 0;
+      D.forEach((m, i) => { const b = document.createElement("button"); b.type = "button"; b.textContent = m.model; b.setAttribute("aria-pressed", i === 0); b.onclick = () => { mi = i; model(); }; $("lcModels").appendChild(b); });
+      function model() {
+        const m = D[mi]; $("lcModels").querySelectorAll("button").forEach((b, i) => b.setAttribute("aria-pressed", i === mi));
+        $("lcVar").innerHTML = ""; m.variants.forEach((v, i) => { const o = document.createElement("option"); o.value = i; o.textContent = v.name; $("lcVar").appendChild(o); });
+        $("lcRate").value = m.rate; variant();
+      }
+      function variant() {
+        const v = D[mi].variants[+$("lcVar").value]; $("lcOtr").textContent = rm(v.otr, 2);
+        $("lcDp").value = Math.round(v.otr * 0.1 / 100) * 100;
+        const q = $("lcQuick"); q.innerHTML = "";
+        [0, 3000, 5000, 10000].forEach((x) => { const b = document.createElement("button"); b.type = "button"; b.textContent = x ? rm(x) : "Full loan"; b.onclick = () => { $("lcDp").value = x; calc(); }; q.appendChild(b); });
+        calc();
+      }
+      function calc() {
+        const v = D[mi].variants[+$("lcVar").value]; const dp = Math.min(v.otr, Math.max(0, +$("lcDp").value || 0)), r = Math.max(0, +$("lcRate").value || 0);
+        const loan = v.otr - dp; $("lcLoan").textContent = rm(loan, 2); const o = {};
+        [7, 9].forEach((y) => { const p = loan * r / 100 * y, t = loan + p, mo = t / (y * 12); o[y] = { p, mo };
+          $("lcM" + y).innerHTML = `${rm(mo)}<small>/bln</small>`; $("lcP" + y).textContent = rm(p); $("lcT" + y).textContent = rm(t); });
+        $("lcSave").innerHTML = loan > 0 ? `7 tahun: bulanan lebih ${rm(o[7].mo - o[9].mo)}, tapi <b>jimat profit bank ${rm(o[9].p - o[7].p)}</b>.` : "Tiada loan, tiada profit bank. 👍";
+        const msg = `Salam Fendi, saya guna Car Loan Calculator: Perodua ${v.name}, OTR anggaran ${rm(v.otr, 2)}, downpayment ${rm(dp)}, loan ${rm(loan)}, kadar ${r}%.\n• 7 tahun: ${rm(o[7].mo)}/bulan (profit bank ${rm(o[7].p)})\n• 9 tahun: ${rm(o[9].mo)}/bulan (profit bank ${rm(o[9].p)})\nBoleh semak kelayakan saya?`;
+        $("lcWa").href = `https://wa.me/${FENDI}?text=${encodeURIComponent(msg)}`;
+      }
+      $("lcVar").addEventListener("input", variant); $("lcDp").addEventListener("input", calc); $("lcRate").addEventListener("input", calc);
+      model();
+    })();
+  </script>
   <script>
     const io = "IntersectionObserver" in window ? new IntersectionObserver((es) => es.forEach((e) => e.isIntersecting && e.target.classList.add("on")), { threshold: 0.1 }) : null;
     document.querySelectorAll(".reveal").forEach((el) => (io ? io.observe(el) : el.classList.add("on")));
