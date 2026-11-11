@@ -1,0 +1,10 @@
+# Netlify: laman statik, tiada build. Folder _tools disorok.
+[build]
+  publish = "."
+  command = ""
+
+[[redirects]]
+  from = "/_tools/*"
+  to = "/404.html"
+  status = 404
+  force = true
