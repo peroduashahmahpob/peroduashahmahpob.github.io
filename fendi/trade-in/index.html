@@ -108,6 +108,15 @@
     .final h3 { margin-top: 0; font-size: 24px; }
     .final p { margin-top: 8px; font-size: 14px; font-weight: 600; opacity: .95; }
     .final .btn.wa { box-shadow: 0 10px 30px rgba(0,0,0,.25); }
+    .team { display: grid; gap: 10px; margin-top: 16px; }
+    .mem { display: grid; grid-template-columns: 76px minmax(0,1fr); gap: 14px; align-items: center; padding: 14px; border-radius: 20px; background: var(--card); border: 2px solid var(--ln); }
+    .mem img { width: 76px; height: 76px; border-radius: 50%; object-fit: cover; border: 3px solid var(--ln); }
+    .mem small { display: block; font-size: 11px; font-weight: 900; letter-spacing: .14em; color: var(--o); }
+    .mem b { display: block; margin-top: 2px; font-size: 22px; font-weight: 900; line-height: 1.1; }
+    .mem span { display: block; margin-top: 2px; font-size: 13px; font-weight: 600; color: var(--g); }
+    .mem.boss { border-color: var(--o); background: linear-gradient(135deg, rgba(238,122,76,.18), var(--card) 70%); }
+    .mem.boss img { border-color: var(--o); width: 76px; height: 76px; }
+    .mem.boss small { color: var(--y); }
     footer { margin-top: 36px; padding: 22px 0 10px; border-top: 2px solid var(--ln); text-align: center; color: var(--g); font-size: 12px; }
     footer b { color: var(--w); letter-spacing: .12em; }
     .sticky { position: fixed; left: 0; right: 0; bottom: 0; padding: 12px 18px calc(12px + env(safe-area-inset-bottom)); background: linear-gradient(180deg, rgba(20,17,16,0), rgba(20,17,16,.96) 30%); z-index: 10; }
@@ -224,13 +233,23 @@
       </div>
     </section>
 
+    <section>
+      <h2>Siapa yang uruskan</h2>
+      <h3>Kenali <span>Team Shah Mahpob</span></h3>
+      <div class="team">
+        <div class="mem boss"><img src="/img/shah.jpg" alt="Shah Mahpob" width="76" height="76" /><div><small>KETUA TEAM</small><b>SHAH MAHPOB</b><span>Ketua Team Shah Mahpob · Sales Advisor Perodua</span></div></div>
+        <div class="mem"><img src="/fendi/img/fendi.jpg" alt="Fendi" width="76" height="76" /><div><small>PAKAR LOAN</small><b>FENDI</b><span>Bantu semak kelayakan &amp; urusan loan</span></div></div>
+        <div class="mem"><img src="/aisyah/img/aisyah.jpg" alt="Aisyah" width="76" height="76" /><div><small>PAKAR LOAN</small><b>AISYAH</b><span>Bantu semak kelayakan &amp; urusan loan</span></div></div>
+      </div>
+    </section>
+
     <div class="final">
       <h3>Tukar kereta lama dengan kami: lebih mudah dan pantas</h3>
       <p>Tak perlu ke JPJ dan PUSPAKOM. Kami bagi harga anggaran dulu.</p>
       <a class="btn tt" href="https://www.tiktok.com/@salesteamperodua" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.6 5.8A4.3 4.3 0 0 1 15.5 3h-3.2v12.4a2.6 2.6 0 1 1-1.8-2.5V9.6a5.8 5.8 0 1 0 5 5.8V9.1a7.4 7.4 0 0 0 4.3 1.4V7.3a4.3 4.3 0 0 1-3.2-1.5Z"/></svg>Terus ke TikTok @salesteamperodua</a>
     </div>
 
-    <footer><b>FENDI</b><br>Pakar Loan Anda · Team Shah Mahpob<br><br>Laman peribadi Sales Advisor. Bukan laman rasmi Perodua.</footer>
+    <footer><b>TEAM SHAH MAHPOB</b><br>Sales &amp; Loan · Perodua<br><br>Laman peribadi Sales Advisor. Bukan laman rasmi Perodua.</footer>
   </main>
 
   <script>
