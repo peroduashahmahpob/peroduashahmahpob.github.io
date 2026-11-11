@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Trade-In Kereta Lama | Aisyah · Team Shah Mahpob</title>
+  <meta name="description" content="Tukar kereta lama dengan Team Shah Mahpob. Tak perlu ke JPJ, tak perlu ke PUSPAKOM, free inspection di tempat awak, tiada hidden cost." />
+  <meta property="og:title" content="Trade-In Kereta Lama · Team Shah Mahpob" />
+  <meta property="og:description" content="Tak perlu ke JPJ & PUSPAKOM · Free inspection · Serah kereta lama masa ambil kereta baru" />
+  <meta property="og:image" content="/img/perodua-logo.png" />
+  <meta name="theme-color" content="#141110" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    :root { --bg: #141110; --card: #1e1a18; --ln: #312b28; --o: #ee7a4c; --od: #cc5a2c; --y: #f5c542; --w: #f4efe9; --g: #a59f99; --gr: #25d366; --rd: #ff6b5e; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--w); font-family: "Montserrat", system-ui, sans-serif; line-height: 1.45; -webkit-font-smoothing: antialiased; padding-bottom: 96px; }
+    a { color: inherit; text-decoration: none; }
+    .wrap { max-width: 520px; margin: 0 auto; padding: 0 18px; }
+    .glow { position: fixed; inset: 0; pointer-events: none; background: radial-gradient(ellipse 80% 40% at 50% 0%, rgba(238,122,76,.22), transparent 70%); z-index: -1; }
+    .top { display: flex; justify-content: space-between; align-items: center; padding: 16px 0 4px; font-size: 13px; font-weight: 800; letter-spacing: .08em; }
+    .top a { color: var(--g); } .top span { color: var(--o); }
+    .plogo { display: inline-flex; align-items: center; justify-content: center; padding: 8px 14px; border-radius: 14px; background: #fff; box-shadow: 0 6px 20px rgba(0,0,0,.35); }
+    .plogo img { display: block; height: 40px; width: auto; }
+    header { padding-top: 18px; }
+    .kick { font-size: 12px; font-weight: 800; letter-spacing: .2em; color: var(--g); text-transform: uppercase; }
+    h1 { margin-top: 6px; font-size: 40px; font-weight: 900; line-height: 1; letter-spacing: -.02em; }
+    h1 em { font-style: normal; color: var(--o); }
+    h1 span { color: var(--o); display: block; font-size: 22px; letter-spacing: 0; margin-top: 8px; }
+    .lead { margin-top: 12px; color: var(--g); font-size: 15px; font-weight: 600; }
+    /* swap visual */
+    .swap { margin-top: 20px; display: grid; grid-template-columns: minmax(0,1fr) 54px minmax(0,1fr); align-items: center; gap: 8px; padding: 16px; border-radius: 22px; background: var(--card); border: 2px solid var(--ln); }
+    .swap .car { text-align: center; }
+    .swap .car svg { width: 100%; height: 70px; }
+    .swap .car b { display: block; margin-top: 6px; font-size: 13px; font-weight: 900; letter-spacing: .1em; }
+    .swap .car.old b { color: var(--g); } .swap .car.new b { color: var(--o); }
+    .swap .ar { width: 54px; height: 54px; border-radius: 50%; background: var(--o); display: grid; place-items: center; font-size: 26px; font-weight: 900; animation: spin 3.5s ease-in-out infinite; }
+    @keyframes spin { 0%, 70% { transform: rotate(0); } 85%, 100% { transform: rotate(180deg); } }
+    .car.old svg { animation: drift 3.5s ease-in-out infinite; } .car.new svg { animation: drift 3.5s ease-in-out infinite reverse; }
+    @keyframes drift { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(6px); } }
+    /* sections */
+    section { margin-top: 34px; }
+    h2 { font-size: 13px; font-weight: 800; letter-spacing: .18em; color: var(--g); text-transform: uppercase; }
+    h3 { margin-top: 6px; font-size: 26px; font-weight: 900; line-height: 1.1; text-wrap: balance; }
+    h3 span { color: var(--o); }
+    .perks { display: grid; gap: 10px; margin-top: 16px; }
+    .perk { display: flex; gap: 14px; align-items: center; padding: 14px 16px; background: var(--card); border: 2px solid var(--ln); border-radius: 18px; }
+    .perk i { flex: none; width: 46px; height: 46px; border-radius: 14px; background: var(--o); display: grid; place-items: center; font-style: normal; font-size: 22px; position: relative; }
+    .perk i.no::after { content: ""; position: absolute; width: 52px; height: 4px; background: #fff; border-radius: 2px; transform: rotate(-45deg); }
+    .perk b { display: block; font-size: 16px; font-weight: 900; }
+    .perk small { color: var(--g); font-size: 13px; font-weight: 500; }
+    /* tabs */
+    .tabs { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 16px; }
+    .tabs button { min-height: 64px; padding: 10px; border-radius: 16px; border: 2px solid var(--ln); background: var(--card); color: var(--w); font: 800 14px "Montserrat", sans-serif; cursor: pointer; line-height: 1.25; }
+    .tabs button small { display: block; font-size: 11px; font-weight: 700; color: var(--g); letter-spacing: .08em; }
+    .tabs button[aria-selected="true"] { background: var(--o); border-color: var(--o); color: #fff; }
+    .tabs button[aria-selected="true"] small { color: #fff; opacity: .85; }
+    .tabs button:focus-visible, .btn:focus-visible, input:focus-visible { outline: 3px solid var(--y); outline-offset: 2px; }
+    .flow { margin-top: 14px; display: grid; }
+    .fs { display: grid; grid-template-columns: 40px minmax(0,1fr); gap: 14px; position: relative; padding-bottom: 18px; }
+    .fs:last-child { padding-bottom: 0; }
+    .fs::before { content: ""; position: absolute; left: 19px; top: 40px; bottom: 0; width: 2px; background: var(--ln); }
+    .fs:last-child::before { display: none; }
+    .fs .n { width: 40px; height: 40px; border-radius: 12px; background: var(--w); color: var(--bg); display: grid; place-items: center; font-weight: 900; position: relative; z-index: 1; }
+    .fs:last-child .n { background: var(--gr); color: #06290f; }
+    .fs b { display: block; margin-top: 8px; font-size: 16px; font-weight: 800; }
+    .fs p { font-size: 14px; color: var(--g); font-weight: 500; margin-top: 2px; }
+    .fs p em { font-style: normal; color: var(--w); font-weight: 700; }
+    .loc { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+    .loc span { padding: 5px 10px; border-radius: 999px; background: #26211e; border: 1px solid var(--ln); font-size: 12px; font-weight: 700; color: var(--w); }
+    /* examples */
+    .ex { display: grid; gap: 10px; margin-top: 14px; }
+    .exc { padding: 16px; border-radius: 18px; background: var(--card); border: 2px solid var(--ln); }
+    .exc.ok { border-color: rgba(37,211,102,.5); } .exc.bad { border-color: rgba(255,107,94,.5); }
+    .exc .t { font-size: 11px; font-weight: 900; letter-spacing: .14em; color: var(--g); }
+    .exc .ln { display: flex; justify-content: space-between; gap: 10px; margin-top: 8px; font-size: 14px; font-weight: 600; color: var(--g); }
+    .exc .ln b { color: var(--w); font-weight: 800; white-space: nowrap; }
+    .exc .res { margin-top: 10px; padding-top: 10px; border-top: 2px solid var(--ln); display: flex; justify-content: space-between; gap: 10px; align-items: baseline; font-weight: 800; }
+    .exc.ok .res b { color: var(--gr); font-size: 22px; } .exc.bad .res b { color: var(--rd); font-size: 22px; }
+    .exc .what { margin-top: 8px; font-size: 13px; font-weight: 600; }
+    /* calculator */
+    .calc { margin-top: 16px; padding: 18px; background: var(--card); border: 2px solid var(--ln); border-radius: 22px; }
+    label { display: block; margin-top: 12px; font-size: 12px; font-weight: 800; letter-spacing: .12em; color: var(--g); text-transform: uppercase; }
+    label:first-child { margin-top: 0; }
+    .rm { position: relative; } .rm::before { content: "RM"; position: absolute; left: 14px; top: 50%; transform: translateY(-50%); margin-top: 3px; font-weight: 900; color: var(--o); }
+    input { width: 100%; margin-top: 6px; min-height: 54px; padding: 0 14px 0 52px; border-radius: 14px; background: #26211e; border: 2px solid var(--ln); color: var(--w); font: 900 20px "Montserrat", sans-serif; -webkit-appearance: none; appearance: none; }
+    input.plain { padding-left: 14px; font-size: 17px; font-weight: 700; }
+    input:focus { outline: none; border-color: var(--o); }
+    .row2 { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 10px; }
+    .out { margin-top: 16px; padding: 16px; border-radius: 18px; border: 2px solid var(--ln); background: #26211e; }
+    .out[data-s="lebih"] { border-color: var(--gr); background: rgba(37,211,102,.08); }
+    .out[data-s="kurang"] { border-color: var(--rd); background: rgba(255,107,94,.08); }
+    .out .lbl { font-size: 12px; font-weight: 900; letter-spacing: .14em; color: var(--g); }
+    .out .big { margin-top: 4px; font-size: 40px; font-weight: 900; letter-spacing: -.02em; line-height: 1.05; }
+    .out[data-s="lebih"] .big { color: var(--gr); } .out[data-s="kurang"] .big { color: var(--rd); }
+    .out p { margin-top: 8px; font-size: 14px; font-weight: 600; }
+    .btn { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; min-height: 56px; border-radius: 16px; font-weight: 800; font-size: 16px; border: 0; cursor: pointer; text-align: center; padding: 10px 16px; font-family: inherit; transition: transform .12s; }
+    .btn:active { transform: scale(.97); }
+    .btn.wa { background: var(--gr); color: #06290f; margin-top: 16px; }
+    .btn svg { width: 22px; height: 22px; flex: none; }
+    .note { margin-top: 12px; font-size: 12px; color: var(--g); }
+    .docs { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 14px; }
+    .docs div { padding: 12px; border-radius: 14px; background: var(--card); border: 2px solid var(--ln); font-size: 13px; font-weight: 700; }
+    .docs div b { display: block; font-size: 20px; }
+    .final { margin-top: 34px; padding: 22px 18px; border-radius: 24px; text-align: center; background: linear-gradient(135deg, var(--o), var(--od)); }
+    .final h3 { margin-top: 0; font-size: 24px; }
+    .final p { margin-top: 8px; font-size: 14px; font-weight: 600; opacity: .95; }
+    .final .btn.wa { box-shadow: 0 10px 30px rgba(0,0,0,.25); }
+    footer { margin-top: 36px; padding: 22px 0 10px; border-top: 2px solid var(--ln); text-align: center; color: var(--g); font-size: 12px; }
+    footer b { color: var(--w); letter-spacing: .12em; }
+    .sticky { position: fixed; left: 0; right: 0; bottom: 0; padding: 12px 18px calc(12px + env(safe-area-inset-bottom)); background: linear-gradient(180deg, rgba(20,17,16,0), rgba(20,17,16,.96) 30%); z-index: 10; }
+    .sticky .btn { max-width: 484px; margin: 0 auto; box-shadow: 0 10px 30px rgba(37,211,102,.35); }
+    [hidden] { display: none !important; }
+    @media (prefers-reduced-motion: reduce) { .swap .ar, .car svg { animation: none !important; } html { scroll-behavior: auto; } }
+  </style>
+</head>
+<body>
+  <div class="glow"></div>
+  <main class="wrap">
+    <nav class="top"><a href="../">← LAMAN UTAMA</a><span>AISYAH · TEAM SHAH</span></nav>
+    <header>
+      <div style="margin-bottom:14px"><span class="plogo"><img src="/img/perodua-logo.png" alt="Perodua" width="59" height="40" /></span></div>
+      <div class="kick">Trade-in kereta lama</div>
+      <h1>TUKAR KERETA<br><em>LAMA → BARU</em><span>PERODUA TEAM SHAH MAHPOB</span></h1>
+      <p class="lead">Lebih mudah dan pantas. Awak tak perlu ke JPJ, tak perlu ke PUSPAKOM. Team kami uruskan semua.</p>
+    </header>
+
+    <div class="swap" aria-hidden="true">
+      <div class="car old">
+        <svg viewBox="0 0 160 70"><path d="M8 52 L16 32 Q20 24 30 23 L58 21 L76 8 Q80 5 88 5 L118 5 Q128 5 134 12 L146 30 L152 33 Q156 35 156 42 L156 52 Z" fill="#6b625c" stroke="#1d1a18" stroke-width="3" stroke-linejoin="round"/><path d="M62 23 L80 10 L100 10 L100 23 Z M106 23 L106 10 L118 10 Q124 10 128 15 L134 23 Z" fill="#a59f99"/><circle cx="40" cy="54" r="12" fill="#1d1a18"/><circle cx="124" cy="54" r="12" fill="#1d1a18"/><circle cx="40" cy="54" r="5" fill="#a59f99"/><circle cx="124" cy="54" r="5" fill="#a59f99"/></svg>
+        <b>KERETA LAMA</b>
+      </div>
+      <div class="ar">⇄</div>
+      <div class="car new">
+        <svg viewBox="0 0 160 70"><path d="M8 52 L16 32 Q20 24 30 23 L58 21 L76 8 Q80 5 88 5 L118 5 Q128 5 134 12 L146 30 L152 33 Q156 35 156 42 L156 52 Z" fill="#ee7a4c" stroke="#1d1a18" stroke-width="3" stroke-linejoin="round"/><path d="M62 23 L80 10 L100 10 L100 23 Z M106 23 L106 10 L118 10 Q124 10 128 15 L134 23 Z" fill="#cfe6f2"/><circle cx="40" cy="54" r="12" fill="#1d1a18"/><circle cx="124" cy="54" r="12" fill="#1d1a18"/><circle cx="40" cy="54" r="5" fill="#f4efe9"/><circle cx="124" cy="54" r="5" fill="#f4efe9"/><path d="M140 4 l3 6 6 3 -6 3 -3 6 -3 -6 -6 -3 6 -3 Z" fill="#f5c542"/></svg>
+        <b>PERODUA BARU</b>
+      </div>
+    </div>
+
+    <section>
+      <h2>Kenapa trade-in dengan kami</h2>
+      <h3>5 kelebihan <span>Team Shah Mahpob</span></h3>
+      <div class="perks">
+        <div class="perk"><i class="no">🏛️</i><div><b>Tak perlu ke JPJ</b><small>Urusan tukar nama kami uruskan</small></div></div>
+        <div class="perk"><i class="no">🔍</i><div><b>Tak perlu ke PUSPAKOM</b><small>Tak payah beratur, tak payah ambil cuti</small></div></div>
+        <div class="perk"><i>🔑</i><div><b>Serah kereta lama masa ambil kereta baru</b><small>Awak tak pernah tak ada kereta</small></div></div>
+        <div class="perk"><i>✅</i><div><b>Free inspection</b><small>Dibuat di tempat awak, tanpa caj</small></div></div>
+        <div class="perk"><i>💯</i><div><b>Tiada hidden cost</b><small>Semua harga diterangkan sebelum setuju</small></div></div>
+      </div>
+    </section>
+
+    <section id="situasi">
+      <h2>Macam mana prosesnya</h2>
+      <h3>Pilih <span>situasi awak</span></h3>
+      <div class="tabs" role="tablist" aria-label="Situasi kereta lama">
+        <button role="tab" id="tab1" aria-selected="true" aria-controls="p1" type="button">Kereta dah habis bayar<small>SITUASI 1</small></button>
+        <button role="tab" id="tab2" aria-selected="false" aria-controls="p2" type="button">Kereta masih ada hutang<small>SITUASI 2</small></button>
+      </div>
+
+      <div id="p1" role="tabpanel" aria-labelledby="tab1">
+        <div class="flow">
+          <div class="fs"><span class="n">1</span><div><b>Bagi detail kereta atau geran</b><p>Hantar gambar geran, model, tahun dan mileage melalui WhatsApp.</p></div></div>
+          <div class="fs"><span class="n">2</span><div><b>Kami semak market value</b><p>Team kami bagi <em>harga anggaran</em> dulu, sebelum apa-apa keputusan.</p></div></div>
+          <div class="fs"><span class="n">3</span><div><b>Submit loan kereta baru</b><p>Kami uruskan permohonan loan Perodua baru awak.</p></div></div>
+          <div class="fs"><span class="n">4</span><div><b>Loan lulus → kami inspect kereta lama</b><p>Inspection dibuat di tempat awak.</p><div class="loc"><span>📍 Batu Pahat? Di Batu Pahat</span><span>📍 Kelantan? Di Kelantan</span></div></div></div>
+          <div class="fs"><span class="n">5</span><div><b>Serah kereta lama, ambil kereta baru</b><p>Hari yang sama. Tak perlu ke JPJ atau PUSPAKOM.</p></div></div>
+        </div>
+      </div>
+
+      <div id="p2" role="tabpanel" aria-labelledby="tab2" hidden>
+        <div class="flow">
+          <div class="fs"><span class="n">1</span><div><b>Bagi detail kereta atau geran</b><p>Kami bagi <em>anggaran market value</em> kereta lama awak.</p></div></div>
+          <div class="fs"><span class="n">2</span><div><b>Awak call bank: tanya full settlement</b><p>Dapatkan jumlah anggaran untuk tutup baki hutang kereta lama.</p></div></div>
+          <div class="fs"><span class="n">3</span><div><b>Bandingkan trade-in value dengan full settlement</b><p>Lebih? Jadi downpayment. Kurang? Tutup bezanya dulu. Contoh di bawah.</p></div></div>
+          <div class="fs"><span class="n">4</span><div><b>Submit loan kereta baru</b><p>Lepas hutang lama ada jalan penyelesaian, team kami submit loan baru.</p></div></div>
+          <div class="fs"><span class="n">5</span><div><b>Serah kereta lama, ambil kereta baru</b><p>Tak perlu ke JPJ atau PUSPAKOM.</p></div></div>
+        </div>
+        <div class="ex">
+          <div class="exc ok">
+            <div class="t">CONTOH A · TRADE-IN LEBIH TINGGI</div>
+            <div class="ln"><span>Trade-in value</span><b>RM21,000</b></div>
+            <div class="ln"><span>Full settlement bank</span><b>− RM20,000</b></div>
+            <div class="res"><span>Lebihan</span><b>+ RM1,000</b></div>
+            <p class="what">✅ Lebihan RM1,000 boleh dijadikan <b>downpayment</b> kereta baru.</p>
+          </div>
+          <div class="exc bad">
+            <div class="t">CONTOH B · TRADE-IN LEBIH RENDAH</div>
+            <div class="ln"><span>Trade-in value</span><b>RM27,000</b></div>
+            <div class="ln"><span>Full settlement bank</span><b>− RM30,000</b></div>
+            <div class="res"><span>Kurang</span><b>− RM3,000</b></div>
+            <p class="what">💡 Keluarkan RM3,000 untuk tutup hutang lama, <b>atau guna rebate</b> yang ada. Lepas tu team kami submit loan baru.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="kira">
+      <h2>Kira sendiri</h2>
+      <h3>Lebih atau <span>kurang?</span></h3>
+      <div class="calc">
+        <label for="tv">Anggaran trade-in value</label>
+        <div class="rm"><input id="tv" type="number" inputmode="numeric" min="0" step="500" value="21000" /></div>
+        <label for="fs">Full settlement bank <span style="text-transform:none;letter-spacing:0">(0 kalau dah habis bayar)</span></label>
+        <div class="rm"><input id="fs" type="number" inputmode="numeric" min="0" step="500" value="0" /></div>
+        <div class="out" id="out" data-s="lebih" aria-live="polite">
+          <div class="lbl" id="oL">LEBIHAN</div>
+          <div class="big" id="oV">+ RM1,000</div>
+          <p id="oP">Boleh dijadikan downpayment kereta baru.</p>
+        </div>
+        <div class="row2" style="margin-top:6px">
+          <div><label for="cm">Model kereta lama</label><input class="plain" id="cm" placeholder="cth Myvi 1.3" maxlength="30" /></div>
+          <div><label for="cy">Tahun</label><input class="plain" id="cy" inputmode="numeric" placeholder="cth 2018" maxlength="4" /></div>
+        </div>
+        <a class="btn wa" id="waT" href="#" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.4.8 3.2.6a2.8 2.8 0 0 0 1.8-1.3 2.3 2.3 0 0 0 .2-1.3c-.1-.1-.3-.2-.5-.3Z"/></svg>
+          Minta harga trade-in di WhatsApp
+        </a>
+        <p class="note">Angka contoh sahaja. Trade-in value sebenar bergantung pada keadaan kereta selepas inspection. Full settlement ikut penyata bank awak. Penggunaan rebate tertakluk terma Perodua semasa.</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>Sediakan</h2>
+      <h3>Apa yang <span>perlu dihantar</span></h3>
+      <div class="docs">
+        <div><b>📄</b>Gambar geran / VOC</div>
+        <div><b>🚗</b>Model, tahun &amp; mileage</div>
+        <div><b>📸</b>Gambar kereta (luar &amp; dalam)</div>
+        <div><b>🏦</b>Full settlement (kalau ada hutang)</div>
+      </div>
+    </section>
+
+    <div class="final">
+      <h3>Tukar kereta lama dengan kami: lebih mudah dan pantas</h3>
+      <p>Tak perlu ke JPJ dan PUSPAKOM. Kami bagi harga anggaran dulu.</p>
+      <a class="btn wa" data-wa="Salam Aisyah, saya nak trade-in kereta lama. Boleh bagi harga anggaran?" href="#">💬 WhatsApp Aisyah sekarang</a>
+    </div>
+
+    <footer><b>AISYAH</b><br>Pakar Loan Anda · Team Shah Mahpob<br><br>Laman peribadi Sales Advisor. Bukan laman rasmi Perodua.</footer>
+  </main>
+  <div class="sticky"><a class="btn wa" data-wa="Salam Aisyah, saya nak trade-in kereta lama. Boleh bagi harga anggaran?" href="#">💬 WhatsApp Aisyah</a></div>
+
+  <script>
+    const WA = "60182031020";
+    const ADVISOR = "Aisyah";
+    const $ = (id) => document.getElementById(id);
+    const wa = (msg) => `https://wa.me/${WA}?text=${encodeURIComponent(msg)}`;
+    document.querySelectorAll("[data-wa]").forEach((a) => { a.href = wa(a.dataset.wa); a.target = "_blank"; a.rel = "noopener"; });
+    const rm = (v) => "RM" + Math.round(Math.abs(v)).toLocaleString("en-US");
+    // tabs
+    const tabs = [["tab1", "p1"], ["tab2", "p2"]];
+    function pick(i) { tabs.forEach(([t, p], k) => { $(t).setAttribute("aria-selected", String(k === i)); $(p).hidden = k !== i; }); }
+    tabs.forEach(([t], i) => $(t).addEventListener("click", () => { pick(i); if (i === 1 && +$("fs").value === 0) { $("fs").value = 20000; calc(); } if (i === 0) { $("fs").value = 0; calc(); } }));
+    // calculator
+    function calc() {
+      const tv = Math.max(0, +$("tv").value || 0), fs = Math.max(0, +$("fs").value || 0), d = tv - fs, o = $("out");
+      if (d >= 0) {
+        o.dataset.s = "lebih"; $("oL").textContent = fs ? "LEBIHAN" : "NILAI TRADE-IN"; $("oV").textContent = "+ " + rm(d);
+        $("oP").textContent = d ? "Boleh dijadikan downpayment kereta baru." : "Trade-in cukup-cukup untuk tutup hutang lama.";
+      } else {
+        o.dataset.s = "kurang"; $("oL").textContent = "KURANG"; $("oV").textContent = "− " + rm(d);
+        $("oP").textContent = `Keluarkan ${rm(d)} untuk tutup hutang lama, atau guna rebate yang ada. Lepas tu kami submit loan baru.`;
+      }
+      const car = [$("cm").value.trim(), $("cy").value.trim()].filter(Boolean).join(" ") || "(belum isi)";
+      $("waT").href = wa(`Salam ${ADVISOR}, saya nak trade-in kereta lama.\nKereta: ${car}\nAnggaran trade-in: ${rm(tv)}\nFull settlement: ${fs ? rm(fs) : "dah habis bayar"}\n${d >= 0 ? "Lebihan" : "Kurang"}: ${rm(d)}\nBoleh team semak market value kereta saya?`);
+    }
+    ["tv", "fs", "cm", "cy"].forEach((id) => $(id).addEventListener("input", calc));
+    calc();
+  </script>
+</body>
+</html>

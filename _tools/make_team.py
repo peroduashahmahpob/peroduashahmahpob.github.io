@@ -2,7 +2,7 @@
 Guna: python3 _tools/make_team.py   (dijalankan dari folder repo). Tambah ahli baru dalam TEAM di bawah."""
 import os, re, sys
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-MODELS = [d for d in ("axia", "bezza", "myvi", "ativa", "traz", "alza", "aruz", "kalkulator", "kuiz", "status") if os.path.isfile(f"{ROOT}/{d}/index.html")]
+MODELS = [d for d in ("axia", "bezza", "myvi", "ativa", "traz", "alza", "aruz", "kalkulator", "kuiz", "status", "trade-in") if os.path.isfile(f"{ROOT}/{d}/index.html")]
 TEAM = [
     dict(slug="aisyah", first="Aisyah", full="AISYAH", wa="60182031020", photo="img/aisyah.jpg", tagline="PAKAR LOAN ANDA"),
     dict(slug="fendi", first="Fendi", full="FENDI", wa="60189038194", photo="img/fendi.jpg", tagline="PAKAR LOAN ANDA"),
