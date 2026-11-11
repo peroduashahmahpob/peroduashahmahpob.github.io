@@ -15,7 +15,7 @@
     :root { --bg: #141110; --card: #1e1a18; --ln: #312b28; --o: #ee7a4c; --od: #cc5a2c; --y: #f5c542; --w: #f4efe9; --g: #a59f99; --gr: #25d366; --rd: #ff6b5e; }
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
-    body { background: var(--bg); color: var(--w); font-family: "Montserrat", system-ui, sans-serif; line-height: 1.45; -webkit-font-smoothing: antialiased; padding-bottom: 96px; }
+    body { background: var(--bg); color: var(--w); font-family: "Montserrat", system-ui, sans-serif; line-height: 1.45; -webkit-font-smoothing: antialiased; padding-bottom: 30px; }
     a { color: inherit; text-decoration: none; }
     .wrap { max-width: 520px; margin: 0 auto; padding: 0 18px; }
     .glow { position: fixed; inset: 0; pointer-events: none; background: radial-gradient(ellipse 80% 40% at 50% 0%, rgba(238,122,76,.22), transparent 70%); z-index: -1; }
@@ -160,7 +160,7 @@
 
       <div id="p1" role="tabpanel" aria-labelledby="tab1">
         <div class="flow">
-          <div class="fs"><span class="n">1</span><div><b>Bagi detail kereta atau geran</b><p>Hantar gambar geran, model, tahun dan mileage melalui WhatsApp.</p></div></div>
+          <div class="fs"><span class="n">1</span><div><b>Bagi detail kereta atau geran</b><p>Hantar gambar geran, model, tahun dan mileage kepada team kami.</p></div></div>
           <div class="fs"><span class="n">2</span><div><b>Kami semak market value</b><p>Team kami bagi <em>harga anggaran</em> dulu, sebelum apa-apa keputusan.</p></div></div>
           <div class="fs"><span class="n">3</span><div><b>Submit loan kereta baru</b><p>Kami uruskan permohonan loan Perodua baru awak.</p></div></div>
           <div class="fs"><span class="n">4</span><div><b>Loan lulus → kami inspect kereta lama</b><p>Inspection dibuat di tempat awak.</p><div class="loc"><span>📍 Batu Pahat? Di Batu Pahat</span><span>📍 Kelantan? Di Kelantan</span></div></div></div>
@@ -208,14 +208,6 @@
           <div class="big" id="oV">+ RM1,000</div>
           <p id="oP">Boleh dijadikan downpayment kereta baru.</p>
         </div>
-        <div class="row2" style="margin-top:6px">
-          <div><label for="cm">Model kereta lama</label><input class="plain" id="cm" placeholder="cth Myvi 1.3" maxlength="30" /></div>
-          <div><label for="cy">Tahun</label><input class="plain" id="cy" inputmode="numeric" placeholder="cth 2018" maxlength="4" /></div>
-        </div>
-        <a class="btn wa" id="waT" href="#" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.4.8 3.2.6a2.8 2.8 0 0 0 1.8-1.3 2.3 2.3 0 0 0 .2-1.3c-.1-.1-.3-.2-.5-.3Z"/></svg>
-          Minta harga trade-in di WhatsApp
-        </a>
         <p class="note">Angka contoh sahaja. Trade-in value sebenar bergantung pada keadaan kereta selepas inspection. Full settlement ikut penyata bank awak. Penggunaan rebate tertakluk terma Perodua semasa.</p>
       </div>
     </section>
@@ -234,19 +226,14 @@
     <div class="final">
       <h3>Tukar kereta lama dengan kami: lebih mudah dan pantas</h3>
       <p>Tak perlu ke JPJ dan PUSPAKOM. Kami bagi harga anggaran dulu.</p>
-      <a class="btn wa" data-wa="Salam Shah, saya nak trade-in kereta lama. Boleh bagi harga anggaran?" href="#">💬 WhatsApp Shah sekarang</a>
+      <p style="margin-top:12px;font-size:18px;font-weight:900">Terus ke profile saya ➜</p>
     </div>
 
     <footer><b>SHAH MAHPOB</b><br>Sales Advisor Perodua<br><br>Laman peribadi Sales Advisor. Bukan laman rasmi Perodua.</footer>
   </main>
-  <div class="sticky"><a class="btn wa" data-wa="Salam Shah, saya nak trade-in kereta lama. Boleh bagi harga anggaran?" href="#">💬 WhatsApp Shah</a></div>
 
   <script>
-    const WA = "60137258194";
-    const ADVISOR = "Shah";
     const $ = (id) => document.getElementById(id);
-    const wa = (msg) => `https://wa.me/${WA}?text=${encodeURIComponent(msg)}`;
-    document.querySelectorAll("[data-wa]").forEach((a) => { a.href = wa(a.dataset.wa); a.target = "_blank"; a.rel = "noopener"; });
     const rm = (v) => "RM" + Math.round(Math.abs(v)).toLocaleString("en-US");
     // tabs
     const tabs = [["tab1", "p1"], ["tab2", "p2"]];
@@ -262,10 +249,8 @@
         o.dataset.s = "kurang"; $("oL").textContent = "KURANG"; $("oV").textContent = "− " + rm(d);
         $("oP").textContent = `Keluarkan ${rm(d)} untuk tutup hutang lama, atau guna rebate yang ada. Lepas tu kami submit loan baru.`;
       }
-      const car = [$("cm").value.trim(), $("cy").value.trim()].filter(Boolean).join(" ") || "(belum isi)";
-      $("waT").href = wa(`Salam ${ADVISOR}, saya nak trade-in kereta lama.\nKereta: ${car}\nAnggaran trade-in: ${rm(tv)}\nFull settlement: ${fs ? rm(fs) : "dah habis bayar"}\n${d >= 0 ? "Lebihan" : "Kurang"}: ${rm(d)}\nBoleh team semak market value kereta saya?`);
     }
-    ["tv", "fs", "cm", "cy"].forEach((id) => $(id).addEventListener("input", calc));
+    ["tv", "fs"].forEach((id) => $(id).addEventListener("input", calc));
     calc();
   </script>
 </body>
