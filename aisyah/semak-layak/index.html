@@ -1,0 +1,502 @@
+<!doctype html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Semak Kelayakan Loan Kereta | Aishah · Team Shah Mahpob</title>
+  <meta name="description" content="Semak DSR, margin loan dan bulanan kereta Perodua yang sesuai dengan gaji anda. Percuma, 2 minit, tak perlu laporan CTOS/CCRIS." />
+  <meta property="og:title" content="Semak Kelayakan Loan Kereta · Team Shah Mahpob" />
+  <meta property="og:description" content="Masukkan gaji & hutang · dapat DSR, margin loan & bulanan kereta yang sesuai · simpan keputusan ke galeri" />
+  <meta name="theme-color" content="#141110" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    :root { --bg: #141110; --card: #1e1a18; --c2: #26211e; --ln: #312b28; --o: #ee7a4c; --y: #f5c542; --w: #f4efe9; --g: #a59f99; --gr: #25d366; --ok: #3ccf7a; --bad: #ff6b5e; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: var(--bg); color: var(--w); font-family: "Montserrat", system-ui, sans-serif; line-height: 1.45; -webkit-font-smoothing: antialiased; padding-bottom: 96px; }
+    a { color: inherit; text-decoration: none; }
+    .wrap { max-width: 520px; margin: 0 auto; padding: 0 16px; }
+    .glow { position: fixed; inset: 0; pointer-events: none; background: radial-gradient(ellipse 80% 40% at 50% 0%, rgba(238,122,76,.2), transparent 70%); z-index: -1; }
+    .top { display: flex; justify-content: space-between; align-items: center; padding: 16px 0 4px; font-size: 13px; font-weight: 800; letter-spacing: .08em; }
+    .top a { color: var(--g); } .top span { color: var(--o); }
+    header { padding-top: 18px; }
+    .plogo { display: inline-flex; align-items: center; justify-content: center; padding: 8px 14px; border-radius: 14px; background: #fff; box-shadow: 0 6px 20px rgba(0,0,0,.35); }
+    .plogo img { display: block; height: 40px; width: auto; }
+    .kick { font-size: 12px; font-weight: 800; letter-spacing: .2em; color: var(--g); text-transform: uppercase; }
+    h1 { margin-top: 4px; font-size: 34px; font-weight: 900; line-height: 1; letter-spacing: -.02em; }
+    h1 span { color: var(--o); display: block; font-size: 22px; letter-spacing: 0; margin-top: 6px; }
+    .trust { margin-top: 14px; display: grid; gap: 6px; font-size: 13px; font-weight: 700; color: var(--g); }
+    .trust b { color: var(--w); }
+    .card { margin-top: 16px; padding: 18px; background: var(--card); border: 2px solid var(--ln); border-radius: 22px; }
+    .step { display: flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 800; letter-spacing: .12em; color: var(--g); text-transform: uppercase; }
+    .step i { font-style: normal; width: 26px; height: 26px; border-radius: 8px; background: var(--o); color: #fff; display: grid; place-items: center; font-size: 13px; letter-spacing: 0; flex: none; }
+    label, .lab { display: block; margin-top: 14px; font-size: 12px; font-weight: 800; letter-spacing: .1em; color: var(--g); text-transform: uppercase; }
+    label small, .lab small { text-transform: none; letter-spacing: 0; font-weight: 600; }
+    input { width: 100%; margin-top: 6px; min-height: 52px; padding: 0 14px; border-radius: 14px; background: var(--c2); border: 2px solid var(--ln); color: var(--w); font: 700 17px "Montserrat", sans-serif; -webkit-appearance: none; appearance: none; }
+    input:focus { outline: none; border-color: var(--o); }
+    input.err { border-color: var(--bad); }
+    .rm { position: relative; } .rm::before { content: "RM"; position: absolute; left: 14px; top: 50%; transform: translateY(-50%); margin-top: 3px; font-weight: 900; color: var(--o); font-size: 15px; }
+    .rm input { padding-left: 50px; }
+    .rm.big input { font-size: 22px; font-weight: 900; }
+    .pc { position: relative; } .pc::after { content: "% setahun"; position: absolute; right: 14px; top: 50%; transform: translateY(-50%); margin-top: 3px; font-weight: 700; color: var(--g); font-size: 13px; }
+    .row2 { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 10px; }
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+    .chips button { padding: 11px 14px; min-height: 44px; border-radius: 14px; border: 2px solid var(--ln); background: var(--c2); color: var(--w); font: 700 14px "Montserrat", sans-serif; cursor: pointer; }
+    .chips button[aria-pressed="true"] { background: var(--o); border-color: var(--o); color: #fff; }
+    .hint { margin-top: 6px; font-size: 12px; color: var(--g); font-weight: 600; }
+    .hint b { color: var(--y); }
+    .tot { margin-top: 14px; display: flex; justify-content: space-between; align-items: center; padding: 12px 14px; border-radius: 14px; background: var(--c2); font-weight: 800; }
+    .tot span { color: var(--g); font-size: 13px; letter-spacing: .06em; text-transform: uppercase; } .tot b { color: var(--y); font-size: 20px; }
+    .btn { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; min-height: 56px; border-radius: 16px; font: 800 16px "Montserrat", sans-serif; border: 0; cursor: pointer; text-align: center; padding: 10px 16px; }
+    .btn.go { background: var(--o); color: #fff; margin-top: 18px; box-shadow: 0 10px 30px rgba(238,122,76,.35); }
+    .btn.wa { background: var(--gr); color: #06290f; } .btn.ghost { background: var(--card); border: 2px solid var(--ln); color: var(--w); }
+    .btn.save { background: var(--w); color: #141110; }
+    .formerr { margin-top: 10px; color: var(--bad); font-weight: 700; font-size: 14px; display: none; }
+
+    /* ---------- result ---------- */
+    #result { display: none; scroll-margin-top: 10px; }
+    #result.on { display: block; }
+    .shot { margin-top: 18px; padding: 20px 18px 18px; border-radius: 24px; background: linear-gradient(180deg, #221c19, #171312); border: 2px solid var(--ln); position: relative; overflow: hidden; }
+    .shot::before { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse 90% 40% at 100% 0%, rgba(238,122,76,.22), transparent 70%); pointer-events: none; }
+    .shot > * { position: relative; }
+    .sh-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; }
+    .sh-top .k { font-size: 11px; font-weight: 900; letter-spacing: .18em; color: var(--o); }
+    .sh-top h2 { font-size: 22px; font-weight: 900; line-height: 1.1; margin-top: 4px; }
+    .sh-top .d { font-size: 11px; color: var(--g); font-weight: 700; text-align: right; white-space: nowrap; }
+    .pill { display: inline-flex; align-items: center; gap: 8px; margin-top: 14px; padding: 8px 14px; border-radius: 999px; font-size: 13px; font-weight: 900; letter-spacing: .1em; }
+    .pill[data-lv="tinggi"] { background: var(--ok); color: #062914; } .pill[data-lv="sederhana"] { background: var(--y); color: #241a00; } .pill[data-lv="rendah"] { background: var(--bad); color: #2a0602; }
+    .verdict { margin-top: 10px; font-size: 15px; font-weight: 700; color: var(--w); }
+    .gauge { margin-top: 16px; }
+    .gauge .lbl { display: flex; justify-content: space-between; font-size: 12px; font-weight: 800; color: var(--g); letter-spacing: .06em; text-transform: uppercase; }
+    .gauge .lbl b { font-size: 22px; color: var(--w); letter-spacing: 0; }
+    .gbar { position: relative; height: 18px; margin-top: 8px; border-radius: 6px; background: var(--c2); }
+    .gbar .now { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 6px 0 0 6px; background: var(--g); }
+    .gbar .car { position: absolute; top: 0; bottom: 0; background: #ee7a4c; border-radius: 0 6px 6px 0; }
+    .gbar .z { position: absolute; top: -5px; bottom: -5px; border-left: 2px dashed; }
+    .gbar .z span { position: absolute; top: -18px; left: -12px; font-size: 10px; font-weight: 900; }
+    .glegend { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 10px; font-size: 11px; font-weight: 700; color: var(--g); }
+    .glegend i { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 5px; vertical-align: -1px; }
+    .tiles { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 8px; margin-top: 16px; }
+    .tile { padding: 12px; border-radius: 16px; background: var(--c2); min-width: 0; }
+    .tile small { display: block; font-size: 10px; font-weight: 800; letter-spacing: .1em; color: var(--g); text-transform: uppercase; }
+    .tile b { display: block; margin-top: 4px; font-size: 22px; font-weight: 900; letter-spacing: -.01em; }
+    .tile em { display: block; font-style: normal; font-size: 11px; color: var(--g); font-weight: 600; margin-top: 2px; }
+    .tile.hl { background: rgba(238,122,76,.12); border: 2px solid rgba(238,122,76,.5); } .tile.hl b { color: var(--o); }
+    .sec { margin-top: 18px; font-size: 11px; font-weight: 900; letter-spacing: .16em; color: var(--g); text-transform: uppercase; }
+    .rec { display: grid; gap: 8px; margin-top: 8px; }
+    .rc { display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 4px 10px; padding: 12px 14px; border-radius: 16px; background: var(--c2); border-left: 4px solid var(--ok); }
+    .rc.amb { border-left-color: var(--y); }
+    .rc .n { font-size: 15px; font-weight: 900; line-height: 1.2; }
+    .rc .n small { display: block; font-size: 11px; color: var(--g); font-weight: 700; margin-top: 2px; }
+    .rc .m { text-align: right; font-size: 18px; font-weight: 900; color: var(--o); white-space: nowrap; }
+    .rc .m small { display: block; font-size: 10px; color: var(--g); font-weight: 700; }
+    .rc .dp { grid-column: 1 / -1; font-size: 12px; font-weight: 700; color: var(--w); }
+    .rc .dp b { color: var(--y); }
+    .none { padding: 14px; border-radius: 16px; background: var(--c2); font-size: 14px; font-weight: 700; color: var(--g); }
+    .sh-foot { margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--ln); display: flex; justify-content: space-between; align-items: center; gap: 10px; font-size: 11px; color: var(--g); font-weight: 700; }
+    .sh-foot b { color: var(--w); font-size: 13px; display: block; }
+    .sh-foot .wa { color: var(--gr); font-size: 13px; font-weight: 900; text-align: right; }
+    .acts { display: grid; gap: 10px; margin-top: 14px; }
+    .tips { margin-top: 10px; display: grid; gap: 8px; list-style: none; }
+    .tips li { display: grid; grid-template-columns: 28px minmax(0,1fr); gap: 10px; padding: 12px; border-radius: 14px; background: var(--c2); font-size: 14px; font-weight: 600; color: var(--w); }
+    .tips li span:first-child { font-size: 18px; line-height: 1.2; }
+    .tips li b { color: var(--y); }
+    .docs { margin-top: 10px; display: grid; gap: 6px; list-style: none; }
+    .docs li { font-size: 14px; font-weight: 600; padding-left: 26px; position: relative; }
+    .docs li::before { content: "✓"; position: absolute; left: 4px; color: var(--ok); font-weight: 900; }
+    details.all { margin-top: 10px; }
+    details.all summary { cursor: pointer; font-weight: 800; font-size: 14px; color: var(--o); padding: 10px 0; list-style: none; }
+    details.all summary::-webkit-details-marker { display: none; }
+    .mt { margin-top: 12px; }
+    .mt h4 { font-size: 14px; font-weight: 900; margin-bottom: 6px; }
+    .vr { display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 2px 10px; padding: 9px 0; border-bottom: 1px solid var(--ln); font-size: 13px; }
+    .vr:last-child { border-bottom: 0; }
+    .vr .nm { font-weight: 700; } .vr .nm small { display: block; color: var(--g); font-weight: 600; font-size: 11px; }
+    .vr .st { text-align: right; font-weight: 800; white-space: nowrap; font-size: 12px; }
+    .vr .st b { display: block; font-size: 15px; color: var(--w); }
+    .st.ok { color: var(--ok); } .st.amb { color: var(--y); } .st.no { color: var(--bad); }
+    .note { margin-top: 14px; font-size: 12px; color: var(--g); }
+    footer { margin-top: 36px; padding: 22px 0 10px; border-top: 2px solid var(--ln); text-align: center; color: var(--g); font-size: 12px; }
+    footer b { color: var(--w); letter-spacing: .12em; }
+    .sticky { position: fixed; left: 0; right: 0; bottom: 0; padding: 12px 16px calc(12px + env(safe-area-inset-bottom)); background: linear-gradient(180deg, rgba(20,17,16,0), rgba(20,17,16,.96) 30%); z-index: 10; }
+    .sticky .btn { max-width: 488px; margin: 0 auto; box-shadow: 0 10px 30px rgba(37,211,102,.35); }
+    /* image preview (fallback untuk simpan) */
+    .ov { position: fixed; inset: 0; z-index: 50; background: rgba(10,8,7,.97); display: none; flex-direction: column; align-items: center; padding: 18px 16px calc(18px + env(safe-area-inset-bottom)); gap: 12px; overflow-y: auto; }
+    .ov.on { display: flex; }
+    .ov p { color: #fff; font-weight: 800; font-size: 15px; text-align: center; max-width: 420px; }
+    .ov img { width: 100%; max-width: 420px; border-radius: 16px; -webkit-touch-callout: default; }
+    .ov .row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; width: 100%; max-width: 420px; }
+  </style>
+</head>
+<body>
+  <div class="glow"></div>
+  <main class="wrap">
+    <nav class="top"><a href="../">← LAMAN UTAMA</a><span>AISHAH · TEAM SHAH</span></nav>
+    <header>
+      <div style="margin-bottom:14px"><span class="plogo"><img src="/img/perodua-logo.png" alt="Perodua" width="59" height="40" /></span></div>
+      <div class="kick">Percuma · 2 minit</div>
+      <h1>SEMAK KELAYAKAN LOAN<span>TEAM SHAH MAHPOB</span></h1>
+      <div class="trust">
+        <div>✓ <b>Tak perlu laporan CTOS / CCRIS</b>, isi gaji &amp; hutang sahaja</div>
+        <div>✓ Dapat <b>DSR, margin loan &amp; bulanan kereta</b> yang sesuai</div>
+        <div>🔒 <b>Data tak disimpan.</b> Kiraan dibuat dalam telefon anda sahaja</div>
+      </div>
+    </header>
+
+    <form id="f" novalidate>
+      <div class="card">
+        <div class="step"><i>1</i>Tentang anda</div>
+        <div class="row2">
+          <div><label for="nama">Nama <small>(pilihan)</small></label><input id="nama" type="text" autocomplete="given-name" maxlength="24" placeholder="cth Farid" /></div>
+          <div><label for="umur">Umur</label><input id="umur" type="number" inputmode="numeric" min="18" max="75" placeholder="cth 30" /></div>
+        </div>
+        <div class="lab">Pekerjaan</div>
+        <div class="chips" data-k="job">
+          <button type="button" data-v="kerajaan">Kerajaan</button>
+          <button type="button" data-v="swasta" aria-pressed="true">Swasta (tetap)</button>
+          <button type="button" data-v="kontrak">Kontrak</button>
+          <button type="button" data-v="sendiri">Bekerja sendiri</button>
+          <button type="button" data-v="gig">Grab / p-hailing</button>
+        </div>
+        <div class="lab">Lesen memandu</div>
+        <div class="chips" data-k="lesen">
+          <button type="button" data-v="ada" aria-pressed="true">Ada (P / CDL)</button>
+          <button type="button" data-v="L">Sedang ambil (L)</button>
+          <button type="button" data-v="tiada">Tiada</button>
+        </div>
+        <div class="lab">Tempat tinggal</div>
+        <div class="chips" data-k="rumah">
+          <button type="button" data-v="keluarga" aria-pressed="true">Dengan keluarga</button>
+          <button type="button" data-v="sewa">Rumah sewa</button>
+          <button type="button" data-v="sendiri">Rumah sendiri</button>
+        </div>
+        <div id="sewaBox" style="display:none"><label for="sewa">Sewa sebulan</label><div class="rm"><input id="sewa" type="number" inputmode="numeric" min="0" step="50" placeholder="0" /></div></div>
+      </div>
+
+      <div class="card">
+        <div class="step"><i>2</i>Pendapatan</div>
+        <label for="gaji">Gaji bersih sebulan</label>
+        <div class="rm big"><input id="gaji" type="number" inputmode="numeric" min="0" step="100" placeholder="cth 3500" /></div>
+        <p class="hint">Gaji bersih = yang masuk akaun, <b>selepas KWSP, PERKESO &amp; cukai</b>. Lihat slip gaji.</p>
+      </div>
+
+      <div class="card">
+        <div class="step"><i>3</i>Hutang sedia ada</div>
+        <p class="hint" style="margin-top:8px">Isi yang ada sahaja. Biarkan kosong jika tiada.</p>
+        <label for="kad">Baki kad kredit <small>(jumlah semua kad)</small></label>
+        <div class="rm"><input id="kad" type="number" inputmode="numeric" min="0" step="100" placeholder="0" /></div>
+        <p class="hint">Bank kira <b>5% daripada baki</b> sebagai bayaran bulanan.</p>
+        <div class="row2">
+          <div><label for="ptptn">PTPTN / sebulan</label><div class="rm"><input id="ptptn" type="number" inputmode="numeric" min="0" placeholder="0" /></div></div>
+          <div><label for="peribadi">Personal loan / sebulan</label><div class="rm"><input id="peribadi" type="number" inputmode="numeric" min="0" placeholder="0" /></div></div>
+          <div><label for="rumahLoan">Loan rumah / sebulan</label><div class="rm"><input id="rumahLoan" type="number" inputmode="numeric" min="0" placeholder="0" /></div></div>
+          <div><label for="kereta">Loan kereta / motor lain</label><div class="rm"><input id="kereta" type="number" inputmode="numeric" min="0" placeholder="0" /></div></div>
+        </div>
+        <label for="lain">Lain-lain / sebulan <small>(Atome, SPayLater, ansuran telefon, koperasi)</small></label>
+        <div class="rm"><input id="lain" type="number" inputmode="numeric" min="0" placeholder="0" /></div>
+        <div class="tot"><span>Komitmen sebulan</span><b id="totK">RM0</b></div>
+      </div>
+
+      <div class="card">
+        <div class="step"><i>4</i>Rekod bayaran &amp; bank</div>
+        <div class="lab">Rekod bayaran hutang 12 bulan lepas</div>
+        <div class="chips" data-k="rekod">
+          <button type="button" data-v="baik" aria-pressed="true">Semua ikut masa</button>
+          <button type="button" data-v="lewat1">Pernah lewat 1 bulan</button>
+          <button type="button" data-v="lewat2">Lewat 2 bulan+</button>
+          <button type="button" data-v="blok">AKPK / SAA / Blacklist</button>
+        </div>
+        <div class="lab">Model yang anda minat</div>
+        <div class="chips" data-k="minat" id="minat"><button type="button" data-v="" aria-pressed="true">Belum pasti</button></div>
+        <label for="rebate">Rebate <small>(jika ada, tanya Sales Advisor)</small></label>
+        <div class="rm"><input id="rebate" type="number" inputmode="numeric" min="0" step="100" placeholder="0" /></div>
+        <p class="hint">Harga kereta ikut <b>OTR asal</b>. Rebate yang anda isi akan ditolak dari harga.</p>
+        <label for="rate">Kadar faedah bank <small>(kadar rata)</small></label>
+        <div class="pc"><input id="rate" type="number" inputmode="decimal" min="0" max="10" step="0.05" placeholder="Auto ikut model" /></div>
+        <p class="hint">Biarkan kosong untuk guna kadar biasa setiap model (2.3% – 2.8%).</p>
+        <button class="btn go" type="submit">Lihat keputusan saya →</button>
+        <p class="formerr" id="ferr">Sila isi gaji bersih dahulu.</p>
+      </div>
+    </form>
+
+    <section id="result">
+      <div class="shot" id="shot">
+        <div class="sh-top">
+          <div><div class="k">KEPUTUSAN SEMAKAN LOAN</div><h2 id="rName">Kelayakan anda</h2></div>
+          <div class="d" id="rDate"></div>
+        </div>
+        <div class="pill" id="pill" data-lv="tinggi">PELUANG TINGGI</div>
+        <p class="verdict" id="verdict"></p>
+
+        <div class="gauge">
+          <div class="lbl"><span>DSR dengan kereta</span><b id="dsrCar">0%</b></div>
+          <div class="gbar" id="gbar"><div class="now" id="gNow"></div><div class="car" id="gCar"></div>
+            <div class="z" style="left:60%;border-color:var(--y)"><span style="color:var(--y)">60%</span></div>
+            <div class="z" style="left:70%;border-color:var(--bad)"><span style="color:var(--bad)">70%</span></div></div>
+          <div class="glegend"><span><i style="background:var(--g)"></i>Hutang sekarang <b id="dsrNow" style="color:var(--w)">0%</b></span><span><i style="background:var(--o)"></i>Ansuran kereta dicadang</span></div>
+        </div>
+
+        <div class="tiles">
+          <div class="tile hl"><small>Bulanan kereta sesuai</small><b id="tAns">RM0</b><em id="tAnsE">DSR 60%</em></div>
+          <div class="tile"><small>Bulanan maksimum</small><b id="tMax">RM0</b><em>DSR 70%, lebih ketat</em></div>
+          <div class="tile"><small>Margin loan</small><b id="tMargin">90%</b><em id="tMarginE">daripada harga OTR</em></div>
+          <div class="tile"><small>Loan maksimum</small><b id="tLoan">RM0</b><em id="tLoanE">9 tahun</em></div>
+          <div class="tile"><small>Baki sara hidup (NDI)</small><b id="tNdi">RM0</b><em id="tNdiE">selepas ansuran</em></div>
+          <div class="tile"><small>Komitmen sekarang</small><b id="tK">RM0</b><em id="tKE">sebulan</em></div>
+        </div>
+
+        <div class="sec">Kereta yang sesuai dengan anda</div>
+        <div class="rec" id="rec"></div>
+
+        <div class="sh-foot">
+          <div><b>TEAM SHAH MAHPOB</b>Sales &amp; Loan · Perodua</div>
+          <div class="wa">WhatsApp<br><span id="waNum">013-725 8194</span></div>
+        </div>
+      </div>
+
+      <div class="acts">
+        <button class="btn save" type="button" id="saveBtn">📥 Simpan gambar keputusan ke galeri</button>
+        <a class="btn wa" id="waRes" href="#" target="_blank" rel="noopener">💬 Hantar keputusan ke WhatsApp Aishah</a>
+      </div>
+
+      <div class="card">
+        <div class="step"><i>✓</i>Cadangan untuk anda</div>
+        <ul class="tips" id="tips"></ul>
+      </div>
+
+      <div class="card">
+        <div class="step"><i>📄</i>Dokumen untuk apply</div>
+        <ul class="docs" id="docs"></ul>
+      </div>
+
+      <div class="card">
+        <div class="step"><i>🚗</i>Semua model Perodua</div>
+        <p class="hint" style="margin-top:8px">Bulanan dikira 9 tahun dengan downpayment minimum. Harga OTR asal, tolak rebate yang anda isi (jika ada).</p>
+        <div id="all"></div>
+      </div>
+
+      <button class="btn ghost" type="button" id="again" style="margin-top:16px">↺ Ubah maklumat &amp; kira semula</button>
+      <p class="note">Anggaran sahaja, bukan kelulusan bank. Bank akan semak CCRIS, CTOS, slip gaji &amp; penyata bank anda. DSR dikira atas gaji bersih; kad kredit 5% daripada baki. Baki sara hidup (NDI) minimum bank RM1,400. Margin maksimum 90% daripada harga OTR. AKPK, SAA &amp; blacklist tidak boleh memohon loan bank. Bulanan guna kadar rata (flat rate). Harga OTR anggaran; rebate ikut maklumat yang anda isi, tertakluk terma Perodua.</p>
+    </section>
+
+    <footer><b>TEAM SHAH MAHPOB</b><br>Sales &amp; Loan · Perodua<br><br>Laman peribadi team Sales Advisor. Bukan laman rasmi Perodua.</footer>
+  </main>
+  <div class="sticky"><a class="btn wa" data-wa="Salam Aishah, saya nak tanya pasal kelayakan loan kereta Perodua." href="#">💬 WhatsApp Aishah</a></div>
+
+  <div class="ov" id="ov">
+    <p id="ovMsg">Tekan lama pada gambar → <u>Simpan ke Foto / Galeri</u></p>
+    <img id="ovImg" alt="Keputusan semakan loan" />
+    <div class="row"><a class="btn save" id="ovDl" download="keputusan-loan.png" href="#">⬇ Muat turun</a><button class="btn ghost" type="button" id="ovX">Tutup</button></div>
+  </div>
+
+  <script src="/kalkulator/data.js"></script>
+  <script>
+    const WA = "60182031020";
+    const ADVISOR = "Aishah";
+    const $ = (id) => document.getElementById(id);
+    const rm = (v) => "RM" + Math.round(Number(v) || 0).toLocaleString("en-US");
+    const wa = (msg) => `https://wa.me/${WA}?text=${encodeURIComponent(msg)}`;
+    document.querySelectorAll("[data-wa]").forEach((a) => { a.href = wa(a.dataset.wa); a.target = "_blank"; a.rel = "noopener"; });
+    $("waNum").textContent = "0" + WA.slice(2, 4) + "-" + WA.slice(4, 7) + " " + WA.slice(7);
+    $("waRes").textContent = `💬 Hantar keputusan ke WhatsApp ${ADVISOR}`;
+
+    // ---------- pilihan (chips) ----------
+    const S = { job: "swasta", lesen: "ada", rumah: "keluarga", rekod: "baik", minat: "" };
+    (window.HARGA || []).forEach((m) => { const b = document.createElement("button"); b.type = "button"; b.dataset.v = m.model; b.textContent = m.model; $("minat").appendChild(b); });
+    document.querySelectorAll(".chips").forEach((g) => g.addEventListener("click", (e) => {
+      const b = e.target.closest("button"); if (!b) return;
+      g.querySelectorAll("button").forEach((x) => x.setAttribute("aria-pressed", x === b));
+      S[g.dataset.k] = b.dataset.v;
+      $("sewaBox").style.display = S.rumah === "sewa" ? "block" : "none";
+      if (shown) run();
+    }));
+    const num = (id) => Math.max(0, +$(id).value || 0);
+
+    // ---------- kiraan ----------
+    const MARGIN_MAX = 0.9, DSR_OK = 0.6, DSR_MAX = 0.7, NDI_OK = 1400, NDI_MIN = 1400;
+    const monthly = (loan, r, n) => loan * (1 + r / 100 * n) / (12 * n);
+    const loanFor = (mo, r, n) => mo * 12 * n / (1 + r / 100 * n);
+
+    function compute() {
+      const G = num("gaji"), umur = num("umur"), sewa = S.rumah === "sewa" ? num("sewa") : 0;
+      const kad = num("kad"), kadMo = kad * 0.05;
+      const parts = { kad: kadMo, ptptn: num("ptptn"), peribadi: num("peribadi"), rumahLoan: num("rumahLoan"), kereta: num("kereta"), lain: num("lain") };
+      const K = Object.values(parts).reduce((a, b) => a + b, 0);
+      const n = umur > 61 ? Math.max(1, 70 - umur) : 9;
+      let margin = MARGIN_MAX;
+      if (["kontrak", "sendiri", "gig"].includes(S.job)) margin = 0.85;
+      if (S.rekod === "lewat1" || S.rekod === "lewat2") margin = Math.min(margin, 0.85);
+      const ansOk = Math.max(0, Math.min(DSR_OK * G - K, G - K - NDI_OK));
+      const ansMax = Math.max(0, Math.min(DSR_MAX * G - K, G - K - NDI_MIN));
+      const customR = +$("rate").value || 0;
+      const D = (window.HARGA || []).map((m) => {
+        const r = customR || m.rate;
+        return { model: m.model, id: m.id, page: m.page, r, vars: m.variants.map((v) => {
+          const rb = Math.min(num("rebate"), v.otr * 0.5), price = v.otr - rb;
+          const loanM = Math.min(price, margin * v.otr), dpMin = price - loanM, moMin = monthly(loanM, r, n);
+          const loanOk = loanFor(ansOk, r, n), dpOk = Math.max(dpMin, price - loanOk), moOk = monthly(price - dpOk, r, n);
+          let st = "no";
+          if (S.rekod !== "blok" && ansOk > 0) {
+            if (moMin <= ansOk + 0.5) st = "ok";
+            else if (dpOk <= price * 0.35) st = "dp";
+            else if (moMin <= ansMax) st = "max";
+          }
+          return { name: v.name, otr: v.otr, rb, price, dpMin, moMin, dpOk, moOk, st };
+        }) };
+      });
+      const mm = (window.HARGA || []).find((m) => m.model === S.minat), rL = customR || (mm ? mm.rate : 2.8);
+      const loanMax = loanFor(ansOk, rL, n);
+      return { G, umur, sewa, kad, kadMo, parts, K, n, margin, ansOk, ansMax, customR, rL, D, loanMax };
+    }
+
+    let shown = false;
+    function run() {
+      const c = compute(), { G, K, ansOk, ansMax } = c;
+      $("totK").textContent = rm(K);
+      if (!shown) return;
+      const nama = $("nama").value.trim();
+      $("rName").textContent = nama ? `${nama.split(" ")[0]}, ini kelayakan anda` : "Kelayakan anda";
+      $("rDate").innerHTML = new Date().toLocaleDateString("ms-MY", { day: "numeric", month: "short", year: "numeric" }) + "<br>Gaji bersih " + rm(G);
+
+      // pilihan terbaik
+      const all = []; c.D.forEach((m) => m.vars.forEach((v) => all.push({ ...v, model: m.model, r: m.r })));
+      const greens = all.filter((v) => v.st === "ok");
+      const bestPerModel = {}; greens.forEach((v) => { if (!bestPerModel[v.model] || v.price > bestPerModel[v.model].price) bestPerModel[v.model] = v; });
+      let picks, pickType = "ok";
+      if (S.minat) {
+        const mv = all.filter((v) => v.model === S.minat);
+        const g = mv.filter((v) => v.st === "ok").sort((a, b) => b.price - a.price);
+        if (g.length) picks = g.slice(0, 3);
+        else { picks = mv.filter((v) => v.st !== "no").sort((a, b) => a.dpOk - b.dpOk).slice(0, 3); pickType = "amb"; }
+        if (!picks.length) picks = [];
+      } else {
+        const bm = Object.values(bestPerModel).sort((a, b) => b.price - a.price);
+        picks = bm.length > 3 ? [bm[0], bm[Math.floor((bm.length - 1) / 2)], bm[bm.length - 1]] : bm;
+      }
+      if (!picks.length && !S.minat) { picks = all.filter((v) => v.st === "dp" || v.st === "max").sort((a, b) => a.dpOk - b.dpOk).slice(0, 3); pickType = "amb"; }
+
+      // tahap
+      let lv = "rendah", vt;
+      if (S.rekod === "blok") vt = "Rekod AKPK, SAA atau blacklist: bank tidak boleh meluluskan loan kereta. Selesaikan dulu dan dapatkan surat pelepasan. WhatsApp kami untuk pilihan lain.";
+      else if (ansOk <= 0) vt = "Komitmen sekarang sudah terlalu tinggi berbanding gaji. Kurangkan hutang dulu sebelum ambil kereta.";
+      else if (S.minat && !picks.length) vt = `Bajet ansuran selesa ${rm(ansOk)} sebulan belum cukup untuk ${S.minat}. Lihat model lain di bawah.`;
+      else if (pickType === "ok" && picks.length) { lv = "tinggi"; vt = `Gaji anda mampu ansuran sehingga ${rm(ansOk)} sebulan dengan selesa.`; }
+      else if (picks.length) { lv = "sederhana"; vt = `Bajet ansuran selesa ${rm(ansOk)} sebulan. Perlu downpayment lebih atau kurangkan hutang.`; }
+      else vt = `Bajet ansuran ${rm(ansOk)} sebulan belum cukup untuk model Perodua sekarang.`;
+      if (S.rekod === "lewat2" && lv !== "rendah") { lv = "rendah"; vt = "Ada tunggakan 2 bulan+. Bank biasanya tolak sehingga tunggakan dijelaskan dan rekod bersih beberapa bulan. Kiraan di bawah ialah anggaran selepas itu."; }
+      if (lv === "tinggi" && (S.rekod === "lewat1" || S.lesen !== "ada")) { lv = "sederhana"; vt += S.rekod === "lewat1" ? " Tapi jelaskan tunggakan dulu sebelum apply." : " Tapi perlu selesaikan soal lesen memandu."; }
+      $("pill").dataset.lv = lv; $("pill").textContent = { tinggi: "✓ PELUANG TINGGI", sederhana: "⚠ PELUANG SEDERHANA", rendah: "✕ PELUANG RENDAH" }[lv];
+      if (S.rekod === "blok") $("pill").textContent = "✕ TAK BOLEH APPLY LOAN BANK";
+      $("verdict").textContent = vt;
+
+      // gauge
+      const carMo = picks[0] ? (pickType === "ok" ? picks[0].moMin : picks[0].moOk) : 0;
+      const dN = G ? K / G * 100 : 0, dC = G ? (K + carMo) / G * 100 : 0;
+      $("dsrNow").textContent = dN.toFixed(1) + "%"; $("dsrCar").textContent = dC.toFixed(1) + "%";
+      $("gNow").style.width = Math.min(100, dN) + "%";
+      $("gCar").style.left = Math.min(100, dN) + "%"; $("gCar").style.width = Math.max(0, Math.min(100, dC) - Math.min(100, dN)) + "%";
+
+      // tiles
+      $("tAns").textContent = rm(ansOk); $("tMax").textContent = rm(ansMax);
+      $("tMargin").textContent = S.rekod === "blok" ? "—" : Math.round(c.margin * 100) + "%";
+      $("tMarginE").textContent = S.rekod === "blok" ? "tak boleh apply bank" : picks[0] ? `downpayment min ${rm(picks[0].dpMin)}` : "daripada harga OTR";
+      $("tLoan").textContent = rm(c.loanMax); $("tLoanE").textContent = `${c.n} tahun · kadar ${c.rL}%`;
+      const ndi = G - K - carMo;
+      $("tNdi").textContent = rm(ndi); $("tNdiE").textContent = c.sewa ? `${rm(ndi - c.sewa)} lepas sewa` : "selepas ansuran kereta";
+      $("tK").textContent = rm(K); $("tKE").textContent = `DSR sekarang ${dN.toFixed(0)}%`;
+      if (S.rekod === "blok") { ["tAns", "tMax", "tLoan"].forEach((id) => { $(id).textContent = "—"; }); $("tLoanE").textContent = "tak boleh apply bank"; }
+
+      // cadangan kereta (dalam gambar)
+      $("rec").innerHTML = picks.length ? picks.map((v) => {
+        const mo = pickType === "ok" ? v.moMin : v.moOk, dp = pickType === "ok" ? v.dpMin : v.dpOk;
+        return `<div class="rc ${pickType === "ok" ? "" : "amb"}"><div class="n">${v.name}<small>Harga ${rm(v.price)}${v.rb ? ` (lepas rebate ${rm(v.rb)})` : ""}</small></div>
+          <div class="m">${rm(mo)}<small>/bulan · ${c.n} thn</small></div>
+          <div class="dp">${dp < 100 ? "Downpayment: <b>hampir RM0 (full loan)</b>" : `Downpayment dicadang: <b>${rm(dp)}</b>`}${v.st === "max" ? `<br>atau downpayment ${rm(v.dpMin)} → ${rm(v.moMin)}/bln (DSR ${((K + v.moMin) / G * 100).toFixed(0)}%, lebih ketat)` : ""}</div></div>`;
+      }).join("") : `<div class="none">Tiada ${S.minat || "model"} yang sesuai buat masa ini. Ikut cadangan di bawah, atau WhatsApp ${ADVISOR} untuk pilihan lain (penjamin / pemohon bersama).</div>`;
+
+      // semua model
+      const lab = { ok: ["ok", "✓ Sesuai"], dp: ["amb", "⚠ Perlu downpayment"], max: ["amb", "⚠ DSR tinggi"], no: ["no", "✕ Belum sesuai"] };
+      $("all").innerHTML = c.D.map((m) => `<div class="mt"><h4>${m.model} <small style="color:var(--g);font-weight:700">· ${m.r}%</small></h4>` + m.vars.map((v) => {
+        const [cl, t] = lab[v.st];
+        const sub = v.st === "dp" ? `Downpayment ${rm(v.dpOk)} → ${rm(v.moOk)}/bln` : `Downpayment ${rm(v.dpMin)} → ${rm(v.moMin)}/bln`;
+        return `<div class="vr"><span class="nm">${v.name}<small>Harga ${rm(v.price)} · ${sub}</small></span><span class="st ${cl}"><b>${rm(v.st === "dp" ? v.moOk : v.moMin)}</b>${t}</span></div>`;
+      }).join("") + `</div>`).join("");
+
+      // tips
+      const T = [];
+      if (S.rekod === "blok") T.push(["⛔", "<b>AKPK / SAA / blacklist tak boleh apply loan bank.</b> Selesaikan hutang dan dapatkan surat pelepasan / penyelesaian dahulu. Pilihan lain: pemohon lain (ahli keluarga) atau tunai."]);
+      if (S.rekod === "lewat2") T.push(["⚠️", "<b>Jelaskan semua tunggakan dulu</b>, set auto-debit, dan pastikan rekod bersih 3–6 bulan sebelum apply."]);
+      if (S.rekod === "lewat1") T.push(["⚠️", "<b>Jelaskan bulan tertunggak dulu</b>, set auto-debit, dan tunggu 1–2 bulan sampai CCRIS kemas kini."]);
+      if (c.kadMo > 0) T.push(["💳", `Baki kad kredit ${rm(c.kad)} dikira <b>${rm(c.kadMo)}/bulan</b>. Setiap RM1,000 dibayar turun, bajet ansuran naik RM50. Tutup kad yang tak guna.`]);
+      if (c.parts.lain > 0) T.push(["🧾", "Bank kira <b>Atome, SPayLater &amp; ansuran telefon</b> sebagai hutang. Langsaikan yang kecil sebelum apply."]);
+      if (picks.length && pickType === "amb") T.push(["💰", `Untuk ${picks[0].name}, sediakan <b>downpayment ${rm(picks[0].dpOk)}</b> supaya bulanan jadi ${rm(picks[0].moOk)}.`]);
+      if (S.lesen !== "ada") T.push(["🪪", S.lesen === "L" ? "Habiskan lesen dulu. Kebanyakan bank minta <b>lesen P / CDL sah</b> semasa permohonan." : "Kebanyakan bank minta <b>lesen memandu sah</b>. Ada pilihan lain (pemohon bersama / ahli keluarga). Tanya kami."]);
+      if (c.sewa && ndi - c.sewa < 800) T.push(["🏠", `Lepas sewa ${rm(c.sewa)} dan ansuran, baki anda tinggal <b>${rm(ndi - c.sewa)}</b>. Pilih model lebih rendah supaya selesa.`]);
+      if (["sendiri", "gig"].includes(S.job)) T.push(["📊", "Pendapatan tak tetap: pastikan <b>duit masuk akaun bank setiap bulan</b> dan isi Borang B / BE LHDN. Bank kira purata 6 bulan."]);
+      if (c.n < 9) T.push(["🎂", `Ikut umur, tempoh loan maksimum <b>${c.n} tahun</b> (bank hadkan umur tamat loan ~70).`]);
+      if (lv === "tinggi" && !T.length) T.push(["🎉", "Profil anda kemas. <b>Jangan mohon kad / loan baru</b> sebelum kereta lulus."]);
+      else T.push(["🚫", "<b>Jangan mohon kad kredit / loan baru</b> sebelum loan kereta lulus. Setiap semakan bank menurunkan skor."]);
+      $("tips").innerHTML = T.map(([i, t]) => `<li><span>${i}</span><span>${t}</span></li>`).join("");
+
+      // dokumen
+      const base = ["Salinan IC (depan &amp; belakang)", "Salinan lesen memandu"];
+      const docs = {
+        kerajaan: ["Slip gaji 3 bulan terkini", "Surat pengesahan jawatan"],
+        swasta: ["Slip gaji 3 bulan terkini", "Penyata KWSP terkini", "Penyata bank 3 bulan (gaji masuk)"],
+        kontrak: ["Slip gaji 3 bulan terkini", "Surat / kontrak kerja", "Penyata KWSP terkini", "Penyata bank 3 bulan"],
+        sendiri: ["Sijil SSM", "Penyata bank 6 bulan", "Borang B LHDN + resit bayaran"],
+        gig: ["Penyata pendapatan app 6 bulan", "Penyata bank 6 bulan", "Borang BE / B LHDN (jika ada)"],
+      }[S.job];
+      $("docs").innerHTML = base.concat(docs).map((d) => `<li>${d}</li>`).join("");
+
+      // WhatsApp
+      const job = { kerajaan: "Kerajaan", swasta: "Swasta (tetap)", kontrak: "Kontrak", sendiri: "Bekerja sendiri", gig: "P-hailing / gig" }[S.job];
+      const msg = `Salam ${ADVISOR}, saya dah buat Semak Kelayakan Loan${nama ? ` (nama: ${nama})` : ""}:
+• Umur ${c.umur || "-"} · ${job} · lesen: ${S.lesen === "ada" ? "ada" : S.lesen === "L" ? "sedang ambil" : "tiada"} · ${S.rumah === "sewa" ? `rumah sewa ${rm(c.sewa)}` : S.rumah === "sendiri" ? "rumah sendiri" : "tinggal dengan keluarga"}
+• Gaji bersih ${rm(G)} · komitmen ${rm(K)} (DSR sekarang ${dN.toFixed(0)}%)
+• Minat: ${S.minat || "belum pasti"}
+• Rekod bayaran: ${{ baik: "semua ikut masa", lewat1: "pernah lewat 1 bulan", lewat2: "lewat 2 bulan+", blok: "AKPK / SAA / blacklist" }[S.rekod]}${num("rebate") ? `\n• Rebate diisi: ${rm(num("rebate"))}` : ""}
+• Bulanan sesuai ${rm(ansOk)} (maks ${rm(ansMax)}) · peluang ${lv.toUpperCase()}
+${picks.length ? "• Cadangan: " + picks.map((v) => `${v.name} ${rm(pickType === "ok" ? v.moMin : v.moOk)}/bln`).join(", ") : ""}
+Boleh bantu saya apply?`;
+      $("waRes").href = wa(msg);
+    }
+
+    document.querySelectorAll("input").forEach((i) => i.addEventListener("input", () => { i.classList.remove("err"); run(); }));
+    $("f").addEventListener("submit", (e) => {
+      e.preventDefault();
+      if (!num("gaji")) { $("gaji").classList.add("err"); $("ferr").style.display = "block"; $("gaji").focus(); return; }
+      $("ferr").style.display = "none"; shown = true; $("result").classList.add("on"); run();
+      $("result").scrollIntoView({ behavior: "smooth" });
+    });
+    $("again").onclick = () => window.scrollTo({ top: 0, behavior: "smooth" });
+
+    // ---------- simpan gambar ----------
+    function loadH2C() {
+      if (window.html2canvas) return Promise.resolve();
+      return new Promise((ok, no) => { const s = document.createElement("script"); s.src = "https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"; s.onload = ok; s.onerror = no; document.head.appendChild(s); });
+    }
+    $("saveBtn").onclick = async () => {
+      const b = $("saveBtn"), old = b.textContent; b.textContent = "Sedang sediakan gambar…"; b.disabled = true;
+      try {
+        await loadH2C(); if (document.fonts) await document.fonts.ready;
+        const cv = await html2canvas($("shot"), { scale: 3, backgroundColor: "#141110", useCORS: true, logging: false });
+        const blob = await new Promise((r) => cv.toBlob(r, "image/png"));
+        const fname = `keputusan-loan-${($("nama").value.trim().split(" ")[0] || "saya").toLowerCase()}.png`;
+        const file = new File([blob], fname, { type: "image/png" });
+        const url = URL.createObjectURL(blob);
+        $("ovImg").src = url; $("ovDl").href = url; $("ovDl").download = fname;
+        let shared = false;
+        if (navigator.canShare && navigator.canShare({ files: [file] })) {
+          try { await navigator.share({ files: [file], title: "Keputusan Semakan Loan" }); shared = true; } catch (err) { if (err && err.name === "AbortError") shared = true; }
+        }
+        if (!shared) $("ov").classList.add("on");
+      } catch (err) {
+        alert("Maaf, gambar tak dapat dijana. Sila screenshot skrin keputusan.");
+      } finally { b.textContent = old; b.disabled = false; }
+    };
+    $("ovX").onclick = () => $("ov").classList.remove("on");
+    run();
+  </script>
+</body>
+</html>
