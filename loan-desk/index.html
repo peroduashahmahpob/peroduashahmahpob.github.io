@@ -9,6 +9,14 @@
 <meta name="apple-mobile-web-app-title" content="Loan Desk">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="theme-color" content="#FFFFFF">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.118.0/dist/umd/supabase.min.js"></script>
+<script>
+/* Public connection details (safe to publish: the database only answers logged-in, active team members). */
+window.TSM_CONFIG = {
+  url: "https://mnyevzrkoibfzwilvwrz.supabase.co",
+  key: "sb_publishable_JXkQzAeEFcBiHG5PDtRjHQ_zP0dYlNM"
+};
+</script>
 <style>
 :root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 body{margin:0}
@@ -67,7 +75,8 @@ button{cursor:pointer}
 .brand b span{color:var(--accent)}
 .brand small{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:600}
 .top-row .sp{flex:1}
-.demo-pill{font-size:11px;font-weight:700;letter-spacing:.08em;padding:4px 8px;border-radius:99px;background:var(--accent-soft);color:var(--accent)}
+.demo-pill{font-size:11px;font-weight:700;letter-spacing:.08em;padding:4px 8px;border-radius:99px;background:var(--accent-soft);color:var(--accent);white-space:nowrap}
+.demo-pill.on{background:var(--ok-soft);color:var(--ok)}
 .me{display:flex;align-items:center;gap:8px;border:1px solid var(--line);background:var(--surface);border-radius:99px;padding:3px 10px 3px 3px;font-weight:600;font-size:13px}
 .av{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-weight:800;font-size:13px;flex:none}
 .av.shah{background:var(--accent-soft);color:var(--accent)}
@@ -295,7 +304,9 @@ const fmtD=s=>{if(!s)return '–';const p=s.split('-');return p[2]+'/'+p[1]+'/'+
 const nowStamp=()=>{const d=new Date();return iso(d)+' '+pad(d.getHours())+':'+pad(d.getMinutes())};
 const fmtStamp=s=>{const [a,b]=s.split(' ');return fmtD(a)+' '+(b||'')};
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const uid=()=>Math.random().toString(36).slice(2,10);
+const CFG=window.TSM_CONFIG, LIVE=!!(CFG&&window.supabase);
+const sb=LIVE?window.supabase.createClient(CFG.url,CFG.key):null;
+const uid=()=>(LIVE&&window.crypto&&crypto.randomUUID)?crypto.randomUUID():Math.random().toString(36).slice(2,10);
 const rm=n=>(n===''||n==null||isNaN(n))?'–':'RM '+Number(n).toLocaleString('en-MY',{maximumFractionDigits:0});
 const rm2=n=>'RM '+Number(n).toLocaleString('en-MY',{minimumFractionDigits:2,maximumFractionDigits:2});
 const cap=s=>USERS[s]?USERS[s].nama:s;
@@ -348,10 +359,81 @@ function demo(){
 }
 
 /* ---------- state ---------- */
-let db=load(KEY); if(!db||!Array.isArray(db.cases)){db=demo();store(KEY,db)}
+let db;
+if(LIVE){db={cases:[],users:{fendi:{aktif:true},aishah:{aktif:true}}}}
+else{db=load(KEY); if(!db||!Array.isArray(db.cases)){db=demo();store(KEY,db)}}
 let pref=Object.assign({me:null,tab:null,view:'kad',screen:'kes',period:'bulan',filter:'semua'},load(PKEY)||{});
 let q='', openId=null;
-const save=()=>store(KEY,db);
+const save=()=>{if(!LIVE)store(KEY,db)}; // live mode never keeps customer data on the phone
+
+/* ---------- live database (Supabase) ---------- */
+const nul=v=>(v===''||v==null)?null:v;
+const num=v=>(v===''||v==null||isNaN(+v))?null:+v;
+function stampOf(isoTs){const d=new Date(isoTs);return iso(d)+' '+pad(d.getHours())+':'+pad(d.getMinutes())}
+function caseFromRow(r){return {id:r.id,pakar:r.pakar,nama:r.nama,tel:r.tel||'',model:r.model||'',harga:r.harga??'',deposit:r.deposit??'',booking:r.booking||'',chassis:r.chassis||'',
+  dca:{on:!!r.dca_on,lokasi:r.dca_lokasi||'',tarikh:r.dca_tarikh||''},rma:{on:!!r.rma_on,cawangan:r.rma_cawangan||'',tarikh:r.rma_tarikh||''},subs:[],log:[],_created:r.created_at}}
+function caseToRow(c){return {id:c.id,pakar:c.pakar,nama:c.nama,tel:nul(c.tel),model:nul(c.model),harga:num(c.harga),deposit:num(c.deposit),booking:nul(c.booking),chassis:nul(c.chassis),
+  dca_on:!!c.dca.on,dca_lokasi:nul(c.dca.lokasi),dca_tarikh:nul(c.dca.tarikh),rma_on:!!c.rma.on,rma_cawangan:nul(c.rma.cawangan),rma_tarikh:nul(c.rma.tarikh)}}
+function subFromRow(r){return {id:r.id,bank:r.bank,submit:r.submit,status:r.status,statusDate:r.status_date||'',remark:r.remark||'',amaun:r.amaun??'',tempoh:r.tempoh??'',kadar:r.kadar??'',_created:r.created_at}}
+function subToRow(cid,s){const t=num(s.tempoh);return {id:s.id,case_id:cid,bank:s.bank,submit:s.submit,status:s.status,status_date:nul(s.statusDate),remark:nul(s.remark),amaun:num(s.amaun),tempoh:t==null?null:Math.round(t),kadar:num(s.kadar)}}
+async function run(p){if(!LIVE)return true;try{const {error}=await p;if(error)throw error;return true}catch(e){toast('Gagal simpan: '+(e.message||e)+'. Cuba lagi.');reloadSoon(0);return false}}
+const api={
+  async createCase(c){if(!LIVE)return;
+    if(!await run(sb.from('cases').insert(caseToRow(c))))return;
+    if(c.subs.length)await run(sb.from('submissions').insert(c.subs.map(s=>subToRow(c.id,s))));
+    const logs=c.log.slice().reverse().map(l=>({case_id:c.id,who_key:l.who,msg:l.msg}));delete c._new;
+    if(logs.length)await run(sb.from('activity_log').insert(logs));},
+  updateCase:c=>LIVE&&run(sb.from('cases').update(caseToRow(c)).eq('id',c.id)),
+  upsertSub:(c,s)=>LIVE&&run(sb.from('submissions').upsert(subToRow(c.id,s))),
+  deleteSub:id=>LIVE&&run(sb.from('submissions').delete().eq('id',id)),
+  deleteCase:id=>LIVE&&run(sb.from('cases').delete().eq('id',id)),
+  log:(cid,msg)=>LIVE&&run(sb.from('activity_log').insert({case_id:cid,who_key:me(),msg})),
+  setActive:(k,v)=>LIVE&&run(sb.from('profiles').update({aktif:v}).eq('pakar_key',k))
+};
+let myId=null, liveOk=false;
+async function loadAll(){
+  const [c,s,l,p]=await Promise.all([sb.from('cases').select('*'),sb.from('submissions').select('*'),
+    sb.from('activity_log').select('*').order('at',{ascending:false}).limit(5000),sb.from('profiles').select('id,pakar_key,aktif,peranan')]);
+  const err=c.error||s.error||l.error||p.error;if(err){toast('Gagal muat data: '+err.message);return false}
+  const mine=(p.data||[]).find(x=>x.id===myId);
+  if(!mine||!mine.aktif){await sb.auth.signOut();pref.me=null;savePref();db.cases=[];closeSheet();renderLogin('Akaun anda telah dimatikan oleh admin.');return false}
+  const by={};(c.data||[]).forEach(r=>by[r.id]=caseFromRow(r));
+  (s.data||[]).forEach(r=>{const k=by[r.case_id];if(k)k.subs.push(subFromRow(r))});
+  (l.data||[]).forEach(r=>{const k=by[r.case_id];if(k)k.log.push({t:stampOf(r.at),who:r.who_key||'shah',msg:r.msg})});
+  Object.values(by).forEach(k=>{k.subs.sort((a,b)=>(a.submit||'').localeCompare(b.submit||'')||(a._created||'').localeCompare(b._created||''));
+    if(!k.log.length)k.log.push({t:stampOf(k._created),who:k.pakar,msg:'Kes dicipta'})});
+  db.cases=Object.values(by);
+  (p.data||[]).forEach(x=>{if(x.pakar_key)db.users[x.pakar_key]={aktif:x.aktif}});
+  return true;
+}
+let reloadT;
+function reloadSoon(ms){clearTimeout(reloadT);reloadT=setTimeout(async()=>{if(!LIVE||!me())return;if(await loadAll())afterReload()},ms==null?400:ms)}
+function afterReload(){
+  const ae=document.activeElement, panel=document.querySelector('#sheet .panel');
+  const typing=ae&&/INPUT|SELECT|TEXTAREA/.test(ae.tagName);
+  if(ae&&ae.id==='q'){renderList()}else if(!(typing&&panel&&panel.contains(ae))){refreshBehind()}else{refreshBehind()}
+  if(openId&&panel&&document.getElementById('subs')&&!(typing&&panel.contains(ae))){
+    if(!byId(openId)){closeSheet();toast('Kes ini telah dipadam.');return}
+    const st=panel.scrollTop;renderDetail(openId);const np=document.querySelector('#sheet .panel');if(np)np.scrollTop=st}
+}
+let chan=null;
+function subscribe(){
+  if(chan)sb.removeChannel(chan);
+  chan=sb.channel('tsm-live');
+  ['cases','submissions','activity_log','profiles'].forEach(t=>chan.on('postgres_changes',{event:'*',schema:'public',table:t},()=>reloadSoon()));
+  chan.subscribe(st=>{liveOk=st==='SUBSCRIBED';const el=$('#livePill');if(el){el.className='demo-pill'+(liveOk?' on':'');el.textContent=liveOk?'● LIVE':'○ OFFLINE'}});
+}
+async function afterAuth(){
+  const {data:{user}}=await sb.auth.getUser();
+  if(!user){pref.me=null;savePref();renderLogin();return}
+  myId=user.id;
+  const {data:p}=await sb.from('profiles').select('*').eq('id',user.id).maybeSingle();
+  if(!p||!p.aktif){await sb.auth.signOut();pref.me=null;savePref();renderLogin(!p?'Akaun ini belum didaftarkan oleh admin.':'Akaun anda telah dimatikan oleh admin.');return}
+  pref.me=p.peranan==='admin'?'shah':p.pakar_key;USERS[pref.me].email=user.email;
+  if(!pref.tab)pref.tab='semua';savePref();
+  $('#app').innerHTML='<div class="wrap login"><p class="muted">Memuatkan data…</p></div>';
+  if(await loadAll()){render();subscribe()}
+}
 const savePref=()=>store(PKEY,pref);
 const me=()=>pref.me;
 const byId=id=>db.cases.find(c=>c.id===id);
@@ -366,7 +448,7 @@ function overall(c){
   return ['Semua tolak','bad'];
 }
 const lastT=c=>(c.log[0]&&c.log[0].t)||'';
-function addLog(c,msg){c.log.unshift({t:nowStamp(),who:me(),msg})}
+function addLog(c,msg){c.log.unshift({t:nowStamp(),who:me(),msg});if(!c._new)api.log(c.id,msg)}
 function inTab(c){return pref.tab==='semua'||c.pakar===pref.tab}
 function matches(c){
   const f=pref.filter, o=overall(c)[0];
@@ -408,11 +490,11 @@ function renderLogin(err){
       <label class="f" for="lgEmail">Email<input class="in" id="lgEmail" type="email" autocomplete="username" placeholder="nama@tsm.demo"></label>
       <label class="f" for="lgPass">Kata laluan<input class="in" id="lgPass" type="password" autocomplete="current-password"></label>
       ${err?`<p class="err">${esc(err)}</p>`:''}
-      <button class="btn primary block" type="submit">Log masuk</button>
+      <button class="btn primary block" type="submit" id="lgBtn">Log masuk</button>
     </form>
-    <div class="stack" style="gap:8px"><span class="muted" style="font-size:12.5px;font-weight:600">Prototaip: tekan untuk masuk sebagai pengguna contoh</span>
+    ${LIVE?'':`<div class="stack" style="gap:8px"><span class="muted" style="font-size:12.5px;font-weight:600">Prototaip: tekan untuk masuk sebagai pengguna contoh</span>
       <div class="who-pick">${Object.values(USERS).map(u=>`<button type="button" data-act="pick" data-u="${u.id}"><span class="av ${u.id}">${u.init}</span>${u.nama}<small>${u.peranan}</small></button>`).join('')}</div>
-    </div>
+    </div>`}
     <p class="muted" style="font-size:12px;margin:0">Hanya Shah boleh tambah pengguna. Tiada pendaftaran awam.</p>
   </div></div>`;
 }
@@ -433,7 +515,7 @@ function render(){
   <header class="top"><div class="wrap">
     <div class="top-row">
       <div class="brand"><b>TSM <span>Loan Desk</span></b><small>TSM Perodua</small></div>
-      <span class="sp"></span><span class="demo-pill">DEMO</span>
+      <span class="sp"></span>${LIVE?`<span class="demo-pill${liveOk?' on':''}" id="livePill">${liveOk?'● LIVE':'○ OFFLINE'}</span>`:'<span class="demo-pill">DEMO</span>'}
       <button class="me" data-act="menu" aria-label="Menu pengguna"><span class="av ${u.id}">${u.init}</span>${u.nama}</button>
     </div>
     ${showSeg?`<div class="seg" role="group" aria-label="Pakar loan">
@@ -460,7 +542,7 @@ function refreshBehind(){ // re-render list/badges behind the open sheet without
 /* ---------- KES ---------- */
 const FILTERS=[['semua','Semua'],['pending','Dalam proses'],['lulus','Lulus'],['tolak','Semua tolak'],['chase','Perlu chase'],['dca','DCA'],['rma','RMA']];
 function renderKes(m){
-  m.innerHTML=`<p class="note">Prototaip guna <b>data contoh</b> yang disimpan dalam telefon ini sahaja. Update live antara Shah, Fendi dan Aishah aktif selepas sambung database.</p>
+  m.innerHTML=`${LIVE?'':'<p class="note">Prototaip guna <b>data contoh</b> yang disimpan dalam telefon ini sahaja. Update live antara Shah, Fendi dan Aishah aktif selepas sambung database.</p>'}
   <div class="toolbar" style="margin-top:12px">
     <input class="search" id="q" type="search" placeholder="Cari nama, telefon, chassis, bank" value="${esc(q)}" aria-label="Cari">
     <div class="vt" role="group" aria-label="Paparan"><button data-act="view" data-v="kad" aria-pressed="${pref.view==='kad'}">Kad</button><button data-act="view" data-v="jadual" aria-pressed="${pref.view==='jadual'}">Jadual</button></div>
@@ -479,7 +561,8 @@ function flags(c){
 function renderList(){
   const L=$('#list');if(!L)return;
   const cs=visible();
-  if(!cs.length){L.innerHTML=`<div class="empty" style="margin-top:8px">Tiada kes yang sepadan.<br>Tukar tapisan atau tekan <b>+ Kes baru</b>.</div>`;return}
+  if(!cs.length){L.innerHTML=db.cases.length?`<div class="empty" style="margin-top:8px">Tiada kes yang sepadan.<br>Tukar tapisan atau tekan <b>+ Kes baru</b>.</div>`
+    :`<div class="empty" style="margin-top:8px"><b style="color:var(--fg)">Belum ada kes.</b><br>Tekan <b>+ Kes baru</b> untuk masukkan pelanggan pertama. Kes yang Fendi atau Aishah tambah akan muncul di sini secara live.</div>`;return}
   if(pref.view==='jadual'){renderTable(L,cs);return}
   L.innerHTML=`<div class="list">${cs.map(c=>{const [o,oc]=overall(c);const late=c.subs.filter(isLate).length;return `
     <button class="case" data-act="open" data-id="${c.id}">
@@ -727,7 +810,7 @@ function submitForm(){
     dca:{on:$('#fDca').checked,lokasi:$('#fDcaLok').value.trim(),tarikh:$('#fDcaT').value},
     rma:{on:$('#fRma').checked,cawangan:$('#fRmaCaw').value.trim(),tarikh:$('#fRmaT').value}};
   if(id){
-    const c=byId(id);const moved=c.pakar!==pk;Object.assign(c,data);
+    const c=byId(id);const moved=c.pakar!==pk;Object.assign(c,data);api.updateCase(c);
     addLog(c,moved?'Kes dipindah ke '+cap(pk)+' dan maklumat dikemas kini':'Maklumat kes dikemas kini');
     save();toast('Kes disimpan');refreshBehind();renderDetail(id);return;
   }
@@ -738,9 +821,9 @@ function submitForm(){
     subs.push({id:uid(),bank,submit:g('submit').value,status:g('status').value,statusDate:g('submit').value,remark:g('remark').value.trim(),amaun:'',tempoh:'',kadar:''});
   });
   if(bad)return err('Tarikh submit wajib diisi untuk '+bad+'.');
-  const c={id:uid(),...data,subs,log:[]};
+  const c={id:uid(),...data,subs,log:[],_new:true};
   addLog(c,'Kes dicipta'+(subs.length?' · submit ke '+subs.map(s=>s.bank).join(', '):''));
-  db.cases.unshift(c);save();toast('Kes baru disimpan');
+  db.cases.unshift(c);save();api.createCase(c);toast('Kes baru disimpan');
   if(pref.tab!=='semua'&&pref.tab!==pk){pref.tab='semua';savePref()}
   refreshBehind();renderDetail(c.id);
 }
@@ -752,9 +835,14 @@ function renderMenu(){
   <div class="pb stack" style="padding-top:14px">
     ${me()==='shah'?`<div><h3 style="margin-top:0">Pengguna</h3><div class="stack" style="gap:8px">
       ${PAKAR.map(p=>`<label class="tog" for="act-${p}"><span class="av ${p}">${USERS[p].init}</span><span style="flex:1">${cap(p)}<small>${USERS[p].email} · ${db.users[p].aktif?'Aktif':'Dimatikan'}</small></span><input type="checkbox" id="act-${p}" data-act="toggleuser" data-u="${p}" ${db.users[p].aktif?'checked':''}></label>`).join('')}
-      <button class="btn" disabled>+ Tambah pengguna (aktif selepas sambung database)</button></div></div>`:''}
-    <div><h3 style="margin-top:0">Prototaip</h3><p class="muted" style="margin:0 0 8px;font-size:13px">Data contoh disimpan dalam pelayar telefon ini sahaja. Reset untuk mula semula dengan 8 kes contoh.</p>
-      <button class="btn danger" data-act="reset">Reset data contoh</button></div>
+      ${LIVE?`<p class="muted" style="margin:0;font-size:12.5px">Akaun yang dimatikan terus terkeluar dan tak boleh log masuk. Untuk tambah pengguna baru: Supabase → Authentication → Add user.</p>`
+        :'<button class="btn" disabled>+ Tambah pengguna (aktif selepas sambung database)</button>'}</div></div>`:''}
+    ${LIVE?`<form id="pwForm" class="stack" style="gap:8px" novalidate><h3 style="margin:0">Tukar kata laluan</h3>
+      <label class="f" for="pw1">Kata laluan baru (sekurang-kurangnya 8 aksara)<input class="in" id="pw1" type="password" autocomplete="new-password"></label>
+      <label class="f" for="pw2">Taip semula<input class="in" id="pw2" type="password" autocomplete="new-password"></label>
+      <p class="err" id="pwErr" hidden></p><button class="btn" type="submit" id="pwBtn">Simpan kata laluan baru</button></form>`
+    :`<div><h3 style="margin-top:0">Prototaip</h3><p class="muted" style="margin:0 0 8px;font-size:13px">Data contoh disimpan dalam pelayar telefon ini sahaja. Reset untuk mula semula dengan 8 kes contoh.</p>
+      <button class="btn danger" data-act="reset">Reset data contoh</button></div>`}
     <button class="btn block" data-act="logout">Log keluar</button>
   </div>`);
 }
@@ -777,19 +865,20 @@ document.addEventListener('click',e=>{
     case 'new':renderForm(null);break;
     case 'edit':renderForm(b.dataset.id);break;
     case 'menu':renderMenu();break;
-    case 'logout':pref.me=null;savePref();closeSheet();render();break;
+    case 'logout':pref.me=null;savePref();closeSheet();
+      if(LIVE){if(chan){sb.removeChannel(chan);chan=null}db.cases=[];sb.auth.signOut().finally(()=>renderLogin())}else render();break;
     case 'reset':if(armed(b,'Tekan sekali lagi untuk reset')){db=demo();save();closeSheet();render();toast('Data contoh di-reset')}break;
     case 'addrow':$('#newSubs').insertAdjacentHTML('beforeend',nsubRow());break;
     case 'rmrow':b.closest('.nsub').remove();break;
     case 'move':{const c=byId(b.dataset.id);const to=c.pakar==='fendi'?'aishah':'fendi';
-      if(armed(b,'Tekan lagi: pindah ke '+cap(to))){c.pakar=to;addLog(c,'Kes dipindah ke '+cap(to));save();toast('Dipindah ke '+cap(to));refreshBehind();renderDetail(c.id)}break;}
+      if(armed(b,'Tekan lagi: pindah ke '+cap(to))){c.pakar=to;api.updateCase(c);addLog(c,'Kes dipindah ke '+cap(to));save();toast('Dipindah ke '+cap(to));refreshBehind();renderDetail(c.id)}break;}
     case 'addsub':{const c=byId(b.dataset.id);const used=new Set(c.subs.map(s=>s.bank));const bank=BANKS.find(x=>!used.has(x))||'Lain-lain';
       const s={id:uid(),bank,submit:todayISO(),status:'Dihantar',statusDate:todayISO(),remark:'',amaun:'',tempoh:'',kadar:''};
-      c.subs.push(s);addLog(c,'Submit ke '+bank);save();refreshBehind();renderDetail(c.id);
+      c.subs.push(s);api.upsertSub(c,s);addLog(c,'Submit ke '+bank);save();refreshBehind();renderDetail(c.id);
       const el=$('#sub-'+s.id);if(el){el.scrollIntoView({block:'center'});$('#f-'+s.id+'-bank').focus({preventScroll:true})}toast('Bank ditambah. Tukar nama bank jika perlu.');break;}
     case 'delsub':{const c=byId(openId);const s=c.subs.find(x=>x.id===b.dataset.sub);
-      if(armed(b,'Tekan sekali lagi untuk padam '+s.bank)){c.subs=c.subs.filter(x=>x!==s);addLog(c,'Submission '+s.bank+' dipadam');save();refreshBehind();renderDetail(c.id);toast(s.bank+' dipadam')}break;}
-    case 'delcase':{const c=byId(b.dataset.id);if(armed(b,'Tekan sekali lagi untuk padam kes '+c.nama)){db.cases=db.cases.filter(x=>x!==c);save();closeSheet();render();toast('Kes dipadam')}break;}
+      if(armed(b,'Tekan sekali lagi untuk padam '+s.bank)){c.subs=c.subs.filter(x=>x!==s);api.deleteSub(s.id);addLog(c,'Submission '+s.bank+' dipadam');save();refreshBehind();renderDetail(c.id);toast(s.bank+' dipadam')}break;}
+    case 'delcase':{const c=byId(b.dataset.id);if(armed(b,'Tekan sekali lagi untuk padam kes '+c.nama)){db.cases=db.cases.filter(x=>x!==c);api.deleteCase(c.id);save();closeSheet();render();toast('Kes dipadam')}break;}
     case 'copytsv':{const text=tsv();const done=()=>toast('Disalin. Paste dalam Excel atau Google Sheets.');
       const fallback=()=>openSheet(`<div class="ph"><div class="t"><b>Salin untuk Excel</b></div><button class="x" data-act="close" aria-label="Tutup">✕</button></div><div class="pb" style="padding-top:12px"><p class="muted" style="margin-top:0">Pilih semua teks di bawah, salin, kemudian paste dalam Excel.</p><textarea class="in mono" id="tsvBox" rows="12" style="font-size:12px" readonly>${esc(text)}</textarea></div>`);
       try{navigator.clipboard.writeText(text).then(done,()=>{fallback();const t=$('#tsvBox');t&&t.select()})}catch(err){fallback()}break;}
@@ -797,6 +886,28 @@ document.addEventListener('click',e=>{
 });
 document.addEventListener('submit',e=>{
   e.preventDefault();
+  if(e.target.id==='loginForm'&&LIVE){
+    const em=$('#lgEmail').value.trim().toLowerCase(),pw=$('#lgPass').value,btn=$('#lgBtn');
+    if(!em||!pw){renderLogin('Isi email dan kata laluan.');return}
+    btn.disabled=true;btn.textContent='Sedang log masuk…';
+    sb.auth.signInWithPassword({email:em,password:pw}).then(({error})=>{
+      if(error){renderLogin(/invalid/i.test(error.message)?'Email atau kata laluan salah.':'Tak dapat log masuk: '+error.message);$('#lgEmail').value=em;return}
+      afterAuth();
+    });
+    return;
+  }
+  if(e.target.id==='pwForm'){
+    const a=$('#pw1').value,b2=$('#pw2').value,er=$('#pwErr');
+    const fail=m=>{er.textContent=m;er.hidden=false};
+    if(a.length<8)return fail('Kata laluan mesti sekurang-kurangnya 8 aksara.');
+    if(a!==b2)return fail('Dua kata laluan tidak sama.');
+    $('#pwBtn').disabled=true;
+    sb.auth.updateUser({password:a}).then(({error})=>{
+      if(error){$('#pwBtn').disabled=false;return fail('Tak berjaya: '+error.message)}
+      closeSheet();toast('Kata laluan baru disimpan');
+    });
+    return;
+  }
   if(e.target.id==='loginForm'){
     const em=$('#lgEmail').value.trim().toLowerCase(),pw=$('#lgPass').value;
     const u=Object.values(USERS).find(x=>x.email===em);
@@ -814,7 +925,7 @@ document.addEventListener('change',e=>{
   if(t.id==='kTempoh'){calc();return}
   if(t.id==='fDca'){$('#dcaBox').hidden=!t.checked;return}
   if(t.id==='fRma'){$('#rmaBox').hidden=!t.checked;return}
-  if(t.dataset.act==='toggleuser'){const p=t.dataset.u;db.users[p].aktif=t.checked;save();toast(cap(p)+(t.checked?' diaktifkan':' dimatikan. Dia tak boleh log masuk.'));renderMenu();return}
+  if(t.dataset.act==='toggleuser'){const p=t.dataset.u;db.users[p].aktif=t.checked;api.setActive(p,t.checked);save();toast(cap(p)+(t.checked?' diaktifkan':' dimatikan. Dia tak boleh log masuk.'));renderMenu();return}
   const f=t.dataset.f, box=t.closest('.sub');
   if(!f||!box||!openId)return;
   const c=byId(openId),s=c.subs.find(x=>x.id===box.dataset.sub);if(!s)return;
@@ -828,12 +939,17 @@ document.addEventListener('change',e=>{
   else if(f==='statusDate')addLog(c,s.bank+': tarikh status → '+fmtD(val));
   else if(f==='remark')addLog(c,s.bank+': remark → "'+val+'"');
   else addLog(c,s.bank+': butiran loan dikemas kini');
-  save();refreshSub(c,s);refreshBehind();
+  api.upsertSub(c,s);save();refreshSub(c,s);refreshBehind();
   if(f==='status')toast(s.bank+': '+val);
 });
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('#sheet').hidden)closeSheet()});
 
-render();
+if(LIVE){
+  $('#app').innerHTML='<div class="wrap login"><p class="muted">Memuatkan…</p></div>';
+  sb.auth.getSession().then(({data})=>{if(data&&data.session)afterAuth();else{pref.me=null;savePref();renderLogin()}});
+  sb.auth.onAuthStateChange(ev=>{if(ev==='SIGNED_OUT'&&pref.me){pref.me=null;savePref();db.cases=[];closeSheet();renderLogin('Sesi tamat. Sila log masuk semula.')}});
+  document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'&&me())reloadSoon(0)});
+}else render();
 })();
 </script>
 
