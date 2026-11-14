@@ -73,7 +73,7 @@
     <details id="adm">
       <summary>🔧 UNTUK TEAM: buat link status customer</summary>
       <div class="row2">
-        <div><label for="gName">Nama customer</label><input id="gName" value="Aisyah" maxlength="20" /></div>
+        <div><label for="gName">Nama customer</label><input id="gName" value="Aishah" maxlength="20" /></div>
         <div><label for="gModel">Model</label><select id="gModel"></select></div>
       </div>
       <div class="row2">
@@ -118,7 +118,7 @@
     }
     function draw() {
       const real = parse(decodeURIComponent(location.hash.slice(1)));
-      const s = real || { name: "Aisyah", model: "Bezza", step: 4, eta: "2811" };
+      const s = real || { name: "Aishah", model: "Bezza", step: 4, eta: "2811" };
       const eta = `${+s.eta.slice(0, 2)} ${MON[+s.eta.slice(2) - 1] || ""}`;
       $("trk").innerHTML = `${real ? "" : '<span class="demo">CONTOH · customer akan dapat link peribadi</span>'}
         <p class="hello"></p>

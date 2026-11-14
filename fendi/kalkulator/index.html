@@ -204,7 +204,7 @@
       $("elig").dataset.lv = lv; $("elPill").textContent = "PELUANG " + lv.toUpperCase(); $("elDsr").textContent = Math.round(dsr) + "%";
       $("elNdi").textContent = rm(ndi); $("elBar").style.width = Math.min(100, dsr) + "%"; $("elNote").textContent = nt;
       const msg = (nm) => `Salam ${nm}, saya guna Loan Calculator: Perodua ${v.name}, OTR anggaran ${rm(v.otr, 2)}${rb ? `, rebate ${rm(rb)} (harga ${rm(price, 2)})` : ""}, downpayment ${rm(dp)}, loan ${rm(loan)}, kadar ${r}%.\n• 7 tahun: ${rm(out[7].mo)}/bulan (profit bank ${rm(out[7].p)})\n• 9 tahun: ${rm(out[9].mo)}/bulan (profit bank ${rm(out[9].p)})\nGaji bersih ${rm(inc)}, komitmen ${rm(cm)} · peluang ${lv.toUpperCase()}.\nBoleh semak kelayakan saya?`;
-      if ($("waA")) $("waA").href = `https://wa.me/60182031020?text=${encodeURIComponent(msg("Aisyah"))}`;
+      if ($("waA")) $("waA").href = `https://wa.me/60182031020?text=${encodeURIComponent(msg("Aishah"))}`;
       if ($("waF")) $("waF").href = `https://wa.me/60189038194?text=${encodeURIComponent(msg("Fendi"))}`;
     }
     $("vsel").addEventListener("input", () => pickVariant(true));

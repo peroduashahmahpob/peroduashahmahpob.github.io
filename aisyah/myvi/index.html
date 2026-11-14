@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>Perodua Myvi 2026 | Harga & Bulanan | Aisyah · Team Shah Mahpob</title>
-  <meta name="description" content="Harga Perodua Myvi 2026 (G 1.3, X 1.5, H 1.5, Advance 1.5), anggaran bulanan, warna dan ciri utama. Tanya Aisyah (Team Shah Mahpob), Sales Advisor Perodua, terus di WhatsApp." />
+  <title>Perodua Myvi 2026 | Harga & Bulanan | Aishah · Team Shah Mahpob</title>
+  <meta name="description" content="Harga Perodua Myvi 2026 (G 1.3, X 1.5, H 1.5, Advance 1.5), anggaran bulanan, warna dan ciri utama. Tanya Aishah (Team Shah Mahpob), Sales Advisor Perodua, terus di WhatsApp." />
   <meta property="og:title" content="Perodua Myvi 2026 · Harga dari RM46,230" />
-  <meta property="og:description" content="5 varian · bulanan dari RM500 (9 tahun, 2.8%) · WhatsApp Aisyah Mahpob" />
+  <meta property="og:description" content="5 varian · bulanan dari RM500 (9 tahun, 2.8%) · WhatsApp Aishah Mahpob" />
   <meta property="og:image" content="../../myvi/img/myvi-cranberry-red.jpg" />
   <meta name="theme-color" content="#141110" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -102,7 +102,7 @@
 <body>
   <div class="glow"></div>
   <main class="wrap">
-    <nav class="top"><a href="../">← LAMAN UTAMA</a><span>AISYAH · TEAM SHAH</span></nav>
+    <nav class="top"><a href="../">← LAMAN UTAMA</a><span>AISHAH · TEAM SHAH</span></nav>
 
     <header class="hero">
       <div class="kick">Perodua · Model 2026</div>
@@ -171,14 +171,14 @@
     </section>
 
     <footer>
-      <b>AISYAH</b><br>Pakar Loan Anda · Team Shah Mahpob<br><br>
+      <b>AISHAH</b><br>Pakar Loan Anda · Team Shah Mahpob<br><br>
       *Bulanan anggaran: loan 90%, 9 tahun, kadar rata 2.8%. Kadar sebenar tertakluk pada bank dan kelayakan awak. Insurans dan OTR ialah anggaran, kerana premium insurans berbeza bagi setiap individu.<br>
-      †Dengan Eco-driving, ikut brochure. Cranberry Red untuk X, H &amp; AV sahaja. Gambar kereta hanya dalam warna Cranberry Red dan Ivory White; warna lain sila tanya Aisyah.<br><br>
+      †Dengan Eco-driving, ikut brochure. Cranberry Red untuk X, H &amp; AV sahaja. Gambar kereta hanya dalam warna Cranberry Red dan Ivory White; warna lain sila tanya Aishah.<br><br>
       Laman peribadi Sales Advisor. Bukan laman rasmi Perodua. Harga, rebate &amp; spesifikasi tertakluk pada perubahan.
     </footer>
   </main>
 
-  <div class="sticky"><a class="btn wa" data-wa="Salam Aisyah, saya berminat dengan Perodua Myvi 2026." href="#">💬 WhatsApp Aisyah pasal Myvi</a></div>
+  <div class="sticky"><a class="btn wa" data-wa="Salam Aishah, saya berminat dengan Perodua Myvi 2026." href="#">💬 WhatsApp Aishah pasal Myvi</a></div>
 
   <script>
     const WA = "60182031020";
@@ -213,7 +213,7 @@
     let curColor = "Cranberry Red"; let shown = "Cranberry Red"; const note = document.getElementById("cnote");
     COLORS.forEach(([f, n, c], i) => {
       const b = document.createElement("button"); b.style.background = c; b.setAttribute("aria-label", n); b.setAttribute("aria-pressed", i === 0);
-      b.onclick = () => { if (f) { shown = n; note.style.display = "none"; img.style.opacity = 0; setTimeout(() => { img.src = `../../myvi/img/myvi-${f}.jpg`; img.alt = `Perodua Myvi warna ${n}`; img.style.opacity = 1; }, 150); } else { note.textContent = `Gambar dalam warna ${shown}. Tanya Aisyah untuk gambar ${n}.`; note.style.display = "block"; }
+      b.onclick = () => { if (f) { shown = n; note.style.display = "none"; img.style.opacity = 0; setTimeout(() => { img.src = `../../myvi/img/myvi-${f}.jpg`; img.alt = `Perodua Myvi warna ${n}`; img.style.opacity = 1; }, 150); } else { note.textContent = `Gambar dalam warna ${shown}. Tanya Aishah untuk gambar ${n}.`; note.style.display = "block"; }
         cn.textContent = n; curColor = n; sw.querySelectorAll("button").forEach((x) => x.setAttribute("aria-pressed", x === b)); };
       sw.appendChild(b);
     });
@@ -236,8 +236,8 @@
         <div class="mons"><small>Anggaran bulanan · kadar ${RATE}%</small><div class="mg"><div class="m1"><span>9 tahun</span><b>${rm(v.m9)}</b></div><div><span>7 tahun</span><b>${rm(v.m7)}</b></div><div><span>Full loan</span><b>${rm(v.mfull)}</b></div></div></div>
         <ul class="f">${v.plus ? `<li class="plus">${v.plus}</li>` : ""}${v.feats.map((f) => `<li>${f}</li>`).join("")}</ul>
         <a class="btn wa" target="_blank" rel="noopener">Saya nak ${v.name}</a>`;
-      el.querySelector(".btn").addEventListener("click", (e) => { e.currentTarget.href = wa(`Salam Aisyah, saya berminat dengan Perodua ${v.name} (OTR anggaran ${rm(v.otr, 2)}), warna ${curColor}. Boleh bantu?`); });
-      el.querySelector(".btn").href = wa(`Salam Aisyah, saya berminat dengan Perodua ${v.name} (OTR anggaran ${rm(v.otr, 2)}).`);
+      el.querySelector(".btn").addEventListener("click", (e) => { e.currentTarget.href = wa(`Salam Aishah, saya berminat dengan Perodua ${v.name} (OTR anggaran ${rm(v.otr, 2)}), warna ${curColor}. Boleh bantu?`); });
+      el.querySelector(".btn").href = wa(`Salam Aishah, saya berminat dengan Perodua ${v.name} (OTR anggaran ${rm(v.otr, 2)}).`);
       box.appendChild(el);
     });
 
@@ -248,7 +248,7 @@
       const v = VARIANTS[+$("vsel").value], d = Math.min(90, Math.max(0, +$("dep").value || 0)), r = Math.max(0, +$("rate").value || 0), y = +$("yrs").value;
       const dp = v.otr * d / 100, loan = d === 10 ? v.loan : Math.floor((v.otr - dp) / 100) * 100, m = loan * (1 + r / 100 * y) / (y * 12);
       $("monthly").textContent = rm(m); $("otr").textContent = rm(v.otr, 2); $("dpv").textContent = rm(dp); $("loan").textContent = rm(loan);
-      $("waCalc").href = wa(`Salam Aisyah, saya kira ${v.name}: OTR anggaran ${rm(v.otr, 2)}, deposit ${d}% (${rm(dp)}), ${y} tahun, kadar ${r}% = bulanan lebih kurang ${rm(m)}. Boleh semak untuk saya?`);
+      $("waCalc").href = wa(`Salam Aishah, saya kira ${v.name}: OTR anggaran ${rm(v.otr, 2)}, deposit ${d}% (${rm(dp)}), ${y} tahun, kadar ${r}% = bulanan lebih kurang ${rm(m)}. Boleh semak untuk saya?`);
       $("waCalc").target = "_blank"; $("waCalc").rel = "noopener";
     }
     ["vsel", "dep", "rate", "yrs"].forEach((id) => $(id).addEventListener("input", calc)); calc();

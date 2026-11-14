@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>Aisyah · Team Shah Mahpob | Sales Advisor Perodua</title>
-  <meta name="description" content="Aisyah (Team Shah Mahpob), Pakar Loan Anda. Sales Advisor Perodua. Tanya harga, promo, kiraan bulanan dan loan terus di WhatsApp. Penghantaran satu Malaysia." />
-  <meta property="og:title" content="AISYAH · Team Shah Mahpob" />
+  <title>Aishah · Team Shah Mahpob | Sales Advisor Perodua</title>
+  <meta name="description" content="Aishah (Team Shah Mahpob), Pakar Loan Anda. Sales Advisor Perodua. Tanya harga, promo, kiraan bulanan dan loan terus di WhatsApp. Penghantaran satu Malaysia." />
+  <meta property="og:title" content="AISHAH · Team Shah Mahpob" />
   <meta property="og:description" content="Sales Advisor Perodua · Penghantaran satu Malaysia · Tiada hidden cost" />
   <meta property="og:image" content="img/aisyah.jpg" />
   <meta name="theme-color" content="#141110" />
@@ -86,13 +86,13 @@
   <main class="wrap">
     <header class="hero">
       <div style="margin-bottom:18px"><span class="plogo"><img src="/img/perodua-logo.png" alt="Perodua" width="59" height="40" /></span></div>
-      <img class="photo" src="img/aisyah.jpg" alt="Aisyah, Sales Advisor Perodua" width="132" height="132" />
+      <img class="photo" src="img/aisyah.jpg" alt="Aishah, Sales Advisor Perodua" width="132" height="132" />
       <div class="kick">Sales Advisor Perodua</div>
-      <h1>AISYAH<br><span>TEAM SHAH MAHPOB</span></h1><p style="display:inline-block;margin-top:12px;padding:8px 16px;border-radius:999px;background:var(--o);color:#fff;font-weight:900;font-size:15px;letter-spacing:.14em">PAKAR LOAN ANDA</p>
+      <h1>AISHAH<br><span>TEAM SHAH MAHPOB</span></h1><p style="display:inline-block;margin-top:12px;padding:8px 16px;border-radius:999px;background:var(--o);color:#fff;font-weight:900;font-size:15px;letter-spacing:.14em">PAKAR LOAN ANDA</p>
       <p class="sub" id="branch">Perodua Malaysia · Urusan &amp; penghantaran seluruh Malaysia</p>
       <a data-rebate-cd href="kalkulator/"></a>
       <div class="cta">
-        <a class="btn wa" data-wa="Salam Aisyah, saya nak tanya pasal kereta Perodua." href="#">
+        <a class="btn wa" data-wa="Salam Aishah, saya nak tanya pasal kereta Perodua." href="#">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.4.8 3.2.6a2.8 2.8 0 0 0 1.8-1.3 2.3 2.3 0 0 0 .2-1.3c-.1-.1-.3-.2-.5-.3Z"/></svg>
           WhatsApp Saya Sekarang
         </a>
@@ -159,12 +159,12 @@
     </section>
 
     <footer>
-      <b>AISYAH</b><br>Pakar Loan Anda · Team Shah Mahpob<br><br>
+      <b>AISHAH</b><br>Pakar Loan Anda · Team Shah Mahpob<br><br>
       Laman peribadi Sales Advisor. Bukan laman rasmi Perodua.<br>Harga, rebate &amp; promo tertakluk pada terma semasa.
     </footer>
   </main>
 
-  <div class="sticky"><a class="btn wa" data-wa="Salam Aisyah, saya nak tanya pasal kereta Perodua." href="#">💬 WhatsApp Aisyah</a></div>
+  <div class="sticky"><a class="btn wa" data-wa="Salam Aishah, saya nak tanya pasal kereta Perodua." href="#">💬 WhatsApp Aishah</a></div>
 
   <script src="/rebate.js"></script>
   <script>
@@ -184,7 +184,7 @@
     MODELS.forEach(([n, d]) => {
       const page = PAGES[n];
       const a = document.createElement("a"); a.className = "model";
-      if (page) { a.href = page; } else { a.href = wa(`Salam Aisyah, saya nak tanya harga & promo Perodua ${n}.`); a.target = "_blank"; a.rel = "noopener"; }
+      if (page) { a.href = page; } else { a.href = wa(`Salam Aishah, saya nak tanya harga & promo Perodua ${n}.`); a.target = "_blank"; a.rel = "noopener"; }
       a.innerHTML = `<b>${n}</b><small>${d}</small><span>${page ? "Lihat harga →" : "Tanya harga →"}</span>`; box.appendChild(a);
     });
     const $ = (id) => document.getElementById(id);
@@ -193,7 +193,7 @@
       const p = Math.max(0, +$("price").value || 0), d = Math.min(90, Math.max(0, +$("dep").value || 0)), r = Math.max(0, +$("rate").value || 0), y = +$("yrs").value;
       const dp = p * d / 100, loan = p - dp, m = loan * (1 + r / 100 * y) / (y * 12);
       $("monthly").textContent = rm(m); $("dpv").textContent = rm(dp); $("loan").textContent = rm(loan);
-      $("waCalc").href = wa(`Salam Aisyah, saya kira: harga ${rm(p)}, deposit ${d}% (${rm(dp)}), ${y} tahun, kadar ${r}% = bulanan lebih kurang ${rm(m)}. Boleh semak untuk saya?`);
+      $("waCalc").href = wa(`Salam Aishah, saya kira: harga ${rm(p)}, deposit ${d}% (${rm(dp)}), ${y} tahun, kadar ${r}% = bulanan lebih kurang ${rm(m)}. Boleh semak untuk saya?`);
       $("waCalc").target = "_blank";
     }
     ["price", "dep", "rate", "yrs"].forEach((id) => $(id).addEventListener("input", calc)); calc();

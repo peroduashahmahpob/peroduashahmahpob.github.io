@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>Status Kereta Saya | Aisyah · Team Shah Mahpob</title>
+  <title>Status Kereta Saya | Aishah · Team Shah Mahpob</title>
   <meta name="description" content="Semak status tempahan kereta Perodua awak bersama Team Shah Mahpob." />
   <meta property="og:title" content="Status kereta Perodua awak" />
   <meta property="og:description" content="PERODUA TEAM SHAH MAHPOB · dari tempahan sampai serah kunci" />
@@ -62,7 +62,7 @@
 <body>
   <div class="glow"></div>
   <main class="wrap">
-    <nav class="top"><a href="../">← LAMAN UTAMA</a><span>AISYAH · TEAM SHAH</span></nav>
+    <nav class="top"><a href="../">← LAMAN UTAMA</a><span>AISHAH · TEAM SHAH</span></nav>
     <header>
       <div style="margin-bottom:14px"><span class="plogo"><img src="/img/perodua-logo.png" alt="Perodua" width="59" height="40" /></span></div>
       <div class="kick">Status kereta saya</div>
@@ -73,7 +73,7 @@
     <details id="adm">
       <summary>🔧 UNTUK TEAM: buat link status customer</summary>
       <div class="row2">
-        <div><label for="gName">Nama customer</label><input id="gName" value="Aisyah" maxlength="20" /></div>
+        <div><label for="gName">Nama customer</label><input id="gName" value="Aishah" maxlength="20" /></div>
         <div><label for="gModel">Model</label><select id="gModel"></select></div>
       </div>
       <div class="row2">
@@ -87,13 +87,13 @@
       <p class="note" id="gMsg">Buat link baru dan hantar setiap kali status bertukar. Link lama kekal tunjuk status lama.</p>
     </details>
 
-    <footer><b>AISYAH</b><br>Pakar Loan Anda · Team Shah Mahpob<br><br>Laman peribadi Sales Advisor. Bukan laman rasmi Perodua.</footer>
+    <footer><b>AISHAH</b><br>Pakar Loan Anda · Team Shah Mahpob<br><br>Laman peribadi Sales Advisor. Bukan laman rasmi Perodua.</footer>
   </main>
-  <div class="sticky"><a class="btn wa" data-wa="Salam Aisyah, saya nak tanya status kereta saya." href="#">💬 WhatsApp Aisyah</a></div>
+  <div class="sticky"><a class="btn wa" data-wa="Salam Aishah, saya nak tanya status kereta saya." href="#">💬 WhatsApp Aishah</a></div>
 
   <script>
     const WA = "60182031020";
-    const ADVISOR = "Aisyah";
+    const ADVISOR = "Aishah";
     const $ = (id) => document.getElementById(id);
     const wa = (msg, to = WA) => `https://wa.me/${to}?text=${encodeURIComponent(msg)}`;
     document.querySelectorAll("[data-wa]").forEach((a) => { a.href = wa(a.dataset.wa); a.target = "_blank"; a.rel = "noopener"; });
@@ -118,7 +118,7 @@
     }
     function draw() {
       const real = parse(decodeURIComponent(location.hash.slice(1)));
-      const s = real || { name: "Aisyah", model: "Bezza", step: 4, eta: "2811" };
+      const s = real || { name: "Aishah", model: "Bezza", step: 4, eta: "2811" };
       const eta = `${+s.eta.slice(0, 2)} ${MON[+s.eta.slice(2) - 1] || ""}`;
       $("trk").innerHTML = `${real ? "" : '<span class="demo">CONTOH · customer akan dapat link peribadi</span>'}
         <p class="hello"></p>

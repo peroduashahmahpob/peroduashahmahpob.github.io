@@ -87,7 +87,7 @@
 <body>
   <div class="glow"></div>
   <main class="wrap">
-    <nav class="top"><a href="../">← LAMAN UTAMA</a><span>AISYAH · TEAM SHAH</span></nav>
+    <nav class="top"><a href="../">← LAMAN UTAMA</a><span>AISHAH · TEAM SHAH</span></nav>
     <header>
       <div style="margin-bottom:14px"><span class="plogo"><img src="/img/perodua-logo.png" alt="Perodua" width="59" height="40" /></span></div>
       <div class="kick">Semua model Perodua 2026</div>
@@ -137,9 +137,9 @@
       <div class="acts">
         <div class="pk">Hantar kiraan ni kepada <b>Pakar Loan Anda</b></div>
         <div class="exp">
-          <img src="/aisyah/img/aisyah.jpg" alt="Aisyah" width="64" height="64" />
-          <div><small>Pakar Loan Anda</small><b>AISYAH</b><a href="/aisyah/" target="_blank" rel="noopener">Lihat laman Aisyah ↗</a></div>
-          <a class="btn wa" id="waA" href="#" target="_blank" rel="noopener">Hantar kiraan ke WhatsApp Aisyah</a>
+          <img src="/aisyah/img/aisyah.jpg" alt="Aishah" width="64" height="64" />
+          <div><small>Pakar Loan Anda</small><b>AISHAH</b><a href="/aisyah/" target="_blank" rel="noopener">Lihat laman Aishah ↗</a></div>
+          <a class="btn wa" id="waA" href="#" target="_blank" rel="noopener">Hantar kiraan ke WhatsApp Aishah</a>
         </div>
         <a class="btn ghost" id="pageLink" href="#">Lihat laman model →</a>
       </div>
@@ -148,13 +148,13 @@
 
     <footer><b>TEAM SHAH MAHPOB</b><br>Sales &amp; Loan · Perodua<br><br>Laman peribadi team Sales Advisor. Bukan laman rasmi Perodua.</footer>
   </main>
-  <div class="sticky"><a class="btn wa" data-wa="Salam Aisyah, saya nak tanya pasal loan kereta Perodua." href="#">💬 WhatsApp Aisyah</a></div>
+  <div class="sticky"><a class="btn wa" data-wa="Salam Aishah, saya nak tanya pasal loan kereta Perodua." href="#">💬 WhatsApp Aishah</a></div>
 
   <script src="/kalkulator/data.js"></script>
   <script src="/rebate.js"></script>
   <script>
     const WA = "60182031020";
-    const ADVISOR = "Aisyah";
+    const ADVISOR = "Aishah";
     const $ = (id) => document.getElementById(id);
     const rm = (v, d = 0) => "RM" + Number(v).toLocaleString("en-US", { minimumFractionDigits: d, maximumFractionDigits: d });
     const wa = (msg) => `https://wa.me/${WA}?text=${encodeURIComponent(msg)}`;
@@ -204,7 +204,7 @@
       $("elig").dataset.lv = lv; $("elPill").textContent = "PELUANG " + lv.toUpperCase(); $("elDsr").textContent = Math.round(dsr) + "%";
       $("elNdi").textContent = rm(ndi); $("elBar").style.width = Math.min(100, dsr) + "%"; $("elNote").textContent = nt;
       const msg = (nm) => `Salam ${nm}, saya guna Loan Calculator: Perodua ${v.name}, OTR anggaran ${rm(v.otr, 2)}${rb ? `, rebate ${rm(rb)} (harga ${rm(price, 2)})` : ""}, downpayment ${rm(dp)}, loan ${rm(loan)}, kadar ${r}%.\n• 7 tahun: ${rm(out[7].mo)}/bulan (profit bank ${rm(out[7].p)})\n• 9 tahun: ${rm(out[9].mo)}/bulan (profit bank ${rm(out[9].p)})\nGaji bersih ${rm(inc)}, komitmen ${rm(cm)} · peluang ${lv.toUpperCase()}.\nBoleh semak kelayakan saya?`;
-      if ($("waA")) $("waA").href = `https://wa.me/60182031020?text=${encodeURIComponent(msg("Aisyah"))}`;
+      if ($("waA")) $("waA").href = `https://wa.me/60182031020?text=${encodeURIComponent(msg("Aishah"))}`;
       if ($("waF")) $("waF").href = `https://wa.me/60189038194?text=${encodeURIComponent(msg("Fendi"))}`;
     }
     $("vsel").addEventListener("input", () => pickVariant(true));
