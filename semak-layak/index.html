@@ -7,20 +7,20 @@
   <meta name="description" content="Semak DSR, margin loan dan bulanan kereta Perodua yang sesuai dengan gaji anda. Percuma, 2 minit, tak perlu laporan CTOS/CCRIS." />
   <meta property="og:title" content="Semak Kelayakan Loan Kereta · Team Shah Mahpob" />
   <meta property="og:description" content="Masukkan gaji & hutang · dapat DSR, margin loan & bulanan kereta yang sesuai · simpan keputusan ke galeri" />
-  <meta name="theme-color" content="#141110" />
+  <meta name="theme-color" content="#1565d8" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&display=swap" rel="stylesheet" />
   <style>
-    :root { --bg: #141110; --card: #1e1a18; --c2: #26211e; --ln: #312b28; --o: #ee7a4c; --y: #f5c542; --w: #f4efe9; --g: #a59f99; --gr: #25d366; --ok: #3ccf7a; --bad: #ff6b5e; }
+    :root { --bg: #f2f6fc; --card: #ffffff; --c2: #edf3fb; --ln: #d5e0ef; --o: #1565d8; --y: #b45309; --w: #0f172a; --g: #556070; --gr: #25d366; --gt: #128c4a; --ok: #16a34a; --bad: #dc2626; }
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { background: var(--bg); color: var(--w); font-family: "Montserrat", system-ui, sans-serif; line-height: 1.45; -webkit-font-smoothing: antialiased; padding-bottom: 96px; }
     a { color: inherit; text-decoration: none; }
     .wrap { max-width: 520px; margin: 0 auto; padding: 0 16px; }
-    .glow { position: fixed; inset: 0; pointer-events: none; background: radial-gradient(ellipse 80% 40% at 50% 0%, rgba(238,122,76,.2), transparent 70%); z-index: -1; }
+    .glow { position: fixed; inset: 0; pointer-events: none; background: radial-gradient(ellipse 80% 40% at 50% 0%, rgba(21,101,216,.14), transparent 70%); z-index: -1; }
     .top { display: flex; justify-content: space-between; align-items: center; padding: 16px 0 4px; font-size: 13px; font-weight: 800; letter-spacing: .08em; }
     .top a { color: var(--g); } .top span { color: var(--o); }
     header { padding-top: 18px; }
-    .plogo { display: inline-flex; align-items: center; justify-content: center; padding: 8px 14px; border-radius: 14px; background: #fff; box-shadow: 0 6px 20px rgba(0,0,0,.35); }
+    .plogo { display: inline-flex; align-items: center; justify-content: center; padding: 8px 14px; border-radius: 14px; background: #fff; border: 1px solid var(--ln); box-shadow: 0 6px 20px rgba(15,23,42,.08); }
     .plogo img { display: block; height: 40px; width: auto; }
     .kick { font-size: 12px; font-weight: 800; letter-spacing: .2em; color: var(--g); text-transform: uppercase; }
     h1 { margin-top: 4px; font-size: 34px; font-weight: 900; line-height: 1; letter-spacing: -.02em; }
@@ -48,30 +48,30 @@
     .tot { margin-top: 14px; display: flex; justify-content: space-between; align-items: center; padding: 12px 14px; border-radius: 14px; background: var(--c2); font-weight: 800; }
     .tot span { color: var(--g); font-size: 13px; letter-spacing: .06em; text-transform: uppercase; } .tot b { color: var(--y); font-size: 20px; }
     .btn { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; min-height: 56px; border-radius: 16px; font: 800 16px "Montserrat", sans-serif; border: 0; cursor: pointer; text-align: center; padding: 10px 16px; }
-    .btn.go { background: var(--o); color: #fff; margin-top: 18px; box-shadow: 0 10px 30px rgba(238,122,76,.35); }
+    .btn.go { background: var(--o); color: #fff; margin-top: 18px; box-shadow: 0 10px 30px rgba(21,101,216,.30); }
     .btn.wa { background: var(--gr); color: #06290f; } .btn.ghost { background: var(--card); border: 2px solid var(--ln); color: var(--w); }
-    .btn.save { background: var(--w); color: #141110; }
+    .btn.save { background: var(--w); color: #fff; }
     .formerr { margin-top: 10px; color: var(--bad); font-weight: 700; font-size: 14px; display: none; }
 
     /* ---------- result ---------- */
     #result { display: none; scroll-margin-top: 10px; }
     #result.on { display: block; }
-    .shot { margin-top: 18px; padding: 20px 18px 18px; border-radius: 24px; background: linear-gradient(180deg, #221c19, #171312); border: 2px solid var(--ln); position: relative; overflow: hidden; }
-    .shot::before { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse 90% 40% at 100% 0%, rgba(238,122,76,.22), transparent 70%); pointer-events: none; }
+    .shot { margin-top: 18px; padding: 20px 18px 18px; border-radius: 24px; background: linear-gradient(180deg, #ffffff, #f4f8fe); border: 2px solid var(--ln); box-shadow: 0 10px 30px rgba(15,23,42,.06); position: relative; overflow: hidden; }
+    .shot::before { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse 90% 40% at 100% 0%, rgba(21,101,216,.12), transparent 70%); pointer-events: none; }
     .shot > * { position: relative; }
     .sh-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; }
     .sh-top .k { font-size: 11px; font-weight: 900; letter-spacing: .18em; color: var(--o); }
     .sh-top h2 { font-size: 22px; font-weight: 900; line-height: 1.1; margin-top: 4px; }
     .sh-top .d { font-size: 11px; color: var(--g); font-weight: 700; text-align: right; white-space: nowrap; }
     .pill { display: inline-flex; align-items: center; gap: 8px; margin-top: 14px; padding: 8px 14px; border-radius: 999px; font-size: 13px; font-weight: 900; letter-spacing: .1em; }
-    .pill[data-lv="tinggi"] { background: var(--ok); color: #062914; } .pill[data-lv="sederhana"] { background: var(--y); color: #241a00; } .pill[data-lv="rendah"] { background: var(--bad); color: #2a0602; }
+    .pill[data-lv="tinggi"] { background: var(--ok); color: #fff; } .pill[data-lv="sederhana"] { background: #f59e0b; color: #1f1300; } .pill[data-lv="rendah"] { background: var(--bad); color: #fff; }
     .verdict { margin-top: 10px; font-size: 15px; font-weight: 700; color: var(--w); }
     .gauge { margin-top: 16px; }
     .gauge .lbl { display: flex; justify-content: space-between; font-size: 12px; font-weight: 800; color: var(--g); letter-spacing: .06em; text-transform: uppercase; }
     .gauge .lbl b { font-size: 22px; color: var(--w); letter-spacing: 0; }
     .gbar { position: relative; height: 18px; margin-top: 8px; border-radius: 6px; background: var(--c2); }
     .gbar .now { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 6px 0 0 6px; background: var(--g); }
-    .gbar .car { position: absolute; top: 0; bottom: 0; background: #ee7a4c; border-radius: 0 6px 6px 0; }
+    .gbar .car { position: absolute; top: 0; bottom: 0; background: #1565d8; border-radius: 0 6px 6px 0; }
     .gbar .z { position: absolute; top: -5px; bottom: -5px; border-left: 2px dashed; }
     .gbar .z span { position: absolute; top: -18px; left: -12px; font-size: 10px; font-weight: 900; }
     .glegend { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 10px; font-size: 11px; font-weight: 700; color: var(--g); }
@@ -81,7 +81,7 @@
     .tile small { display: block; font-size: 10px; font-weight: 800; letter-spacing: .1em; color: var(--g); text-transform: uppercase; }
     .tile b { display: block; margin-top: 4px; font-size: 22px; font-weight: 900; letter-spacing: -.01em; }
     .tile em { display: block; font-style: normal; font-size: 11px; color: var(--g); font-weight: 600; margin-top: 2px; }
-    .tile.hl { background: rgba(238,122,76,.12); border: 2px solid rgba(238,122,76,.5); } .tile.hl b { color: var(--o); }
+    .tile.hl { background: rgba(21,101,216,.08); border: 2px solid rgba(21,101,216,.45); } .tile.hl b { color: var(--o); }
     .sec { margin-top: 18px; font-size: 11px; font-weight: 900; letter-spacing: .16em; color: var(--g); text-transform: uppercase; }
     .rec { display: grid; gap: 8px; margin-top: 8px; }
     .rc { display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 4px 10px; padding: 12px 14px; border-radius: 16px; background: var(--c2); border-left: 4px solid var(--ok); }
@@ -95,7 +95,7 @@
     .none { padding: 14px; border-radius: 16px; background: var(--c2); font-size: 14px; font-weight: 700; color: var(--g); }
     .sh-foot { margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--ln); display: flex; justify-content: space-between; align-items: center; gap: 10px; font-size: 11px; color: var(--g); font-weight: 700; }
     .sh-foot b { color: var(--w); font-size: 13px; display: block; }
-    .sh-foot .wa { color: var(--gr); font-size: 13px; font-weight: 900; text-align: right; }
+    .sh-foot .wa { color: var(--gt); font-size: 13px; font-weight: 900; text-align: right; }
     .acts { display: grid; gap: 10px; margin-top: 14px; }
     .tips { margin-top: 10px; display: grid; gap: 8px; list-style: none; }
     .tips li { display: grid; grid-template-columns: 28px minmax(0,1fr); gap: 10px; padding: 12px; border-radius: 14px; background: var(--c2); font-size: 14px; font-weight: 600; color: var(--w); }
@@ -115,10 +115,13 @@
     .vr .st { text-align: right; font-weight: 800; white-space: nowrap; font-size: 12px; }
     .vr .st b { display: block; font-size: 15px; color: var(--w); }
     .st.ok { color: var(--ok); } .st.amb { color: var(--y); } .st.no { color: var(--bad); }
+    .rbx { margin-top: 14px; padding: 12px 14px; border-radius: 14px; background: rgba(22,163,74,.07); border: 2px solid rgba(22,163,74,.3); font-size: 12px; font-weight: 600; color: var(--w); }
+    .rbx b.t { display: block; font-size: 12px; font-weight: 900; letter-spacing: .1em; color: var(--ok); margin-bottom: 4px; }
+    .rbx div { display: flex; justify-content: space-between; gap: 8px; padding: 2px 0; } .rbx div b { white-space: nowrap; }
     .note { margin-top: 14px; font-size: 12px; color: var(--g); }
     footer { margin-top: 36px; padding: 22px 0 10px; border-top: 2px solid var(--ln); text-align: center; color: var(--g); font-size: 12px; }
     footer b { color: var(--w); letter-spacing: .12em; }
-    .sticky { position: fixed; left: 0; right: 0; bottom: 0; padding: 12px 16px calc(12px + env(safe-area-inset-bottom)); background: linear-gradient(180deg, rgba(20,17,16,0), rgba(20,17,16,.96) 30%); z-index: 10; }
+    .sticky { position: fixed; left: 0; right: 0; bottom: 0; padding: 12px 16px calc(12px + env(safe-area-inset-bottom)); background: linear-gradient(180deg, rgba(242,246,252,0), rgba(242,246,252,.96) 30%); z-index: 10; }
     .sticky .btn { max-width: 488px; margin: 0 auto; box-shadow: 0 10px 30px rgba(37,211,102,.35); }
     /* image preview (fallback untuk simpan) */
     .ov { position: fixed; inset: 0; z-index: 50; background: rgba(10,8,7,.97); display: none; flex-direction: column; align-items: center; padding: 18px 16px calc(18px + env(safe-area-inset-bottom)); gap: 12px; overflow-y: auto; }
@@ -208,9 +211,7 @@
         </div>
         <div class="lab">Model yang anda minat</div>
         <div class="chips" data-k="minat" id="minat"><button type="button" data-v="" aria-pressed="true">Belum pasti</button></div>
-        <label for="rebate">Rebate <small>(jika ada, tanya Sales Advisor)</small></label>
-        <div class="rm"><input id="rebate" type="number" inputmode="numeric" min="0" step="100" placeholder="0" /></div>
-        <p class="hint">Harga kereta ikut <b>OTR asal</b>. Rebate yang anda isi akan ditolak dari harga.</p>
+        <div class="rbx" id="rbx"></div>
         <label for="rate">Kadar faedah bank <small>(kadar rata)</small></label>
         <div class="pc"><input id="rate" type="number" inputmode="decimal" min="0" max="10" step="0.05" placeholder="Auto ikut model" /></div>
         <p class="hint">Biarkan kosong untuk guna kadar biasa setiap model (2.3% – 2.8%).</p>
@@ -229,7 +230,7 @@
         <p class="verdict" id="verdict"></p>
 
         <div class="gauge">
-          <div class="lbl"><span>DSR dengan kereta</span><b id="dsrCar">0%</b></div>
+          <div class="lbl"><span id="dsrLbl">DSR dengan kereta</span><b id="dsrCar">0%</b></div>
           <div class="gbar" id="gbar"><div class="now" id="gNow"></div><div class="car" id="gCar"></div>
             <div class="z" style="left:60%;border-color:var(--y)"><span style="color:var(--y)">60%</span></div>
             <div class="z" style="left:70%;border-color:var(--bad)"><span style="color:var(--bad)">70%</span></div></div>
@@ -271,12 +272,12 @@
 
       <div class="card">
         <div class="step"><i>🚗</i>Semua model Perodua</div>
-        <p class="hint" style="margin-top:8px">Bulanan dikira 9 tahun dengan downpayment minimum. Harga OTR asal, tolak rebate yang anda isi (jika ada).</p>
+        <p class="hint" style="margin-top:8px">Bulanan dikira 9 tahun dengan downpayment minimum. Harga OTR asal tolak rebate bulan ini (ikut varian).</p>
         <div id="all"></div>
       </div>
 
       <button class="btn ghost" type="button" id="again" style="margin-top:16px">↺ Ubah maklumat &amp; kira semula</button>
-      <p class="note">Anggaran sahaja, bukan kelulusan bank. Bank akan semak CCRIS, CTOS, slip gaji &amp; penyata bank anda. DSR dikira atas gaji bersih; kad kredit 5% daripada baki. Baki sara hidup (NDI) minimum bank RM1,400. Margin maksimum 90% daripada harga OTR. AKPK, SAA &amp; blacklist tidak boleh memohon loan bank. Bulanan guna kadar rata (flat rate). Harga OTR anggaran; rebate ikut maklumat yang anda isi, tertakluk terma Perodua.</p>
+      <p class="note">Anggaran sahaja, bukan kelulusan bank. Bank akan semak CCRIS, CTOS, slip gaji &amp; penyata bank anda. DSR dikira atas gaji bersih; kad kredit 5% daripada baki. Baki sara hidup (NDI) minimum bank RM1,400. Margin maksimum 90% daripada harga OTR. AKPK, SAA &amp; blacklist tidak boleh memohon loan bank. Bulanan guna kadar rata (flat rate). Harga OTR anggaran; rebate ikut senarai bulan semasa, tertakluk terma Perodua.</p>
     </section>
 
     <footer><b>TEAM SHAH MAHPOB</b><br>Sales &amp; Loan · Perodua<br><br>Laman peribadi team Sales Advisor. Bukan laman rasmi Perodua.</footer>
@@ -290,6 +291,7 @@
   </div>
 
   <script src="/kalkulator/data.js"></script>
+  <script src="/rebate.js"></script>
   <script>
     const WA = "60137258194";
     const ADVISOR = "Shah";
@@ -332,7 +334,7 @@
       const D = (window.HARGA || []).map((m) => {
         const r = customR || m.rate;
         return { model: m.model, id: m.id, page: m.page, r, vars: m.variants.map((v) => {
-          const rb = Math.min(num("rebate"), v.otr * 0.5), price = v.otr - rb;
+          const rb = window.rebateFor ? window.rebateFor(v.name) : 0, price = v.otr - rb;
           const loanM = Math.min(price, margin * v.otr), dpMin = price - loanM, moMin = monthly(loanM, r, n);
           const loanOk = loanFor(ansOk, r, n), dpOk = Math.max(dpMin, price - loanOk), moOk = monthly(price - dpOk, r, n);
           let st = "no";
@@ -349,6 +351,14 @@
       return { G, umur, sewa, kad, kadMo, parts, K, n, margin, ansOk, ansMax, customR, rL, D, loanMax };
     }
 
+    // ringkasan rebate bulan ini (dari /rebate.js)
+    (function () {
+      const R = window.REBATE; if (!R) return;
+      const grp = {}; (window.HARGA || []).forEach((m) => m.variants.forEach((v) => { const r = window.rebateFor(v.name); (grp[m.model] = grp[m.model] || []).push(r); }));
+      const rows = Object.entries(grp).map(([m, a]) => { const lo = Math.min(...a), hi = Math.max(...a);
+        return `<div><span>${m}</span><b>${hi === 0 ? "tiada rebate" : lo === hi ? rm(hi) : `${rm(lo)} – ${rm(hi)}`}</b></div>`; }).join("");
+      $("rbx").innerHTML = `<b class="t">✓ REBATE ${R.bulan} DITOLAK AUTOMATIK</b>${rows}<p style="margin-top:4px;color:var(--g)">Harga ikut OTR asal, rebate ikut varian.</p>`;
+    })();
     let shown = false;
     function run() {
       const c = compute(), { G, K, ansOk, ansMax } = c;
@@ -376,23 +386,26 @@
       if (!picks.length && !S.minat) { picks = all.filter((v) => v.st === "dp" || v.st === "max").sort((a, b) => a.dpOk - b.dpOk).slice(0, 3); pickType = "amb"; }
 
       // tahap
-      let lv = "rendah", vt;
+      let lv = "rendah", vt, susun = false;
+      const dsrNow = G ? K / G * 100 : 0, jom = " Tapi jangan risau, jom kita susun strategi kewangan anda bersama-sama.";
       if (S.rekod === "blok") vt = "Rekod AKPK, SAA atau blacklist: bank tidak boleh meluluskan loan kereta. Selesaikan dulu dan dapatkan surat pelepasan. WhatsApp kami untuk pilihan lain.";
-      else if (ansOk <= 0) vt = "Komitmen sekarang sudah terlalu tinggi berbanding gaji. Kurangkan hutang dulu sebelum ambil kereta.";
+      else if (ansOk <= 0) { susun = true; vt = dsrNow >= 80 ? `Komitmen anda sudah terlalu tinggi, ${dsrNow.toFixed(0)}% daripada gaji.${jom}` : `Komitmen anda sekarang ${dsrNow.toFixed(0)}% daripada gaji, jadi ruang untuk ansuran kereta masih terhad.${jom}`; }
       else if (S.minat && !picks.length) vt = `Bajet ansuran selesa ${rm(ansOk)} sebulan belum cukup untuk ${S.minat}. Lihat model lain di bawah.`;
       else if (pickType === "ok" && picks.length) { lv = "tinggi"; vt = `Gaji anda mampu ansuran sehingga ${rm(ansOk)} sebulan dengan selesa.`; }
       else if (picks.length) { lv = "sederhana"; vt = `Bajet ansuran selesa ${rm(ansOk)} sebulan. Perlu downpayment lebih atau kurangkan hutang.`; }
-      else vt = `Bajet ansuran ${rm(ansOk)} sebulan belum cukup untuk model Perodua sekarang.`;
+      else { susun = true; vt = `Bajet ansuran ${rm(ansOk)} sebulan belum cukup untuk model Perodua sekarang.${jom}`; }
+      if (susun && dsrNow < 80) lv = "sederhana";
       if (S.rekod === "lewat2" && lv !== "rendah") { lv = "rendah"; vt = "Ada tunggakan 2 bulan+. Bank biasanya tolak sehingga tunggakan dijelaskan dan rekod bersih beberapa bulan. Kiraan di bawah ialah anggaran selepas itu."; }
       if (lv === "tinggi" && (S.rekod === "lewat1" || S.lesen !== "ada")) { lv = "sederhana"; vt += S.rekod === "lewat1" ? " Tapi jelaskan tunggakan dulu sebelum apply." : " Tapi perlu selesaikan soal lesen memandu."; }
       $("pill").dataset.lv = lv; $("pill").textContent = { tinggi: "✓ PELUANG TINGGI", sederhana: "⚠ PELUANG SEDERHANA", rendah: "✕ PELUANG RENDAH" }[lv];
+      if (susun && S.rekod !== "blok") $("pill").textContent = dsrNow >= 80 ? "✕ KOMITMEN TERLALU TINGGI" : "⚠ PERLU SUSUN STRATEGI";
       if (S.rekod === "blok") $("pill").textContent = "✕ TAK BOLEH APPLY LOAN BANK";
       $("verdict").textContent = vt;
 
       // gauge
       const carMo = picks[0] ? (pickType === "ok" ? picks[0].moMin : picks[0].moOk) : 0;
       const dN = G ? K / G * 100 : 0, dC = G ? (K + carMo) / G * 100 : 0;
-      $("dsrNow").textContent = dN.toFixed(1) + "%"; $("dsrCar").textContent = dC.toFixed(1) + "%";
+      $("dsrNow").textContent = dN.toFixed(1) + "%"; $("dsrCar").textContent = dC.toFixed(1) + "%"; $("dsrLbl").textContent = carMo ? "DSR dengan kereta" : "DSR sekarang";
       $("gNow").style.width = Math.min(100, dN) + "%";
       $("gCar").style.left = Math.min(100, dN) + "%"; $("gCar").style.width = Math.max(0, Math.min(100, dC) - Math.min(100, dN)) + "%";
 
@@ -402,14 +415,20 @@
       $("tMarginE").textContent = S.rekod === "blok" ? "tak boleh apply bank" : picks[0] ? `downpayment min ${rm(picks[0].dpMin)}` : "daripada harga OTR";
       $("tLoan").textContent = rm(c.loanMax); $("tLoanE").textContent = `${c.n} tahun · kadar ${c.rL}%`;
       const ndi = G - K - carMo;
-      $("tNdi").textContent = rm(ndi); $("tNdiE").textContent = c.sewa ? `${rm(ndi - c.sewa)} lepas sewa` : "selepas ansuran kereta";
+      $("tNdi").textContent = rm(ndi); $("tNdiE").textContent = c.sewa ? `${rm(ndi - c.sewa)} lepas sewa` : carMo ? "selepas ansuran kereta" : "selepas hutang sekarang";
+      $("tAnsE").textContent = "DSR 60%";
+      if (susun && S.rekod !== "blok") {
+        const target = Math.min(...all.map((v) => v.moMin)), room = Math.min(0.6 * G - target, G - 1400 - target), need = Math.ceil(Math.max(0, K - room) / 10) * 10;
+        $("tAnsE").textContent = room > 0 ? `kurangkan hutang ${rm(need)}/bln untuk mula` : "perlu tambah pendapatan / pemohon bersama";
+        $("tLoanE").textContent = "selepas susun hutang";
+      }
       $("tK").textContent = rm(K); $("tKE").textContent = `DSR sekarang ${dN.toFixed(0)}%`;
       if (S.rekod === "blok") { ["tAns", "tMax", "tLoan"].forEach((id) => { $(id).textContent = "—"; }); $("tLoanE").textContent = "tak boleh apply bank"; }
 
       // cadangan kereta (dalam gambar)
       $("rec").innerHTML = picks.length ? picks.map((v) => {
         const mo = pickType === "ok" ? v.moMin : v.moOk, dp = pickType === "ok" ? v.dpMin : v.dpOk;
-        return `<div class="rc ${pickType === "ok" ? "" : "amb"}"><div class="n">${v.name}<small>Harga ${rm(v.price)}${v.rb ? ` (lepas rebate ${rm(v.rb)})` : ""}</small></div>
+        return `<div class="rc ${pickType === "ok" ? "" : "amb"}"><div class="n">${v.name}<small>${v.rb ? `OTR ${rm(v.otr)} − rebate ${rm(v.rb)} = ${rm(v.price)}` : `OTR ${rm(v.otr)} · tiada rebate`}</small></div>
           <div class="m">${rm(mo)}<small>/bulan · ${c.n} thn</small></div>
           <div class="dp">${dp < 100 ? "Downpayment: <b>hampir RM0 (full loan)</b>" : `Downpayment dicadang: <b>${rm(dp)}</b>`}${v.st === "max" ? `<br>atau downpayment ${rm(v.dpMin)} → ${rm(v.moMin)}/bln (DSR ${((K + v.moMin) / G * 100).toFixed(0)}%, lebih ketat)` : ""}</div></div>`;
       }).join("") : `<div class="none">Tiada ${S.minat || "model"} yang sesuai buat masa ini. Ikut cadangan di bawah, atau WhatsApp ${ADVISOR} untuk pilihan lain (penjamin / pemohon bersama).</div>`;
@@ -419,7 +438,7 @@
       $("all").innerHTML = c.D.map((m) => `<div class="mt"><h4>${m.model} <small style="color:var(--g);font-weight:700">· ${m.r}%</small></h4>` + m.vars.map((v) => {
         const [cl, t] = lab[v.st];
         const sub = v.st === "dp" ? `Downpayment ${rm(v.dpOk)} → ${rm(v.moOk)}/bln` : `Downpayment ${rm(v.dpMin)} → ${rm(v.moMin)}/bln`;
-        return `<div class="vr"><span class="nm">${v.name}<small>Harga ${rm(v.price)} · ${sub}</small></span><span class="st ${cl}"><b>${rm(v.st === "dp" ? v.moOk : v.moMin)}</b>${t}</span></div>`;
+        return `<div class="vr"><span class="nm">${v.name}<small>OTR ${rm(v.otr)}${v.rb ? ` − rebate ${rm(v.rb)}` : ""} · ${sub}</small></span><span class="st ${cl}"><b>${rm(v.st === "dp" ? v.moOk : v.moMin)}</b>${t}</span></div>`;
       }).join("") + `</div>`).join("");
 
       // tips
@@ -430,6 +449,19 @@
       if (c.kadMo > 0) T.push(["💳", `Baki kad kredit ${rm(c.kad)} dikira <b>${rm(c.kadMo)}/bulan</b>. Setiap RM1,000 dibayar turun, bajet ansuran naik RM50. Tutup kad yang tak guna.`]);
       if (c.parts.lain > 0) T.push(["🧾", "Bank kira <b>Atome, SPayLater &amp; ansuran telefon</b> sebagai hutang. Langsaikan yang kecil sebelum apply."]);
       if (picks.length && pickType === "amb") T.push(["💰", `Untuk ${picks[0].name}, sediakan <b>downpayment ${rm(picks[0].dpOk)}</b> supaya bulanan jadi ${rm(picks[0].moOk)}.`]);
+      // DSR 75%+ (kereta dengan downpayment minimum): pilihan penjamin atau tambah downpayment ~10% harga
+      if (S.rekod !== "blok" && G) {
+        const pool = S.minat ? all.filter((v) => v.model === S.minat) : all;
+        const ref = picks[0] || pool.slice().sort((a, b) => a.moMin - b.moMin)[0];
+        if (ref) {
+          const dFull = (K + ref.moMin) / G * 100;
+          if (dFull >= 75) {
+            const dp10 = Math.round(ref.price * 0.1 / 100) * 100, newMo = monthly(Math.max(0, ref.price - ref.dpMin - dp10), ref.r, c.n), newD = (K + newMo) / G * 100;
+            T.push(["🤝", `<b>Pilihan 1: Sediakan seorang penjamin.</b> Dengan ${ref.name}, DSR anda ${dFull.toFixed(0)}% (75% ke atas). Penjamin yang ada gaji tetap &amp; rekod bayaran bersih (contohnya ibu bapa, pasangan atau adik-beradik) boleh bantu bank luluskan permohonan.`]);
+            T.push(["💵", `<b>Pilihan 2: Tambah downpayment ${rm(dp10)}</b> (lebih kurang 10% harga ${ref.name}). Bulanan turun dari ${rm(ref.moMin)} ke <b>${rm(newMo)}</b>, DSR jadi ${newD.toFixed(0)}%.`]);
+          }
+        }
+      }
       if (S.lesen !== "ada") T.push(["🪪", S.lesen === "L" ? "Habiskan lesen dulu. Kebanyakan bank minta <b>lesen P / CDL sah</b> semasa permohonan." : "Kebanyakan bank minta <b>lesen memandu sah</b>. Ada pilihan lain (pemohon bersama / ahli keluarga). Tanya kami."]);
       if (c.sewa && ndi - c.sewa < 800) T.push(["🏠", `Lepas sewa ${rm(c.sewa)} dan ansuran, baki anda tinggal <b>${rm(ndi - c.sewa)}</b>. Pilih model lebih rendah supaya selesa.`]);
       if (["sendiri", "gig"].includes(S.job)) T.push(["📊", "Pendapatan tak tetap: pastikan <b>duit masuk akaun bank setiap bulan</b> dan isi Borang B / BE LHDN. Bank kira purata 6 bulan."]);
@@ -455,7 +487,7 @@
 • Umur ${c.umur || "-"} · ${job} · lesen: ${S.lesen === "ada" ? "ada" : S.lesen === "L" ? "sedang ambil" : "tiada"} · ${S.rumah === "sewa" ? `rumah sewa ${rm(c.sewa)}` : S.rumah === "sendiri" ? "rumah sendiri" : "tinggal dengan keluarga"}
 • Gaji bersih ${rm(G)} · komitmen ${rm(K)} (DSR sekarang ${dN.toFixed(0)}%)
 • Minat: ${S.minat || "belum pasti"}
-• Rekod bayaran: ${{ baik: "semua ikut masa", lewat1: "pernah lewat 1 bulan", lewat2: "lewat 2 bulan+", blok: "AKPK / SAA / blacklist" }[S.rekod]}${num("rebate") ? `\n• Rebate diisi: ${rm(num("rebate"))}` : ""}
+• Rekod bayaran: ${{ baik: "semua ikut masa", lewat1: "pernah lewat 1 bulan", lewat2: "lewat 2 bulan+", blok: "AKPK / SAA / blacklist" }[S.rekod]}
 • Bulanan sesuai ${rm(ansOk)} (maks ${rm(ansMax)}) · peluang ${lv.toUpperCase()}
 ${picks.length ? "• Cadangan: " + picks.map((v) => `${v.name} ${rm(pickType === "ok" ? v.moMin : v.moOk)}/bln`).join(", ") : ""}
 Boleh bantu saya apply?`;
@@ -480,7 +512,7 @@ Boleh bantu saya apply?`;
       const b = $("saveBtn"), old = b.textContent; b.textContent = "Sedang sediakan gambar…"; b.disabled = true;
       try {
         await loadH2C(); if (document.fonts) await document.fonts.ready;
-        const cv = await html2canvas($("shot"), { scale: 3, backgroundColor: "#141110", useCORS: true, logging: false });
+        const cv = await html2canvas($("shot"), { scale: 3, backgroundColor: "#ffffff", useCORS: true, logging: false });
         const blob = await new Promise((r) => cv.toBlob(r, "image/png"));
         const fname = `keputusan-loan-${($("nama").value.trim().split(" ")[0] || "saya").toLowerCase()}.png`;
         const file = new File([blob], fname, { type: "image/png" });
