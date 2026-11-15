@@ -118,6 +118,15 @@
     .rbx { margin-top: 14px; padding: 12px 14px; border-radius: 14px; background: rgba(22,163,74,.07); border: 2px solid rgba(22,163,74,.3); font-size: 12px; font-weight: 600; color: var(--w); }
     .rbx b.t { display: block; font-size: 12px; font-weight: 900; letter-spacing: .1em; color: var(--ok); margin-bottom: 4px; }
     .rbx div { display: flex; justify-content: space-between; gap: 8px; padding: 2px 0; } .rbx div b { white-space: nowrap; }
+    .pk { margin-top: 6px; font-size: 12px; font-weight: 800; letter-spacing: .1em; color: var(--g); text-transform: uppercase; }
+    .exp { display: grid; grid-template-columns: 56px minmax(0,1fr); gap: 12px; align-items: center; padding: 12px; border-radius: 18px; background: var(--card); border: 2px solid var(--ln); }
+    .exp img { width: 56px; height: 56px; border-radius: 14px; object-fit: cover; }
+    .exp small { display: block; font-size: 11px; font-weight: 900; letter-spacing: .12em; color: var(--o); text-transform: uppercase; }
+    .exp b { display: block; font-size: 18px; font-weight: 900; } .exp span { font-size: 13px; font-weight: 700; color: var(--g); }
+    .exp .btn { grid-column: 1 / -1; min-height: 48px; font-size: 15px; }
+    .links { display: grid; gap: 10px; margin-top: 12px; }
+    .lk { display: grid; grid-template-columns: 40px minmax(0,1fr) auto; gap: 12px; align-items: center; padding: 14px; border-radius: 16px; background: var(--c2); border: 2px solid var(--ln); }
+    .lk .i { font-size: 26px; text-align: center; } .lk b { display: block; font-size: 15px; font-weight: 900; } .lk span { font-size: 13px; font-weight: 600; color: var(--g); } .lk em { font-style: normal; font-weight: 900; color: var(--o); font-size: 18px; }
     .note { margin-top: 14px; font-size: 12px; color: var(--g); }
     footer { margin-top: 36px; padding: 22px 0 10px; border-top: 2px solid var(--ln); text-align: center; color: var(--g); font-size: 12px; }
     footer b { color: var(--w); letter-spacing: .12em; }
@@ -251,13 +260,14 @@
 
         <div class="sh-foot">
           <div><b>TEAM SHAH MAHPOB</b>Sales &amp; Loan · Perodua</div>
-          <div class="wa">WhatsApp<br><span id="waNum">013-725 8194</span></div>
+          <div class="wa" id="waNums">WhatsApp<br>013-725 8194</div>
         </div>
       </div>
 
       <div class="acts">
         <button class="btn save" type="button" id="saveBtn">📥 Simpan gambar keputusan ke galeri</button>
         <a class="btn wa" id="waRes" href="#" target="_blank" rel="noopener">💬 Hantar keputusan ke WhatsApp Aishah</a>
+        <div id="pakar" style="display:grid;gap:10px"></div>
       </div>
 
       <div class="card">
@@ -271,6 +281,14 @@
       </div>
 
       <div class="card">
+        <div class="step"><i>🔗</i>Rujukan berguna</div>
+        <div class="links">
+          <a class="lk" href="https://eccris.bnm.gov.my/eccris/pages/sec/login.xhtml" target="_blank" rel="noopener"><span class="i">🏦</span><span><b>Laporan CCRIS percuma (eCCRIS)</b><span>Untuk dapatkan laporan CCRIS dari pihak Bank Negara Malaysia (BNM).</span></span><em>↗</em></a>
+          <a class="lk" href="/ebook/" target="_blank" rel="noopener"><span class="i">📘</span><span><b>Ebook: Rahsia Loan Approved</b><span>Baca ebook untuk faham gaya bahasa bank.</span></span><em>↗</em></a>
+        </div>
+      </div>
+
+      <div class="card">
         <div class="step"><i>🚗</i>Semua model Perodua</div>
         <p class="hint" style="margin-top:8px">Bulanan dikira 9 tahun dengan downpayment minimum. Harga OTR asal tolak rebate bulan ini (ikut varian).</p>
         <div id="all"></div>
@@ -280,7 +298,7 @@
       <p class="note">Anggaran sahaja, bukan kelulusan bank. Bank akan semak CCRIS, CTOS, slip gaji &amp; penyata bank anda. DSR dikira atas gaji bersih; kad kredit 5% daripada baki. Baki sara hidup (NDI) minimum bank RM1,400. Margin maksimum 90% daripada harga OTR. AKPK, SAA &amp; blacklist tidak boleh memohon loan bank. Bulanan guna kadar rata (flat rate). Harga OTR anggaran; rebate ikut senarai bulan semasa, tertakluk terma Perodua.</p>
     </section>
 
-    <footer><b>TEAM SHAH MAHPOB</b><br>Sales &amp; Loan · Perodua<br><br>Laman peribadi team Sales Advisor. Bukan laman rasmi Perodua.</footer>
+    <footer><b>TEAM SHAH MAHPOB</b><br>Sales &amp; Loan · Perodua<br><br>LAMAN CHECK KEWANGAN TSM PERODUA<br>Bukan laman rasmi Perodua.</footer>
   </main>
   <div class="sticky"><a class="btn wa" data-wa="Salam Aishah, saya nak tanya pasal kelayakan loan kereta Perodua." href="#">💬 WhatsApp Aishah</a></div>
 
@@ -299,7 +317,10 @@
     const rm = (v) => "RM" + Math.round(Number(v) || 0).toLocaleString("en-US");
     const wa = (msg) => `https://wa.me/${WA}?text=${encodeURIComponent(msg)}`;
     document.querySelectorAll("[data-wa]").forEach((a) => { a.href = wa(a.dataset.wa); a.target = "_blank"; a.rel = "noopener"; });
-    $("waNum").textContent = "0" + WA.slice(2, 4) + "-" + WA.slice(4, 7) + " " + WA.slice(7);
+    const ph = (n) => "0" + n.slice(2, 4) + "-" + n.slice(4, 7) + " " + n.slice(7);
+    const PAKAR = ADVISOR === "Shah" ? [{ n: "Aishah", wa: "60182031020", img: "/aisyah/img/aisyah.jpg" }, { n: "Fendi", wa: "60189038194", img: "/fendi/img/fendi.jpg" }] : [];
+    $("waNums").innerHTML = PAKAR.length ? [{ n: ADVISOR, wa: WA }].concat(PAKAR).map((p) => `${p.n} ${ph(p.wa)}`).join("<br>") : `WhatsApp<br>${ph(WA)}`;
+    if (PAKAR.length) $("pakar").innerHTML = `<div class="pk">Atau hantar kepada Pakar Loan kami</div>` + PAKAR.map((p, i) => `<div class="exp"><img src="${p.img}" alt="${p.n}" width="56" height="56" /><div><small>Pakar Loan Anda</small><b>${p.n.toUpperCase()}</b><span>${ph(p.wa)}</span></div><a class="btn wa" id="waP${i}" href="https://wa.me/${p.wa}" target="_blank" rel="noopener">💬 Hantar keputusan ke WhatsApp ${p.n}</a></div>`).join("");
     $("waRes").textContent = `💬 Hantar keputusan ke WhatsApp ${ADVISOR}`;
 
     // ---------- pilihan (chips) ----------
@@ -483,7 +504,7 @@
 
       // WhatsApp
       const job = { kerajaan: "Kerajaan", swasta: "Swasta (tetap)", kontrak: "Kontrak", sendiri: "Bekerja sendiri", gig: "P-hailing / gig" }[S.job];
-      const msg = `Salam ${ADVISOR}, saya dah buat Semak Kelayakan Loan${nama ? ` (nama: ${nama})` : ""}:
+      const msgFor = (nm) => `Salam ${nm}, saya dah buat Semak Kelayakan Loan${nama ? ` (nama: ${nama})` : ""}:
 • Umur ${c.umur || "-"} · ${job} · lesen: ${S.lesen === "ada" ? "ada" : S.lesen === "L" ? "sedang ambil" : "tiada"} · ${S.rumah === "sewa" ? `rumah sewa ${rm(c.sewa)}` : S.rumah === "sendiri" ? "rumah sendiri" : "tinggal dengan keluarga"}
 • Gaji bersih ${rm(G)} · komitmen ${rm(K)} (DSR sekarang ${dN.toFixed(0)}%)
 • Minat: ${S.minat || "belum pasti"}
@@ -491,7 +512,8 @@
 • Bulanan sesuai ${rm(ansOk)} (maks ${rm(ansMax)}) · peluang ${lv.toUpperCase()}
 ${picks.length ? "• Cadangan: " + picks.map((v) => `${v.name} ${rm(pickType === "ok" ? v.moMin : v.moOk)}/bln`).join(", ") : ""}
 Boleh bantu saya apply?`;
-      $("waRes").href = wa(msg);
+      $("waRes").href = wa(msgFor(ADVISOR));
+      PAKAR.forEach((p, i) => { $("waP" + i).href = `https://wa.me/${p.wa}?text=${encodeURIComponent(msgFor(p.n))}`; });
     }
 
     document.querySelectorAll("input").forEach((i) => i.addEventListener("input", () => { i.classList.remove("err"); run(); }));
