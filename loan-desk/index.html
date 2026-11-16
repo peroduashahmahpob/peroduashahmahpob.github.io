@@ -439,6 +439,7 @@ const me=()=>pref.me;
 const byId=id=>db.cases.find(c=>c.id===id);
 
 /* ---------- derived ---------- */
+function firstSubmit(c){return c.subs.map(s=>s.submit).filter(Boolean).sort()[0]||''}
 function subDays(s){if(!s.submit)return null;const end=PENDING.has(s.status)?todayISO():(s.statusDate||todayISO());return Math.max(0,diff(s.submit,end))}
 const isLate=s=>PENDING.has(s.status)&&subDays(s)>CHASE_DAYS;
 function overall(c){
@@ -631,7 +632,7 @@ function renderChase(m){
 /* ---------- DASHBOARD ---------- */
 function renderDash(m){
   const t=todayISO(),mon=t.slice(0,7);
-  const inP=c=>pref.period==='semua'||(c.booking||'').slice(0,7)===mon;
+  const inP=c=>pref.period==='semua'||(firstSubmit(c)||c.booking||'').slice(0,7)===mon;
   const cs=db.cases.filter(inP);
   const stat=list=>{
     const lulus=list.filter(c=>c.subs.some(s=>s.status==='Lulus')).length;
@@ -647,7 +648,7 @@ function renderDash(m){
   const monName=new Date().toLocaleDateString('ms-MY',{month:'long',year:'numeric'});
   m.innerHTML=`<div class="row" style="justify-content:space-between;margin-top:4px"><h2>Prestasi team</h2>
     <div class="vt" role="group" aria-label="Tempoh"><button data-act="period" data-p="bulan" aria-pressed="${pref.period==='bulan'}">Bulan ini</button><button data-act="period" data-p="semua" aria-pressed="${pref.period==='semua'}">Semua</button></div></div>
-  <p class="muted" style="margin:0 0 12px">${pref.period==='bulan'?'Kes dengan tarikh booking dalam '+monName:'Semua kes dalam rekod'} · data contoh</p>
+  <p class="muted" style="margin:0 0 12px">${pref.period==='bulan'?'Kes dengan tarikh submit loan dalam '+monName:'Semua kes dalam rekod'}${LIVE?'':' · data contoh'}</p>
   <div class="duo">${PAKAR.map(p=>{const s=stat(cs.filter(c=>c.pakar===p));return `<div class="pc ${p}">
     <div class="hd"><span class="av ${p}">${USERS[p].init}</span>${cap(p)}</div>
     <div class="big num">${s.rate===null?'–':s.rate+'%'} <small>kadar lulus</small></div>
@@ -725,7 +726,7 @@ function renderDetail(id){
       <div><dt>Model</dt><dd>${esc(c.model)||'–'}</dd></div>
       <div><dt>Harga OTR</dt><dd class="num">${rm(c.harga)}</dd></div>
       <div><dt>Deposit</dt><dd class="num">${rm(c.deposit)}</dd></div>
-      <div><dt>Tarikh booking</dt><dd class="num">${fmtD(c.booking)}</dd></div>
+      <div><dt>Tarikh submit loan</dt><dd class="num">${firstSubmit(c)?fmtD(firstSubmit(c)):'Belum submit'}</dd></div>
       <div><dt>Chassis number</dt><dd class="mono">${esc(c.chassis)||'–'}</dd></div>
       <div class="full"><dt>DCA · hantar luar Selangor</dt><dd>${c.dca.on?`Ya → ${esc(c.dca.lokasi)||'lokasi belum diisi'}${c.dca.tarikh?' · '+fmtD(c.dca.tarikh):''}`:'Tidak'}</dd></div>
       <div class="full"><dt>RMA · collect cawangan lain</dt><dd>${c.rma.on?`Ya → ${esc(c.rma.cawangan)||'cawangan belum diisi'}${c.rma.tarikh?' · '+fmtD(c.rma.tarikh):''}`:'Tidak'}</dd></div>
@@ -778,7 +779,6 @@ function renderForm(id){
       <label class="f" for="fModel">Model<input class="in" id="fModel" list="models" value="${v('model')}" placeholder="Bezza 1.3 AV"></label>
       <label class="f" for="fHarga">Harga OTR (RM)<input class="in num" id="fHarga" type="number" inputmode="decimal" value="${v('harga')}"></label>
       <label class="f" for="fDep">Deposit (RM)<input class="in num" id="fDep" type="number" inputmode="decimal" value="${v('deposit')}"></label>
-      <label class="f" for="fBook">Tarikh booking<input class="in" id="fBook" type="date" value="${c?c.booking||'':todayISO()}"></label>
       <label class="f" for="fChassis">Chassis number<input class="in mono" id="fChassis" value="${v('chassis')}" autocapitalize="characters" autocomplete="off" style="font-size:16px"></label>
     </div>
     <datalist id="models">${MODELS.map(x=>`<option value="${x}">`).join('')}</datalist>
@@ -806,7 +806,7 @@ function submitForm(){
   if(!pk)return err('Pilih pakar loan: Fendi atau Aishah.');
   if(!nama){$('#fNama').classList.add('bad');return err('Isi nama pelanggan.')}
   const data={pakar:pk,nama,tel:$('#fTel').value.trim(),model:$('#fModel').value.trim(),harga:$('#fHarga').value,deposit:$('#fDep').value,
-    booking:$('#fBook').value,chassis:$('#fChassis').value.trim().toUpperCase(),
+    chassis:$('#fChassis').value.trim().toUpperCase(),
     dca:{on:$('#fDca').checked,lokasi:$('#fDcaLok').value.trim(),tarikh:$('#fDcaT').value},
     rma:{on:$('#fRma').checked,cawangan:$('#fRmaCaw').value.trim(),tarikh:$('#fRmaT').value}};
   if(id){
@@ -821,7 +821,7 @@ function submitForm(){
     subs.push({id:uid(),bank,submit:g('submit').value,status:g('status').value,statusDate:g('submit').value,remark:g('remark').value.trim(),amaun:'',tempoh:'',kadar:''});
   });
   if(bad)return err('Tarikh submit wajib diisi untuk '+bad+'.');
-  const c={id:uid(),...data,subs,log:[],_new:true};
+  const c={id:uid(),...data,booking:subs.map(s=>s.submit).sort()[0]||todayISO(),subs,log:[],_new:true};
   addLog(c,'Kes dicipta'+(subs.length?' · submit ke '+subs.map(s=>s.bank).join(', '):''));
   db.cases.unshift(c);save();api.createCase(c);toast('Kes baru disimpan');
   if(pref.tab!=='semua'&&pref.tab!==pk){pref.tab='semua';savePref()}
