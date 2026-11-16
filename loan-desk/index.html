@@ -132,6 +132,7 @@ h3{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.09em;
 .st-wait{background:var(--wait-soft);color:var(--wait)}
 .st-info{background:var(--info-soft);color:var(--info)}
 .st-kiv{background:var(--kiv-soft);color:var(--kiv)}
+.st-book{background:#ebe7ff;color:#5b3fd6}
 .st-none{background:var(--surface-2);color:var(--muted)}
 .late{color:var(--bad);font-weight:700}
 .empty{border:1px dashed var(--line);border-radius:14px;padding:28px 16px;text-align:center;color:var(--muted)}
@@ -443,6 +444,7 @@ function firstSubmit(c){return c.subs.map(s=>s.submit).filter(Boolean).sort()[0]
 function subDays(s){if(!s.submit)return null;const end=PENDING.has(s.status)?todayISO():(s.statusDate||todayISO());return Math.max(0,diff(s.submit,end))}
 const isLate=s=>PENDING.has(s.status)&&subDays(s)>CHASE_DAYS;
 function overall(c){
+  if((c.vso||'').trim())return ['Booked','book'];
   if(!c.subs.length)return ['Belum submit','none'];
   if(c.subs.some(s=>s.status==='Lulus'))return ['Lulus','ok'];
   if(c.subs.some(s=>PENDING.has(s.status)))return ['Dalam proses','wait'];
@@ -455,6 +457,7 @@ function matches(c){
   const f=pref.filter, o=overall(c)[0];
   if(f==='pending'&&o!=='Dalam proses')return false;
   if(f==='lulus'&&o!=='Lulus')return false;
+  if(f==='booked'&&o!=='Booked')return false;
   if(f==='tolak'&&o!=='Semua tolak')return false;
   if(f==='dca'&&!c.dca.on)return false;
   if(f==='rma'&&!c.rma.on)return false;
@@ -541,7 +544,7 @@ function refreshBehind(){ // re-render list/badges behind the open sheet without
 }
 
 /* ---------- KES ---------- */
-const FILTERS=[['semua','Semua'],['pending','Dalam proses'],['lulus','Lulus'],['tolak','Semua tolak'],['chase','Perlu chase'],['dca','DCA'],['rma','RMA']];
+const FILTERS=[['semua','Semua'],['pending','Dalam proses'],['lulus','Lulus'],['booked','Booked'],['tolak','Semua tolak'],['chase','Perlu chase'],['dca','DCA'],['rma','RMA']];
 function renderKes(m){
   m.innerHTML=`${LIVE?'':'<p class="note">Prototaip guna <b>data contoh</b> yang disimpan dalam telefon ini sahaja. Update live antara Shah, Fendi dan Aishah aktif selepas sambung database.</p>'}
   <div class="toolbar" style="margin-top:12px">
@@ -642,7 +645,7 @@ function renderDash(m){
     const subs=list.reduce((n,c)=>n+c.subs.length,0);
     const late=list.reduce((n,c)=>n+c.subs.filter(isLate).length,0);
     const rate=(lulus+tolak)?Math.round(lulus/(lulus+tolak)*100):null;
-    return {kes:list.length,lulus,tolak,pend,subs,late,rate,dca:list.filter(c=>c.dca.on).length,rma:list.filter(c=>c.rma.on).length};
+    return {kes:list.length,lulus,tolak,pend,subs,late,rate,booked:list.filter(c=>(c.vso||'').trim()).length,dca:list.filter(c=>c.dca.on).length,rma:list.filter(c=>c.rma.on).length};
   };
   const bank={};cs.forEach(c=>c.subs.forEach(s=>{const b=bank[s.bank]||(bank[s.bank]={n:0,ok:0,bad:0,p:0});b.n++;if(s.status==='Lulus')b.ok++;else if(s.status==='Tolak')b.bad++;else b.p++}));
   const banks=Object.entries(bank).sort((a,b)=>b[1].n-a[1].n);
@@ -655,7 +658,7 @@ function renderDash(m){
     <div class="big num">${s.rate===null?'–':s.rate+'%'} <small>kadar lulus</small></div>
     <div class="meter"><i style="width:${s.rate||0}%"></i></div>
     <div class="mini num"><div><span>Kes</span><b>${s.kes}</b></div><div><span>Submission</span><b>${s.subs}</b></div>
-      <div><span>Lulus</span><b style="color:var(--ok)">${s.lulus}</b></div><div><span>Semua tolak</span><b style="color:var(--bad)">${s.tolak}</b></div>
+      <div><span>Lulus</span><b style="color:var(--ok)">${s.lulus}</b></div><div><span>Booked</span><b style="color:#5b3fd6">${s.booked}</b></div><div><span>Semua tolak</span><b style="color:var(--bad)">${s.tolak}</b></div>
       <div><span>Dalam proses</span><b>${s.pend}</b></div><div><span>Perlu chase</span><b class="${s.late?'late':''}">${s.late}</b></div>
       <div><span>DCA</span><b>${s.dca}</b></div><div><span>RMA</span><b>${s.rma}</b></div></div></div>`}).join('')}</div>
   <h3>Prestasi bank</h3>
@@ -782,7 +785,7 @@ function renderForm(id){
       <label class="f" for="fHarga">Harga OTR (RM)<input class="in num" id="fHarga" type="number" inputmode="decimal" value="${v('harga')}"></label>
       <label class="f" for="fDep">Deposit (RM)<input class="in num" id="fDep" type="number" inputmode="decimal" value="${v('deposit')}"></label>
       <label class="f" for="fChassis">Chassis number<input class="in mono" id="fChassis" value="${v('chassis')}" autocapitalize="characters" autocomplete="off" style="font-size:16px"></label>
-      <label class="f" for="fVso">VSO number<input class="in mono" id="fVso" value="${v('vso')}" autocapitalize="characters" autocomplete="off" style="font-size:16px"></label>
+      <label class="f" for="fVso">VSO number <small class="muted" style="font-weight:500">(isi = kes Booked)</small><input class="in mono" id="fVso" value="${v('vso')}" autocapitalize="characters" autocomplete="off" style="font-size:16px"></label>
     </div>
     <datalist id="models">${MODELS.map(x=>`<option value="${x}">`).join('')}</datalist>
     <label class="tog" for="fDca"><input type="checkbox" id="fDca" ${c&&c.dca.on?'checked':''}><span>DCA<small>Kereta kena hantar ke luar Selangor</small></span></label>
@@ -813,7 +816,7 @@ function submitForm(){
     dca:{on:$('#fDca').checked,lokasi:$('#fDcaLok').value.trim(),tarikh:$('#fDcaT').value},
     rma:{on:$('#fRma').checked,cawangan:$('#fRmaCaw').value.trim(),tarikh:$('#fRmaT').value}};
   if(id){
-    const c=byId(id);const moved=c.pakar!==pk;Object.assign(c,data);api.updateCase(c);
+    const c=byId(id);const moved=c.pakar!==pk;const nb=!(c.vso||'').trim()&&data.vso;Object.assign(c,data);api.updateCase(c);if(nb)addLog(c,'Kes Booked · VSO '+data.vso);
     addLog(c,moved?'Kes dipindah ke '+cap(pk)+' dan maklumat dikemas kini':'Maklumat kes dikemas kini');
     save();toast('Kes disimpan');refreshBehind();renderDetail(id);return;
   }
