@@ -354,7 +354,7 @@ function demo(){
     subs.forEach(s=>{log.push({t:s.submit+' 11:30',who:o.pakar,msg:'Submit ke '+s.bank});
       if(s.status!=='Dihantar')log.push({t:s.statusDate+' 16:20',who:o.pakar,msg:s.bank+': status → '+s.status});});
     log.sort((a,b)=>b.t.localeCompare(a.t));
-    return {id:uid(),tel:'',chassis:'',dca:{on:false,lokasi:'',tarikh:''},rma:{on:false,cawangan:'',tarikh:''},...o,subs,log};
+    return {id:uid(),tel:'',chassis:'',vso:'',dca:{on:false,lokasi:'',tarikh:''},rma:{on:false,cawangan:'',tarikh:''},...o,subs,log};
   }),users:{fendi:{aktif:true},aishah:{aktif:true}}};
 }
 
@@ -370,9 +370,9 @@ const save=()=>{if(!LIVE)store(KEY,db)}; // live mode never keeps customer data 
 const nul=v=>(v===''||v==null)?null:v;
 const num=v=>(v===''||v==null||isNaN(+v))?null:+v;
 function stampOf(isoTs){const d=new Date(isoTs);return iso(d)+' '+pad(d.getHours())+':'+pad(d.getMinutes())}
-function caseFromRow(r){return {id:r.id,pakar:r.pakar,nama:r.nama,tel:r.tel||'',model:r.model||'',harga:r.harga??'',deposit:r.deposit??'',booking:r.booking||'',chassis:r.chassis||'',
+function caseFromRow(r){return {id:r.id,pakar:r.pakar,nama:r.nama,tel:r.tel||'',model:r.model||'',harga:r.harga??'',deposit:r.deposit??'',booking:r.booking||'',chassis:r.chassis||'',vso:r.vso||'',
   dca:{on:!!r.dca_on,lokasi:r.dca_lokasi||'',tarikh:r.dca_tarikh||''},rma:{on:!!r.rma_on,cawangan:r.rma_cawangan||'',tarikh:r.rma_tarikh||''},subs:[],log:[],_created:r.created_at}}
-function caseToRow(c){return {id:c.id,pakar:c.pakar,nama:c.nama,tel:nul(c.tel),model:nul(c.model),harga:num(c.harga),deposit:num(c.deposit),booking:nul(c.booking),chassis:nul(c.chassis),
+function caseToRow(c){return {id:c.id,pakar:c.pakar,nama:c.nama,tel:nul(c.tel),model:nul(c.model),harga:num(c.harga),deposit:num(c.deposit),booking:nul(c.booking),chassis:nul(c.chassis),vso:nul(c.vso),
   dca_on:!!c.dca.on,dca_lokasi:nul(c.dca.lokasi),dca_tarikh:nul(c.dca.tarikh),rma_on:!!c.rma.on,rma_cawangan:nul(c.rma.cawangan),rma_tarikh:nul(c.rma.tarikh)}}
 function subFromRow(r){return {id:r.id,bank:r.bank,submit:r.submit,status:r.status,statusDate:r.status_date||'',remark:r.remark||'',amaun:r.amaun??'',tempoh:r.tempoh??'',kadar:r.kadar??'',_created:r.created_at}}
 function subToRow(cid,s){const t=num(s.tempoh);return {id:s.id,case_id:cid,bank:s.bank,submit:s.submit,status:s.status,status_date:nul(s.statusDate),remark:nul(s.remark),amaun:num(s.amaun),tempoh:t==null?null:Math.round(t),kadar:num(s.kadar)}}
@@ -459,7 +459,7 @@ function matches(c){
   if(f==='dca'&&!c.dca.on)return false;
   if(f==='rma'&&!c.rma.on)return false;
   if(f==='chase'&&!c.subs.some(isLate))return false;
-  if(q){const s=q.toLowerCase();const hay=(c.nama+' '+c.tel+' '+c.chassis+' '+c.model+' '+c.subs.map(x=>x.bank).join(' ')).toLowerCase();if(!hay.includes(s))return false}
+  if(q){const s=q.toLowerCase();const hay=(c.nama+' '+c.tel+' '+c.chassis+' '+(c.vso||'')+' '+c.model+' '+c.subs.map(x=>x.bank).join(' ')).toLowerCase();if(!hay.includes(s))return false}
   return true;
 }
 const visible=()=>db.cases.filter(inTab).filter(matches).sort((a,b)=>lastT(b).localeCompare(lastT(a)));
@@ -545,7 +545,7 @@ const FILTERS=[['semua','Semua'],['pending','Dalam proses'],['lulus','Lulus'],['
 function renderKes(m){
   m.innerHTML=`${LIVE?'':'<p class="note">Prototaip guna <b>data contoh</b> yang disimpan dalam telefon ini sahaja. Update live antara Shah, Fendi dan Aishah aktif selepas sambung database.</p>'}
   <div class="toolbar" style="margin-top:12px">
-    <input class="search" id="q" type="search" placeholder="Cari nama, telefon, chassis, bank" value="${esc(q)}" aria-label="Cari">
+    <input class="search" id="q" type="search" placeholder="Cari nama, telefon, chassis, VSO, bank" value="${esc(q)}" aria-label="Cari">
     <div class="vt" role="group" aria-label="Paparan"><button data-act="view" data-v="kad" aria-pressed="${pref.view==='kad'}">Kad</button><button data-act="view" data-v="jadual" aria-pressed="${pref.view==='jadual'}">Jadual</button></div>
   </div>
   <div class="chips" role="group" aria-label="Tapis">${FILTERS.map(([k,l])=>`<button class="chip" data-act="filter" data-f="${k}" aria-pressed="${pref.filter===k}">${l}</button>`).join('')}</div>
@@ -578,7 +578,7 @@ function renderList(){
       </span>
     </button>`}).join('')}</div>`;
 }
-const COLS=['Pakar','Nama','Telefon','Model','Chassis Number','DCA','RMA','Bank','Tarikh Submit','Status Loan','Tarikh Status','Hari','Remark'];
+const COLS=['Pakar','Nama','Telefon','Model','VSO Number','Chassis Number','DCA','RMA','Bank','Tarikh Submit','Status Loan','Tarikh Status','Hari','Remark'];
 function rowsFor(cs){
   const out=[];
   cs.forEach(c=>{const subs=c.subs.length?c.subs:[null];subs.forEach((s,i)=>out.push({c,s,i,n:subs.length}))});
@@ -594,6 +594,7 @@ function renderTable(L,cs){
       <td rowspan="${n}" class="case-cell" data-act="open" data-id="${c.id}">${esc(c.nama)}</td>
       <td rowspan="${n}" class="nowrap">${esc(c.tel)}</td>
       <td rowspan="${n}" class="nowrap">${esc(c.model)}</td>
+      <td rowspan="${n}" class="mono">${esc(c.vso)||'–'}</td>
       <td rowspan="${n}" class="mono">${esc(c.chassis)||'–'}</td>
       <td rowspan="${n}">${c.dca.on?'Ya · '+esc(c.dca.lokasi):'–'}</td>
       <td rowspan="${n}">${c.rma.on?'Ya · '+esc(c.rma.cawangan):'–'}</td>`:'';
@@ -609,7 +610,7 @@ function tsv(){
   const rows=rowsFor(visible());
   const clean=v=>String(v??'').replace(/[\t\n]/g,' ');
   const lines=[COLS.join('\t')];
-  rows.forEach(({c,s})=>lines.push([cap(c.pakar),c.nama,c.tel,c.model,c.chassis,c.dca.on?'Ya - '+c.dca.lokasi:'Tidak',c.rma.on?'Ya - '+c.rma.cawangan:'Tidak',
+  rows.forEach(({c,s})=>lines.push([cap(c.pakar),c.nama,c.tel,c.model,c.vso,c.chassis,c.dca.on?'Ya - '+c.dca.lokasi:'Tidak',c.rma.on?'Ya - '+c.rma.cawangan:'Tidak',
     s?s.bank:'',s?fmtD(s.submit):'',s?s.status:'Belum submit',s?fmtD(s.statusDate):'',s?subDays(s):'',s?s.remark:''].map(clean).join('\t')));
   return lines.join('\n');
 }
@@ -727,7 +728,8 @@ function renderDetail(id){
       <div><dt>Harga OTR</dt><dd class="num">${rm(c.harga)}</dd></div>
       <div><dt>Deposit</dt><dd class="num">${rm(c.deposit)}</dd></div>
       <div><dt>Tarikh submit loan</dt><dd class="num">${firstSubmit(c)?fmtD(firstSubmit(c)):'Belum submit'}</dd></div>
-      <div><dt>Chassis number</dt><dd class="mono">${esc(c.chassis)||'–'}</dd></div>
+      <div><dt>VSO number</dt><dd class="mono">${esc(c.vso)||'–'}</dd></div>
+      <div class="full"><dt>Chassis number</dt><dd class="mono">${esc(c.chassis)||'–'}</dd></div>
       <div class="full"><dt>DCA · hantar luar Selangor</dt><dd>${c.dca.on?`Ya → ${esc(c.dca.lokasi)||'lokasi belum diisi'}${c.dca.tarikh?' · '+fmtD(c.dca.tarikh):''}`:'Tidak'}</dd></div>
       <div class="full"><dt>RMA · collect cawangan lain</dt><dd>${c.rma.on?`Ya → ${esc(c.rma.cawangan)||'cawangan belum diisi'}${c.rma.tarikh?' · '+fmtD(c.rma.tarikh):''}`:'Tidak'}</dd></div>
     </dl>
@@ -780,6 +782,7 @@ function renderForm(id){
       <label class="f" for="fHarga">Harga OTR (RM)<input class="in num" id="fHarga" type="number" inputmode="decimal" value="${v('harga')}"></label>
       <label class="f" for="fDep">Deposit (RM)<input class="in num" id="fDep" type="number" inputmode="decimal" value="${v('deposit')}"></label>
       <label class="f" for="fChassis">Chassis number<input class="in mono" id="fChassis" value="${v('chassis')}" autocapitalize="characters" autocomplete="off" style="font-size:16px"></label>
+      <label class="f" for="fVso">VSO number<input class="in mono" id="fVso" value="${v('vso')}" autocapitalize="characters" autocomplete="off" style="font-size:16px"></label>
     </div>
     <datalist id="models">${MODELS.map(x=>`<option value="${x}">`).join('')}</datalist>
     <label class="tog" for="fDca"><input type="checkbox" id="fDca" ${c&&c.dca.on?'checked':''}><span>DCA<small>Kereta kena hantar ke luar Selangor</small></span></label>
@@ -806,7 +809,7 @@ function submitForm(){
   if(!pk)return err('Pilih pakar loan: Fendi atau Aishah.');
   if(!nama){$('#fNama').classList.add('bad');return err('Isi nama pelanggan.')}
   const data={pakar:pk,nama,tel:$('#fTel').value.trim(),model:$('#fModel').value.trim(),harga:$('#fHarga').value,deposit:$('#fDep').value,
-    chassis:$('#fChassis').value.trim().toUpperCase(),
+    chassis:$('#fChassis').value.trim().toUpperCase(),vso:$('#fVso').value.trim().toUpperCase(),
     dca:{on:$('#fDca').checked,lokasi:$('#fDcaLok').value.trim(),tarikh:$('#fDcaT').value},
     rma:{on:$('#fRma').checked,cawangan:$('#fRmaCaw').value.trim(),tarikh:$('#fRmaT').value}};
   if(id){
