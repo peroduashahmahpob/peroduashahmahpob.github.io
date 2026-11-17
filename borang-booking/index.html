@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="ms">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Borang Booking</title>
+<style>
+  :root{
+    --bg:#f3f4f6; --panel:#ffffff; --ink:#111827; --muted:#6b7280; --line:#d1d5db;
+    --accent:#0b4ea2; --accent-soft:#e7effa;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif}
+  .app{display:grid;grid-template-columns:420px 1fr;gap:16px;padding:16px;min-height:100vh}
+  @media (max-width:980px){.app{grid-template-columns:1fr}}
+
+  /* ---------- input panel ---------- */
+  .panel{background:var(--panel);border-radius:14px;padding:16px;box-shadow:0 1px 3px rgba(0,0,0,.08);align-self:start}
+  .panel h1{font-size:18px;margin:0 0 4px}
+  .panel p.sub{margin:0 0 14px;color:var(--muted);font-size:13px}
+  fieldset{border:0;padding:0;margin:0 0 14px}
+  legend{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);margin-bottom:8px}
+  label{display:block;font-size:12px;color:var(--muted);margin:0 0 3px}
+  input,textarea,select{width:100%;font:inherit;font-size:15px;padding:9px 10px;border:1px solid var(--line);border-radius:8px;background:#fff;color:var(--ink)}
+  input:focus,textarea:focus{outline:2px solid var(--accent);outline-offset:-1px;border-color:var(--accent)}
+  textarea{resize:vertical;min-height:58px}
+  .row{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px}
+  .row.one{grid-template-columns:1fr}
+  .row.amt{grid-template-columns:1fr 110px}
+  .chips{display:flex;flex-wrap:wrap;gap:6px}
+  .chip{display:flex;align-items:center;gap:6px;border:1px solid var(--line);border-radius:999px;padding:6px 10px;font-size:13px;cursor:pointer;user-select:none;background:#fff;color:var(--ink);margin:0}
+  .chip input{width:auto;margin:0}
+  .chip:has(input:checked){background:var(--accent-soft);border-color:var(--accent);color:var(--accent);font-weight:600}
+  .gear{margin-top:8px;display:none}
+  .gear.on{display:block}
+  .actions{display:flex;gap:8px;position:sticky;bottom:0;background:var(--panel);padding-top:10px}
+  button{font:inherit;font-weight:600;border:0;border-radius:10px;padding:12px 14px;cursor:pointer}
+  .btn-print{flex:1;background:var(--accent);color:#fff;font-size:16px}
+  .btn-clear{background:#eef0f3;color:var(--ink)}
+  .hint{font-size:12px;color:var(--muted);margin-top:8px}
+
+  /* ---------- preview ---------- */
+  .preview{overflow:auto;padding:4px}
+  .preview .label{font-size:12px;color:var(--muted);margin:0 0 8px}
+  .stage{transform-origin:top left}
+
+  /* ---------- the A4 landscape sheet ---------- */
+  .sheet{
+    width:210mm;height:297mm;background:#fff;color:#000;
+    padding:9mm 8mm 7mm;box-shadow:0 2px 12px rgba(0,0,0,.15);
+    font-family:Arial,Helvetica,sans-serif;display:flex;flex-direction:column;
+  }
+  .hdr{display:flex;justify-content:space-between;align-items:flex-end}
+  .brand{display:flex;flex-direction:column;gap:2mm;padding-bottom:1mm}
+  .brand .logo{font-size:7mm;font-weight:800;letter-spacing:.2mm;display:flex;align-items:center;gap:2mm}
+  .brand .logo .dot{width:7mm;height:7mm;border-radius:50%;background:#333;color:#fff;display:grid;place-items:center;font-size:4.6mm;font-style:italic}
+  .brand .co{font-size:2.9mm;font-weight:700}
+  table.types{border-collapse:collapse}
+  table.types th,table.types td{border:.35mm solid #000;width:18mm;text-align:center;font-size:2.6mm;font-weight:700}
+  table.types th{height:8mm;padding:0 1mm;line-height:1.1}
+  table.types td{height:9mm;font-size:5mm}
+  table.types td.gearv{font-size:3.4mm}
+
+  .box{border:.45mm solid #000;flex:1;display:flex;flex-direction:column;min-height:0}
+  .fields{padding:2mm 4mm 2mm}
+  .fr{display:flex;gap:4mm}
+  .fr > .f{flex:1;min-width:0}
+  .fr > .f.w{flex:1.25}
+  .f{display:flex;align-items:flex-end;gap:2mm;height:10.4mm}
+  .f .k{font-weight:700;font-size:3.5mm;white-space:nowrap}
+  .f .v{flex:1;border-bottom:.3mm solid #000;font-size:3.6mm;padding:0 1mm .6mm;min-height:5mm;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-family:"Courier New",Courier,monospace;font-weight:700}
+  .f .v.sm{flex:0 0 auto;width:22mm;text-align:center}
+  .f .sep{font-weight:700;font-size:4mm}
+  .f.addr{height:auto;align-items:flex-start;padding-top:2.4mm}
+  .f.addr .v{white-space:normal;line-height:5.4mm;min-height:11mm;background:repeating-linear-gradient(to bottom,transparent 0,transparent 5.1mm,#000 5.1mm,#000 5.4mm);border-bottom:0;overflow:hidden;max-height:11mm}
+  .f.rem .v{white-space:normal;line-height:5.4mm;min-height:11mm;max-height:11mm;background:repeating-linear-gradient(to bottom,transparent 0,transparent 5.1mm,#000 5.1mm,#000 5.4mm);border-bottom:0}
+  .f.rem{height:auto;align-items:flex-start;padding-top:2.4mm}
+
+  .chk{border-top:.45mm solid #000;display:grid;grid-template-columns:1.35fr 1fr;flex:1;min-height:0}
+  .chk table{border-collapse:collapse;width:100%;height:100%}
+  .chk td,.chk th{border:.25mm solid #000;font-size:2.4mm;padding:0 1mm;text-align:left;font-weight:400}
+  .chk .title{background:#9a9a9a;font-weight:700;font-size:2.8mm;height:5mm}
+  .chk th.c{text-align:center;font-weight:700;background:#9a9a9a;width:20mm}
+  .chk td.colon{width:2mm;text-align:center;padding:0}
+  .chk .pov{background:#9a9a9a;text-align:center;font-weight:700;text-decoration:underline}
+  .chk .left{border-right:.45mm solid #000}
+  .chk .povt td:first-child{width:45%}
+  .chk .left table{table-layout:auto}
+  .chk .left td:first-child{width:62%}
+  .foot{font-size:2.8mm;font-weight:700;padding-top:1.5mm;display:flex;gap:2mm;min-height:9mm}
+  .foot .fv{flex:1;font-family:"Courier New",Courier,monospace;font-size:3.3mm;line-height:4mm;white-space:pre-wrap;max-height:8mm;overflow:hidden}
+
+  @page{size:A4 portrait;margin:0}
+  @media print{
+    html,body{background:#fff}
+    .panel,.preview .label{display:none !important}
+    .app{display:block;padding:0}
+    .preview{padding:0;overflow:visible}
+    .stage{transform:none !important;width:auto !important;height:auto !important}
+    .sheet{box-shadow:none}
+  }
+</style>
+</head>
+<body>
+<div class="app">
+  <!-- ======== INPUT ======== -->
+  <form class="panel" id="f" autocomplete="off" onsubmit="return false">
+    <h1>Borang Booking</h1>
+    <p class="sub">Isi di sini, borang di sebelah terisi sendiri. Tekan <b>Cetak</b> untuk A4 menegak.</p>
+
+    <fieldset>
+      <legend>Jenis</legend>
+      <div class="chips">
+        <label class="chip"><input type="checkbox" name="t_zero">Zero Booking</label>
+        <label class="chip"><input type="checkbox" name="t_cash">Cash</label>
+        <label class="chip"><input type="checkbox" name="t_staff">Staff</label>
+        <label class="chip"><input type="checkbox" name="t_pov">POV</label>
+        <label class="chip"><input type="checkbox" name="t_refund">Refund</label>
+        <label class="chip"><input type="checkbox" name="t_gear" id="t_gear">Gear Up</label>
+      </div>
+      <div class="gear" id="gearBox"><label>Gear Up (RM)</label><input name="gear" inputmode="decimal" placeholder="cth 1500"></div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Booking</legend>
+      <div class="row"><div><label>VSO No</label><input name="vso"></div><div><label>Booking Date</label><input name="bdate" type="date"></div></div>
+      <div class="row"><div><label>Booking No</label><input name="bno"></div><div><label>Cust No / Ref No</label><div class="row" style="margin:0;gap:4px"><input name="cust" placeholder="Cust"><input name="ref" placeholder="Ref"></div></div></div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Pelanggan</legend>
+      <div class="row one"><div><label>Nama</label><input name="name" data-upper></div></div>
+      <div class="row"><div><label>No IC</label><input name="ic" inputmode="numeric" placeholder="000000-00-0000"></div><div><label>No H/P</label><input name="hp" inputmode="tel" placeholder="012-3456789"></div></div>
+      <div class="row one"><div><label>Email</label><input name="email" type="email" inputmode="email"></div></div>
+      <div class="row one"><div><label>Alamat</label><textarea name="addr" data-upper rows="2"></textarea></div></div>
+      <div class="row one"><div><label>TIN No</label><input name="tin" data-upper></div></div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Kereta</legend>
+      <div class="row"><div><label>Model</label><input name="model" list="models" data-upper></div><div><label>Warna</label><input name="colour" list="colours" data-upper></div></div>
+      <div class="row"><div><label>Chassis No</label><input name="chassis" data-upper></div><div><label>Engine No</label><input name="engine" data-upper></div></div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Insurans &amp; Loan</legend>
+      <div class="row"><div><label>Insurance Co.</label><input name="ins" list="insurers" data-upper></div><div><label>Finance Co.</label><input name="fin" list="banks" data-upper></div></div>
+      <div class="row amt"><div><label>Amount Financed (RM)</label><input name="amt" inputmode="decimal" placeholder="cth 45000"></div><div><label>Bulan</label><input name="months" list="tenure" inputmode="numeric"></div></div>
+      <div class="row one"><div><label>Fin. Ownership Claims No.</label><input name="claims" data-upper></div></div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Lain-lain</legend>
+      <div class="row one"><div><label>Sales Advisor Name <span style="font-size:11px">(diingat)</span></label><input name="sa" data-upper></div></div>
+      <div class="row one"><div><label>Remarks</label><textarea name="rem" rows="2"></textarea></div></div>
+      <div class="row one"><div><label>Remarks (Office Use Only) — bawah sekali</label><textarea name="rem2" rows="2"></textarea></div></div>
+    </fieldset>
+
+    <div class="actions">
+      <button type="button" class="btn-clear" id="clear">Kosongkan</button>
+      <button type="button" class="btn-print" id="print">Cetak / PDF</button>
+    </div>
+    <p class="hint">Data pelanggan tak disimpan — tutup page = hilang. Hanya nama Sales Advisor diingat. Untuk PDF: pilih "Save as PDF" dalam tetingkap cetak.</p>
+
+    <datalist id="models"><option>AXIA</option><option>BEZZA</option><option>MYVI</option><option>ATIVA</option><option>ALZA</option><option>ARUZ</option><option>TRAZ</option><option>QV-E</option></datalist>
+    <datalist id="colours"><option>GLITTERING SILVER</option><option>IVORY WHITE</option><option>GRANITE GREY</option><option>ELECTRIC BLUE</option><option>LAVA RED</option><option>CRANBERRY RED</option><option>MIDNIGHT BLUE</option><option>BLACK</option></datalist>
+    <datalist id="banks"><option>MAYBANK</option><option>CIMB BANK</option><option>PUBLIC BANK</option><option>RHB BANK</option><option>HONG LEONG BANK</option><option>AMBANK</option><option>BANK ISLAM</option><option>BANK RAKYAT</option><option>BANK MUAMALAT</option><option>AFFIN BANK</option><option>ALLIANCE BANK</option><option>BSN</option><option>AGROBANK</option></datalist>
+    <datalist id="insurers"><option>TAKAFUL IKHLAS</option><option>ETIQA</option><option>ALLIANZ</option><option>TOKIO MARINE</option><option>BERJAYA SOMPO</option><option>ZURICH</option><option>MSIG</option><option>LONPAC</option><option>AIA</option><option>SYARIKAT TAKAFUL MALAYSIA</option></datalist>
+    <datalist id="tenure"><option>60</option><option>72</option><option>84</option><option>96</option><option>108</option></datalist>
+  </form>
+
+  <!-- ======== PREVIEW / PRINT ======== -->
+  <div class="preview" id="preview">
+    <p class="label">Pratonton A4 menegak</p>
+    <div class="stage" id="stage">
+      <div class="sheet" id="sheet">
+        <div class="hdr">
+          <div class="brand">
+            <div class="logo"><span class="dot">P</span>PERODUA</div>
+            <div class="co">PERODUA SALES SDN BHD (DAMANSARA DAMAI)</div>
+          </div>
+          <table class="types">
+            <tr><th>ZERO<br>BOOKING</th><th>CASH</th><th>STAFF</th><th>POV</th><th>REFUND</th><th>GEAR UP (RM)</th></tr>
+            <tr><td data-o="t_zero"></td><td data-o="t_cash"></td><td data-o="t_staff"></td><td data-o="t_pov"></td><td data-o="t_refund"></td><td class="gearv" data-o="gear"></td></tr>
+          </table>
+        </div>
+
+        <div class="box">
+          <div class="fields">
+            <div class="fr"><div class="f w"><span class="k">VSO No:</span><span class="v" data-o="vso"></span></div><div class="f"><span class="k">Booking Date :</span><span class="v" data-o="bdate"></span></div></div>
+            <div class="fr"><div class="f"><span class="k">Booking No:</span><span class="v" data-o="bno"></span></div><div class="f w"><span class="k">Cust No/Ref No:</span><span class="v" data-o="cust"></span><span class="sep">/</span><span class="v" data-o="ref"></span></div></div>
+            <div class="f"><span class="k">Name :</span><span class="v" data-o="name"></span></div>
+            <div class="fr"><div class="f w"><span class="k">Ic No:</span><span class="v" data-o="ic"></span></div><div class="f"><span class="k">Email :</span><span class="v" data-o="email"></span></div></div>
+            <div class="f addr"><span class="k">Address:</span><span class="v" data-o="addr"></span></div>
+            <div class="fr"><div class="f w"><span class="k">H/P No:</span><span class="v" data-o="hp"></span></div><div class="f"><span class="k">TIN No:</span><span class="v" data-o="tin"></span></div></div>
+            <div class="fr"><div class="f w"><span class="k">Model :</span><span class="v" data-o="model"></span></div><div class="f"><span class="k">Colour:</span><span class="v" data-o="colour"></span></div></div>
+            <div class="f"><span class="k">Chassis No:</span><span class="v" data-o="chassis"></span></div>
+            <div class="f"><span class="k">Engine No :</span><span class="v" data-o="engine"></span></div>
+            <div class="f"><span class="k">Insurance Co.:</span><span class="v" data-o="ins"></span></div>
+            <div class="f"><span class="k">Finance Co. :</span><span class="v" data-o="fin"></span></div>
+            <div class="f"><span class="k">Amount Financed :</span><span class="v" data-o="amt"></span><span class="k">for</span><span class="v sm" data-o="months"></span><span class="k">Months</span></div>
+            <div class="f"><span class="k">Fin. Ownershipclaims No.:</span><span class="v" data-o="claims"></span></div>
+            <div class="f"><span class="k">Sales Advisor Name :</span><span class="v" data-o="sa"></span></div>
+            <div class="f rem"><span class="k">Remarks:</span><span class="v" data-o="rem"></span></div>
+          </div>
+
+          <!-- Registration checklist: left blank on purpose -->
+          <div class="chk">
+            <div class="left">
+              <table>
+                <tr><th class="title">REGISTRATION CHECKLIST - PSSB DAMANSARA DAMAI</th><td class="colon title"></td><th class="c">SA (√)</th><th class="c">ADMIN</th></tr>
+                <tr><td>STOCK ARRIVAL / RMA</td><td class="colon">:</td><td></td><td></td></tr>
+                <tr><td>RUNNING NO</td><td class="colon">:</td><td></td><td></td></tr>
+                <tr><td>TENDER NO / SLIP &amp; EBROWN FILE</td><td class="colon">:</td><td></td><td></td></tr>
+                <tr><td>IC COPY &amp; EBROWN FILE</td><td class="colon">:</td><td></td><td></td></tr>
+                <tr><td>VALID D/L COPY &amp; EBROWN FILE</td><td class="colon">:</td><td></td><td></td></tr>
+                <tr><td>GUARANTOR IC IF APPLICABLE</td><td class="colon">:</td><td></td><td></td></tr>
+                <tr><td>VALID LOU COPY &amp; EBROWN FILE</td><td class="colon">:</td><td></td><td></td></tr>
+                <tr><td>ENDORSED NCD / CN</td><td class="colon">:</td><td></td><td></td></tr>
+                <tr><td>LETTER FOR OWN INSURANCE &amp; CN (IF APPLICABLE)</td><td class="colon">:</td><td></td><td></td></tr>
+                <tr><td>OVERPAYMENT - ONLINE PAYMENT FORM &amp; BANK STATEMENT</td><td class="colon">:</td><td></td><td></td></tr>
+                <tr><td>INSURANCE COVER NOTE</td><td class="colon">:</td><td colspan="2"></td></tr>
+                <tr><td>PV / K1 (ACK NO)</td><td class="colon">:</td><td colspan="2"></td></tr>
+              </table>
+            </div>
+            <div>
+              <table class="povt">
+                <tr><th class="pov" colspan="3">POV TRADE IN</th></tr>
+                <tr><td>REG NO</td><td class="colon">:</td><td></td></tr>
+                <tr><td>YEAR OF MANUFACTURING</td><td class="colon">:</td><td></td></tr>
+                <tr><td>APPRAISAL NO</td><td class="colon">:</td><td></td></tr>
+                <tr><td>TRADE IN VALUE</td><td class="colon">:</td><td></td></tr>
+                <tr><td>HP SETTLEMENT</td><td class="colon">:</td><td></td></tr>
+                <tr><td>DATELINE</td><td class="colon">:</td><td></td></tr>
+                <tr><td>VOC ORIGINAL &amp; COPY</td><td class="colon">:</td><td></td></tr>
+                <tr><td>INDEMNITY LETTER</td><td class="colon">:</td><td></td></tr>
+                <tr><td>THIRD PARTY IC IF APPLICABLE</td><td class="colon">:</td><td></td></tr>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="foot"><span>REMARKS (Office Use Only :</span><span class="fv" data-o="rem2"></span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const form = document.getElementById('f');
+  const out = {};
+  document.querySelectorAll('[data-o]').forEach(el => out[el.dataset.o] = el);
+  const SA_KEY = 'borangBooking.sa';
+
+  const money = v => {
+    const n = parseFloat(String(v).replace(/[^\d.]/g,''));
+    return isNaN(n) ? '' : 'RM ' + n.toLocaleString('en-MY',{minimumFractionDigits:2,maximumFractionDigits:2});
+  };
+  const fmtDate = v => { if(!v) return ''; const [y,m,d] = v.split('-'); return `${d}/${m}/${y}`; };
+  const fmtIC = v => { const d = v.replace(/\D/g,'').slice(0,12); return d.length>8 ? `${d.slice(0,6)}-${d.slice(6,8)}-${d.slice(8)}` : d.length>6 ? `${d.slice(0,6)}-${d.slice(6)}` : d; };
+
+  function render(){
+    const fd = new FormData(form);
+    const get = k => (fd.get(k) || '').toString().trim();
+    for (const k in out){
+      let v;
+      if (k.startsWith('t_')) { out[k].textContent = form.elements[k].checked ? '✓' : ''; continue; }
+      switch(k){
+        case 'bdate': v = fmtDate(get(k)); break;
+        case 'amt': v = money(get(k)); break;
+        case 'gear': v = form.elements.t_gear.checked ? (money(get(k)) || '✓') : ''; break;
+        case 'email': v = get(k); break;
+        case 'rem': case 'rem2': v = get(k); break;
+        default: v = get(k).toUpperCase();
+      }
+      out[k].textContent = v;
+    }
+    document.getElementById('gearBox').classList.toggle('on', form.elements.t_gear.checked);
+    try { localStorage.setItem(SA_KEY, get('sa')); } catch(e){}
+  }
+
+  // live formatting
+  form.elements.ic.addEventListener('input', e => { e.target.value = fmtIC(e.target.value); });
+  form.addEventListener('input', render);
+  form.addEventListener('change', render);
+
+  // defaults
+  const today = new Date(); today.setMinutes(today.getMinutes() - today.getTimezoneOffset());
+  function setDefaults(){
+    form.elements.bdate.value = today.toISOString().slice(0,10);
+    try { form.elements.sa.value = localStorage.getItem(SA_KEY) || ''; } catch(e){}
+  }
+  setDefaults();
+
+  document.getElementById('clear').onclick = () => {
+    if (!confirm('Kosongkan semua maklumat pelanggan?')) return;
+    const sa = form.elements.sa.value;
+    form.reset(); setDefaults(); form.elements.sa.value = sa; render();
+  };
+  document.getElementById('print').onclick = () => window.print();
+
+  // scale preview to fit
+  const stage = document.getElementById('stage'), sheet = document.getElementById('sheet'), prev = document.getElementById('preview');
+  function fit(){
+    const w = sheet.offsetWidth, h = sheet.offsetHeight;
+    const s = Math.min(1, (prev.clientWidth - 8) / w);
+    stage.style.transform = `scale(${s})`;
+    stage.style.width = w*s + 'px'; stage.style.height = h*s + 'px';
+  }
+  window.addEventListener('resize', fit);
+  render(); fit();
+})();
+</script>
+</body>
+</html>
