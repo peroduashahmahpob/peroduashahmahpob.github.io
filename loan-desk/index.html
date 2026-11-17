@@ -290,6 +290,24 @@ const BANKS=['Maybank','CIMB','Public Bank','RHB','Bank Islam','AmBank','Hong Le
 const STATUSES=['Dihantar','Dalam proses','Perlu dokumen','KIV','Lulus','Tolak'];
 const ST={'Dihantar':['info','↗'],'Dalam proses':['wait','…'],'Perlu dokumen':['wait','!'],'KIV':['kiv','‖'],'Lulus':['ok','✓'],'Tolak':['bad','✕']};
 const PENDING=new Set(['Dihantar','Dalam proses','Perlu dokumen','KIV']);
+const WARNA={
+  Axia:['S43 Granite Grey','B89 Coral Blue','W09 Ivory White','S28 Glittering Silver','R69 Lava Red'],
+  Bezza:['S43 Granite Grey','W09 Ivory White','R67 Garnet Red','S28 Glittering Silver','B81 Ocean Blue'],
+  Alza:['S28 Glittering Silver','W09 Ivory White','X16 Elegant Black','R67 Garnet Red','T35 Vintage Brown'],
+  Traz:['XL3 Electric Blue 2-Tone','XL2 Glittering Silver 2-Tone','S43 Granite Grey','W09 Ivory White','S28 Glittering Silver'],
+  Ativa:['XJ2 2-Tone Pearl Delima Red','XJ3 2-Tone Pearl Diamond White','Pearl Delima Red','W25 Pearl Diamond White','B89 Coral Blue','S43 Granite Grey','S28 Glittering Silver'],
+  Myvi:['S28 Glittering Silver','S43 Granite Grey','W09 Ivory White','R76 Cranberry Red','B88 Electric Blue']};
+const famOf=m=>Object.keys(WARNA).find(k=>(m||'').toLowerCase().includes(k.toLowerCase()))||'';
+function swatch(w){const t=(w||'').toLowerCase();
+  const col=/black/.test(t)?'#1c1c1e':/brown/.test(t)?'#6b4a32':/cranberry/.test(t)?'#8e1b2e':/delima|garnet/.test(t)?'#9b1c24':/red/.test(t)?'#c8202a':
+    /ocean/.test(t)?'#1f4f8a':/electric/.test(t)?'#1f5fd1':/coral|blue/.test(t)?'#3a86c8':/grey/.test(t)?'#5e6268':/silver/.test(t)?'#c4c7cc':/white/.test(t)?'#f6f4ee':'#ddd';
+  const two=/2-tone/.test(t);
+  return `<span aria-hidden="true" style="display:inline-block;width:14px;height:14px;border-radius:50%;vertical-align:-2px;margin-right:6px;border:1px solid rgba(0,0,0,.25);background:${two?`linear-gradient(180deg,#1c1c1e 0 40%,${col} 40%)`:col}"></span>`}
+function warnaOpts(model,cur){const f=famOf(model);
+  const grp=k=>WARNA[k].map(x=>`<option value="${x}" ${x===cur?'selected':''}>${x}</option>`).join('');
+  const known=Object.values(WARNA).flat().includes(cur);
+  return `<option value="">${f?'Pilih warna '+f:'Pilih warna'}</option>${cur&&!known?`<option value="${esc(cur)}" selected>${esc(cur)}</option>`:''}`+
+    (f?grp(f):Object.keys(WARNA).map(k=>`<optgroup label="${k}">${grp(k)}</optgroup>`).join(''));}
 const MODELS=['Axia 1.0 G','Axia 1.0 X','Axia 1.0 SE','Axia 1.0 AV','Bezza 1.0 G','Bezza 1.3 X','Bezza 1.3 AV','Myvi 1.3 G','Myvi 1.5 H','Myvi 1.5 AV','Ativa 1.0 X','Ativa 1.0 H','Ativa 1.0 AV','Alza H','Alza AV','Aruz X','Aruz AV','Traz'];
 const CHASE_DAYS=3;
 
@@ -355,7 +373,7 @@ function demo(){
     subs.forEach(s=>{log.push({t:s.submit+' 11:30',who:o.pakar,msg:'Submit ke '+s.bank});
       if(s.status!=='Dihantar')log.push({t:s.statusDate+' 16:20',who:o.pakar,msg:s.bank+': status → '+s.status});});
     log.sort((a,b)=>b.t.localeCompare(a.t));
-    return {id:uid(),tel:'',chassis:'',vso:'',dca:{on:false,lokasi:'',tarikh:''},rma:{on:false,cawangan:'',tarikh:''},...o,subs,log};
+    return {id:uid(),tel:'',chassis:'',vso:'',warna:'',dca:{on:false,lokasi:'',tarikh:''},rma:{on:false,cawangan:'',tarikh:''},...o,subs,log};
   }),users:{fendi:{aktif:true},aishah:{aktif:true}}};
 }
 
@@ -371,9 +389,9 @@ const save=()=>{if(!LIVE)store(KEY,db)}; // live mode never keeps customer data 
 const nul=v=>(v===''||v==null)?null:v;
 const num=v=>(v===''||v==null||isNaN(+v))?null:+v;
 function stampOf(isoTs){const d=new Date(isoTs);return iso(d)+' '+pad(d.getHours())+':'+pad(d.getMinutes())}
-function caseFromRow(r){return {id:r.id,pakar:r.pakar,nama:r.nama,tel:r.tel||'',model:r.model||'',harga:r.harga??'',deposit:r.deposit??'',booking:r.booking||'',chassis:r.chassis||'',vso:r.vso||'',
+function caseFromRow(r){return {id:r.id,pakar:r.pakar,nama:r.nama,tel:r.tel||'',model:r.model||'',harga:r.harga??'',deposit:r.deposit??'',booking:r.booking||'',chassis:r.chassis||'',vso:r.vso||'',warna:r.warna||'',
   dca:{on:!!r.dca_on,lokasi:r.dca_lokasi||'',tarikh:r.dca_tarikh||''},rma:{on:!!r.rma_on,cawangan:r.rma_cawangan||'',tarikh:r.rma_tarikh||''},subs:[],log:[],_created:r.created_at}}
-function caseToRow(c){return {id:c.id,pakar:c.pakar,nama:c.nama,tel:nul(c.tel),model:nul(c.model),harga:num(c.harga),deposit:num(c.deposit),booking:nul(c.booking),chassis:nul(c.chassis),vso:nul(c.vso),
+function caseToRow(c){return {id:c.id,pakar:c.pakar,nama:c.nama,tel:nul(c.tel),model:nul(c.model),harga:num(c.harga),deposit:num(c.deposit),booking:nul(c.booking),chassis:nul(c.chassis),vso:nul(c.vso),warna:nul(c.warna),
   dca_on:!!c.dca.on,dca_lokasi:nul(c.dca.lokasi),dca_tarikh:nul(c.dca.tarikh),rma_on:!!c.rma.on,rma_cawangan:nul(c.rma.cawangan),rma_tarikh:nul(c.rma.tarikh)}}
 function subFromRow(r){return {id:r.id,bank:r.bank,submit:r.submit,status:r.status,statusDate:r.status_date||'',remark:r.remark||'',amaun:r.amaun??'',tempoh:r.tempoh??'',kadar:r.kadar??'',_created:r.created_at}}
 function subToRow(cid,s){const t=num(s.tempoh);return {id:s.id,case_id:cid,bank:s.bank,submit:s.submit,status:s.status,status_date:nul(s.statusDate),remark:nul(s.remark),amaun:num(s.amaun),tempoh:t==null?null:Math.round(t),kadar:num(s.kadar)}}
@@ -462,7 +480,7 @@ function matches(c){
   if(f==='dca'&&!c.dca.on)return false;
   if(f==='rma'&&!c.rma.on)return false;
   if(f==='chase'&&!c.subs.some(isLate))return false;
-  if(q){const s=q.toLowerCase();const hay=(c.nama+' '+c.tel+' '+c.chassis+' '+(c.vso||'')+' '+c.model+' '+c.subs.map(x=>x.bank).join(' ')).toLowerCase();if(!hay.includes(s))return false}
+  if(q){const s=q.toLowerCase();const hay=(c.nama+' '+c.tel+' '+c.chassis+' '+(c.vso||'')+' '+(c.warna||'')+' '+c.model+' '+c.subs.map(x=>x.bank).join(' ')).toLowerCase();if(!hay.includes(s))return false}
   return true;
 }
 const visible=()=>db.cases.filter(inTab).filter(matches).sort((a,b)=>lastT(b).localeCompare(lastT(a)));
@@ -574,14 +592,14 @@ function renderList(){
       <span class="cb">
         <span class="ct"><span class="tag ${c.pakar}">${cap(c.pakar)}</span><span class="pill st-${oc}">${o}</span></span>
         <span class="cn">${esc(c.nama)}</span>
-        <span class="cs">${esc(c.model||'–')}${c.chassis?` · <span class="mono">${esc(c.chassis)}</span>`:' · <i>tiada chassis</i>'}</span>
+        <span class="cs">${esc(c.model||'–')}${c.warna?' · '+swatch(c.warna).replace('margin-right:6px','margin-right:3px')+esc(c.warna.split(' ')[0]):''}${c.chassis?` · <span class="mono">${esc(c.chassis)}</span>`:' · <i>tiada chassis</i>'}</span>
         ${flags(c)}
         <span class="banks">${c.subs.map(bankPill).join('')||'<span class="pill st-none">Belum submit</span>'}</span>
         ${late?`<span class="cs late">${late} submission perlu chase</span>`:''}
       </span>
     </button>`}).join('')}</div>`;
 }
-const COLS=['Pakar','Nama','Telefon','Model','VSO Number','Chassis Number','DCA','RMA','Bank','Tarikh Submit','Status Loan','Tarikh Status','Hari','Remark'];
+const COLS=['Pakar','Nama','Telefon','Model','Kod Warna','VSO Number','Chassis Number','DCA','RMA','Bank','Tarikh Submit','Status Loan','Tarikh Status','Hari','Remark'];
 function rowsFor(cs){
   const out=[];
   cs.forEach(c=>{const subs=c.subs.length?c.subs:[null];subs.forEach((s,i)=>out.push({c,s,i,n:subs.length}))});
@@ -597,6 +615,7 @@ function renderTable(L,cs){
       <td rowspan="${n}" class="case-cell" data-act="open" data-id="${c.id}">${esc(c.nama)}</td>
       <td rowspan="${n}" class="nowrap">${esc(c.tel)}</td>
       <td rowspan="${n}" class="nowrap">${esc(c.model)}</td>
+      <td rowspan="${n}" class="nowrap">${c.warna?swatch(c.warna)+esc(c.warna):'–'}</td>
       <td rowspan="${n}" class="mono">${esc(c.vso)||'–'}</td>
       <td rowspan="${n}" class="mono">${esc(c.chassis)||'–'}</td>
       <td rowspan="${n}">${c.dca.on?'Ya · '+esc(c.dca.lokasi):'–'}</td>
@@ -613,7 +632,7 @@ function tsv(){
   const rows=rowsFor(visible());
   const clean=v=>String(v??'').replace(/[\t\n]/g,' ');
   const lines=[COLS.join('\t')];
-  rows.forEach(({c,s})=>lines.push([cap(c.pakar),c.nama,c.tel,c.model,c.vso,c.chassis,c.dca.on?'Ya - '+c.dca.lokasi:'Tidak',c.rma.on?'Ya - '+c.rma.cawangan:'Tidak',
+  rows.forEach(({c,s})=>lines.push([cap(c.pakar),c.nama,c.tel,c.model,c.warna,c.vso,c.chassis,c.dca.on?'Ya - '+c.dca.lokasi:'Tidak',c.rma.on?'Ya - '+c.rma.cawangan:'Tidak',
     s?s.bank:'',s?fmtD(s.submit):'',s?s.status:'Belum submit',s?fmtD(s.statusDate):'',s?subDays(s):'',s?s.remark:''].map(clean).join('\t')));
   return lines.join('\n');
 }
@@ -728,6 +747,7 @@ function renderDetail(id){
     <dl class="kv" style="margin:0">
       <div><dt>Telefon</dt><dd>${esc(c.tel)||'–'}${wa?` · <a href="${wa}" target="_blank" rel="noopener" style="color:var(--ok)">WhatsApp</a>`:''}</dd></div>
       <div><dt>Model</dt><dd>${esc(c.model)||'–'}</dd></div>
+      <div class="full"><dt>Kod warna</dt><dd>${c.warna?swatch(c.warna)+'<b>'+esc(c.warna.split(' ')[0])+'</b> '+esc(c.warna.split(' ').slice(1).join(' ')):'–'}</dd></div>
       <div><dt>Harga OTR</dt><dd class="num">${rm(c.harga)}</dd></div>
       <div><dt>Deposit</dt><dd class="num">${rm(c.deposit)}</dd></div>
       <div><dt>Tarikh submit loan</dt><dd class="num">${firstSubmit(c)?fmtD(firstSubmit(c)):'Belum submit'}</dd></div>
@@ -782,6 +802,7 @@ function renderForm(id){
     <div class="g2">
       <label class="f" for="fTel">Telefon<input class="in" id="fTel" type="tel" inputmode="tel" value="${v('tel')}" placeholder="012-345 6789"></label>
       <label class="f" for="fModel">Model<input class="in" id="fModel" list="models" value="${v('model')}" placeholder="Bezza 1.3 AV"></label>
+      <label class="f" for="fWarna" style="grid-column:1/-1">Kod warna<select class="in" id="fWarna">${warnaOpts(c?c.model:'',c?c.warna:'')}</select></label>
       <label class="f" for="fHarga">Harga OTR (RM)<input class="in num" id="fHarga" type="number" inputmode="decimal" value="${v('harga')}"></label>
       <label class="f" for="fDep">Deposit (RM)<input class="in num" id="fDep" type="number" inputmode="decimal" value="${v('deposit')}"></label>
       <label class="f" for="fChassis">Chassis number<input class="in mono" id="fChassis" value="${v('chassis')}" autocapitalize="characters" autocomplete="off" style="font-size:16px"></label>
@@ -812,7 +833,7 @@ function submitForm(){
   if(!pk)return err('Pilih pakar loan: Fendi atau Aishah.');
   if(!nama){$('#fNama').classList.add('bad');return err('Isi nama pelanggan.')}
   const data={pakar:pk,nama,tel:$('#fTel').value.trim(),model:$('#fModel').value.trim(),harga:$('#fHarga').value,deposit:$('#fDep').value,
-    chassis:$('#fChassis').value.trim().toUpperCase(),vso:$('#fVso').value.trim().toUpperCase(),
+    chassis:$('#fChassis').value.trim().toUpperCase(),vso:$('#fVso').value.trim().toUpperCase(),warna:$('#fWarna').value,
     dca:{on:$('#fDca').checked,lokasi:$('#fDcaLok').value.trim(),tarikh:$('#fDcaT').value},
     rma:{on:$('#fRma').checked,cawangan:$('#fRmaCaw').value.trim(),tarikh:$('#fRmaT').value}};
   if(id){
@@ -924,6 +945,7 @@ document.addEventListener('submit',e=>{
 document.addEventListener('input',e=>{
   if(e.target.id==='q'){q=e.target.value;renderList()}
   if(['kHarga','kDep','kKadar'].includes(e.target.id))calc();
+  if(e.target.id==='fModel'){const w=$('#fWarna');if(w){const cur=w.value;const f=famOf(e.target.value);if(w.dataset.fam!==f){w.dataset.fam=f;w.innerHTML=warnaOpts(e.target.value,f&&!WARNA[f].includes(cur)?'':cur)}}}
   if(e.target.classList.contains('bad'))e.target.classList.remove('bad');
 });
 document.addEventListener('change',e=>{
