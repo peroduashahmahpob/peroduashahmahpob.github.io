@@ -110,6 +110,43 @@
     .ov p { color: #fff; font-weight: 800; font-size: 15px; text-align: center; max-width: 420px; }
     .ov img { width: 100%; max-width: 420px; border-radius: 16px; -webkit-touch-callout: default; }
     .ov .row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; width: 100%; max-width: 420px; }
+    /* ---------- kad download (portrait padat, tak nampak di skrin) ---------- */
+    #card { position: absolute; left: -10000px; top: 0; width: 360px; padding: 18px 18px 14px; background: #fff; color: var(--w); font-family: "Montserrat", sans-serif; }
+    #card .c-top { display: flex; justify-content: space-between; align-items: center; }
+    #card .c-top b { font-size: 17px; font-weight: 900; letter-spacing: .04em; line-height: 1; }
+    #card .c-top b small { display: block; margin-top: 3px; font-size: 8px; letter-spacing: .14em; color: var(--g); }
+    #card .c-top img { height: 24px; }
+    #card .c-k { margin-top: 12px; font-size: 9px; font-weight: 900; letter-spacing: .16em; color: var(--o); }
+    #card h3 { font-size: 21px; font-weight: 900; line-height: 1.1; margin-top: 2px; }
+    #card .c-m { font-size: 10px; font-weight: 700; color: var(--g); margin-top: 2px; }
+    #card .c-rows { margin-top: 10px; padding-top: 6px; border-top: 2px dashed var(--ln); }
+    #card .c-ln { display: flex; justify-content: space-between; padding: 3px 0; font-size: 11.5px; font-weight: 600; }
+    #card .c-ln span { color: var(--g); } #card .c-ln b { font-weight: 800; white-space: nowrap; }
+    #card .c-ln s { color: var(--g); font-weight: 600; font-size: 10px; margin-right: 4px; }
+    #card .c-ln.otr { margin-top: 3px; padding: 6px 9px; border-radius: 9px; background: var(--c2); font-size: 12.5px; }
+    #card .c-ln.otr span { color: var(--w); font-weight: 800; }
+    #card .c-ln.rb { margin-top: 5px; padding: 7px 9px; border-radius: 9px; background: linear-gradient(135deg, var(--rb), var(--rb2)); color: #fff; font-size: 12.5px; }
+    #card .c-ln.rb span { color: #fff; font-weight: 900; letter-spacing: .04em; } #card .c-ln.rb b { font-size: 15px; font-weight: 900; }
+    #card .c-ln.loan { margin-top: 5px; padding: 8px 9px; border-radius: 9px; background: var(--w); color: #fff; font-size: 13px; }
+    #card .c-ln.loan span { color: #fff; font-weight: 800; } #card .c-ln.loan b { font-size: 16px; font-weight: 900; }
+    #card .c-sec { margin-top: 10px; font-size: 8.5px; font-weight: 900; letter-spacing: .14em; color: var(--g); }
+    #card .c-ten { margin-top: 5px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
+    #card .c-ten > div { padding: 7px 4px 6px; border-radius: 10px; border: 2px solid var(--ln); background: var(--c2); text-align: center; }
+    #card .c-ten .y { font-size: 9px; font-weight: 900; letter-spacing: .06em; color: var(--g); }
+    #card .c-ten .mo { margin-top: 2px; font-size: 16px; font-weight: 900; color: var(--o); line-height: 1.1; white-space: nowrap; }
+    #card .c-ten .mo small { display: block; font-size: 8px; font-weight: 700; color: var(--g); }
+    #card .c-ten .pf { margin-top: 4px; padding-top: 4px; border-top: 1px solid var(--ln); font-size: 7.5px; font-weight: 700; color: var(--g); }
+    #card .c-ten .pf b { display: block; font-size: 10px; font-weight: 900; color: var(--y); }
+    #card .c-perk { margin-top: 9px; padding: 7px 6px; border-radius: 9px; background: var(--w); color: #fff; font-size: 8.6px; font-weight: 800; text-align: center; white-space: nowrap; }
+    #card .c-perk b { color: #fcd34d; }
+    #card .c-team { margin-top: 10px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; text-align: center; }
+    #card .c-team img { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; object-position: center top; border: 2px solid var(--ln); display: block; margin: 0 auto; }
+    #card .c-team .lead img { border-color: var(--o); }
+    #card .c-team b { display: block; margin-top: 3px; font-size: 11px; font-weight: 900; }
+    #card .c-team i { display: block; font-style: normal; font-size: 7.5px; font-weight: 900; letter-spacing: .04em; color: var(--g); text-transform: uppercase; }
+    #card .c-team .lead i { color: var(--o); }
+    #card .c-team small { display: block; margin-top: 1px; font-size: 9.5px; font-weight: 800; color: var(--gt); }
+    #card .c-note { margin-top: 9px; font-size: 7.5px; font-weight: 600; color: var(--g); text-align: center; line-height: 1.4; }
     @media (max-width: 380px) { .ten > div { gap: 8px; padding: 10px; } .ten .mo { font-size: 20px; } .ten .y { width: 48px; height: 44px; font-size: 16px; } h1 { font-size: 32px; } }
   </style>
 </head>
@@ -192,6 +229,7 @@
 
     <footer><b>TSM PERODUA</b><br>Team Shah Mahpob · Sales &amp; Loan Perodua<br><br>Harga Semenanjung Malaysia. Bukan laman rasmi Perodua.</footer>
   </main>
+  <div id="card" aria-hidden="true"></div>
 
   <div class="ov" id="ov">
     <p>Tekan lama pada gambar → <u>Simpan ke Foto / Galeri</u></p>
@@ -292,6 +330,26 @@
       $("diff").style.display = c.loan > 0 ? "" : "none";
       $("vUp").textContent = rm(c.dp);
       $("upS").textContent = c.dp ? "Downpayment (OTR, insurans & road tax dah masuk loan)" : "Full loan: OTR, insurans & road tax dah masuk loan";
+      // kad download padat
+      $("card").innerHTML = `
+        <div class="c-top"><b>TSM PERODUA<small>TEAM SHAH MAHPOB</small></b><img src="/img/perodua-logo.png" alt="" /></div>
+        <div class="c-k">SEBUT HARGA · ${fmt(today).toUpperCase()} · SEMENANJUNG</div>
+        <h3>Perodua ${v.name}</h3>
+        <div class="c-m">NCD ${S.ncd}% · ${c.dp ? "Downpayment " + rm(c.dp) : "Full loan"}</div>
+        <div class="c-rows">
+          <div class="c-ln"><span>Selling price</span><b>${rm(v.body)}</b></div>
+          <div class="c-ln"><span>Road tax, pendaftaran &amp; ownership</span><b>${rm(v.rt + v.reg + v.claim)}</b></div>
+          <div class="c-ln"><span>Insurans (NCD ${S.ncd}%)</span><b>${S.ncd ? `<s>${rm(v.ins)}</s>` : ""}${rm(c.ins)}</b></div>
+          <div class="c-ln otr"><span>Harga OTR</span><b>${rm(c.otr)}</b></div>
+          <div class="c-ln rb"><span>REBATE ${REB.bulan || ""}</span><b>− ${rm(c.rb)}</b></div>
+          ${c.dp ? `<div class="c-ln"><span>Downpayment</span><b>− ${rm(c.dp)}</b></div>` : ""}
+          <div class="c-ln loan"><span>Jumlah loan</span><b>${rm(c.loan)}</b></div>
+        </div>
+        <div class="c-sec">BULANAN · ${RATE}% FLAT SETAHUN</div>
+        <div class="c-ten">${c.rows.map((r) => `<div><div class="y">${r.y} TAHUN</div><div class="mo">${rm(r.mo)}<small>sebulan</small></div><div class="pf">Untung bank<b>${rm(r.profit)}</b></div></div>`).join("")}</div>
+        <div class="c-perk">🏢 DIRECT HQ &nbsp;·&nbsp; 🚚 Delivery satu Malaysia naik lori <b>TANPA CAJ</b></div>
+        <div class="c-team">${TEAM.map((p) => `<div class="${p.lead ? "lead" : ""}"><img src="${p.img}" alt="" /><b>${p.n}</b><i>${p.role}</i><small>${ph(p.wa)}</small></div>`).join("")}</div>
+        <div class="c-note">Anggaran. Insurans ikut syarikat insurans · bulanan tertakluk kelulusan bank · rebate tertakluk terma Perodua${end ? " (tamat " + fmt(end) + ")" : ""}.</div>`;
       $("notes").innerHTML = `* Harga Semenanjung Malaysia${REB.bulan ? `, ${REB.bulan.charAt(0) + REB.bulan.slice(1).toLowerCase()} ${today.getFullYear()}` : ""}. Insurans anggaran komprehensif ikut NCD (premium sebenar mungkin berbeza sikit ikut syarikat insurans). Bulanan anggaran kadar ${RATE}% flat, tertakluk kelulusan &amp; kadar bank. Rebate tertakluk terma Perodua dan tarikh tamat promosi.`;
     }
 
@@ -304,7 +362,7 @@
       const b = $("saveBtn"), old = b.textContent; b.textContent = "Sedang sediakan gambar…"; b.disabled = true;
       try {
         await loadH2C(); if (document.fonts) await document.fonts.ready;
-        const cv = await html2canvas($("shot"), { scale: 3, backgroundColor: "#ffffff", useCORS: true, logging: false });
+        const cv = await html2canvas($("card"), { scale: 3, backgroundColor: "#ffffff", useCORS: true, logging: false });
         const blob = await new Promise((r) => cv.toBlob(r, "image/png"));
         const fname = `sebut-harga-${S.v.id === "x" ? "bezza-1.3x" : "bezza-1.3av"}.png`;
         const file = new File([blob], fname, { type: "image/png" });
