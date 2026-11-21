@@ -149,6 +149,10 @@
     .faq details[open] summary::after { content: "–"; }
     .faq details p { padding: 0 14px 13px; font-size: 14px; font-weight: 500; color: var(--g); line-height: 1.5; }
     .faq details p b { color: var(--w); }
+    .bub.q { margin-left: auto; margin-top: 16px; border-radius: 14px 4px 14px 14px; background: #d9fdd3; font-weight: 700; width: fit-content; }
+    .faqc .bub .dk { display: block; margin-top: 10px; font-weight: 800; color: var(--w); }
+    .faqc .bub .dk:first-child { margin-top: 0; }
+    .faqc .bub i { display: block; margin-top: 2px; font-size: 13px; color: var(--y); font-style: normal; font-weight: 700; }
     .fab { position: fixed; right: 16px; bottom: calc(16px + env(safe-area-inset-bottom)); z-index: 10; padding: 12px 16px; border-radius: 999px; background: var(--o); color: #fff; font: 800 14px "Montserrat", sans-serif; box-shadow: 0 10px 30px rgba(21,101,216,.4); transition: opacity .2s, transform .2s; }
     .fab.off { opacity: 0; transform: translateY(20px); pointer-events: none; }
 
@@ -241,12 +245,34 @@
       <a class="btn ghost" href="https://tinyurl.com/reviewshahmahpob" target="_blank" rel="noopener">⭐ Baca review Google kami (5.0)</a>
     </section>
 
-    <section class="card faq">
-      <h2>Soalan yang selalu ditanya</h2>
-      <details><summary>Boleh full loan ke?</summary><p>Boleh. Insurans, road tax &amp; pendaftaran semua masuk dalam loan. Awak tak payah keluar duit awal, kalau loan lulus 😊</p></details>
-      <details><summary>NCD tu apa?</summary><p>Diskaun insurans sebab tak pernah claim. Ada kereta lama yang tak claim? Mungkin awak ada NCD. Kereta pertama, pilih 0%.</p></details>
-      <details><summary>Dokumen apa kena sedia?</summary><p>IC &amp; lesen, plus:<br>• <b>Kerja swasta:</b> slip gaji 3 bulan, penyata KWSP, penyata bank 3 bulan<br>• <b>Kerajaan:</b> slip gaji 3 bulan, surat pengesahan jawatan<br>• <b>Bisnes sendiri:</b> SSM, penyata bank 6 bulan, Borang B + resit</p></details>
-      <details><summary>Rebate tu sampai bila?</summary><p>Rebate bulan ni ada tarikh tamat (tengok countdown kat atas). Lepas tu ikut promosi bulan baru.</p></details>
+    <section class="chat faqc">
+      <div class="who"><img src="/img/shah.jpg" alt="Shah" /><div><b>Soalan yang selalu ditanya</b><small>Shah · TSM Perodua menjawab</small></div></div>
+
+      <div class="bub q">Boleh full loan ke?</div>
+      <div class="bub">Boleh full loan! 🙌<br>Rebate <b id="faqReb">RM4,000</b> yang Perodua bagi tu, kita guna sebagai <b>downpayment</b>.<br>So dia dah cover road tax &amp; insurans sekali. <b>Tak perlu keluar duit</b> 😊</div>
+
+      <div class="bub q">NCD tu apa?</div>
+      <div class="bub">Diskaun insurans sebab tak pernah claim.<br>Kalau ada kereta lama, <b>transfer NCD</b> kepada Bezza awak. Lebih jimat tau, rugi tak buat!<br>Team kami akan assist bab NCD ni 👍</div>
+
+      <div class="bub q">Dokumen apa kena sedia?</div>
+      <div class="bub">
+        <span class="dk">👔 Kerja swasta</span>IC, lesen, slip gaji 3 bulan, penyata KWSP, penyata bank 3 bulan.<br><i>Kalau ada OT atau komisen, wajib bagi slip gaji 6 bulan ye.</i>
+        <span class="dk">🏛️ Kerajaan</span>IC, lesen, slip gaji 3 bulan, penyata bank 3 bulan.
+        <span class="dk">🏪 Bisnes sendiri</span>IC, lesen, SSM 3 keping, penyata bank 6 bulan.
+        <span class="dk">🎓 Fresh graduate</span>IC, lesen, skrol tamat belajar, offer letter.
+      </div>
+
+      <div class="bub q">Rebate tu sampai bila?</div>
+      <div class="bub">Rebate sampai <b>bulan 12</b>, tapi sementara stok masih ada je tau.<br>Masuk Januari 2027, rebate dah takde. Rugi juga ye 😬</div>
+
+      <div class="bub q">Kalau takde lesen?</div>
+      <div class="bub">Gaji basic <b>RM2,500 ke atas</b>, tak perlu lesen.<br>Kalau gaji basic <b>bawah RM2,500</b>, kena sediakan penjamin yang ada lesen.</div>
+
+      <div class="bub q">Kalau nak trade in boleh?</div>
+      <div class="bub">Boleh! 🚗<br>Nanti share <b>geran kereta</b>, kami check harga market value.<br>Serah kereta lama masa ambil kereta baru.</div>
+
+      <div class="bub q">Kereta ready stock tak?</div>
+      <div class="bub">Yup, kereta <b>ready stock</b>, jangan risau. Semua warna ada.<br>Kita hantar satu Malaysia naik lori, <b>takde caj</b> 🚚</div>
     </section>
 
     <section class="chat" id="kira">
@@ -303,7 +329,6 @@
       <div class="ten" id="ten"></div>
       <div class="diff" id="diff"></div>
 
-      <div class="up"><div><span>Bayaran awal anda</span><small id="upS"></small></div><b id="vUp"></b></div>
 
       <div class="perks q"><span>🏢 DIRECT HQ</span><span>🚚 Delivery satu Malaysia naik lori · <b>tanpa caj</b></span></div>
 
@@ -421,8 +446,6 @@
         ? `💡 Ambil ${z.y} tahun: bulanan kurang <b>${rm(a.mo - z.mo)}</b> berbanding ${a.y} tahun, tapi untung bank lebih <b>${rm(z.profit - a.profit)}</b>.`
         : "Bayaran penuh tunai, tiada loan.";
       $("diff").style.display = c.loan > 0 ? "" : "none";
-      $("vUp").textContent = rm(c.dp);
-      $("upS").textContent = c.dp ? "Downpayment (OTR, insurans & road tax dah masuk loan)" : "Full loan: OTR, insurans & road tax dah masuk loan";
       // kad download padat
       $("card").innerHTML = `
         <div class="c-top"><b>TSM PERODUA<small>TEAM SHAH MAHPOB</small></b><img src="/img/perodua-logo.png" alt="" /></div>
@@ -467,6 +490,8 @@
       const dPrice = va.body - vx.body, dReb = rebateOf(va) - rebateOf(vx), dLoan = fullLoan(va) - fullLoan(vx), dMo = mo(fullLoan(va), Y) - mo(fullLoan(vx), Y);
       $("vsTip").innerHTML = `💡 AV mahal ${rm0(dPrice)}${dReb > 0 ? `, tapi rebate dia lebih ${rm0(dReb)}` : ""}.<br>Kalau full loan ${Y} tahun, bulanan beza <b>${rm0(dMo)} je</b>.<br><br>Nak kamera undur, skrin &amp; A.S.A.? Ambil <b>AV</b>.<br>Nak paling jimat? <b>X</b> dah cukup 👍`;
     }
+    const rbs = [...new Set(VARIANTS.map(rebateOf).filter(Boolean))];
+    if (rbs.length) $("faqReb").textContent = VARIANTS.filter((v) => rebateOf(v)).map((v) => `${rm0(rebateOf(v))} (${v.name.replace(MODEL + " ", "").replace(" Auto", "")})`).join(" / ");
     if ("IntersectionObserver" in window) {
       new IntersectionObserver((es) => es.forEach((e) => { if (e.target.id === "kira") $("fab").classList.toggle("off", e.isIntersecting || e.boundingClientRect.top < 0); }), { threshold: 0 }).observe($("kira"));
     }
