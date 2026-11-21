@@ -5,7 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>Sebut Harga Perodua Bezza | Shah Mahpob</title>
   <meta name="description" content="Sebut harga Perodua Bezza 1.3X & 1.3AV (Semenanjung): harga OTR, insurans ikut NCD anda, rebate bulan ini dan bulanan loan 5/7/9 tahun." />
-  <meta property="og:title" content="Sebut Harga Perodua Bezza · Team Shah Mahpob" />
+  <meta property="og:title" content="Perodua Bezza · Sebut Harga TSM Perodua" />
+  <meta property="og:image" content="https://peroduashahmahpob.github.io/bezza/img/bezza-garnet-red.jpg" />
   <meta property="og:description" content="Pilih varian & NCD · dapat harga OTR, rebate, jumlah loan & bulanan 5 / 7 / 9 tahun" />
   <meta name="theme-color" content="#1565d8" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -110,6 +111,47 @@
     .ov p { color: #fff; font-weight: 800; font-size: 15px; text-align: center; max-width: 420px; }
     .ov img { width: 100%; max-width: 420px; border-radius: 16px; -webkit-touch-callout: default; }
     .ov .row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; width: 100%; max-width: 420px; }
+    /* ---------- kenal kereta ---------- */
+    .hero { margin-top: 16px; padding: 14px 10px 10px; border-radius: 22px; background: linear-gradient(180deg, #fff, var(--c2)); border: 2px solid var(--ln); text-align: center; }
+    .hero img { width: 100%; height: auto; display: block; transition: opacity .15s; }
+    .sw { display: flex; justify-content: center; gap: 10px; margin-top: 8px; }
+    .sw button { width: 30px; height: 30px; border-radius: 50%; border: 3px solid #fff; box-shadow: 0 0 0 2px var(--ln); cursor: pointer; }
+    .sw button[aria-pressed="true"] { box-shadow: 0 0 0 3px var(--o); }
+    .cname { margin-top: 6px; font-size: 12px; font-weight: 800; color: var(--g); }
+    .from { margin-top: 8px; font-size: 15px; font-weight: 700; color: var(--g); }
+    .from b { color: var(--o); font-size: 28px; font-weight: 900; }
+    .from small { font-size: 12px; }
+    .btn.go { margin-top: 14px; background: var(--o); color: #fff; box-shadow: 0 10px 30px rgba(21,101,216,.30); }
+    .chat { margin-top: 18px; padding: 14px 12px; border-radius: 22px; background: #e9dfd4; background-image: radial-gradient(rgba(255,255,255,.35) 1px, transparent 1px); background-size: 14px 14px; scroll-margin-top: 12px; }
+    .who { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+    .who img { width: 38px; height: 38px; border-radius: 50%; object-fit: cover; object-position: center top; }
+    .who b { display: block; font-size: 14px; font-weight: 800; } .who small { font-size: 11px; color: var(--gt); font-weight: 700; }
+    .bub { position: relative; max-width: 88%; margin-top: 6px; padding: 9px 12px; border-radius: 4px 14px 14px 14px; background: #fff; font-size: 15px; font-weight: 500; line-height: 1.45; box-shadow: 0 1px 1px rgba(0,0,0,.08); }
+    .bub b { font-weight: 800; } .bub i { color: var(--g); }
+    .bub.me { margin-left: auto; margin-top: 14px; border-radius: 14px 4px 14px 14px; background: #d9fdd3; max-width: 100%; }
+    .card h2 { font-size: 20px; font-weight: 900; line-height: 1.2; }
+    .pt { display: flex; gap: 12px; margin-top: 14px; align-items: flex-start; }
+    .pt > i { flex: none; width: 40px; height: 40px; border-radius: 12px; background: var(--c2); display: grid; place-items: center; font-style: normal; font-size: 20px; }
+    .pt p { font-size: 14px; font-weight: 500; color: var(--g); line-height: 1.45; }
+    .pt p b { display: block; color: var(--w); font-size: 15px; font-weight: 800; }
+    .tsmw .btn { margin-top: 16px; }
+    .vsg { margin-top: 12px; display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 8px; }
+    .vsg > div { padding: 12px 10px; border-radius: 16px; border: 2px solid var(--ln); background: var(--c2); }
+    .vsg > div.av { border-color: var(--o); background: #fff; }
+    .vsg b { display: block; font-size: 18px; font-weight: 900; } .vsg .av b { color: var(--o); }
+    .vsg small { display: block; font-size: 11px; font-weight: 700; color: var(--g); }
+    .vsg ul { margin-top: 8px; padding-left: 16px; font-size: 12.5px; font-weight: 600; line-height: 1.45; }
+    .vsg li { margin-top: 3px; }
+    .faq details { margin-top: 10px; border: 2px solid var(--ln); border-radius: 14px; background: var(--c2); }
+    .faq summary { padding: 13px 14px; font-size: 15px; font-weight: 800; cursor: pointer; list-style: none; display: flex; justify-content: space-between; gap: 10px; }
+    .faq summary::-webkit-details-marker { display: none; }
+    .faq summary::after { content: "+"; color: var(--o); font-weight: 900; font-size: 18px; line-height: 1; }
+    .faq details[open] summary::after { content: "–"; }
+    .faq details p { padding: 0 14px 13px; font-size: 14px; font-weight: 500; color: var(--g); line-height: 1.5; }
+    .faq details p b { color: var(--w); }
+    .fab { position: fixed; right: 16px; bottom: calc(16px + env(safe-area-inset-bottom)); z-index: 10; padding: 12px 16px; border-radius: 999px; background: var(--o); color: #fff; font: 800 14px "Montserrat", sans-serif; box-shadow: 0 10px 30px rgba(21,101,216,.4); transition: opacity .2s, transform .2s; }
+    .fab.off { opacity: 0; transform: translateY(20px); pointer-events: none; }
+
     /* ---------- kad download (portrait padat, tak nampak di skrin) ---------- */
     #card { position: absolute; left: -10000px; top: 0; width: 360px; padding: 18px 18px 14px; background: #fff; color: var(--w); font-family: "Montserrat", sans-serif; }
     #card .c-top { display: flex; justify-content: space-between; align-items: center; }
@@ -156,11 +198,66 @@
     <header>
       <div class="brand"><div class="plogo"><img src="/img/perodua-logo.png" alt="Perodua" /></div><div class="tsm">TSM PERODUA<small>Team Shah Mahpob</small></div></div>
       <div class="perks"><span>🏢 DIRECT HQ</span><span>🚚 Delivery satu Malaysia naik lori · <b>tanpa caj</b></span></div>
-      <p class="kick">Sebut Harga · Semenanjung</p>
+      <div class="hero">
+        <img id="carimg" src="/bezza/img/bezza-garnet-red.jpg" alt="Perodua Bezza warna Garnet Red" width="502" height="284" />
+        <div class="sw" id="sw"></div>
+        <p class="cname" id="cname">Garnet Red</p>
+      </div>
+      <p class="kick">Sedan jimat · Bonet besar</p>
       <h1>Perodua <span>Bezza</span></h1>
-      <p class="sub">Pilih varian &amp; NCD anda. Harga, rebate dan bulanan dikira terus.</p>
+      <p class="from">Bulanan dari <b id="fromMo">RM—</b><small>/bulan</small><br><small>full loan 9 tahun · selepas rebate</small></p>
+      <a class="btn go" href="#kira">🧮 Kira bulanan saya ↓</a>
       <div data-rebate-cd></div>
     </header>
+
+    <!-- ===== KENAL BEZZA (gaya chat WhatsApp) ===== -->
+    <section class="chat">
+      <div class="who"><img src="/img/shah.jpg" alt="Shah" /><div><b>Shah · TSM Perodua</b><small>online</small></div></div>
+      <div class="bub">Salam 👋 Saya Shah, ketua pasukan TSM Perodua.</div>
+      <div class="bub">Ramai tanya saya:<br><i>"Shah, nak sedan tapi bajet macam kereta kecil. Ada ke?"</i></div>
+      <div class="bub">Ada. <b>Bezza</b> 😄<br>Jom saya terangkan ringkas-ringkas. 2 minit je baca.</div>
+    </section>
+
+    <section class="card why">
+      <h2>Kenapa ramai pilih Bezza?</h2>
+      <div class="pt"><i>⛽</i><p><b>Jimat minyak gila</b>21–22 km/liter. Tangki 36 liter, isi penuh boleh jalan lebih kurang 750 km. Ulang-alik kerja seminggu pun tak habis.</p></div>
+      <div class="pt"><i>🧳</i><p><b>Bonet besar, 508 liter</b>Stroller, beg balik kampung satu family, barang dapur sebulan. Semua muat.</p></div>
+      <div class="pt"><i>💸</i><p><b>Road tax RM70 je setahun</b>Servis pun murah, spare part senang cari kat mana-mana.</p></div>
+      <div class="pt"><i>⚙️</i><p><b>Enjin 1.3L, gear auto</b>Dual VVT-i, 70kW. Masuk highway, potong lori, tak semput.</p></div>
+      <div class="pt"><i>🔑</i><p><b>Smart key + push start</b>Kunci dalam poket je. Tekan butang, terus hidup.</p></div>
+      <div class="pt"><i>🛡️</i><p><b>Selamat untuk family</b>ABS + EBD, 2 airbag, ISOFIX untuk kerusi baby. Ada VSC &amp; TRC supaya kereta stabil masa hujan.</p></div>
+    </section>
+
+    <section class="card vs">
+      <h2>1.3X atau 1.3AV? Beza apa?</h2>
+      <div class="vsg">
+        <div><b>1.3X</b><small>Dah cukup lengkap</small>
+          <ul><li>Enjin 1.3L auto</li><li>Rim alloy 15" + lampu kabus</li><li>Smart key &amp; push start</li><li>VSC, TRC, Brake Assist</li><li>Sensor sudut depan</li><li>21.0 km/liter</li></ul></div>
+        <div class="av"><b>1.3AV</b><small>Semua dalam X, tambah:</small>
+          <ul><li>A.S.A. (brek auto bila nak langgar)</li><li>Kamera undur</li><li>Skrin multimedia + navigasi</li><li>Kerusi kulit</li><li>Cermin sisi lipat auto</li><li>Eco Idle · 22.0 km/liter</li></ul></div>
+      </div>
+      <div class="bub me" id="vsTip"></div>
+    </section>
+
+    <section class="card tsmw">
+      <h2>Kenapa beli dengan TSM Perodua?</h2>
+      <div class="pt"><i>🏢</i><p><b>Direct HQ</b>Urusan terus, tak ada orang tengah.</p></div>
+      <div class="pt"><i>🚚</i><p><b>Delivery satu Malaysia naik lori, tanpa caj</b>Duduk Kelantan ke, Johor ke, kereta dihantar naik lori ke tempat awak. Tak payah datang ambil.</p></div>
+      <div class="pt"><i>🤝</i><p><b>Pakar loan bantu awak</b>Aishah &amp; Fendi tolong semak dan susun permohonan loan awak. Tak faham apa-apa, tanya je.</p></div>
+      <a class="btn ghost" href="https://tinyurl.com/reviewshahmahpob" target="_blank" rel="noopener">⭐ Baca review Google kami (5.0)</a>
+    </section>
+
+    <section class="card faq">
+      <h2>Soalan yang selalu ditanya</h2>
+      <details><summary>Boleh full loan ke?</summary><p>Boleh. Insurans, road tax &amp; pendaftaran semua masuk dalam loan. Awak tak payah keluar duit awal, kalau loan lulus 😊</p></details>
+      <details><summary>NCD tu apa?</summary><p>Diskaun insurans sebab tak pernah claim. Ada kereta lama yang tak claim? Mungkin awak ada NCD. Kereta pertama, pilih 0%.</p></details>
+      <details><summary>Dokumen apa kena sedia?</summary><p>IC &amp; lesen, plus:<br>• <b>Kerja swasta:</b> slip gaji 3 bulan, penyata KWSP, penyata bank 3 bulan<br>• <b>Kerajaan:</b> slip gaji 3 bulan, surat pengesahan jawatan<br>• <b>Bisnes sendiri:</b> SSM, penyata bank 6 bulan, Borang B + resit</p></details>
+      <details><summary>Rebate tu sampai bila?</summary><p>Rebate bulan ni ada tarikh tamat (tengok countdown kat atas). Lepas tu ikut promosi bulan baru.</p></details>
+    </section>
+
+    <section class="chat" id="kira">
+      <div class="bub">Ok, dah kenal Bezza? 😄<br>Jom kira <b>bulanan awak</b> pulak 👇<br>Pilih varian, NCD &amp; cara bayar. Harga keluar terus.</div>
+    </section>
 
     <section class="card">
       <div class="step"><i>1</i>Pilih varian</div>
@@ -229,6 +326,7 @@
 
     <footer><b>TSM PERODUA</b><br>Team Shah Mahpob · Sales &amp; Loan Perodua<br><br>Harga Semenanjung Malaysia. Bukan laman rasmi Perodua.</footer>
   </main>
+  <a class="fab" id="fab" href="#kira">🧮 Kira bulanan ↓</a>
   <div id="card" aria-hidden="true"></div>
 
   <div class="ov" id="ov">
@@ -352,6 +450,31 @@
         <div class="c-team">${TEAM.map((p) => `<div class="${p.lead ? "lead" : ""}"><img src="${p.img}" alt="" /><b>${p.n}</b><i>${p.role}</i><small>${ph(p.wa)}</small></div>`).join("")}</div>
         <div class="c-note">Anggaran. Insurans ikut syarikat insurans · bulanan tertakluk kelulusan bank · rebate tertakluk terma Perodua${end ? " (tamat " + fmt(end) + ")" : ""}.</div>`;
       $("notes").innerHTML = `* Harga Semenanjung Malaysia${REB.bulan ? `, ${REB.bulan.charAt(0) + REB.bulan.slice(1).toLowerCase()} ${today.getFullYear()}` : ""}. Insurans anggaran komprehensif ikut NCD (premium sebenar mungkin berbeza sikit ikut syarikat insurans). Bulanan anggaran kadar ${RATE}% flat, tertakluk kelulusan &amp; kadar bank. Rebate tertakluk terma Perodua dan tarikh tamat promosi.`;
+    }
+
+    // ---------- kenal kereta: warna, "bulanan dari", tip X vs AV, butang terapung ----------
+    const COLORS = [
+      ["garnet-red", "Garnet Red", "#8f1f24"], ["ocean-blue", "Ocean Blue", "#137fa6"], ["sugar-brown", "Sugar Brown", "#6b4f47"],
+      ["granite-grey", "Granite Grey", "#33363a"], ["glittering-silver", "Glittering Silver", "#b9bcbf"], ["ivory-white", "Ivory White", "#f3f2ee"],
+    ];
+    $("sw").innerHTML = COLORS.map(([f, n, c], i) => `<button type="button" data-f="${f}" data-n="${n}" style="background:${c}" aria-label="${n}" aria-pressed="${i === 0}"></button>`).join("");
+    $("sw").onclick = (e) => {
+      const b = e.target.closest("button"); if (!b) return; press($("sw"), b);
+      const img = $("carimg"); img.style.opacity = 0;
+      setTimeout(() => { img.src = `/bezza/img/bezza-${b.dataset.f}.jpg`; img.alt = `Perodua Bezza warna ${b.dataset.n}`; img.style.opacity = 1; }, 150);
+      $("cname").textContent = b.dataset.n;
+    };
+    const fullLoan = (v) => r2(v.body + v.rt + v.reg + v.claim + v.ins - rebateOf(v));        // NCD 0%, tanpa DP
+    const mo = (loan, y) => r2(loan * (1 + RATE / 100 * y) / (y * 12));
+    const Y = TENURES[TENURES.length - 1];
+    $("fromMo").textContent = rm0(Math.min(...VARIANTS.map((v) => mo(fullLoan(v), Y))));
+    const vx = VARIANTS.find((v) => v.id === "x"), va = VARIANTS.find((v) => v.id === "av");
+    if (vx && va) {
+      const dPrice = va.body - vx.body, dReb = rebateOf(va) - rebateOf(vx), dLoan = fullLoan(va) - fullLoan(vx), dMo = mo(fullLoan(va), Y) - mo(fullLoan(vx), Y);
+      $("vsTip").innerHTML = `💡 AV mahal ${rm0(dPrice)}${dReb > 0 ? `, tapi rebate dia lebih ${rm0(dReb)}` : ""}.<br>Kalau full loan ${Y} tahun, bulanan beza <b>${rm0(dMo)} je</b>.<br><br>Nak kamera undur, skrin &amp; A.S.A.? Ambil <b>AV</b>.<br>Nak paling jimat? <b>X</b> dah cukup 👍`;
+    }
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver((es) => es.forEach((e) => { if (e.target.id === "kira") $("fab").classList.toggle("off", e.isIntersecting || e.boundingClientRect.top < 0); }), { threshold: 0 }).observe($("kira"));
     }
 
     // ---------- simpan gambar ----------
