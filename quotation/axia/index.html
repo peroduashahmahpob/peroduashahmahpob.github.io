@@ -138,6 +138,10 @@
     .vsg { margin-top: 12px; display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 8px; }
     .vsg > div { padding: 12px 10px; border-radius: 16px; border: 2px solid var(--ln); background: var(--c2); }
     .vsg ul li { list-style: disc; }
+    .vsg.one { grid-template-columns: 1fr; }
+    .vsg.one ul { columns: 2; column-gap: 18px; }
+    .vsg.one li { break-inside: avoid; }
+    @media (max-width: 340px) { .vsg.one ul { columns: 1; } }
     .vsg > div.av { border-color: var(--o); background: #fff; }
     .vsg b { display: block; font-size: 18px; font-weight: 900; } .vsg .av b { color: var(--o); }
     .vsg small { display: block; font-size: 11px; font-weight: 700; color: var(--g); }
@@ -228,15 +232,15 @@
 
     <section class="card vs">
       <h2>G, X, SE atau AV? Beza apa?</h2>
-      <div class="vsg">
+      <div class="vsg one">
         <div><b>G</b><small>Asas, dah cukup</small>
-          <ul><li>1.0L + gear auto D-CVT</li><li>Audio MP3 &amp; Bluetooth</li><li>ABS, VSC, TRC, Hill-start Assist</li></ul></div>
+          <ul><li>1.0L + gear auto D-CVT</li><li>2 airbag</li><li>Sensor belakang</li><li>Rim alloy 14"</li><li>Lampu halogen (auto OFF)</li><li>Skrin LCD multi-info</li><li>Audio MP3 &amp; Bluetooth</li><li>2 speaker depan</li></ul></div>
         <div><b>X</b><small>Semua dalam G, tambah:</small>
-          <ul><li>Sport rim alloy 14"</li><li>Sensor belakang</li></ul></div>
+          <ul><li>Sensor sudut depan</li><li>Lampu depan LED</li><li>Lampu auto ON/OFF</li><li>Key free entry</li><li>Push start/stop</li><li>Tilt steering</li><li>Laras lampu depan (manual)</li><li>Cup holder belakang</li><li>4 speaker (2 depan, 2 belakang)</li></ul></div>
         <div><b>SE</b><small>Semua dalam X, tambah:</small>
-          <ul><li>Lampu LED + DRL</li><li>Key-free &amp; push start</li><li>Bodykit &amp; spoiler belakang</li><li>ECO Idle · 27.4 km/liter</li></ul></div>
+          <ul><li>Kerusi semi-bucket</li><li>Meter analog dengan RPM</li><li>Stereng dengan Power Mode</li><li>ECO Idle (27.4 km/liter)</li><li>Tinted solar &amp; security</li><li>Lampu DRL</li><li>Skirting depan &amp; tepi</li><li>Spoiler belakang</li><li>Aircond digital</li><li>Pemegang pintu dalam chrome</li><li>Tombol gear kulit</li><li>Anti-snatch hook</li><li>Shopping hooks</li></ul></div>
         <div class="av"><b>AV</b><small>Semua dalam SE, tambah:</small>
-          <ul><li>6 airbag</li><li>A.S.A. (brek auto bila nak langgar)</li><li>Blind Spot Monitor &amp; Lane Assist</li><li>Skrin 9" + kamera undur</li><li>Kerusi semi-leather</li></ul></div>
+          <ul><li>6 airbag</li><li>Advanced Safety Assist (A.S.A.)</li><li>Lane Departure Warning (LDW)</li><li>Lane Departure Prevention (LDP)</li><li>Blind Spot Monitor (BSM)</li><li>Rear Cross Traffic Alert (RCTA)</li><li>Auto High Beam (AHB)</li><li>Kamera undur</li></ul></div>
       </div>
       <div class="bub me" id="vsTip"></div>
     </section>
@@ -496,7 +500,7 @@
       const g = m.find((x) => x.v.id === "g"), x = m.find((x) => x.v.id === "x");
       $("vsTip").innerHTML = `💡 Bulanan full loan ${Y} tahun (selepas rebate):<br>` +
         m.map((x) => `${x.v.name.replace(MODEL + " 1.0 ", "")} <b>${rm0(x.m)}</b>`).join(" · ") +
-        (g && x ? `<br><br>Tengok tu, <b>X cuma lebih ${rm0(Math.round(x.m) - Math.round(g.m))} sebulan</b> dari G, sebab rebate X besar. Dapat rim sport &amp; sensor belakang 👍` : "");
+        (g && x ? `<br><br>Tengok tu, <b>X cuma lebih ${rm0(Math.round(x.m) - Math.round(g.m))} sebulan</b> dari G, sebab rebate X besar. Dapat lampu LED, keyless &amp; push start 👍` : "");
     }
     const rbs = [...new Set(VARIANTS.map(rebateOf).filter(Boolean))];
     if (rbs.length > 2) $("faqReb").textContent = `${rm0(Math.min(...rbs))} – ${rm0(Math.max(...rbs))} (ikut varian)`;
