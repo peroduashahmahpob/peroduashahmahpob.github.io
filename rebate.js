@@ -1,8 +1,8 @@
 // ====== REBATE BULAN INI — tukar fail ni sahaja setiap bulan ======
 // Senarai dari Shah: "Rebate Perodua Nov 2026". Nama ikut varian dalam kalkulator/data.js.
 window.REBATE = {
-  bulan: "NOVEMBER",
-  tamat: "2026-11-30T23:59:59+08:00",   // waktu Malaysia
+  bulan: "HUJUNG TAHUN",               // Shah 2026-11-21: rebate Nov kekal sampai 31 Dis (sementara stok ada)
+  tamat: "2026-12-31T23:59:59+08:00",   // waktu Malaysia
   sehingga: 7500,                        // rebate paling tinggi (untuk banner)
   rules: [                               // [teks dalam nama varian, rebate RM] — yang pertama padan dipakai
     ["axia g", 500], ["axia x", 3900], ["axia se", 4300], ["axia av", 4900],
