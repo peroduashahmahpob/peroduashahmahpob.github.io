@@ -144,7 +144,7 @@ window.HARGA = [
  {
   "id": "ativa",
   "model": "Ativa",
-  "rate": 2.4,
+  "rate": 2.3,
   "page": "../ativa/",
   "variants": [
    {
