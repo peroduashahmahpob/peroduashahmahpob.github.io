@@ -42,6 +42,11 @@
     .rm { position: relative; margin-top: 12px; } .rm::before { content: "RM"; position: absolute; left: 14px; top: 50%; transform: translateY(-50%); font-weight: 900; color: var(--o); font-size: 15px; }
     input { width: 100%; min-height: 54px; padding: 0 14px 0 50px; border-radius: 14px; background: var(--c2); border: 2px solid var(--ln); color: var(--w); font: 900 22px "Montserrat", sans-serif; -webkit-appearance: none; appearance: none; }
     input:focus { outline: none; border-color: var(--o); }
+    input.nm { margin-top: 12px; padding: 0 14px; font-size: 18px; font-weight: 700; }
+    .qh .for { margin-top: 8px; display: inline-block; padding: 5px 10px; border-radius: 10px; background: var(--c2); font-size: 13px; font-weight: 600; color: var(--g); }
+    .qh .for b { color: var(--w); font-weight: 900; }
+    #card .c-for { margin-top: 8px; display: inline-block; padding: 4px 9px; border-radius: 8px; background: var(--c2); font-size: 10.5px; font-weight: 600; color: var(--g); }
+    #card .c-for b { color: var(--w); font-weight: 900; }
     #dpBox { display: none; } #dpBox.on { display: block; }
     .dperr { margin-top: 6px; font-size: 12px; font-weight: 700; color: var(--bad); display: none; }
 
@@ -303,12 +308,19 @@
       </div>
     </section>
 
+    <section class="card">
+      <div class="step"><i>4</i>Nama anda <small style="text-transform:none;letter-spacing:0;font-weight:600">(pilihan)</small></div>
+      <input class="nm" id="nama" type="text" maxlength="40" placeholder="Contoh: Ahmad" autocomplete="name" aria-label="Nama anda" />
+      <p class="hint">Nama akan keluar dalam sebut harga &amp; gambar download.</p>
+    </section>
+
     <div class="shot" id="shot">
       <div class="qh">
         <div>
           <div class="k">TSM PERODUA · SEBUT HARGA</div>
           <h2 id="qName">Bezza</h2>
           <div class="m" id="qMeta"></div>
+          <div class="for" id="qFor"></div>
         </div>
         <img src="/img/perodua-logo.png" alt="" />
       </div>
@@ -376,6 +388,7 @@
     // ======================================================================
 
     const $ = (id) => document.getElementById(id);
+    const esc = (t) => String(t).replace(/[&<>"]/g, (ch) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[ch]));
     const r2 = (n) => Math.round((n + Number.EPSILON) * 100) / 100;
     const rm = (n) => "RM" + n.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
     const rm0 = (n) => "RM" + Math.round(n).toLocaleString("en-US");
@@ -398,6 +411,7 @@
       const b = e.target.closest("button"); if (!b) return; press($("pay"), b); S.pay = b.dataset.p;
       $("dpBox").classList.toggle("on", S.pay === "dp"); if (S.pay === "dp") $("dp").focus(); run();
     };
+    $("nama").addEventListener("input", () => run());
     $("dp").addEventListener("input", () => {
       const raw = $("dp").value.replace(/[^\d]/g, "");
       $("dp").value = raw ? (+raw).toLocaleString("en-US") : ""; run();
@@ -446,10 +460,13 @@
         ? `💡 Ambil ${z.y} tahun: bulanan kurang <b>${rm(a.mo - z.mo)}</b> berbanding ${a.y} tahun, tapi untung bank lebih <b>${rm(z.profit - a.profit)}</b>.`
         : "Bayaran penuh tunai, tiada loan.";
       $("diff").style.display = c.loan > 0 ? "" : "none";
+      const nama = $("nama").value.trim();
+      $("qFor").innerHTML = nama ? `Disediakan untuk <b>${esc(nama)}</b>` : ""; $("qFor").style.display = nama ? "" : "none";
       // kad download padat
       $("card").innerHTML = `
         <div class="c-top"><b>TSM PERODUA<small>TEAM SHAH MAHPOB</small></b><img src="/img/perodua-logo.png" alt="" /></div>
         <div class="c-k">SEBUT HARGA · ${fmt(today).toUpperCase()} · SEMENANJUNG</div>
+        ${nama ? `<div class="c-for">Disediakan untuk <b>${esc(nama)}</b></div>` : ""}
         <h3>Perodua ${v.name}</h3>
         <div class="c-m">NCD ${S.ncd}% · ${c.dp ? "Downpayment " + rm(c.dp) : "Full loan"}</div>
         <div class="c-rows">
