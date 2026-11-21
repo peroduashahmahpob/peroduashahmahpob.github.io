@@ -242,6 +242,7 @@
     // ====== DATA BEZZA (Semenanjung) — tukar di sini bila harga baru ======
     // ins = premium insurans dalam price list (NCD 0%, termasuk duti setem RM10).
     // key = nama varian dalam /rebate.js (rebate auto ikut bulan).
+    const MODEL = "Bezza";
     const TEAM = [
       { n: "Shah", role: "Ketua Pasukan", wa: "60137258194", img: "/img/shah.jpg", lead: true },
       { n: "Aishah", role: "Pakar Loan", wa: "60182031020", img: "/aisyah/img/aisyah.jpg" },
@@ -270,7 +271,7 @@
     // pilihan varian
     $("vars").innerHTML = VARIANTS.map((v, i) => {
       const otr = v.body + v.rt + v.reg + v.claim + v.ins, rb = rebateOf(v);
-      return `<button type="button" data-i="${i}" aria-pressed="${i === 0}"><b>${v.name.replace("Bezza ", "")}</b><small>OTR ${rm0(otr)}</small>${rb ? `<em>REBATE ${rm0(rb)}</em>` : ""}</button>`;
+      return `<button type="button" data-i="${i}" aria-pressed="${i === 0}"><b>${v.name.replace(MODEL + " ", "")}</b><small>OTR ${rm0(otr)}</small>${rb ? `<em>REBATE ${rm0(rb)}</em>` : ""}</button>`;
     }).join("");
     $("ncds").innerHTML = NCDS.map((n) => `<button type="button" data-n="${n}" aria-pressed="${n === 0}">${n}%</button>`).join("");
     const press = (box, el) => box.querySelectorAll("button").forEach((b) => b.setAttribute("aria-pressed", b === el));
@@ -309,7 +310,7 @@
       const fmt = (d) => d.toLocaleDateString("ms-MY", { day: "numeric", month: "short", year: "numeric", timeZone: "Asia/Kuala_Lumpur" });
       $("qMeta").textContent = `${fmt(today)} · Semenanjung · NCD ${S.ncd}%`;
       $("vBody").textContent = rm(v.body); $("vRt").textContent = rm(v.rt); $("vReg").textContent = rm(v.reg); $("vClaim").textContent = rm(v.claim);
-      $("vSi").textContent = `Nilai dilindungi ${rm0(v.si)} · NCD ${S.ncd}%`;
+      $("vSi").textContent = v.si ? `Nilai dilindungi ${rm0(v.si)} · NCD ${S.ncd}%` : `NCD ${S.ncd}%`;
       $("vIns").innerHTML = S.ncd ? `<s>${rm(v.ins)}</s>${rm(c.ins)}` : rm(c.ins);
       $("lnIns").classList.toggle("ncd", S.ncd > 0);
       $("vOtr").textContent = rm(c.otr);
@@ -364,13 +365,13 @@
         await loadH2C(); if (document.fonts) await document.fonts.ready;
         const cv = await html2canvas($("card"), { scale: 3, backgroundColor: "#ffffff", useCORS: true, logging: false });
         const blob = await new Promise((r) => cv.toBlob(r, "image/png"));
-        const fname = `sebut-harga-${S.v.id === "x" ? "bezza-1.3x" : "bezza-1.3av"}.png`;
+        const fname = `sebut-harga-${S.v.name.toLowerCase().replace(/[^a-z0-9.]+/g, "-")}.png`;
         const file = new File([blob], fname, { type: "image/png" });
         const url = URL.createObjectURL(blob);
         $("ovImg").src = url; $("ovDl").href = url; $("ovDl").download = fname;
         let shared = false;
         if (navigator.canShare && navigator.canShare({ files: [file] })) {
-          try { await navigator.share({ files: [file], title: "Sebut Harga Perodua Bezza" }); shared = true; } catch (err) { if (err && err.name === "AbortError") shared = true; }
+          try { await navigator.share({ files: [file], title: "Sebut Harga Perodua " + MODEL }); shared = true; } catch (err) { if (err && err.name === "AbortError") shared = true; }
         }
         if (!shared) $("ov").classList.add("on");
       } catch (err) {
