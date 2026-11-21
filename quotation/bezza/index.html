@@ -13,7 +13,7 @@
   <style>
     :root { --bg: #f2f6fc; --card: #ffffff; --c2: #edf3fb; --ln: #d5e0ef; --o: #1565d8; --y: #b45309; --w: #0f172a; --g: #556070; --gr: #25d366; --gt: #128c4a; --ok: #16a34a; --bad: #dc2626; --rb: #ee7a4c; --rb2: #cc5a2c; }
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { background: var(--bg); color: var(--w); font-family: "Montserrat", system-ui, sans-serif; line-height: 1.45; -webkit-font-smoothing: antialiased; padding-bottom: 96px; }
+    body { background: var(--bg); color: var(--w); font-family: "Montserrat", system-ui, sans-serif; line-height: 1.45; -webkit-font-smoothing: antialiased; padding-bottom: 32px; }
     a { color: inherit; text-decoration: none; }
     .wrap { max-width: 520px; margin: 0 auto; padding: 0 16px; }
     .glow { position: fixed; inset: 0; pointer-events: none; background: radial-gradient(ellipse 80% 40% at 50% 0%, rgba(21,101,216,.14), transparent 70%); z-index: -1; }
@@ -79,8 +79,23 @@
     .up span { font-size: 13px; font-weight: 800; color: var(--gt); } .up small { display: block; font-size: 11px; font-weight: 600; color: var(--g); }
     .up b { font-size: 20px; font-weight: 900; color: var(--gt); white-space: nowrap; font-variant-numeric: tabular-nums; }
     .notes { margin-top: 14px; font-size: 11px; font-weight: 600; color: var(--g); line-height: 1.5; }
-    .sh-foot { margin-top: 14px; padding-top: 12px; border-top: 2px dashed var(--ln); display: flex; justify-content: space-between; align-items: center; gap: 10px; font-size: 12px; font-weight: 800; }
-    .sh-foot .wa { color: var(--gt); text-align: right; }
+    .brand { display: flex; align-items: center; gap: 12px; }
+    .tsm { font-size: 24px; font-weight: 900; letter-spacing: .04em; line-height: 1; }
+    .tsm small { display: block; margin-top: 4px; font-size: 11px; font-weight: 800; letter-spacing: .16em; color: var(--g); text-transform: uppercase; }
+    .perks { margin-top: 14px; display: flex; flex-wrap: wrap; gap: 8px; }
+    .perks span { padding: 8px 12px; border-radius: 999px; background: var(--w); color: #fff; font-size: 12px; font-weight: 800; letter-spacing: .02em; }
+    .perks span b { color: #fcd34d; text-transform: uppercase; }
+    .perks.q { margin-top: 14px; }
+    .perks.q span { flex: 1 1 auto; text-align: center; }
+    .team { margin-top: 14px; padding-top: 14px; border-top: 2px dashed var(--ln); }
+    .team .tk { font-size: 11px; font-weight: 900; letter-spacing: .14em; color: var(--o); text-align: center; }
+    .tm { margin-top: 10px; display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 8px; text-align: center; }
+    .tm img { width: 68px; height: 68px; border-radius: 50%; object-fit: cover; object-position: center top; border: 3px solid var(--ln); display: block; margin: 0 auto; }
+    .tm .lead img { border-color: var(--o); }
+    .tm b { display: block; margin-top: 6px; font-size: 14px; font-weight: 900; }
+    .tm i { display: inline-block; margin-top: 3px; padding: 2px 6px; border-radius: 999px; background: var(--c2); color: var(--g); font-style: normal; font-size: 9px; font-weight: 900; letter-spacing: .02em; white-space: nowrap; text-transform: uppercase; }
+    .tm .lead i { background: var(--o); color: #fff; }
+    .tm small { display: block; margin-top: 5px; font-size: 11px; font-weight: 800; color: var(--gt); white-space: nowrap; }
 
     .btn { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; min-height: 56px; border-radius: 16px; font: 800 16px "Montserrat", sans-serif; border: 0; cursor: pointer; text-align: center; padding: 10px 16px; }
     .btn.wa { background: var(--gr); color: #06290f; } .btn.ghost { background: var(--card); border: 2px solid var(--ln); color: var(--w); }
@@ -102,7 +117,8 @@
   <div class="glow"></div>
   <main class="wrap">
     <header>
-      <div class="plogo"><img src="/img/perodua-logo.png" alt="Perodua" /></div>
+      <div class="brand"><div class="plogo"><img src="/img/perodua-logo.png" alt="Perodua" /></div><div class="tsm">TSM PERODUA<small>Team Shah Mahpob</small></div></div>
+      <div class="perks"><span>🏢 DIRECT HQ</span><span>🚚 Delivery satu Malaysia naik lori · <b>tanpa caj</b></span></div>
       <p class="kick">Sebut Harga · Semenanjung</p>
       <h1>Perodua <span>Bezza</span></h1>
       <p class="sub">Pilih varian &amp; NCD anda. Harga, rebate dan bulanan dikira terus.</p>
@@ -136,14 +152,14 @@
     <div class="shot" id="shot">
       <div class="qh">
         <div>
-          <div class="k">SEBUT HARGA</div>
+          <div class="k">TSM PERODUA · SEBUT HARGA</div>
           <h2 id="qName">Bezza</h2>
           <div class="m" id="qMeta"></div>
         </div>
         <img src="/img/perodua-logo.png" alt="" />
       </div>
       <div style="margin-top:8px">
-        <div class="ln"><span>Harga kereta</span><b id="vBody"></b></div>
+        <div class="ln"><span>Selling price</span><b id="vBody"></b></div>
         <div class="ln"><span>Road tax (1 tahun)</span><b id="vRt"></b></div>
         <div class="ln"><span>Pendaftaran</span><b id="vReg"></b></div>
         <div class="ln"><span>Ownership claim</span><b id="vClaim"></b></div>
@@ -161,18 +177,21 @@
 
       <div class="up"><div><span>Bayaran awal anda</span><small id="upS"></small></div><b id="vUp"></b></div>
 
+      <div class="perks q"><span>🏢 DIRECT HQ</span><span>🚚 Delivery satu Malaysia naik lori · <b>tanpa caj</b></span></div>
+
       <p class="notes" id="notes"></p>
-      <div class="sh-foot"><span>TEAM SHAH MAHPOB<br><span style="color:var(--g);font-weight:700">Sales Advisor Perodua</span></span><span class="wa" id="waNum"></span></div>
+      <div class="team">
+        <div class="tk">TSM PERODUA · TEAM SHAH MAHPOB</div>
+        <div class="tm" id="team"></div>
+      </div>
     </div>
 
     <div class="acts">
-      <a class="btn wa" id="waRes" href="#" target="_blank" rel="noopener">💬 Hantar sebut harga ke WhatsApp Shah</a>
-      <button class="btn save" type="button" id="saveBtn">📷 Simpan gambar sebut harga</button>
+      <button class="btn save" type="button" id="saveBtn">📷 Tekan untuk download</button>
     </div>
 
-    <footer><b>TEAM SHAH MAHPOB</b><br>Sales &amp; Loan · Perodua<br><br>Harga Semenanjung Malaysia. Bukan laman rasmi Perodua.</footer>
+    <footer><b>TSM PERODUA</b><br>Team Shah Mahpob · Sales &amp; Loan Perodua<br><br>Harga Semenanjung Malaysia. Bukan laman rasmi Perodua.</footer>
   </main>
-  <div class="sticky"><a class="btn wa" data-wa="Salam Shah, saya nak tanya pasal Perodua Bezza." href="#" target="_blank" rel="noopener">💬 WhatsApp Shah</a></div>
 
   <div class="ov" id="ov">
     <p>Tekan lama pada gambar → <u>Simpan ke Foto / Galeri</u></p>
@@ -185,8 +204,11 @@
     // ====== DATA BEZZA (Semenanjung) — tukar di sini bila harga baru ======
     // ins = premium insurans dalam price list (NCD 0%, termasuk duti setem RM10).
     // key = nama varian dalam /rebate.js (rebate auto ikut bulan).
-    const ADVISOR = "Shah";
-    const WA = "60137258194";
+    const TEAM = [
+      { n: "Shah", role: "Ketua Pasukan", wa: "60137258194", img: "/img/shah.jpg", lead: true },
+      { n: "Aishah", role: "Pakar Loan", wa: "60182031020", img: "/aisyah/img/aisyah.jpg" },
+      { n: "Fendi", role: "Pakar Loan", wa: "60189038194", img: "/fendi/img/fendi.jpg" },
+    ];
     const RATE = 2.8;                 // % flat setahun
     const TENURES = [5, 7, 9];
     const STAMP = 10;                 // duti setem insurans (tak kena NCD)
@@ -202,7 +224,7 @@
     const rm = (n) => "RM" + n.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
     const rm0 = (n) => "RM" + Math.round(n).toLocaleString("en-US");
     const ph = (w) => "0" + w.slice(2, 4) + "-" + w.slice(4, 7) + " " + w.slice(7);
-    const wa = (msg) => `https://wa.me/${WA}?text=${encodeURIComponent(msg)}`;
+    $("team").innerHTML = TEAM.map((p) => `<div class="${p.lead ? "lead" : ""}"><img src="${p.img}" alt="${p.n}" /><b>${p.n}</b><i>${p.role}</i><small>${ph(p.wa)}</small></div>`).join("");
     const rebateOf = (v) => (window.rebateFor ? window.rebateFor(v.key) : 0);
     const REB = window.REBATE || {};
     const S = { v: VARIANTS[0], ncd: 0, pay: "full", dp: 0 };
@@ -271,11 +293,7 @@
       $("vUp").textContent = rm(c.dp);
       $("upS").textContent = c.dp ? "Downpayment (OTR, insurans & road tax dah masuk loan)" : "Full loan: OTR, insurans & road tax dah masuk loan";
       $("notes").innerHTML = `* Harga Semenanjung Malaysia${REB.bulan ? `, ${REB.bulan.charAt(0) + REB.bulan.slice(1).toLowerCase()} ${today.getFullYear()}` : ""}. Insurans anggaran komprehensif ikut NCD (premium sebenar mungkin berbeza sikit ikut syarikat insurans). Bulanan anggaran kadar ${RATE}% flat, tertakluk kelulusan &amp; kadar bank. Rebate tertakluk terma Perodua dan tarikh tamat promosi.`;
-      $("waNum").innerHTML = `WhatsApp ${ADVISOR}<br>${ph(WA)}`;
-      const best = c.rows.map((r) => `${r.y} thn ${rm(r.mo)}`).join(" / ");
-      $("waRes").href = wa(`Salam ${ADVISOR}, saya berminat Perodua ${v.name}.\n• NCD: ${S.ncd}%\n• Harga OTR: ${rm(c.otr)}\n• Rebate: ${rm(c.rb)}\n• ${c.dp ? `Downpayment: ${rm(c.dp)}` : "Full loan"}\n• Jumlah loan: ${rm(c.loan)}\n• Bulanan (${RATE}%): ${best}\nBoleh bantu proceed?`);
     }
-    document.querySelectorAll("[data-wa]").forEach((a) => (a.href = wa(a.dataset.wa)));
 
     // ---------- simpan gambar ----------
     function loadH2C() {
