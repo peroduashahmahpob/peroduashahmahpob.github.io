@@ -1,0 +1,502 @@
+<!doctype html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
+  <title>Borang Maklumat Pemohon · TSM Perodua</title>
+  <meta name="robots" content="noindex" />
+  <meta name="description" content="Isi maklumat permohonan loan kereta — siap jadi gambar hitam putih yang jelas, terus hantar ke WhatsApp Pakar Loan." />
+  <meta property="og:title" content="Borang Maklumat Pemohon · TSM Perodua" />
+  <meta property="og:description" content="Isi sekali, siap jadi gambar jelas, hantar terus ke Pakar Loan." />
+  <meta name="theme-color" content="#1565d8" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root { --bg: #f2f6fc; --card: #fff; --c2: #f5f8fc; --ln: #d5e0ef; --o: #1565d8; --w: #0f172a; --g: #5b6576; --gr: #25d366; --bad: #dc2626; --badbg: #fdecec; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--bg); color: var(--w); font: 500 14px/1.4 "Montserrat", system-ui, sans-serif; -webkit-font-smoothing: antialiased; padding-bottom: 40px; }
+    .wrap { max-width: 640px; margin: 0 auto; padding: 18px 14px; }
+    header { text-align: center; padding: 6px 0 4px; }
+    .kick { font-size: 11px; font-weight: 800; letter-spacing: .2em; color: var(--g); }
+    h1 { font-size: 20px; font-weight: 800; margin-top: 4px; }
+    .intro { margin-top: 10px; padding: 10px 12px; border-radius: 12px; background: #e8f7ee; border: 1px solid #bfe6cd; font-size: 12px; font-weight: 600; color: #14532d; }
+    .card { margin-top: 12px; padding: 14px 14px 16px; background: var(--card); border: 1px solid var(--ln); border-radius: 16px; scroll-margin-top: 12px; }
+    .sec { display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+    .sec i { font-style: normal; width: 22px; height: 22px; border-radius: 6px; background: var(--o); color: #fff; display: grid; place-items: center; font-size: 11px; letter-spacing: 0; flex: none; }
+    .snote { margin-top: 6px; font-size: 11.5px; font-weight: 600; color: var(--g); }
+    .snote b { color: var(--bad); }
+    .sub { margin-top: 14px; padding-top: 10px; border-top: 1px dashed var(--ln); font-size: 12px; font-weight: 800; color: var(--o); }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 10px; }
+    .f { margin-top: 10px; min-width: 0; }
+    .f.full { grid-column: 1 / -1; }
+    .f > span { display: block; font-size: 11px; font-weight: 700; color: var(--g); margin-bottom: 4px; }
+    .f > span em { font-style: normal; color: var(--bad); }
+    input, select, textarea { width: 100%; min-height: 40px; padding: 8px 10px; border-radius: 10px; background: var(--c2); border: 1px solid var(--ln); color: var(--w); font: 600 14px "Montserrat", sans-serif; -webkit-appearance: none; appearance: none; }
+    select { background-image: linear-gradient(45deg, transparent 50%, var(--g) 50%), linear-gradient(135deg, var(--g) 50%, transparent 50%); background-position: calc(100% - 15px) 17px, calc(100% - 10px) 17px; background-size: 5px 5px; background-repeat: no-repeat; padding-right: 26px; }
+    textarea { resize: vertical; min-height: 58px; }
+    input:focus, select:focus, textarea:focus { outline: none; border-color: var(--o); background: #fff; }
+    .up { text-transform: uppercase; }
+    .f.err input, .f.err select, .f.err textarea, .f.err .chips button { border-color: var(--bad); background: var(--badbg); }
+    .f.err > span::after { content: " — wajib isi"; color: var(--bad); }
+    .chips { display: flex; flex-wrap: wrap; gap: 6px; }
+    .chips button { padding: 8px 12px; min-height: 38px; border-radius: 10px; border: 1px solid var(--ln); background: var(--c2); color: var(--w); font: 700 13px "Montserrat", sans-serif; cursor: pointer; }
+    .chips button[aria-pressed="true"] { background: var(--o); border-color: var(--o); color: #fff; }
+    .hide { display: none !important; }
+    .send { margin-top: 16px; padding: 16px 14px; background: var(--card); border: 1px solid var(--ln); border-radius: 16px; text-align: center; }
+    .send p { font-size: 12px; font-weight: 600; color: var(--g); }
+    .btn { display: flex; width: 100%; align-items: center; justify-content: center; gap: 8px; margin-top: 10px; min-height: 50px; padding: 10px 14px; border-radius: 14px; border: 0; font: 800 15px "Montserrat", sans-serif; cursor: pointer; text-decoration: none; text-align: center; }
+    .btn.wa { background: var(--gr); color: #06290f; }
+    .btn.wa small { font-weight: 600; font-size: 12px; opacity: .8; }
+    .btn.ghost { background: var(--card); border: 1px solid var(--ln); color: var(--w); font-size: 14px; }
+    .btn.clear { background: none; color: var(--g); font-size: 12px; min-height: 36px; text-decoration: underline; }
+    .foot { margin-top: 18px; text-align: center; font-size: 11px; color: var(--g); font-weight: 600; }
+    .ov { position: fixed; inset: 0; background: rgba(15,23,42,.55); z-index: 20; display: none; align-items: flex-end; justify-content: center; }
+    .ov.on { display: flex; }
+    .sheet { width: 100%; max-width: 640px; max-height: 92vh; overflow: auto; background: #fff; border-radius: 20px 20px 0 0; padding: 18px 16px calc(18px + env(safe-area-inset-bottom)); }
+    .sheet h2 { font-size: 17px; font-weight: 800; }
+    .sheet p { margin-top: 6px; font-size: 13px; color: var(--g); font-weight: 600; }
+    .sheet p b { color: var(--w); }
+    .pages { margin-top: 12px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+    .pages a { display: block; border: 1px solid var(--ln); border-radius: 8px; overflow: hidden; background: #fff; }
+    .pages img { display: block; width: 100%; }
+    .pages a span { display: block; text-align: center; font-size: 11px; font-weight: 700; color: var(--g); padding: 3px 0; border-top: 1px solid var(--ln); }
+    .note { margin-top: 10px; font-size: 11.5px; color: var(--g); font-weight: 600; }
+    .spin { width: 36px; height: 36px; border: 4px solid var(--ln); border-top-color: var(--o); border-radius: 50%; animation: sp .8s linear infinite; margin: 12px auto; }
+    @keyframes sp { to { transform: rotate(360deg); } }
+    .zoom { position: fixed; inset: 0; z-index: 30; background: rgba(0,0,0,.85); overflow: auto; display: none; }
+    .zoom.on { display: block; }
+    .zoom img { display: block; width: 100%; max-width: 900px; margin: 0 auto; }
+    .zoom button { position: fixed; top: 12px; right: 12px; width: 40px; height: 40px; border-radius: 50%; border: 0; background: #fff; font: 800 18px sans-serif; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="kick">TSM PERODUA</div>
+      <h1>Borang Maklumat Pemohon</h1>
+    </header>
+    <div class="intro">🔒 Isi sekali (±5 minit). Bila siap, tekan butang hijau di bawah — maklumat jadi <b>gambar hitam putih</b> dan dihantar ke WhatsApp Pakar Loan. Tiada apa-apa disimpan di server.</div>
+    <form id="form" autocomplete="on" novalidate></form>
+    <div class="send" id="sendBox">
+      <p>Semak semula maklumat. Tekan nama Pakar Loan anda:</p>
+      <div id="sendBtns"></div>
+      <button class="btn clear" type="button" id="clear">Padam semua maklumat</button>
+    </div>
+    <div class="foot">Borang TSM PERODUA · Bukan laman rasmi Perodua atau bank</div>
+  </div>
+  <div class="ov" id="ov"><div class="sheet" id="sheet"></div></div>
+  <div class="zoom" id="zoom"><button type="button" id="zx">✕</button><img id="zimg" alt="" /></div>
+
+  <script>
+  (function () {
+    "use strict";
+    var $ = function (id) { return document.getElementById(id); };
+
+    var ADVISORS = [
+      { key: "fendi", name: "Fendi", role: "Pakar Loan", wa: "60189038194" },
+      { key: "aishah", name: "Aishah", role: "Pakar Loan", wa: "60182031020" },
+      { key: "shah", name: "Shah", role: "Ketua Pasukan", wa: "60137258194" }
+    ];
+    var q = new URLSearchParams(location.search);
+    var only = (q.get("sa") || "").toLowerCase();
+    var shown = ADVISORS.filter(function (a) { return only ? a.key === only : a.key !== "shah"; });
+    if (!shown.length) shown = ADVISORS.slice(0, 2);
+    function fmtWa(n) { var s = "0" + n.slice(2); return s.slice(0, 3) + "-" + s.slice(3, 6) + " " + s.slice(6); }
+
+    var NEGERI = ["Selangor","WP Kuala Lumpur","WP Putrajaya","Johor","Kedah","Kelantan","Melaka","Negeri Sembilan","Pahang","Perak","Perlis","Pulau Pinang","Sabah","Sarawak","Terengganu","WP Labuan"];
+    var BANK = ["Maybank","CIMB","Public Bank","RHB","Hong Leong","AmBank","Bank Islam","Bank Rakyat","BSN","Affin","Alliance","Bank Muamalat","Agrobank","MBSB","OCBC","UOB","HSBC","Standard Chartered","Al Rajhi","Kuwait Finance House"];
+    var SIJIL = ["SPM","STPM / Matrikulasi","Sijil / SKM","Diploma","Degree","Master / PhD","Tiada","Lain-lain"];
+    var HUB = ["Ibu","Bapa","Adik-beradik","Lain-lain"];
+
+    // Medan borang. type: text | tel | email | ic | sel | chips | area | addr | surat | mon | rm | sub
+    function job(p, extra) {
+      return [
+        { id: p + "kerja", label: "Pekerjaan / Jawatan / Pangkat", req: 1, full: 1 },
+        { id: p + "mula", label: "Tarikh mula bekerja", ph: "cth: 03/2019", req: 1 },
+        { id: p + "telpej", label: "No tel pejabat", type: "tel" },
+        { id: p + "syarikat", label: "Nama syarikat / majikan", req: 1, full: 1 },
+        { id: p + "alpej", label: "Alamat pejabat", type: "area", full: 1 }
+      ].concat(extra || []);
+    }
+    function addr(p, label) {
+      return { id: p + "al", label: label, type: "addr", req: 1, full: 1 };
+    }
+    var SECTIONS = [
+      { key: "A", title: "Kereta yang diminati", page: 1, fields: [
+        { id: "model", label: "Model kereta", type: "sel", opts: ["Axia","Bezza","Myvi","Ativa","Alza","Aruz","Traz"], req: 1 },
+        { id: "warna", label: "Warna", ph: "cth: Granite Grey" }
+      ]},
+      { key: "B", title: "Maklumat pemohon", page: 1, fields: [
+        { id: "nama", label: "Nama penuh (ikut IC)", req: 1, full: 1 },
+        { id: "ic", label: "No IC", type: "ic", req: 1 },
+        { id: "hp", label: "No tel HP", type: "tel", req: 1 },
+        { id: "email", label: "Email", type: "email", req: 1, full: 1 },
+        { id: "telrumah", label: "No tel rumah", type: "tel" },
+        addr("p_", "Alamat rumah (yang diduduki sekarang)"),
+        { id: "surat", label: "Alamat surat-menyurat", type: "surat", req: 1, full: 1 },
+        { id: "strumah", label: "Status rumah", type: "chips", opts: ["Sendiri","Family","Sewa"], req: 1, full: 1 },
+        { id: "status", label: "Status perkahwinan", type: "chips", opts: ["Bujang","Berkahwin","Duda / Janda"], req: 1, full: 1 },
+        { id: "anak", label: "Bilangan anak", type: "num", ph: "0" }
+      ].concat(job("", [
+        { id: "bank", label: "Gaji masuk bank", type: "bank", req: 1 },
+        { id: "sijil", label: "Sijil / Diploma / Degree", type: "sel", opts: SIJIL, req: 1 },
+        { id: "kereta", label: "Kereta sekarang", type: "chips", opts: ["Tiada kereta","Masih dalam loan","Habis bayar"], req: 1, full: 1 }
+      ]))},
+      { key: "C", title: "Maklumat pasangan", page: 2, when: function () { return val("status") === "Berkahwin"; },
+        note: "Jika sudah berkahwin — hanya untuk rujukan.", off: "Tidak berkenaan",
+        fields: [
+          { id: "s_nama", label: "Nama pasangan", req: 1, full: 1 },
+          { id: "s_ic", label: "No IC", type: "ic" },
+          { id: "s_hp", label: "No tel HP", type: "tel", req: 1 },
+          { id: "s_kerja", label: "Pekerjaan", full: 1 },
+          { id: "s_mula", label: "Tarikh mula bekerja", ph: "cth: 03/2019" },
+          { id: "s_telpej", label: "No tel pejabat", type: "tel" },
+          { id: "s_syarikat", label: "Nama syarikat", full: 1 },
+          { id: "s_alpej", label: "Alamat pejabat", type: "area", full: 1 },
+          { id: "s_gaji", label: "Anggaran pendapatan (RM)", type: "rm" }
+        ]},
+      { key: "D", title: "Rujukan kecemasan", page: 2,
+        note: "Ibu / Bapa / Adik-beradik. <b>WAJIB isi 2 orang.</b> Untuk rujukan sahaja — bank TIDAK akan call rujukan.",
+        fields: [1, 2].reduce(function (a, n) {
+          return a.concat([
+            { type: "sub", label: "Rujukan " + n },
+            { id: "r" + n + "_nama", label: "Nama", req: 1, full: 1 },
+            { id: "r" + n + "_tel", label: "No tel", type: "tel", req: 1 },
+            { id: "r" + n + "_hub", label: "Hubungan", type: "sel", opts: HUB, req: 1, def: n === 1 ? "Ibu" : "" },
+            { id: "r" + n + "_kerja", label: "Pekerjaan", full: 1 }
+          ]);
+        }, [])},
+      { key: "E", title: "Penjamin / Gerento", page: 3, toggle: "gerento",
+        note: "Isi jika ada penjamin sahaja.", off: "Tiada penjamin",
+        fields: [
+          { id: "g_nama", label: "Nama penuh penjamin", req: 1, full: 1 },
+          { id: "g_ic", label: "No IC", type: "ic", req: 1 },
+          { id: "g_hp", label: "No tel HP", type: "tel", req: 1 },
+          { id: "g_email", label: "Email", type: "email", full: 1 },
+          { id: "g_telrumah", label: "No tel rumah", type: "tel" },
+          addr("g_", "Alamat rumah (yang diduduki sekarang)")
+        ].concat(job("g_", [
+          { id: "g_bank", label: "Gaji masuk bank", type: "bank", req: 1 },
+          { id: "g_sijil", label: "Sijil / Diploma / Degree", type: "sel", opts: SIJIL }
+        ]))}
+    ];
+
+    // ---------- bina borang ----------
+    var form = $("form"), FIELDS = [];
+    function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+    function opts(list, ph) { return '<option value="">' + (ph || "Pilih…") + '</option>' + list.map(function (o) { return '<option>' + esc(o) + '</option>'; }).join(""); }
+    function chips(id, list) { return '<div class="chips" data-chips="' + id + '">' + list.map(function (o) { return '<button type="button" aria-pressed="false" data-v="' + esc(o) + '">' + esc(o) + '</button>'; }).join("") + '</div>'; }
+    function fieldHtml(f) {
+      if (f.type === "sub") return '<div class="sub full" style="grid-column:1/-1">' + esc(f.label) + '</div>';
+      var lab = '<span>' + esc(f.label) + (f.req ? ' <em>*</em>' : '') + '</span>', inner;
+      var ph = f.ph ? ' placeholder="' + esc(f.ph) + '"' : "";
+      switch (f.type) {
+        case "tel": inner = '<input id="' + f.id + '" type="tel" inputmode="tel" placeholder="cth: 012-345 6789" />'; break;
+        case "email": inner = '<input id="' + f.id + '" type="email" inputmode="email" autocapitalize="off" placeholder="nama@gmail.com" />'; break;
+        case "ic": inner = '<input id="' + f.id + '" type="text" inputmode="numeric" maxlength="14" placeholder="900101-10-1234" />'; break;
+        case "num": inner = '<input id="' + f.id + '" type="text" inputmode="numeric" maxlength="2"' + ph + ' />'; break;
+        case "rm": inner = '<input id="' + f.id + '" type="text" inputmode="decimal" placeholder="cth: 3500" />'; break;
+        case "sel": inner = '<select id="' + f.id + '">' + opts(f.opts) + '</select>'; break;
+        case "bank": inner = '<select id="' + f.id + '">' + opts(BANK.concat(["Lain-lain"]), "Pilih bank…") + '</select><input id="' + f.id + '_x" class="up hide" type="text" placeholder="Nama bank" style="margin-top:6px" />'; break;
+        case "chips": inner = chips(f.id, f.opts); break;
+        case "area": inner = '<textarea id="' + f.id + '" class="up" rows="2"' + ph + '></textarea>'; break;
+        case "addr":
+          var p = f.id;
+          inner = '<div class="grid" data-addr="' + p + '">' +
+            '<input id="' + p + '_no" class="up" type="text" placeholder="No rumah / unit" style="grid-column:1/-1" />' +
+            '<input id="' + p + '_jln" class="up" type="text" placeholder="Jalan / Lorong / Taman" style="grid-column:1/-1;margin-top:6px" />' +
+            '<input id="' + p + '_bandar" class="up" type="text" placeholder="Bandar" style="margin-top:6px" />' +
+            '<input id="' + p + '_poskod" type="text" inputmode="numeric" maxlength="5" placeholder="Poskod" style="margin-top:6px" />' +
+            '<select id="' + p + '_negeri" style="grid-column:1/-1;margin-top:6px">' + opts(NEGERI, "Negeri…") + '</select></div>';
+          break;
+        case "surat":
+          inner = chips(f.id, ["Sama dengan alamat rumah", "Alamat lain"]) +
+            '<textarea id="' + f.id + '_x" class="up hide" rows="3" placeholder="No, jalan, bandar, poskod, negeri" style="margin-top:6px"></textarea>';
+          break;
+        default: inner = '<input id="' + f.id + '" class="up" type="text"' + ph + ' />';
+      }
+      return '<label class="f' + (f.full ? " full" : "") + '" data-f="' + f.id + '">' + lab + inner + '</label>';
+    }
+    var html = "";
+    SECTIONS.forEach(function (s, i) {
+      html += '<section class="card" id="sec-' + s.key + '"><div class="sec"><i>' + s.key + '</i>' + esc(s.title) + '</div>' +
+        (s.note ? '<div class="snote">' + s.note + '</div>' : "");
+      if (s.toggle) html += '<div class="f"><span>Ada penjamin / gerento?</span>' + chips(s.toggle, ["Tiada", "Ada"]) + '</div>';
+      if (s.when) html += '<div class="snote" id="off-' + s.key + '">Pilih status <b style="color:var(--w)">Berkahwin</b> di atas untuk isi bahagian ni.</div>';
+      html += '<div class="grid" id="body-' + s.key + '">' + s.fields.map(fieldHtml).join("") + '</div></section>';
+      s.fields.forEach(function (f) { if (f.id) { f.sec = s; FIELDS.push(f); } });
+    });
+    form.innerHTML = html;
+    // label membungkus chips → klik label jangan cetus butang pertama
+    form.querySelectorAll("label.f").forEach(function (l) { if (l.querySelector(".chips")) l.outerHTML = l.outerHTML.replace(/^<label/, "<div").replace(/<\/label>$/, "</div>"); });
+
+    // ---------- nilai ----------
+    var chipVal = {};
+    function val(id) {
+      var f = FIELDS.filter(function (x) { return x.id === id; })[0];
+      if (chipVal.hasOwnProperty(id) && (!f || f.type === "chips" || f.type === "surat")) return chipVal[id] || "";
+      var el = $(id); if (!el) return chipVal[id] || "";
+      return el.value.trim();
+    }
+    function up(s) { return String(s || "").toUpperCase(); }
+    function addrText(p) {
+      var no = val(p + "_no"), j = val(p + "_jln"), b = val(p + "_bandar"), pk = val(p + "_poskod"), n = val(p + "_negeri");
+      return up([no, j, [pk, b].filter(Boolean).join(" "), n].filter(Boolean).join(", "));
+    }
+    function display(f) {
+      switch (f.type) {
+        case "addr": return addrText(f.id);
+        case "surat": return val(f.id) === "Alamat lain" ? up(val(f.id + "_x")) : (val(f.id) ? "SAMA DENGAN ALAMAT RUMAH" : "");
+        case "bank": return val(f.id) === "Lain-lain" ? up(val(f.id + "_x")) : up(val(f.id));
+        case "email": return val(f.id).toLowerCase();
+        case "rm": var v = val(f.id).replace(/[^\d.]/g, ""); return v ? "RM " + Number(v).toLocaleString("en-MY") : "";
+        default: return up(val(f.id));
+      }
+    }
+    function filled(f) {
+      if (f.type === "addr") return ["_no", "_jln", "_bandar", "_poskod", "_negeri"].every(function (k) { return val(f.id + k); }) && /^\d{5}$/.test(val(f.id + "_poskod"));
+      if (f.type === "surat") return val(f.id) === "Sama dengan alamat rumah" || (val(f.id) === "Alamat lain" && val(f.id + "_x").length > 8);
+      if (f.type === "bank") return val(f.id) && (val(f.id) !== "Lain-lain" || val(f.id + "_x"));
+      if (f.type === "ic") return /^\d{6}-\d{2}-\d{4}$/.test(val(f.id));
+      if (f.type === "tel") return val(f.id).replace(/\D/g, "").length >= 9;
+      if (f.type === "email") return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val(f.id));
+      return !!val(f.id);
+    }
+    function secOn(s) {
+      if (s.when) return s.when();
+      if (s.toggle) return val(s.toggle) === "Ada";
+      return true;
+    }
+
+    // ---------- simpan sementara (sessionStorage: hilang bila tab ditutup) ----------
+    var KEY = "tsm-maklumat-v1";
+    function save() {
+      var d = { c: chipVal };
+      form.querySelectorAll("input,select,textarea").forEach(function (el) { if (el.id) d[el.id] = el.value; });
+      try { sessionStorage.setItem(KEY, JSON.stringify(d)); } catch (e) {}
+    }
+    function load() {
+      var d; try { d = JSON.parse(sessionStorage.getItem(KEY) || "null"); } catch (e) {}
+      FIELDS.forEach(function (f) { if (f.def && $(f.id)) $(f.id).value = f.def; });
+      if (!d) return;
+      Object.keys(d).forEach(function (k) { if (k !== "c" && $(k)) $(k).value = d[k]; });
+      Object.keys(d.c || {}).forEach(function (k) { setChip(k, d.c[k]); });
+    }
+    function setChip(id, v) {
+      chipVal[id] = v;
+      var box = form.querySelector('[data-chips="' + id + '"]'); if (!box) return;
+      box.querySelectorAll("button").forEach(function (b) { b.setAttribute("aria-pressed", b.getAttribute("data-v") === v ? "true" : "false"); });
+    }
+    function refresh() {
+      SECTIONS.forEach(function (s) {
+        var on = secOn(s);
+        $("body-" + s.key).classList.toggle("hide", !on);
+        if ($("off-" + s.key)) $("off-" + s.key).classList.toggle("hide", on);
+      });
+      ["surat"].forEach(function (id) { $(id + "_x").classList.toggle("hide", val(id) !== "Alamat lain"); });
+      ["bank", "g_bank"].forEach(function (id) { $(id + "_x").classList.toggle("hide", val(id) !== "Lain-lain"); });
+    }
+    function clearErr(t) { var l = t.closest && t.closest(".f"); if (l) l.classList.remove("err"); }
+
+    form.addEventListener("click", function (e) {
+      var b = e.target.closest(".chips button"); if (!b) return;
+      e.preventDefault();
+      setChip(b.parentNode.getAttribute("data-chips"), b.getAttribute("data-v"));
+      clearErr(b); refresh(); save();
+    });
+    form.addEventListener("input", function (e) {
+      var t = e.target, f = FIELDS.filter(function (x) { return x.id === t.id; })[0];
+      if (f && f.type === "ic") {
+        var d = t.value.replace(/\D/g, "").slice(0, 12);
+        t.value = d.length > 8 ? d.slice(0, 6) + "-" + d.slice(6, 8) + "-" + d.slice(8) : d.length > 6 ? d.slice(0, 6) + "-" + d.slice(6) : d;
+      }
+      if (/_poskod$/.test(t.id) || (f && f.type === "num")) t.value = t.value.replace(/\D/g, "");
+      clearErr(t); refresh(); save();
+    });
+    form.addEventListener("change", function (e) { clearErr(e.target); refresh(); save(); });
+    $("clear").onclick = function () {
+      if (!confirm("Padam semua maklumat yang dah diisi?")) return;
+      try { sessionStorage.removeItem(KEY); } catch (e) {}
+      form.querySelectorAll("input,select,textarea").forEach(function (el) { el.value = ""; });
+      Object.keys(chipVal).forEach(function (k) { setChip(k, ""); });
+      form.querySelectorAll(".err").forEach(function (x) { x.classList.remove("err"); });
+      FIELDS.forEach(function (f) { if (f.def && $(f.id)) $(f.id).value = f.def; });
+      refresh(); window.scrollTo({ top: 0, behavior: "smooth" });
+    };
+
+    // ---------- butang hantar ----------
+    $("sendBtns").innerHTML = shown.map(function (a) {
+      return '<button type="button" class="btn wa" data-sa="' + a.key + '">📤 Hantar ke ' + a.name + ' <small>(' + a.role + ')</small></button>';
+    }).join("");
+    $("sendBtns").addEventListener("click", function (e) {
+      var b = e.target.closest("[data-sa]"); if (!b) return;
+      var sa = ADVISORS.filter(function (a) { return a.key === b.getAttribute("data-sa"); })[0];
+      go(sa);
+    });
+
+    function validate() {
+      var first = null, n = 0;
+      if (!val("gerento")) { var gt = form.querySelector('[data-chips="gerento"]').parentNode; gt.classList.add("err"); first = first || gt; n++; }
+      FIELDS.forEach(function (f) {
+        if (!f.req || !secOn(f.sec)) return;
+        var ok = filled(f), el = form.querySelector('[data-f="' + f.id + '"]');
+        if (el) el.classList.toggle("err", !ok);
+        if (!ok) { n++; if (!first) first = el; }
+      });
+      // format salah tapi tak wajib (cth email penjamin)
+      FIELDS.forEach(function (f) {
+        if (f.req || !secOn(f.sec) || !val(f.id) || ["ic", "email", "tel"].indexOf(f.type) < 0) return;
+        if (!filled(f)) { var el = form.querySelector('[data-f="' + f.id + '"]'); el.classList.add("err"); n++; if (!first) first = el; }
+      });
+      if (first) { first.scrollIntoView({ behavior: "smooth", block: "center" }); }
+      return n;
+    }
+
+    // ---------- lukis gambar A4 hitam putih ----------
+    var W = 1240, H = 1754, M = 64, FONT = 'Arial, "Helvetica Neue", Helvetica, sans-serif';
+    function pad2(n) { return (n < 10 ? "0" : "") + n; }
+    function stamp() { var d = new Date(); return pad2(d.getDate()) + "/" + pad2(d.getMonth() + 1) + "/" + d.getFullYear() + "  " + pad2(d.getHours()) + ":" + pad2(d.getMinutes()); }
+    function wrap(ctx, text, maxW) {
+      var out = [], words = String(text).split(/\s+/), line = "";
+      words.forEach(function (w) {
+        while (ctx.measureText(w).width > maxW) {
+          var k = w.length; while (k > 1 && ctx.measureText(w.slice(0, k)).width > maxW) k--;
+          if (line) { out.push(line); line = ""; }
+          out.push(w.slice(0, k)); w = w.slice(k);
+        }
+        var t = line ? line + " " + w : w;
+        if (ctx.measureText(t).width > maxW && line) { out.push(line); line = w; } else line = t;
+      });
+      if (line || !out.length) out.push(line);
+      return out;
+    }
+    // blocks: {h:"A. TAJUK"} | {note:"..."} | {sub:"Rujukan 1"} | {k:"Label", v:"Nilai"}
+    function pageBlocks(pg) {
+      var out = [];
+      SECTIONS.forEach(function (s) {
+        if (s.page !== pg && !(pg === 2 && s.key === "E" && !secOn(s))) return;
+        out.push({ h: s.key + ".  " + up(s.title) });
+        if (!secOn(s)) { out.push({ k: "Status", v: up(s.off) + (s.key === "C" ? " (" + up(val("status") || "-") + ")" : "") }); return; }
+        if (s.key === "D") out.push({ note: "Untuk rujukan sahaja — bank tidak akan call rujukan." });
+        if (s.key === "C") out.push({ note: "Hanya untuk rujukan." });
+        s.fields.forEach(function (f) {
+          if (f.type === "sub") { out.push({ sub: up(f.label) }); return; }
+          out.push({ k: f.label, v: display(f) || "-" });
+        });
+      });
+      return out;
+    }
+    function drawPage(pg, total, sa) {
+      var c = document.createElement("canvas"); c.width = W; c.height = H;
+      var x = c.getContext("2d");
+      x.fillStyle = "#fff"; x.fillRect(0, 0, W, H);
+      x.fillStyle = "#000"; x.strokeStyle = "#000"; x.textBaseline = "top";
+      // kepala
+      x.font = "bold 40px " + FONT; x.fillText("BORANG MAKLUMAT PEMOHON", M, 56);
+      x.font = "bold 24px " + FONT; x.textAlign = "right"; x.fillText("TSM PERODUA", W - M, 58);
+      x.font = "22px " + FONT; x.fillText("Muka surat " + pg + " / " + total, W - M, 92);
+      x.textAlign = "left";
+      x.font = "22px " + FONT;
+      x.fillText("Untuk: " + sa.role + " " + sa.name + " (" + fmtWa(sa.wa) + ")      Tarikh: " + stamp(), M, 106);
+      x.fillRect(M, 146, W - 2 * M, 5);
+      // kotak nama + IC (setiap muka surat)
+      x.lineWidth = 3; x.strokeRect(M, 168, W - 2 * M, 66);
+      x.font = "bold 20px " + FONT; x.fillText("NAMA PEMOHON", M + 18, 178); x.fillText("NO IC", W - M - 330, 178);
+      x.font = "bold 28px " + FONT;
+      var nm = up(val("nama")); while (x.measureText(nm).width > W - 2 * M - 400 && nm.length > 4) nm = nm.slice(0, -2) + "…";
+      x.fillText(nm, M + 18, 201); x.fillText(val("ic"), W - M - 330, 201);
+
+      var blocks = pageBlocks(pg), top = 258, bottom = H - 96, cw = W - 2 * M;
+      var s = 1, lay;
+      function layout(sc) {
+        var labW = Math.round(370 * Math.max(sc, .85)), vf = Math.round(26 * sc), lf = Math.round(21 * sc), lh = 1.28, padY = Math.round(11 * sc), y = 0, L = [];
+        blocks.forEach(function (b) {
+          if (b.h) { y += L.length ? Math.round(22 * sc) : 0; L.push({ b: b, y: y, hgt: Math.round(46 * sc) }); y += Math.round(46 * sc); return; }
+          if (b.note) { x.font = "italic " + Math.round(20 * sc) + "px " + FONT; var nl = wrap(x, b.note, cw - 20); L.push({ b: b, y: y, lines: nl, f: Math.round(20 * sc), hgt: nl.length * Math.round(20 * sc * lh) + 12 }); y += nl.length * Math.round(20 * sc * lh) + 12; return; }
+          if (b.sub) { var sh = Math.round(40 * sc); L.push({ b: b, y: y, hgt: sh, f: Math.round(22 * sc) }); y += sh; return; }
+          x.font = "bold " + lf + "px " + FONT; var kl = wrap(x, b.k, labW - 28);
+          x.font = vf + "px " + FONT; var vl = wrap(x, b.v, cw - labW - 28);
+          var hgt = Math.max(kl.length * Math.round(lf * lh), vl.length * Math.round(vf * lh)) + padY * 2;
+          L.push({ b: b, y: y, kl: kl, vl: vl, lf: lf, vf: vf, lh: lh, padY: padY, labW: labW, hgt: hgt }); y += hgt;
+        });
+        return { L: L, h: y };
+      }
+      do { lay = layout(s); s -= .03; } while (lay.h > bottom - top && s > .6);
+      lay.L.forEach(function (r) {
+        var y = top + r.y, b = r.b;
+        if (b.h) { x.fillStyle = "#000"; x.fillRect(M, y, cw, r.hgt); x.fillStyle = "#fff"; x.font = "bold " + Math.round(r.hgt * .5) + "px " + FONT; x.fillText(b.h, M + 16, y + r.hgt * .24); x.fillStyle = "#000"; return; }
+        if (b.note) { x.font = "italic " + r.f + "px " + FONT; r.lines.forEach(function (t, i) { x.fillText(t, M + 4, y + 7 + i * Math.round(r.f * 1.28)); }); return; }
+        if (b.sub) { x.fillStyle = "#e6e6e6"; x.fillRect(M, y, cw, r.hgt); x.fillStyle = "#000"; x.lineWidth = 1.5; x.strokeRect(M, y, cw, r.hgt); x.font = "bold " + r.f + "px " + FONT; x.fillText(b.sub, M + 16, y + (r.hgt - r.f) / 2); return; }
+        x.lineWidth = 1.5; x.strokeRect(M, y, cw, r.hgt);
+        x.beginPath(); x.moveTo(M + r.labW, y); x.lineTo(M + r.labW, y + r.hgt); x.stroke();
+        x.font = "bold " + r.lf + "px " + FONT;
+        r.kl.forEach(function (t, i) { x.fillText(t, M + 14, y + r.padY + 2 + i * Math.round(r.lf * r.lh)); });
+        x.font = r.vf + "px " + FONT;
+        r.vl.forEach(function (t, i) { x.fillText(t, M + r.labW + 14, y + r.padY + i * Math.round(r.vf * r.lh)); });
+      });
+      // kaki
+      x.fillRect(M, H - 78, cw, 2);
+      x.font = "18px " + FONT;
+      x.fillText("Maklumat diisi sendiri oleh pemohon melalui borang TSM PERODUA. Bukan borang rasmi bank.", M, H - 62);
+      x.textAlign = "right"; x.font = "bold 20px " + FONT; x.fillText(pg + " / " + total, W - M, H - 62); x.textAlign = "left";
+      return c;
+    }
+    function toBlob(c) { return new Promise(function (r) { c.toBlob(r, "image/png"); }); }
+
+    // ---------- hantar ----------
+    var ov = $("ov"), files = [], urls = [];
+    function sheet(h) { $("sheet").innerHTML = h; ov.classList.add("on"); }
+    function closeSheet() { ov.classList.remove("on"); }
+    ov.addEventListener("click", function (e) { if (e.target === ov) closeSheet(); });
+    $("zx").onclick = function () { $("zoom").classList.remove("on"); };
+
+    async function go(sa) {
+      var miss = validate();
+      if (miss) { setTimeout(function () { alert("Ada " + miss + " maklumat belum lengkap / salah format (kotak merah). Sila semak."); }, 350); return; }
+      sheet('<h2>Sedang siapkan gambar…</h2><div class="spin"></div>');
+      urls.forEach(function (u) { URL.revokeObjectURL(u); }); urls = []; files = [];
+      var total = secOn(SECTIONS[4]) ? 3 : 2;
+      var base = "MAKLUMAT_" + up(val("nama")).replace(/[^A-Z0-9]+/g, "_").replace(/^_|_$/g, "").slice(0, 30);
+      for (var p = 1; p <= total; p++) {
+        var blob = await toBlob(drawPage(p, total, sa));
+        files.push(new File([blob], base + "_" + p + ".png", { type: "image/png" }));
+        urls.push(URL.createObjectURL(blob));
+      }
+      var canShare = !!(navigator.canShare && navigator.canShare({ files: files }));
+      var who = sa.role + " " + sa.name;
+      sheet(
+        '<h2>✅ ' + total + ' gambar siap!</h2>' +
+        '<p>' + (canShare
+          ? 'Tekan butang hijau → pilih <b>WhatsApp</b> → pilih chat <b>' + who + '</b> (' + fmtWa(sa.wa) + ') → Hantar.'
+          : 'Simpan gambar dulu, kemudian buka WhatsApp <b>' + who + '</b> (' + fmtWa(sa.wa) + ') → tekan 📎 → Galeri → pilih ' + total + ' gambar ni.') + '</p>' +
+        '<div class="pages">' + urls.map(function (u, i) { return '<a href="#" data-i="' + i + '"><img src="' + u + '" alt="Muka surat ' + (i + 1) + '" /><span>Muka surat ' + (i + 1) + '</span></a>'; }).join("") + '</div>' +
+        (canShare ? '<button class="btn wa" id="share">📤 Hantar ke ' + who + '</button>' : "") +
+        '<button class="btn ' + (canShare ? "ghost" : "wa") + '" id="dl">⬇️ Simpan gambar dalam telefon</button>' +
+        '<a class="btn ghost" id="wa" target="_blank" rel="noopener" href="https://wa.me/' + sa.wa + '">💬 Buka WhatsApp ' + sa.name + '</a>' +
+        '<button class="btn ghost" id="back">← Betulkan maklumat</button>' +
+        '<p class="note">Tekan gambar untuk besarkan & semak. Maklumat tidak dihantar ke mana-mana server — hanya ke WhatsApp yang anda pilih.</p>'
+      );
+      $("sheet").querySelectorAll(".pages a").forEach(function (a) {
+        a.onclick = function (e) { e.preventDefault(); $("zimg").src = urls[+a.getAttribute("data-i")]; $("zoom").classList.add("on"); };
+      });
+      if ($("share")) $("share").onclick = async function () {
+        try { await navigator.share({ files: files, title: "Maklumat pemohon" }); }
+        catch (e) { if (e && e.name !== "AbortError") download(); }
+      };
+      $("dl").onclick = download;
+      $("back").onclick = closeSheet;
+    }
+    function download() {
+      files.forEach(function (f, i) {
+        setTimeout(function () {
+          var a = document.createElement("a"); a.href = urls[i]; a.download = f.name;
+          document.body.appendChild(a); a.click(); a.remove();
+        }, i * 500);
+      });
+    }
+
+    load(); refresh();
+  })();
+  </script>
+</body>
+</html>
