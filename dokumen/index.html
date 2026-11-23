@@ -36,6 +36,10 @@
     .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
     .chips button { padding: 11px 16px; min-height: 44px; border-radius: 14px; border: 2px solid var(--ln); background: var(--c2); color: var(--w); font: 700 14px "Montserrat", sans-serif; cursor: pointer; }
     .chips button[aria-pressed="true"] { background: var(--o); border-color: var(--o); color: #fff; }
+    .chips.mode { display: grid; gap: 8px; }
+    .chips.mode button { text-align: left; padding: 12px 14px; }
+    .chips.mode button small { display: block; font-size: 12px; font-weight: 600; opacity: .8; margin-top: 2px; }
+    .mhint { margin-top: 8px; font-size: 12px; font-weight: 700; color: var(--y); }
     .tips { margin-top: 12px; display: grid; gap: 8px; font-size: 13px; font-weight: 600; color: var(--g); }
     .tips div { display: flex; gap: 10px; } .tips b { color: var(--w); }
 
@@ -86,6 +90,14 @@
     .btn { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; min-height: 54px; border-radius: 16px; font: 800 16px "Montserrat", sans-serif; border: 0; cursor: pointer; text-align: center; padding: 10px 16px; }
     .btn.go { background: var(--o); color: #fff; box-shadow: 0 10px 30px rgba(21,101,216,.28); }
     .btn.go.off { background: #94a3b8; box-shadow: none; }
+    .btn.go.ready { background: var(--gr); color: #06290f; box-shadow: 0 10px 30px rgba(37,211,102,.35); }
+    .congrats { display: none; margin-top: 16px; padding: 20px 18px; border-radius: 22px; background: var(--okbg); border: 2px solid #86d3a3; text-align: center; scroll-margin-top: 20px; }
+    .congrats.on { display: block; animation: pop .35s ease-out; }
+    .congrats .big { font-size: 40px; line-height: 1; }
+    .congrats h2 { margin-top: 8px; font-size: 22px; font-weight: 900; color: #14532d; }
+    .congrats p { margin-top: 6px; font-size: 14px; font-weight: 600; color: #14532d; }
+    .congrats .btn { margin-top: 14px; }
+    @keyframes pop { from { transform: scale(.96); opacity: 0; } to { transform: none; opacity: 1; } }
     .btn.wa { background: var(--gr); color: #06290f; }
     .btn.ghost { background: var(--card); border: 2px solid var(--ln); color: var(--w); }
 
@@ -123,6 +135,10 @@
       <div class="step"><i>1</i>Maklumat anda</div>
       <label for="nama">Nama penuh (ikut IC)</label>
       <input type="text" id="nama" autocomplete="name" placeholder="CTH: AHMAD BIN ALI" />
+      <label>Jenis pekerjaan</label>
+      <div class="chips mode" id="jenis"></div>
+      <div id="otq"><label>Gaji ada OT / komisyen / elaun berubah?</label><div class="chips" id="otbox"></div></div>
+      <p class="mhint" id="mhint"></p>
       <label>Sales advisor anda</label>
       <div class="chips" id="sa"></div>
     </section>
@@ -141,13 +157,21 @@
       <div id="slots"></div>
     </section>
 
+    <section class="congrats" id="congrats">
+      <div class="big">🎉</div>
+      <h2>Tahniah!</h2>
+      <p>Anda berjaya upload semua dokumen.</p>
+      <p id="congTxt"></p>
+      <button class="btn go ready" id="make2"></button>
+    </section>
+
     <footer><b>TEAM SHAH MAHPOB</b><br>Sales &amp; Loan · Perodua<br><br>Dokumen hanya untuk permohonan loan kereta anda.<br>Bukan laman rasmi Perodua.</footer>
   </main>
 
   <div class="bar"><div class="in">
     <div class="prog"><span id="progTxt">Dokumen wajib</span><b id="progNum">0/0</b></div>
     <div class="meter"><i id="meter"></i></div>
-    <button class="btn go off" id="make">📄 Siapkan PDF</button>
+    <button class="btn go off" id="make"></button>
   </div></div>
 
   <div class="sheet" id="sheet"><div class="box" id="sheetBox"></div></div>
@@ -160,32 +184,87 @@
     if (window.pdfjsLib) pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
 
     var ADVISORS = [
-      { key: "shah", name: "Shah", wa: "60137258194" },
-      { key: "aishah", name: "Aishah", wa: "60182031020" },
-      { key: "fendi", name: "Fendi", wa: "60189038194" }
+      { key: "shah", name: "Shah", role: "Ketua Pasukan", wa: "60137258194" },
+      { key: "aishah", name: "Aishah", role: "Pakar Loan", wa: "60182031020" },
+      { key: "fendi", name: "Fendi", role: "Pakar Loan", wa: "60189038194" }
     ];
     var BULAN = ["Jan","Feb","Mac","Apr","Mei","Jun","Jul","Ogo","Sep","Okt","Nov","Dis"];
     function monthAgo(n) { var d = new Date(); d.setDate(1); d.setMonth(d.getMonth() - n); return BULAN[d.getMonth()] + " " + d.getFullYear(); }
 
-    // kind: photo = small card (IC/lesen), doc = full page
-    var SLOTS = [
-      { id: "icf", grp: "🪪 Kad pengenalan", name: "IC — depan", req: true, max: 1, kind: "card", pair: "ic" },
-      { id: "icb", name: "IC — belakang", req: true, max: 1, kind: "card", pair: "ic" },
-      { id: "lsf", grp: "🚗 Lesen memandu", name: "Lesen — depan", sub: "Lesen digital MyJPJ? Screenshot pun boleh", req: true, max: 1, kind: "card", pair: "ls" },
-      { id: "lsb", name: "Lesen — belakang", req: false, max: 1, kind: "card", pair: "ls" },
-      { id: "sl1", grp: "📄 Slip gaji 3 bulan terkini", name: "Slip gaji — bulan terkini", sub: "Contoh: " + monthAgo(1), req: true, max: 6, kind: "doc" },
-      { id: "sl2", name: "Slip gaji — bulan sebelumnya", sub: "Contoh: " + monthAgo(2), req: true, max: 6, kind: "doc" },
-      { id: "sl3", name: "Slip gaji — 3 bulan lepas", sub: "Contoh: " + monthAgo(3), req: true, max: 6, kind: "doc" },
-      { id: "pb", grp: "🏦 Penyata bank 3 bulan terkini", name: "Penyata bank (akaun gaji masuk)", sub: "Boleh pilih beberapa fail / gambar sekali gus", req: true, max: 40, kind: "doc", confirm: "Saya sahkan penyata ni cukup 3 bulan terkini (" + monthAgo(3) + " – " + monthAgo(1) + ")" },
-      { id: "lain", grp: "➕ Lain-lain", name: "Dokumen lain (jika diminta)", sub: "EA, KWSP, surat majikan, SSM…", req: false, max: 20, kind: "doc" }
+    // Jenis pekerjaan (peraturan Shah 2026-11-23):
+    //  kerajaan / swasta  = slip 3 bulan + penyata 3 bulan; ada OT / komisyen → slip 6 + penyata 6
+    //  niaga    = peniaga: IC + lesen depan & belakang, SSM 3 keping, penyata 6 bulan (tiada slip)
+    //  ehailing = Grab / Foodpanda / J&T…: penyata pendapatan mingguan 24 keping (6 bulan) + penyata bank 6 bulan
+    var MODES = [
+      { key: "kerajaan", name: "Kerja kerajaan", sub: "Penjawat awam / badan berkanun", gaji: true },
+      { key: "swasta", name: "Kerja swasta", sub: "Makan gaji dengan syarikat", gaji: true },
+      { key: "niaga", name: "Peniaga / bekerja sendiri", sub: "Ada SSM" },
+      { key: "ehailing", name: "E-hailing / penghantar", sub: "Grab, Foodpanda, J&T, Lalamove, ShopeeFood…" }
     ];
-    var state = {}; SLOTS.forEach(function (s) { state[s.id] = { items: [], ok: false }; });
+    var params = new URLSearchParams(location.search);
+    var mode = MODES[1], ot = params.get("ot") === "1";
+    MODES.forEach(function (m) { if (m.key === (params.get("jenis") || "").toLowerCase()) mode = m; });
+    function months() { return mode.gaji && !ot ? 3 : 6; }
+    function modeLabel() { return mode.name + (mode.gaji ? (ot ? " (ada OT / komisyen)" : " (gaji tetap)") : ""); }
+
+    // kind: card = IC/lesen (depan+belakang satu muka), doc = satu muka penuh
+    function buildSlots() {
+      var n = months(), niaga = mode.key === "niaga", eh = mode.key === "ehailing", s = [];
+      s.push({ id: "icf", grp: "🪪 Kad pengenalan", name: "IC — depan", req: true, max: 1, kind: "card", pair: "ic" });
+      s.push({ id: "icb", name: "IC — belakang", req: true, max: 1, kind: "card", pair: "ic" });
+      s.push({ id: "lsf", grp: "🚗 Lesen memandu", name: "Lesen — depan", sub: "Lesen digital MyJPJ? Screenshot pun boleh", req: true, max: 1, kind: "card", pair: "ls" });
+      s.push({ id: "lsb", name: "Lesen — belakang", req: niaga, max: 1, kind: "card", pair: "ls" });
+      if (niaga) {
+        s.push({ id: "ssm", grp: "🏢 Dokumen SSM", name: "SSM — 3 keping", sub: "Masukkan ketiga-tiga muka surat SSM (gambar atau PDF)", req: true, min: 3, max: 10, kind: "doc" });
+      } else if (eh) {
+        s.push({ id: "eh", grp: "🛵 Penyata pendapatan mingguan", name: "Penyata pendapatan platform — 24 minggu (6 bulan)", sub: "Screenshot / PDF pendapatan mingguan dari app Grab, Foodpanda, J&T… Boleh pilih banyak sekali gus", req: true, min: 24, max: 60, kind: "doc" });
+      } else {
+        for (var i = 1; i <= n; i++) s.push({ id: "sl" + i, grp: i === 1 ? "📄 Slip gaji " + n + " bulan terkini" : "", name: "Slip gaji bulan " + i + (i === 1 ? " (terkini)" : ""), sub: "Contoh: " + monthAgo(i), req: true, max: 6, kind: "doc" });
+      }
+      s.push({ id: "pb", grp: "🏦 Penyata bank " + n + " bulan terkini", name: niaga ? "Penyata bank (akaun duit perniagaan masuk)" : eh ? "Penyata bank (akaun duit pendapatan masuk)" : "Penyata bank (akaun gaji masuk)", sub: "Boleh pilih beberapa fail / gambar sekali gus", req: true, max: 60, kind: "doc", confirm: "Saya sahkan penyata ni cukup " + n + " bulan terkini (" + monthAgo(n) + " – " + monthAgo(1) + ")" });
+      s.push({ id: "lain", grp: "➕ Lain-lain", name: "Dokumen lain (jika diminta)", sub: niaga ? "Borang B, lesen perniagaan, resit cukai…" : eh ? "Borang B, KWSP i-Saraan, PSV / lesen GDL…" : "EA, KWSP, surat majikan…", req: false, max: 20, kind: "doc" });
+      s.forEach(function (x) { if (!state[x.id]) state[x.id] = { items: [], ok: false }; });
+      return s;
+    }
+    var state = {};
+    var SLOTS = buildSlots();
     var sa = ADVISORS[0];
-    var q = (new URLSearchParams(location.search).get("sa") || "").toLowerCase();
+    var q = (params.get("sa") || "").toLowerCase();
     if (q === "aisyah") q = "aishah";
     ADVISORS.forEach(function (a) { if (a.key === q) sa = a; });
 
     var $ = function (id) { return document.getElementById(id); };
+
+    // ---------- jenis pekerjaan chips ----------
+    function setMode(m, o) {
+      var before = months();
+      mode = m; ot = o;
+      if (months() !== before) state.pb.ok = false; // tempoh berubah → kena sahkan semula
+      SLOTS = buildSlots(); drawMode(); drawSlots(); SLOTS.forEach(drawThumbs); refresh();
+    }
+    function drawMode() {
+      $("jenis").innerHTML = "";
+      MODES.forEach(function (m) {
+        var b = document.createElement("button");
+        b.type = "button"; b.innerHTML = m.name + "<small>" + m.sub + "</small>"; b.setAttribute("aria-pressed", m === mode ? "true" : "false");
+        b.onclick = function () { if (m !== mode) setMode(m, ot); };
+        $("jenis").appendChild(b);
+      });
+      $("otq").style.display = mode.gaji ? "" : "none";
+      $("otbox").innerHTML = "";
+      [[false, "Tidak — gaji tetap"], [true, "Ya — ada OT / komisyen"]].forEach(function (o) {
+        var b = document.createElement("button");
+        b.type = "button"; b.textContent = o[1]; b.setAttribute("aria-pressed", o[0] === ot ? "true" : "false");
+        b.onclick = function () { if (o[0] !== ot) setMode(mode, o[0]); };
+        $("otbox").appendChild(b);
+      });
+      var n = months();
+      $("mhint").textContent =
+        mode.key === "niaga" ? "Perlu: IC & lesen depan belakang, SSM 3 keping, penyata bank 6 bulan." :
+        mode.key === "ehailing" ? "Perlu: IC, lesen, penyata pendapatan mingguan 24 keping (6 bulan), penyata bank 6 bulan." :
+        "Perlu: IC, lesen, slip gaji " + n + " bulan, penyata bank " + n + " bulan.";
+    }
+    drawMode();
 
     // ---------- advisor chips ----------
     function drawSA() {
@@ -193,7 +272,7 @@
       ADVISORS.forEach(function (a) {
         var b = document.createElement("button");
         b.type = "button"; b.textContent = a.name; b.setAttribute("aria-pressed", a === sa ? "true" : "false");
-        b.onclick = function () { sa = a; drawSA(); };
+        b.onclick = function () { sa = a; drawSA(); refresh(); };
         $("sa").appendChild(b);
       });
     }
@@ -222,6 +301,7 @@
           inp.addEventListener("change", function () { var f = Array.prototype.slice.call(inp.files); inp.value = ""; if (f.length) addFiles(s, f); });
         });
         var cb = el.querySelector(".confirm input");
+        if (cb) cb.checked = state[s.id].ok;
         if (cb) cb.addEventListener("change", function () { state[s.id].ok = cb.checked; el.querySelector(".confirm").classList.remove("miss"); refresh(); });
       });
     }
@@ -240,23 +320,34 @@
         box.appendChild(d);
       });
       var anyWarn = st.items.some(function (x) { return x.warn; });
+      var short = !!(s.min && st.items.length > 0 && st.items.length < s.min);
       var wm = el.querySelector(".warnmsg");
-      wm.classList.toggle("on", anyWarn);
-      wm.textContent = anyWarn ? "⚠️ Ada gambar yang mungkin kabur / gelap. Bank boleh tolak — lebih baik buang (✕) dan ambil semula di tempat terang." : "";
+      wm.classList.toggle("on", anyWarn || short);
+      wm.textContent = (short ? "📄 Baru " + st.items.length + " daripada " + s.min + " keping — tambah lagi. " : "") +
+        (anyWarn ? "⚠️ Ada gambar yang mungkin kabur / gelap. Bank boleh tolak — lebih baik buang (✕) dan ambil semula di tempat terang." : "");
       var add = el.querySelector(".addrow");
       add.style.display = st.items.length >= s.max ? "none" : "";
       var c = el.querySelector(".confirm"); if (c) c.style.display = st.items.length ? "" : "none";
     }
 
-    function slotDone(s) { var st = state[s.id]; return st.items.length > 0 && (!s.confirm || st.ok); }
+    function slotDone(s) { var st = state[s.id]; return st.items.length >= (s.min || 1) && (!s.confirm || st.ok); }
     function refresh() {
       var req = SLOTS.filter(function (s) { return s.req; }), done = req.filter(slotDone).length;
       SLOTS.forEach(function (s) { var el = $("slot-" + s.id); el.classList.toggle("done", slotDone(s)); if (slotDone(s)) el.classList.remove("miss"); });
       $("progNum").textContent = done + "/" + req.length;
       $("progTxt").textContent = done === req.length ? "✅ Semua dokumen wajib lengkap" : "Dokumen wajib lengkap";
       $("meter").style.width = (100 * done / req.length) + "%";
-      $("make").classList.toggle("off", done !== req.length);
+      var all = done === req.length, who = sa.role + " " + sa.name;
+      $("make").classList.toggle("off", !all);
+      $("make").classList.toggle("ready", all);
+      $("make").textContent = "📤 Hantar ke " + who;
+      $("make2").textContent = "📤 Hantar ke " + who;
+      $("congTxt").innerHTML = "Sekarang tekan butang <b>Hantar ke " + who + "</b> supaya " + who + " boleh terus proses permohonan loan anda ke pihak bank.";
+      $("congrats").classList.toggle("on", all);
+      if (all && !wasAll) setTimeout(function () { $("congrats").scrollIntoView({ behavior: "smooth", block: "center" }); }, 150);
+      wasAll = all;
     }
+    var wasAll = false;
 
     // ---------- image processing ----------
     var MAXE = 1800;
@@ -335,7 +426,8 @@
         var vp = page.getViewport({ scale: sc }), c = document.createElement("canvas");
         c.width = Math.round(vp.width); c.height = Math.round(vp.height);
         var x = c.getContext("2d"); x.fillStyle = "#fff"; x.fillRect(0, 0, c.width, c.height);
-        await page.render({ canvasContext: x, viewport: vp }).promise;
+        // intent "print" = tanpa requestAnimationFrame, supaya tak tersangkut bila tab / app di latar belakang
+        await page.render({ canvasContext: x, viewport: vp, intent: "print" }).promise;
         out.push(await makeItem(c, "", qual));
         page.cleanup();
       }
@@ -420,7 +512,7 @@
       var y = H - 70;
       cover.drawText("TSM PERODUA", { x: 50, y: y, size: 11, font: fb, color: blue }); y -= 30;
       cover.drawText("DOKUMEN PERMOHONAN LOAN KERETA", { x: 50, y: y, size: 18, font: fb, color: ink }); y -= 40;
-      [["Nama", NM], ["Tarikh hantar", tarikh()], ["Sales advisor", sa.name], ["Jumlah muka surat", String(doc.getPageCount())]].forEach(function (r) {
+      [["Nama", NM], ["Pekerjaan", modeLabel()], ["Tarikh hantar", tarikh()], [sa.role, sa.name + "  (" + waNo() + ")"], ["Jumlah muka surat", String(doc.getPageCount())]].forEach(function (r) {
         cover.drawText(r[0], { x: 50, y: y, size: 11, font: f, color: grey });
         cover.drawText(clean(r[1]), { x: 190, y: y, size: 12, font: fb, color: ink }); y -= 22;
       });
@@ -439,10 +531,12 @@
 
     // ---------- actions ----------
     var lastFile = null;
+    function waNo() { var d = sa.wa.replace(/^60/, "0"); return d.slice(0, 3) + "-" + d.slice(3, 6) + " " + d.slice(6); }
     function sheet(html) { $("sheetBox").innerHTML = html; $("sheet").classList.add("on"); }
     function closeSheet() { $("sheet").classList.remove("on"); }
     $("sheet").addEventListener("click", function (e) { if (e.target === $("sheet")) closeSheet(); });
 
+    $("make2").addEventListener("click", function () { $("make").click(); });
     $("make").addEventListener("click", async function () {
       var n = nama();
       if (!n) { $("nama").classList.add("err"); $("nama").scrollIntoView({ behavior: "smooth", block: "center" }); $("nama").focus(); return; }
@@ -466,12 +560,12 @@
         var canShare = !!(navigator.canShare && navigator.canShare({ files: [lastFile] }));
         sheet(
           '<h2>✅ PDF siap!</h2><p>' + (canShare
-            ? 'Tekan butang hijau → pilih <b>WhatsApp</b> → pilih chat <b>' + sa.name + '</b> → Hantar.'
-            : 'Download PDF dulu, kemudian buka WhatsApp <b>' + sa.name + '</b> → tekan 📎 → <b>Dokumen</b> → pilih fail ni.') + '</p>' +
+            ? 'Tekan butang hijau → pilih <b>WhatsApp</b> → pilih chat <b>' + sa.role + ' ' + sa.name + '</b> (' + waNo() + ') → Hantar.'
+            : 'Download PDF dulu, kemudian buka WhatsApp <b>' + sa.role + ' ' + sa.name + '</b> (' + waNo() + ') → tekan 📎 → <b>Dokumen</b> → pilih fail ni.') + '</p>' +
           '<div class="file"><span class="ic">PDF</span><div><b>' + fname + '</b><span>' + r.pages + ' muka surat · ' + mb + ' MB</span></div></div>' +
           (canShare
-            ? '<button class="btn wa" id="share">📤 Hantar ke WhatsApp ' + sa.name + '</button><button class="btn ghost" id="dl">⬇️ Simpan PDF dalam telefon</button>'
-            : '<button class="btn wa" id="dl">⬇️ Download PDF</button><a class="btn ghost" id="wa" target="_blank" rel="noopener">💬 Buka WhatsApp ' + sa.name + ' & attach PDF</a>') +
+            ? '<button class="btn wa" id="share">📤 Hantar ke ' + sa.role + ' ' + sa.name + '</button><button class="btn ghost" id="dl">⬇️ Simpan PDF dalam telefon</button>'
+            : '<button class="btn wa" id="dl">⬇️ Download PDF</button><a class="btn ghost" id="wa" target="_blank" rel="noopener">💬 Buka WhatsApp ' + sa.role + ' ' + sa.name + '</a>') +
           '<button class="btn ghost" id="back">← Tambah / tukar dokumen</button>' +
           '<p class="note">Selepas hantar, anda boleh padam gambar IC & dokumen dari galeri telefon untuk keselamatan.</p>'
         );
