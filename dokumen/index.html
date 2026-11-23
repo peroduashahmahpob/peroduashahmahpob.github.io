@@ -39,6 +39,9 @@
     .chips.mode { display: grid; gap: 8px; }
     .chips.mode button { text-align: left; padding: 12px 14px; }
     .chips.mode button small { display: block; font-size: 12px; font-weight: 600; opacity: .8; margin-top: 2px; }
+    #jenisCard.miss .chips.mode button { border-color: var(--bad); background: var(--badbg); }
+    .pick { margin-top: 12px; padding: 16px; border-radius: 16px; border: 2px dashed var(--ln); background: var(--c2); font-size: 14px; font-weight: 600; color: var(--g); text-align: center; }
+    .pick b { color: var(--o); }
     .mhint { margin-top: 8px; font-size: 12px; font-weight: 700; color: var(--y); }
     .tips { margin-top: 12px; display: grid; gap: 8px; font-size: 13px; font-weight: 600; color: var(--g); }
     .tips div { display: flex; gap: 10px; } .tips b { color: var(--w); }
@@ -135,8 +138,8 @@
       <div class="step"><i>1</i>Maklumat anda</div>
       <label for="nama">Nama penuh (ikut IC)</label>
       <input type="text" id="nama" autocomplete="name" placeholder="CTH: AHMAD BIN ALI" />
-      <label>Jenis pekerjaan</label>
-      <div class="chips mode" id="jenis"></div>
+      <div id="jenisCard"><label>Jenis pekerjaan <small>(pilih satu)</small></label>
+      <div class="chips mode" id="jenis"></div></div>
       <div id="otq"><label>Gaji ada OT / komisyen / elaun berubah?</label><div class="chips" id="otbox"></div></div>
       <p class="mhint" id="mhint"></p>
       <label>Sales advisor anda</label>
@@ -202,13 +205,16 @@
       { key: "ehailing", name: "E-hailing / penghantar", sub: "Grab, Foodpanda, J&T, Lalamove, ShopeeFood…" }
     ];
     var params = new URLSearchParams(location.search);
-    var mode = MODES[1], ot = params.get("ot") === "1";
+    // Tiada pilihan awal — customer wajib pilih sendiri (Shah 2026-11-23)
+    var mode = null, ot = params.get("ot") === "1" ? true : params.get("ot") === "0" ? false : null;
     MODES.forEach(function (m) { if (m.key === (params.get("jenis") || "").toLowerCase()) mode = m; });
+    function ready() { return !!mode && (!mode.gaji || ot !== null); }
     function months() { return mode.gaji && !ot ? 3 : 6; }
     function modeLabel() { return mode.name + (mode.gaji ? (ot ? " (ada OT / komisyen)" : " (gaji tetap)") : ""); }
 
     // kind: card = IC/lesen (depan+belakang satu muka), doc = satu muka penuh
     function buildSlots() {
+      if (!ready()) return [];
       var n = months(), niaga = mode.key === "niaga", eh = mode.key === "ehailing", s = [];
       s.push({ id: "icf", grp: "🪪 Kad pengenalan", name: "IC — depan", req: true, max: 1, kind: "card", pair: "ic" });
       s.push({ id: "icb", name: "IC — belakang", req: true, max: 1, kind: "card", pair: "ic" });
@@ -237,9 +243,10 @@
 
     // ---------- jenis pekerjaan chips ----------
     function setMode(m, o) {
-      var before = months();
+      var before = ready() ? months() : 0;
       mode = m; ot = o;
-      if (months() !== before) state.pb.ok = false; // tempoh berubah → kena sahkan semula
+      if (state.pb && (ready() ? months() : 0) !== before) state.pb.ok = false; // tempoh berubah → kena sahkan semula
+      $("jenisCard").classList.remove("miss");
       SLOTS = buildSlots(); drawMode(); drawSlots(); SLOTS.forEach(drawThumbs); refresh();
     }
     function drawMode() {
@@ -250,7 +257,7 @@
         b.onclick = function () { if (m !== mode) setMode(m, ot); };
         $("jenis").appendChild(b);
       });
-      $("otq").style.display = mode.gaji ? "" : "none";
+      $("otq").style.display = mode && mode.gaji ? "" : "none";
       $("otbox").innerHTML = "";
       [[false, "Tidak — gaji tetap"], [true, "Ya — ada OT / komisyen"]].forEach(function (o) {
         var b = document.createElement("button");
@@ -258,6 +265,8 @@
         b.onclick = function () { if (o[0] !== ot) setMode(mode, o[0]); };
         $("otbox").appendChild(b);
       });
+      if (!mode) { $("mhint").textContent = "👆 Pilih jenis pekerjaan anda dulu — senarai dokumen akan keluar ikut pilihan."; return; }
+      if (!ready()) { $("mhint").textContent = "👆 Pilih Ya atau Tidak dulu."; return; }
       var n = months();
       $("mhint").textContent =
         mode.key === "niaga" ? "Perlu: IC & lesen depan belakang, SSM 3 keping, penyata bank 6 bulan." :
@@ -281,6 +290,7 @@
     // ---------- slots UI ----------
     function drawSlots() {
       var root = $("slots"); root.innerHTML = "";
+      if (!ready()) { root.innerHTML = '<p class="pick">👆 Pilih <b>jenis pekerjaan</b> di langkah 1 dulu. Senarai dokumen yang perlu akan keluar di sini.</p>'; return; }
       SLOTS.forEach(function (s) {
         if (s.grp) { var g = document.createElement("div"); g.className = "grp"; g.textContent = s.grp; root.appendChild(g); }
         var el = document.createElement("div"); el.className = "slot"; el.id = "slot-" + s.id;
@@ -334,10 +344,10 @@
     function refresh() {
       var req = SLOTS.filter(function (s) { return s.req; }), done = req.filter(slotDone).length;
       SLOTS.forEach(function (s) { var el = $("slot-" + s.id); el.classList.toggle("done", slotDone(s)); if (slotDone(s)) el.classList.remove("miss"); });
-      $("progNum").textContent = done + "/" + req.length;
-      $("progTxt").textContent = done === req.length ? "✅ Semua dokumen wajib lengkap" : "Dokumen wajib lengkap";
-      $("meter").style.width = (100 * done / req.length) + "%";
-      var all = done === req.length, who = sa.role + " " + sa.name;
+      var all = ready() && done === req.length, who = sa.role + " " + sa.name;
+      $("progNum").textContent = ready() ? done + "/" + req.length : "";
+      $("progTxt").textContent = !mode ? "Pilih jenis pekerjaan dulu" : !ready() ? "Jawab soalan OT / komisyen dulu" : all ? "✅ Semua dokumen wajib lengkap" : "Dokumen wajib lengkap";
+      $("meter").style.width = ready() ? (100 * done / req.length) + "%" : "0%";
       $("make").classList.toggle("off", !all);
       $("make").classList.toggle("ready", all);
       $("make").textContent = "📤 Hantar ke " + who;
@@ -541,6 +551,7 @@
       var n = nama();
       if (!n) { $("nama").classList.add("err"); $("nama").scrollIntoView({ behavior: "smooth", block: "center" }); $("nama").focus(); return; }
       $("nama").classList.remove("err");
+      if (!ready()) { $("jenisCard").classList.add("miss"); $("jenisCard").scrollIntoView({ behavior: "smooth", block: "center" }); return; }
       var first = null;
       SLOTS.forEach(function (s) {
         if (!s.req || slotDone(s)) return;
