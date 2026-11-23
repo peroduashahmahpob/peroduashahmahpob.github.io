@@ -138,6 +138,8 @@
       <div class="step"><i>1</i>Maklumat anda</div>
       <label for="nama">Nama penuh (ikut IC)</label>
       <input type="text" id="nama" autocomplete="name" placeholder="CTH: AHMAD BIN ALI" />
+      <label for="model">Model kereta</label>
+      <input type="text" id="model" autocomplete="off" placeholder="CTH: BEZZA 1.3X" />
       <div id="jenisCard"><label>Jenis pekerjaan <small>(pilih satu)</small></label>
       <div class="chips mode" id="jenis"></div></div>
       <div id="otq"><label>Gaji ada OT / komisyen / elaun berubah?</label><div class="chips" id="otbox"></div></div>
@@ -225,9 +227,9 @@
       } else if (eh) {
         s.push({ id: "eh", grp: "🛵 Penyata pendapatan mingguan", name: "Penyata pendapatan platform — 24 minggu (6 bulan)", sub: "Screenshot / PDF pendapatan mingguan dari app Grab, Foodpanda, J&T… Boleh pilih banyak sekali gus", req: true, min: 24, max: 60, kind: "doc" });
       } else {
-        for (var i = 1; i <= n; i++) s.push({ id: "sl" + i, grp: i === 1 ? "📄 Slip gaji " + n + " bulan terkini" : "", name: "Slip gaji bulan " + i + (i === 1 ? " (terkini)" : ""), sub: "Contoh: " + monthAgo(i), req: true, max: 6, kind: "doc" });
+        for (var i = 1; i <= n; i++) s.push({ id: "sl" + i, grp: i === 1 ? "📄 Slip gaji " + n + " bulan terkini" : "", name: "Slip gaji " + ["pertama", "kedua", "ketiga", "keempat", "kelima", "keenam"][i - 1], sub: "Contoh: " + monthAgo(i), req: true, max: 6, kind: "doc" });
       }
-      s.push({ id: "pb", grp: "🏦 Penyata bank " + n + " bulan terkini", name: niaga ? "Penyata bank (akaun duit perniagaan masuk)" : eh ? "Penyata bank (akaun duit pendapatan masuk)" : "Penyata bank (akaun gaji masuk)", sub: "Boleh pilih beberapa fail / gambar sekali gus", req: true, max: 60, kind: "doc", confirm: "Saya sahkan penyata ni cukup " + n + " bulan terkini (" + monthAgo(n) + " – " + monthAgo(1) + ")" });
+      s.push({ id: "pb", grp: "🏦 Penyata bank " + n + " bulan terkini", name: niaga ? "Penyata bank (akaun duit perniagaan masuk)" : eh ? "Penyata bank (akaun duit pendapatan masuk)" : "Penyata bank (akaun gaji masuk)", sub: "Pastikan cukup " + n + " bulan terkini (" + monthAgo(n) + " – " + monthAgo(1) + "). Boleh pilih beberapa fail / gambar sekali gus", req: true, max: 60, kind: "doc" });
       s.push({ id: "lain", grp: "➕ Lain-lain", name: "Dokumen lain (jika diminta)", sub: niaga ? "Borang B, lesen perniagaan, resit cukai…" : eh ? "Borang B, KWSP i-Saraan, PSV / lesen GDL…" : "EA, KWSP, surat majikan…", req: false, max: 20, kind: "doc" });
       s.forEach(function (x) { if (!state[x.id]) state[x.id] = { items: [], ok: false }; });
       return s;
@@ -478,6 +480,7 @@
 
     // ---------- build PDF ----------
     function clean(t) { return String(t).normalize("NFKD").replace(/[–—]/g, "-").replace(/[^\x20-\x7E]/g, "").trim(); }
+    function model() { return $("model").value.trim().toUpperCase().replace(/\s+/g, " "); }
     function nama() { return $("nama").value.trim().toUpperCase().replace(/\s+/g, " "); }
     function tarikh() { var d = new Date(); return ("0" + d.getDate()).slice(-2) + "/" + ("0" + (d.getMonth() + 1)).slice(-2) + "/" + d.getFullYear(); }
 
@@ -522,7 +525,7 @@
       var y = H - 70;
       cover.drawText("TSM PERODUA", { x: 50, y: y, size: 11, font: fb, color: blue }); y -= 30;
       cover.drawText("DOKUMEN PERMOHONAN LOAN KERETA", { x: 50, y: y, size: 18, font: fb, color: ink }); y -= 40;
-      [["Nama", NM], ["Pekerjaan", modeLabel()], ["Tarikh hantar", tarikh()], [sa.role, sa.name + "  (" + waNo() + ")"], ["Jumlah muka surat", String(doc.getPageCount())]].forEach(function (r) {
+      [["Nama", NM], ["Model kereta", clean(model())], ["Pekerjaan", modeLabel()], ["Tarikh hantar", tarikh()], [sa.role, sa.name + "  (" + waNo() + ")"], ["Jumlah muka surat", String(doc.getPageCount())]].forEach(function (r) {
         cover.drawText(r[0], { x: 50, y: y, size: 11, font: f, color: grey });
         cover.drawText(clean(r[1]), { x: 190, y: y, size: 12, font: fb, color: ink }); y -= 22;
       });
@@ -551,6 +554,7 @@
       var n = nama();
       if (!n) { $("nama").classList.add("err"); $("nama").scrollIntoView({ behavior: "smooth", block: "center" }); $("nama").focus(); return; }
       $("nama").classList.remove("err");
+      if (!model()) { $("model").classList.add("err"); $("model").scrollIntoView({ behavior: "smooth", block: "center" }); $("model").focus(); return; }
       if (!ready()) { $("jenisCard").classList.add("miss"); $("jenisCard").scrollIntoView({ behavior: "smooth", block: "center" }); return; }
       var first = null;
       SLOTS.forEach(function (s) {
@@ -597,6 +601,7 @@
       document.body.appendChild(a); a.click(); setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 4000);
     }
     $("nama").addEventListener("input", function () { $("nama").classList.remove("err"); });
+    $("model").addEventListener("input", function () { $("model").classList.remove("err"); });
     window.addEventListener("beforeunload", function (e) {
       var any = SLOTS.some(function (s) { return state[s.id].items.length; });
       if (any && !lastFile) { e.preventDefault(); e.returnValue = ""; }
