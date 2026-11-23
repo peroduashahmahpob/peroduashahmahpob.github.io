@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="ms">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>VSO Pantas</title>
+<style>
+:root{--bg:#f4f1ec;--card:#fff;--ink:#1d1b18;--mut:#6f6a62;--line:#e2ddd4;--acc:#e0642c;--acc2:#fff1ea}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#1a1816;--card:#24211e;--ink:#f3efe8;--mut:#a59e93;--line:#3a3530;--acc:#f07a44;--acc2:#3a2418}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+header{padding:14px 16px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:10px}
+header h1{font-size:18px;margin:0}
+header span{color:var(--mut);font-size:13px}
+main{display:grid;grid-template-columns:minmax(300px,420px) 1fr;gap:16px;padding:16px;max-width:1400px;margin:auto}
+@media (max-width:860px){main{grid-template-columns:1fr}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;margin-bottom:12px}
+.card h2{font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--mut);margin:0 0 10px}
+label{display:block;font-size:13px;color:var(--mut);margin:8px 0 3px}
+input,select,textarea{width:100%;padding:10px 11px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink);font:inherit}
+textarea{min-height:96px;resize:vertical}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.seg{display:flex;gap:6px;flex-wrap:wrap}
+.seg button{flex:1;padding:10px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink);font:inherit;font-weight:600;cursor:pointer}
+.seg button.on{background:var(--acc);border-color:var(--acc);color:#fff}
+.btn{display:block;width:100%;padding:13px;border:0;border-radius:12px;background:var(--acc);color:#fff;font:inherit;font-weight:700;font-size:16px;cursor:pointer;margin-top:8px}
+.btn.ghost{background:var(--acc2);color:var(--acc)}
+.sum{display:grid;grid-template-columns:1fr auto;gap:2px 10px;font-size:14px}
+.sum b{text-align:right;font-variant-numeric:tabular-nums}
+.sum .tot{font-weight:800;font-size:16px;border-top:1px solid var(--line);padding-top:6px;margin-top:4px}
+.note{font-size:12.5px;color:var(--mut);margin-top:6px}
+input.ubah{border-color:var(--acc);background:var(--acc2)}
+.warn{background:var(--acc2);color:var(--acc);border-radius:10px;padding:8px 10px;font-size:13px;margin-top:8px;display:none}
+.prev{position:sticky;top:12px;align-self:start}
+.prev canvas{width:100%;height:auto;border-radius:6px;box-shadow:0 6px 30px rgba(0,0,0,.18);background:#fff;display:block}
+#printImg{display:none}
+@media print{
+  @page{size:A4 portrait;margin:6mm}
+  body{background:#fff}
+  header,main{display:none!important}
+  #printImg{display:block;width:100%;height:auto;max-height:285mm;object-fit:contain}
+}
+</style>
+</head>
+<body>
+<header><h1>VSO Pantas</h1><span>Vehicle Sales Order · TSM PERODUA</span></header>
+<main>
+<section>
+  <div class="card">
+    <h2>1 · Maklumat customer</h2>
+    <label for="paste">Tampal mesej (nama, IC, no tel) — app cam sendiri</label>
+    <textarea id="paste" placeholder="Contoh:&#10;Nama: ...&#10;IC: 900101-14-5678&#10;Tel: 012-3456789"></textarea>
+    <label for="nama">Nama penuh</label>
+    <input id="nama" autocomplete="off">
+    <div class="row">
+      <div><label for="ic">No. K/P</label><input id="ic" inputmode="numeric" autocomplete="off"></div>
+      <div><label for="tel">No. tel (HP)</label><input id="tel" inputmode="tel" autocomplete="off"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>2 · Kereta</h2>
+    <label for="kod">Kod model</label>
+    <select id="kod"></select>
+    <div id="warnaBox">
+      <label>Jenis warna</label>
+      <div class="seg" id="warna"></div>
+    </div>
+    <div class="row">
+      <div><label for="tempoh">Tempoh (bulan)</label><input id="tempoh" inputmode="numeric" value="108"></div>
+      <div><label for="hantar">Anggaran delivery</label><input id="hantar" value="2026"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>3 · Harga &amp; loan</h2>
+    <label>Situasi</label>
+    <div class="seg" id="situasi">
+      <button data-v="1" class="on">Ada deposit</button>
+      <button data-v="2">Full loan</button>
+    </div>
+    <p class="note">Harga auto ikut model. Kalau harga berubah, terus ubah di sini — jumlah dikira semula automatik. Kotak oren = dah diubah dari harga list.</p>
+    <label for="pBody">Govt. Approved Net Selling Price (RM)</label>
+    <input id="pBody" class="pr" inputmode="decimal">
+    <div id="aksBox" style="display:none">
+      <label for="aks">Standard Accessories Package (RM)</label>
+      <input id="aks" inputmode="decimal" placeholder="Taip amaun pakej aksesori">
+    </div>
+    <div class="row">
+      <div><label for="pRt">Road tax</label><input id="pRt" class="pr" inputmode="decimal"></div>
+      <div><label for="pReg">Registration fee</label><input id="pReg" class="pr" inputmode="decimal"></div>
+    </div>
+    <div class="row">
+      <div><label for="pClaim">HP ownership claim</label><input id="pClaim" class="pr" inputmode="decimal"></div>
+      <div><label for="pIns">Insurans</label><input id="pIns" class="pr" inputmode="decimal"></div>
+    </div>
+    <button class="btn ghost" id="resetHarga" style="padding:9px;font-size:14px">Reset ikut harga list</button>
+    <div class="row">
+      <div><label for="loan">Amount financed (RM)</label><input id="loan" inputmode="decimal" placeholder="Taip"></div>
+      <div><label for="tarikh">Tarikh</label><input id="tarikh"></div>
+    </div>
+    <div class="card" style="margin:12px 0 0;background:var(--bg)">
+      <div class="sum" id="sum"></div>
+    </div>
+    <div class="warn" id="loanWarn"></div>
+  </div>
+
+  <div class="card">
+    <h2>Tetapan (simpan dalam telefon ni)</h2>
+    <div class="row">
+      <div><label for="sa">Sales advisor &amp; ID</label><input id="sa"></div>
+      <div><label for="branch">Cawangan</label><input id="branch"></div>
+    </div>
+  </div>
+
+  <button class="btn" id="dlJpg">Download JPG</button>
+  <button class="btn ghost" id="dlPdf">Cetak / Simpan PDF (A4)</button>
+  <button class="btn ghost" id="reset">Kosongkan untuk customer baru</button>
+  <p class="note">Maklumat customer tak disimpan di mana-mana — hilang bila page ditutup.</p>
+</section>
+
+<section class="prev"><canvas id="cv"></canvas></section>
+</main>
+<img id="printImg" alt="">
+
+<script>
+// ===== Senarai kod model (dari Shah) + harga ikut kalkulator/data.js =====
+// [kod, model, description, warna boleh pilih, {warna: [body, roadtax, reg, claim, insurans]}]
+const M = [
+  ["CG1GZ","Axia","AXIA G",["METALLIC"],{METALLIC:[33680,20,150,50,1417.8]}],
+  ["CG1XZ","Axia","AXIA X",["METALLIC"],{METALLIC:[38280,20,150,50,1479]}],
+  ["CG1SZ","Axia","AXIA SE",["METALLIC"],{METALLIC:[42780,20,150,50,1519.8]}],
+  ["CG1VZ","Axia","AXIA AV",["METALLIC"],{METALLIC:[48780,20,150,50,1581]}],
+  ["AQ3XZ1","Bezza","BEZZA 1.3 X",["METALLIC"],{METALLIC:[43710,70,150,50,1363.4]}],
+  ["AQ3VZ1","Bezza","BEZZA 1.3 AV",["METALLIC"],{METALLIC:[49710,70,150,50,1546.2]}],
+  ["BD3GZ1","Myvi","MYVI 1.3 G",["METALLIC"],{METALLIC:[46230,70,150,50,1455.2]}],
+  ["BD3GZ","Myvi","MYVI 1.3 G ASA",["METALLIC"],{METALLIC:[48230,70,150,50,1550.7]}],
+  ["BD5XZ","Myvi","MYVI 1.5 X",["METALLIC"],{METALLIC:[50610,90,150,50,1592.65]}],
+  ["BD5HZ","Myvi","MYVI 1.5 H",["METALLIC"],{METALLIC:[54610,90,150,50,1703.85]}],
+  ["BD5VZ","Myvi","MYVI 1.5 AV",["METALLIC"],{METALLIC:[59610,90,150,50,1819.2]}],
+  ["BP5XZ","Alza","ALZA X",["METALLIC"],{METALLIC:[62210,90,150,50,1904.3]}],
+  ["BP5HZ","Alza","ALZA H",["METALLIC"],{METALLIC:[67710,90,150,50,2047.5]}],
+  ["BP5VZ","Alza","ALZA AV",["METALLIC"],{METALLIC:[75210,90,150,50,2229.5]}],
+  ["U1XZ","Ativa","ATIVA 1.0 X",["METALLIC"],{METALLIC:[62280,20,150,50,1800.9]}],
+  ["U1HZ","Ativa","ATIVA 1.0 H",["METALLIC","SPECIAL METALLIC"],{METALLIC:[67080,20,150,50,1940.3],"SPECIAL METALLIC":[67580,20,150,50,1980.3]}],
+  ["U1VZ","Ativa","ATIVA 1.0 AV",["METALLIC","SPECIAL METALLIC","2 TONE"],{METALLIC:[72380,20,150,50,2059.7],"SPECIAL METALLIC":[72880,20,150,50,2103.8],"2 TONE":[73180,20,150,50,2103.8]}],
+  ["Y5XZ","Traz","TRAZ 1.5 X",["METALLIC"],{METALLIC:[75780,120,150,50,2200]}],
+  ["Y5HZ","Traz","TRAZ 1.5 H",["METALLIC","2 TONE"],{METALLIC:[80780,120,150,50,2500],"2 TONE":[81680,120,150,50,2550]}],
+  // Aruz: price list 15 Sept 2026 (tiada insurans dalam list — team isi sendiri)
+  ["W5XZ2","Aruz","ARUZ 1.5 X",["METALLIC","SOLID"],{METALLIC:[68580,120,150,50,null],SOLID:[68580,120,150,50,null]}],
+  ["W5VZ2","Aruz","ARUZ 1.5 AV",["METALLIC","SOLID"],{METALLIC:[73580,120,150,50,null],SOLID:[73580,120,150,50,null]}],
+];
+
+// ===== Kedudukan teks atas borang (piksel gambar asal 1082×1454) =====
+// Diukur dari garisan sebenar borang: [x, garis dasar teks, l/c/r, saiz huruf]
+// Kotak = teks di tengah kotak; garisan = teks duduk 7px atas garisan.
+const P = {
+  tarikh:[580,178,"l",20],                         // sebelah "Date / Tarikh :"
+  nama:[58,229,"l",20],                            // kotak nama (2 baris jika panjang)
+  branch:[676,223,"l",18],                         // bawah label Branch, atas garisan 229
+  nric:[620,252,"l",20],                           // baris 229–260, tengah
+  tel:[542,296,"l",17],                            // sebelah "HP/ Hp:" (535) sebelum "Hse" (674)
+  sa:[928,295,"c",20],                             // kotak SA 819–1038, atas garisan 303
+  model:[337,356,"c",16], warna:[337,416,"c",16],  // jadual 20px tinggi, tengah kolum 242–433
+  desc:[690,356,"c",16], tempoh:[690,416,"c",16],  // tengah ruang 585–798
+  hantar:[928,406,"c",20],                         // kotak delivery 817–1038
+  body:[535,512,"c",21], aks:[535,693,"c",21],     // kolum RM 470–600, garisan 519 / 700
+  // baris rapat (27px): tengah-tengah antara dua garisan
+  rt:[535,1015,"c",18], reg:[535,1043,"c",18], claim:[535,1097,"c",18], ins:[535,1124,"c",18],
+  beli:[535,1216,"c",21],                          // garisan tebal 1224
+  loan:[970,604,"c",21], period:[970,647,"c",20],  // garisan 611 / 654
+  finSrc:[972,1268,"c",21],                        // kotak From Finance Source 1235–1286
+};
+const SC = 2;  // kanvas 2x supaya tajam
+
+const $ = id => document.getElementById(id);
+const fmt = n => Number(n).toLocaleString("en-MY",{minimumFractionDigits:2,maximumFractionDigits:2});
+const num = v => { const n = parseFloat(String(v||"").replace(/[^0-9.]/g,"")); return isNaN(n)?0:n; };
+let situasi = "1", warna = "METALLIC";
+const sen = v => Math.round(num(v)*100); // kira dalam sen supaya tiada ralat perpuluhan
+
+// dropdown kod
+$("kod").innerHTML = ["Axia","Bezza","Myvi","Alza","Ativa","Traz","Aruz"].map(g =>
+  `<optgroup label="${g}">` + M.filter(m=>m[1]===g).map(m=>`<option value="${m[0]}">${m[0]} — ${m[2]}</option>`).join("") + `</optgroup>`).join("");
+const cur = () => M.find(m=>m[0]===$("kod").value);
+
+function drawWarna(){
+  const m = cur();
+  if (!m[3].includes(warna)) warna = m[3][0];
+  $("warnaBox").style.display = m[3].length>1 ? "" : "none";
+  $("warna").innerHTML = m[3].map(w=>`<button data-v="${w}" class="${w===warna?"on":""}">${w}</button>`).join("");
+}
+// harga list → kotak harga (team boleh ubah selepas ni)
+const PF = ["pBody","pRt","pReg","pClaim","pIns"];
+const listHarga = () => cur()[4][warna];
+function isiHarga(){
+  const p = listHarga();
+  PF.forEach((id,i)=>{ $(id).value = p[i]==null ? "" : p[i].toFixed(2); });
+  $("pIns").placeholder = p[4]==null ? "Takde dalam price list — taip" : "";
+}
+function tandaUbah(){
+  const p = listHarga();
+  PF.forEach((id,i)=>$(id).classList.toggle("ubah", p[i]!=null && $(id).value.trim()!=="" && sen($(id).value)!==Math.round(p[i]*100)));
+}
+$("warna").onclick = e => { const b=e.target.closest("button"); if(!b) return; warna=b.dataset.v; drawWarna(); isiHarga(); upd(); };
+$("situasi").onclick = e => { const b=e.target.closest("button"); if(!b) return; situasi=b.dataset.v;
+  [...$("situasi").children].forEach(x=>x.classList.toggle("on",x===b));
+  $("aksBox").style.display = situasi==="2" ? "" : "none"; upd(); };
+$("kod").onchange = () => { drawWarna(); isiHarga(); upd(); };
+$("resetHarga").onclick = () => { isiHarga(); upd(); };
+
+// tampal pintar
+function parsePaste(t){
+  const ic = t.match(/\b(\d{6})[\s-]?(\d{2})[\s-]?(\d{4})\b/);
+  if (ic) $("ic").value = `${ic[1]}-${ic[2]}-${ic[3]}`;
+  const rest = ic ? t.replace(ic[0]," ") : t;
+  const tel = rest.match(/(?:\+?6)?01\d[\s-]?\d{3,4}[\s-]?\d{3,4}/);
+  if (tel) { let d = tel[0].replace(/\D/g,"").replace(/^6(?=01)/,""); $("tel").value = d.slice(0,3)+"-"+d.slice(3); }
+  const lines = t.split(/\n/).map(l=>l.replace(/^\s*(nama( penuh)?|name|customer)\s*[:\-]\s*/i,"").trim())
+    .filter(l=>l && !/\d{4}/.test(l) && /[a-z]/i.test(l) && !/^(ic|nric|no|tel|hp|phone|k\/p)\b/i.test(l));
+  const nm = lines.find(l=>/\b(bin|binti|bt|a\/l|a\/p)\b/i.test(l)) || lines[0];
+  if (nm) $("nama").value = nm.toUpperCase();
+}
+$("paste").oninput = () => { parsePaste($("paste").value); upd(); };
+
+// tarikh automatik
+const d = new Date();
+$("tarikh").value = `${String(d.getDate()).padStart(2,"0")}/${String(d.getMonth()+1).padStart(2,"0")}/${d.getFullYear()}`;
+
+// tetapan disimpan
+function ls(k,v){ try{ if(v===undefined) return localStorage.getItem(k); localStorage.setItem(k,v);}catch(e){} }
+$("sa").value = ls("vso_sa") || "SHAH 507526";
+$("branch").value = ls("vso_branch") || "PSSB DAMANSARA DAMAI";
+$("sa").addEventListener("input",()=>ls("vso_sa",$("sa").value));
+$("branch").addEventListener("input",()=>ls("vso_branch",$("branch").value));
+
+let V = {};
+function upd(){
+  const m = cur();
+  tandaUbah();
+  // semua dalam sen, kemudian bahagi 100 — purchase price sentiasa tepat
+  const c = {body:sen($("pBody").value), rt:sen($("pRt").value), reg:sen($("pReg").value), claim:sen($("pClaim").value),
+             ins:sen($("pIns").value), aks: situasi==="2" ? sen($("aks").value) : 0};
+  const h = {body:c.body/100, rt:c.rt/100, reg:c.reg/100, claim:c.claim/100};
+  const ins = c.ins/100, aks = c.aks/100;
+  const beli = (c.body + c.aks + c.rt + c.reg + c.claim + c.ins)/100;
+  const loan = sen($("loan").value)/100, t = $("tempoh").value.trim();
+  V = {
+    tarikh:$("tarikh").value, nama:$("nama").value.toUpperCase().trim(), branch:$("branch").value.toUpperCase(),
+    nric:$("ic").value, tel:$("tel").value, sa:$("sa").value.toUpperCase(),
+    model:m[0], warna, desc:m[2], tempoh: t ? t+" MONTHS" : "", hantar:$("hantar").value,
+    body:h.body?fmt(h.body):"", aks:aks?fmt(aks):"", rt:fmt(h.rt), reg:fmt(h.reg), claim:fmt(h.claim),
+    ins:c.ins?fmt(ins):"", beli:h.body?fmt(beli):"", loan:loan?fmt(loan):"", finSrc:loan?fmt(loan):"", period: t ? t+" MONTHS" : "",
+  };
+  $("sum").innerHTML = [["Harga kereta",h.body],aks?["Pakej aksesori",aks]:null,["Road tax",h.rt],["Registration",h.reg],
+    ["HP claim",h.claim],["Insurans",ins]].filter(Boolean).map(([a,b])=>`<span>${a}</span><b>${fmt(b)}</b>`).join("")
+    + `<span class="tot">Purchase price</span><b class="tot">RM ${fmt(beli)}</b>`
+    + (loan?`<span>Amount financed</span><b>RM ${fmt(loan)}</b><span>Loan / purchase price</span><b>${(loan/beli*100).toFixed(1)}%</b>`:"");
+  const w = $("loanWarn");
+  if (!c.ins) { w.style.display="block"; w.textContent="Insurans belum diisi."; }
+  else if (loan && loan > beli) { w.style.display="block"; w.textContent="Amount financed lebih tinggi dari purchase price — semak semula."; }
+  else w.style.display="none";
+  draw();
+}
+["nama","ic","tel","tempoh","hantar","aks","loan","tarikh","sa","branch",...PF].forEach(id=>$(id).addEventListener("input",upd));
+
+// lukis atas borang
+const img = new Image(); img.src = "vso-blank.jpg"; img.onload = () => { cv.width=img.width*SC; cv.height=img.height*SC; draw(); };
+const cv = $("cv"), cx = cv.getContext("2d");
+const GRID = /[?&]grid/.test(location.search);
+function draw(){
+  if (!img.complete || !img.width) return;
+  cx.setTransform(SC,0,0,SC,0,0);
+  cx.drawImage(img,0,0);
+  cx.fillStyle="#111"; cx.textBaseline="alphabetic";
+  for (const k in P){
+    let s = V[k]; if (!s) continue;
+    const [x,y,a,fs] = P[k];
+    cx.font = `${fs}px Arial, Helvetica, sans-serif`;
+    cx.textAlign = a==="r"?"right":a==="c"?"center":"left";
+    if (k==="nama") { wrap(s,x,y,405,26); continue; }
+    cx.fillText(s,x,y);
+  }
+  if (GRID){ cx.strokeStyle="rgba(255,0,0,.35)"; cx.fillStyle="red"; cx.font="10px Arial"; cx.textAlign="left";
+    for(let i=0;i<img.width;i+=50){cx.beginPath();cx.moveTo(i,0);cx.lineTo(i,img.height);cx.stroke();cx.fillText(i,i+1,10);}
+    for(let j=0;j<img.height;j+=50){cx.beginPath();cx.moveTo(0,j);cx.lineTo(img.width,j);cx.stroke();cx.fillText(j,1,j-1);} }
+}
+function wrap(s,x,y,maxW,lh){
+  const words = s.split(/\s+/); let line="", n=0;
+  for (const wd of words){ const t = line?line+" "+wd:wd;
+    if (cx.measureText(t).width>maxW && line){ cx.fillText(line,x,y+n*lh); n++; line=wd; } else line=t; }
+  if (line) cx.fillText(line,x,y+n*lh);
+}
+
+function fname(){ return "VSO_" + (V.nama||"customer").split(" ").slice(0,2).join("_") + "_" + V.model + ".jpg"; }
+$("dlJpg").onclick = () => { cv.toBlob(b=>{ const a=document.createElement("a"); a.href=URL.createObjectURL(b); a.download=fname(); a.click(); setTimeout(()=>URL.revokeObjectURL(a.href),4000); },"image/jpeg",0.92); };
+$("dlPdf").onclick = () => { $("printImg").src = cv.toDataURL("image/jpeg",0.95); setTimeout(()=>window.print(),150); };
+$("reset").onclick = () => { ["paste","nama","ic","tel","aks","loan"].forEach(id=>$(id).value=""); isiHarga(); upd(); window.scrollTo(0,0); };
+
+drawWarna(); isiHarga(); upd();
+</script>
+</body>
+</html>
