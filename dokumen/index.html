@@ -1,0 +1,504 @@
+<!doctype html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Hantar Dokumen Loan | TSM Perodua</title>
+  <meta name="robots" content="noindex" />
+  <meta name="description" content="Snap IC, lesen, slip gaji dan penyata bank — siap jadi satu PDF jelas, terus hantar ke WhatsApp. Diproses dalam telefon anda sahaja." />
+  <meta property="og:title" content="Hantar Dokumen Loan · TSM Perodua" />
+  <meta property="og:description" content="Satu PDF, jelas, 3 minit. Dokumen diproses dalam telefon anda sahaja." />
+  <meta name="theme-color" content="#1565d8" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    :root { --bg: #f2f6fc; --card: #ffffff; --c2: #edf3fb; --ln: #d5e0ef; --o: #1565d8; --y: #b45309; --w: #0f172a; --g: #556070; --gr: #25d366; --ok: #16a34a; --okbg: #e8f7ee; --bad: #dc2626; --badbg: #fdecec; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: var(--bg); color: var(--w); font-family: "Montserrat", system-ui, sans-serif; line-height: 1.45; -webkit-font-smoothing: antialiased; padding-bottom: 120px; }
+    .wrap { max-width: 520px; margin: 0 auto; padding: 0 16px; }
+    .glow { position: fixed; inset: 0; pointer-events: none; background: radial-gradient(ellipse 80% 40% at 50% 0%, rgba(21,101,216,.14), transparent 70%); z-index: -1; }
+    header { padding-top: 22px; }
+    .brand { display: flex; align-items: center; gap: 12px; }
+    .plogo { display: inline-flex; padding: 7px 12px; border-radius: 14px; background: #fff; border: 1px solid var(--ln); box-shadow: 0 6px 20px rgba(15,23,42,.08); }
+    .plogo img { display: block; height: 34px; width: auto; }
+    .kick { font-size: 12px; font-weight: 800; letter-spacing: .2em; color: var(--g); text-transform: uppercase; }
+    h1 { margin-top: 16px; font-size: 32px; font-weight: 900; line-height: 1.02; letter-spacing: -.02em; }
+    h1 span { color: var(--o); display: block; font-size: 20px; letter-spacing: 0; margin-top: 6px; }
+    .lock { margin-top: 14px; padding: 12px 14px; border-radius: 16px; background: var(--okbg); border: 2px solid #bfe6cd; font-size: 13px; font-weight: 600; color: #14532d; }
+    .lock b { font-weight: 800; }
+    .card { margin-top: 16px; padding: 18px; background: var(--card); border: 2px solid var(--ln); border-radius: 22px; }
+    .step { display: flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 800; letter-spacing: .12em; color: var(--g); text-transform: uppercase; }
+    .step i { font-style: normal; width: 26px; height: 26px; border-radius: 8px; background: var(--o); color: #fff; display: grid; place-items: center; font-size: 13px; letter-spacing: 0; flex: none; }
+    label { display: block; margin-top: 14px; font-size: 12px; font-weight: 800; letter-spacing: .1em; color: var(--g); text-transform: uppercase; }
+    input[type=text] { width: 100%; margin-top: 6px; min-height: 52px; padding: 0 14px; border-radius: 14px; background: var(--c2); border: 2px solid var(--ln); color: var(--w); font: 700 17px "Montserrat", sans-serif; -webkit-appearance: none; appearance: none; text-transform: uppercase; }
+    input[type=text]:focus { outline: none; border-color: var(--o); }
+    input.err { border-color: var(--bad); }
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+    .chips button { padding: 11px 16px; min-height: 44px; border-radius: 14px; border: 2px solid var(--ln); background: var(--c2); color: var(--w); font: 700 14px "Montserrat", sans-serif; cursor: pointer; }
+    .chips button[aria-pressed="true"] { background: var(--o); border-color: var(--o); color: #fff; }
+    .tips { margin-top: 12px; display: grid; gap: 8px; font-size: 13px; font-weight: 600; color: var(--g); }
+    .tips div { display: flex; gap: 10px; } .tips b { color: var(--w); }
+
+    /* slots */
+    .grp { margin-top: 18px; font-size: 13px; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; }
+    .slot { margin-top: 10px; padding: 14px; border-radius: 18px; border: 2px dashed var(--ln); background: var(--c2); scroll-margin-top: 20px; transition: border-color .2s, background .2s; }
+    .slot.done { border-style: solid; border-color: #9ad8b0; background: var(--okbg); }
+    .slot.miss { border-color: var(--bad); background: var(--badbg); }
+    .shead { display: flex; align-items: center; gap: 10px; }
+    .tick { width: 28px; height: 28px; border-radius: 50%; border: 2px solid var(--ln); background: #fff; display: grid; place-items: center; font-size: 15px; font-weight: 900; color: #fff; flex: none; }
+    .slot.done .tick { background: var(--ok); border-color: var(--ok); }
+    .sname { font-size: 15px; font-weight: 800; line-height: 1.25; flex: 1; min-width: 0; }
+    .sname small { display: block; font-size: 12px; font-weight: 600; color: var(--g); margin-top: 2px; }
+    .tag { font-size: 10px; font-weight: 800; letter-spacing: .1em; padding: 3px 8px; border-radius: 99px; background: #fff; border: 1px solid var(--ln); color: var(--g); flex: none; }
+    .tag.req { color: var(--bad); border-color: #f5c2c2; }
+    .addrow { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 8px; margin-top: 12px; }
+    .add { display: flex; align-items: center; justify-content: center; gap: 6px; min-height: 48px; padding: 8px 10px; border-radius: 14px; border: 2px solid var(--o); background: #fff; color: var(--o); font: 800 14px "Montserrat", sans-serif; cursor: pointer; text-align: center; }
+    .add.solid { background: var(--o); color: #fff; }
+    .add, .confirm { margin-top: 0; text-transform: none; letter-spacing: 0; }
+    .add { position: relative; overflow: hidden; }
+    .add input { position: absolute; inset: 0; opacity: 0; width: 100%; height: 100%; cursor: pointer; }
+    .thumbs { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 8px; margin-top: 12px; }
+    .thumbs:empty { display: none; }
+    .th { position: relative; border-radius: 12px; overflow: hidden; background: #fff; border: 2px solid var(--ln); aspect-ratio: 3/4; }
+    .th.warn { border-color: #f59e0b; }
+    .th img { width: 100%; height: 100%; object-fit: contain; display: block; background: #fff; }
+    .th.warn .pg { display: none; }
+    .th .pg { position: absolute; left: 4px; top: 4px; font-size: 10px; font-weight: 800; background: rgba(15,23,42,.75); color: #fff; padding: 2px 6px; border-radius: 6px; }
+    .th .wn { position: absolute; left: 0; right: 0; top: 0; font-size: 10px; font-weight: 800; background: #f59e0b; color: #1f1300; padding: 3px 4px; text-align: center; line-height: 1.2; }
+    .th .ctl { position: absolute; right: 4px; bottom: 4px; display: flex; gap: 4px; }
+    .th .ctl button { width: 30px; height: 30px; border-radius: 9px; border: 0; background: rgba(15,23,42,.8); color: #fff; font-size: 15px; cursor: pointer; display: grid; place-items: center; }
+    .th .ctl button.del { background: var(--bad); }
+    .confirm { display: flex; gap: 10px; align-items: flex-start; margin-top: 12px; padding: 10px 12px; border-radius: 12px; background: #fff; border: 2px solid var(--ln); font-size: 13px; font-weight: 700; cursor: pointer; }
+    .confirm input { width: 22px; height: 22px; flex: none; margin-top: 1px; accent-color: var(--ok); }
+    .confirm.miss { border-color: var(--bad); }
+    .busy { margin-top: 10px; font-size: 13px; font-weight: 700; color: var(--o); display: none; }
+    .busy.on { display: block; }
+    .warnmsg { margin-top: 10px; font-size: 12px; font-weight: 700; color: #92400e; background: #fff7e6; border: 1px solid #f7d99b; border-radius: 10px; padding: 8px 10px; display: none; }
+    .warnmsg.on { display: block; }
+
+    /* bottom bar */
+    .bar { position: fixed; left: 0; right: 0; bottom: 0; padding: 10px 16px calc(10px + env(safe-area-inset-bottom)); background: rgba(255,255,255,.96); border-top: 2px solid var(--ln); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); z-index: 10; }
+    .bar .in { max-width: 520px; margin: 0 auto; }
+    .prog { display: flex; justify-content: space-between; font-size: 12px; font-weight: 800; color: var(--g); letter-spacing: .04em; }
+    .prog b { color: var(--w); }
+    .meter { height: 8px; border-radius: 99px; background: var(--c2); margin: 6px 0 8px; overflow: hidden; }
+    .meter i { display: block; height: 100%; width: 0; background: var(--ok); transition: width .3s; }
+    .btn { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; min-height: 54px; border-radius: 16px; font: 800 16px "Montserrat", sans-serif; border: 0; cursor: pointer; text-align: center; padding: 10px 16px; }
+    .btn.go { background: var(--o); color: #fff; box-shadow: 0 10px 30px rgba(21,101,216,.28); }
+    .btn.go.off { background: #94a3b8; box-shadow: none; }
+    .btn.wa { background: var(--gr); color: #06290f; }
+    .btn.ghost { background: var(--card); border: 2px solid var(--ln); color: var(--w); }
+
+    /* done sheet */
+    .sheet { position: fixed; inset: 0; background: rgba(15,23,42,.55); z-index: 20; display: none; align-items: flex-end; justify-content: center; }
+    .sheet.on { display: flex; }
+    .sheet .box { width: 100%; max-width: 520px; background: #fff; border-radius: 26px 26px 0 0; padding: 22px 18px calc(18px + env(safe-area-inset-bottom)); max-height: 92vh; overflow: auto; }
+    .sheet h2 { font-size: 22px; font-weight: 900; }
+    .sheet p { margin-top: 6px; font-size: 14px; color: var(--g); font-weight: 600; }
+    .file { margin-top: 14px; display: flex; gap: 12px; align-items: center; padding: 12px; border-radius: 16px; background: var(--c2); border: 2px solid var(--ln); }
+    .file .ic { width: 44px; height: 54px; border-radius: 8px; background: var(--bad); color: #fff; font-size: 11px; font-weight: 900; display: grid; place-items: center; flex: none; }
+    .file b { display: block; font-size: 13px; word-break: break-all; }
+    .file span { font-size: 12px; color: var(--g); font-weight: 700; }
+    .sheet .btn { margin-top: 10px; }
+    .note { margin-top: 12px; font-size: 12px; color: var(--g); font-weight: 600; }
+    .spin { width: 40px; height: 40px; border: 4px solid var(--ln); border-top-color: var(--o); border-radius: 50%; animation: sp 0.8s linear infinite; margin: 10px auto; }
+    @keyframes sp { to { transform: rotate(360deg); } }
+    footer { margin-top: 36px; padding: 22px 0 10px; border-top: 2px solid var(--ln); text-align: center; color: var(--g); font-size: 12px; }
+    footer b { color: var(--w); letter-spacing: .12em; }
+  </style>
+</head>
+<body>
+  <div class="glow"></div>
+  <main class="wrap">
+    <header>
+      <div class="brand">
+        <span class="plogo"><img src="../img/perodua-logo.png" alt="Perodua" /></span>
+        <span class="kick">TSM Perodua</span>
+      </div>
+      <h1>Hantar Dokumen Loan<span>Satu PDF, jelas, siap 3 minit.</span></h1>
+      <div class="lock">🔒 <b>Selamat:</b> gambar & fail anda diproses <b>dalam telefon ini sahaja</b>. Tiada apa disimpan atau dimuat naik ke laman ini. Fail hanya keluar bila <b>anda sendiri</b> tekan Hantar ke WhatsApp.</div>
+    </header>
+
+    <section class="card">
+      <div class="step"><i>1</i>Maklumat anda</div>
+      <label for="nama">Nama penuh (ikut IC)</label>
+      <input type="text" id="nama" autocomplete="name" placeholder="CTH: AHMAD BIN ALI" />
+      <label>Sales advisor anda</label>
+      <div class="chips" id="sa"></div>
+    </section>
+
+    <section class="card">
+      <div class="step"><i>2</i>Tips supaya bank terima</div>
+      <div class="tips">
+        <div><span>📸</span><span>Letak dokumen atas <b>meja gelap</b>, tempat <b>terang</b>, nampak <b>4 bucu</b>. Jangan guna flash.</span></div>
+        <div><span>🏦</span><span>Penyata bank: <b>download PDF dari app bank</b> (Maybank2u, CIMB, BSN…) lebih jelas dari screenshot.</span></div>
+        <div><span>🔐</span><span>PDF berkunci? Laman ni akan minta kata laluan (biasanya no. IC / tarikh lahir).</span></div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="step"><i>3</i>Masukkan dokumen</div>
+      <div id="slots"></div>
+    </section>
+
+    <footer><b>TEAM SHAH MAHPOB</b><br>Sales &amp; Loan · Perodua<br><br>Dokumen hanya untuk permohonan loan kereta anda.<br>Bukan laman rasmi Perodua.</footer>
+  </main>
+
+  <div class="bar"><div class="in">
+    <div class="prog"><span id="progTxt">Dokumen wajib</span><b id="progNum">0/0</b></div>
+    <div class="meter"><i id="meter"></i></div>
+    <button class="btn go off" id="make">📄 Siapkan PDF</button>
+  </div></div>
+
+  <div class="sheet" id="sheet"><div class="box" id="sheetBox"></div></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script>
+  (function () {
+    "use strict";
+    if (window.pdfjsLib) pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+
+    var ADVISORS = [
+      { key: "shah", name: "Shah", wa: "60137258194" },
+      { key: "aishah", name: "Aishah", wa: "60182031020" },
+      { key: "fendi", name: "Fendi", wa: "60189038194" }
+    ];
+    var BULAN = ["Jan","Feb","Mac","Apr","Mei","Jun","Jul","Ogo","Sep","Okt","Nov","Dis"];
+    function monthAgo(n) { var d = new Date(); d.setDate(1); d.setMonth(d.getMonth() - n); return BULAN[d.getMonth()] + " " + d.getFullYear(); }
+
+    // kind: photo = small card (IC/lesen), doc = full page
+    var SLOTS = [
+      { id: "icf", grp: "🪪 Kad pengenalan", name: "IC — depan", req: true, max: 1, kind: "card", pair: "ic" },
+      { id: "icb", name: "IC — belakang", req: true, max: 1, kind: "card", pair: "ic" },
+      { id: "lsf", grp: "🚗 Lesen memandu", name: "Lesen — depan", sub: "Lesen digital MyJPJ? Screenshot pun boleh", req: true, max: 1, kind: "card", pair: "ls" },
+      { id: "lsb", name: "Lesen — belakang", req: false, max: 1, kind: "card", pair: "ls" },
+      { id: "sl1", grp: "📄 Slip gaji 3 bulan terkini", name: "Slip gaji — bulan terkini", sub: "Contoh: " + monthAgo(1), req: true, max: 6, kind: "doc" },
+      { id: "sl2", name: "Slip gaji — bulan sebelumnya", sub: "Contoh: " + monthAgo(2), req: true, max: 6, kind: "doc" },
+      { id: "sl3", name: "Slip gaji — 3 bulan lepas", sub: "Contoh: " + monthAgo(3), req: true, max: 6, kind: "doc" },
+      { id: "pb", grp: "🏦 Penyata bank 3 bulan terkini", name: "Penyata bank (akaun gaji masuk)", sub: "Boleh pilih beberapa fail / gambar sekali gus", req: true, max: 40, kind: "doc", confirm: "Saya sahkan penyata ni cukup 3 bulan terkini (" + monthAgo(3) + " – " + monthAgo(1) + ")" },
+      { id: "lain", grp: "➕ Lain-lain", name: "Dokumen lain (jika diminta)", sub: "EA, KWSP, surat majikan, SSM…", req: false, max: 20, kind: "doc" }
+    ];
+    var state = {}; SLOTS.forEach(function (s) { state[s.id] = { items: [], ok: false }; });
+    var sa = ADVISORS[0];
+    var q = (new URLSearchParams(location.search).get("sa") || "").toLowerCase();
+    if (q === "aisyah") q = "aishah";
+    ADVISORS.forEach(function (a) { if (a.key === q) sa = a; });
+
+    var $ = function (id) { return document.getElementById(id); };
+
+    // ---------- advisor chips ----------
+    function drawSA() {
+      $("sa").innerHTML = "";
+      ADVISORS.forEach(function (a) {
+        var b = document.createElement("button");
+        b.type = "button"; b.textContent = a.name; b.setAttribute("aria-pressed", a === sa ? "true" : "false");
+        b.onclick = function () { sa = a; drawSA(); };
+        $("sa").appendChild(b);
+      });
+    }
+    drawSA();
+
+    // ---------- slots UI ----------
+    function drawSlots() {
+      var root = $("slots"); root.innerHTML = "";
+      SLOTS.forEach(function (s) {
+        if (s.grp) { var g = document.createElement("div"); g.className = "grp"; g.textContent = s.grp; root.appendChild(g); }
+        var el = document.createElement("div"); el.className = "slot"; el.id = "slot-" + s.id;
+        var single = s.max === 1;
+        el.innerHTML =
+          '<div class="shead"><span class="tick">✓</span><div class="sname">' + s.name + (s.sub ? "<small>" + s.sub + "</small>" : "") + '</div>' +
+          '<span class="tag' + (s.req ? " req" : "") + '">' + (s.req ? "WAJIB" : "PILIHAN") + '</span></div>' +
+          '<div class="addrow">' +
+            '<label class="add solid">📷 Ambil gambar<input type="file" accept="image/*" capture="environment"></label>' +
+            '<label class="add">📁 Pilih fail / PDF<input type="file" accept="image/*,application/pdf"' + (single ? "" : " multiple") + '></label>' +
+          '</div>' +
+          '<div class="busy">⏳ Sedang proses…</div>' +
+          '<div class="warnmsg"></div>' +
+          '<div class="thumbs"></div>' +
+          (s.confirm ? '<label class="confirm" style="display:none"><input type="checkbox"><span>' + s.confirm + '</span></label>' : "");
+        root.appendChild(el);
+        el.querySelectorAll("input[type=file]").forEach(function (inp) {
+          inp.addEventListener("change", function () { var f = Array.prototype.slice.call(inp.files); inp.value = ""; if (f.length) addFiles(s, f); });
+        });
+        var cb = el.querySelector(".confirm input");
+        if (cb) cb.addEventListener("change", function () { state[s.id].ok = cb.checked; el.querySelector(".confirm").classList.remove("miss"); refresh(); });
+      });
+    }
+
+    function drawThumbs(s) {
+      var el = $("slot-" + s.id), box = el.querySelector(".thumbs"), st = state[s.id];
+      box.innerHTML = "";
+      st.items.forEach(function (it, i) {
+        var d = document.createElement("div"); d.className = "th" + (it.warn ? " warn" : "");
+        d.innerHTML = '<img alt="">' + (it.warn ? '<span class="wn">' + it.warn + "</span>" : "") +
+          '<span class="pg">' + (i + 1) + '</span><span class="ctl"><button type="button" title="Pusing">↻</button><button type="button" class="del" title="Buang">✕</button></span>';
+        d.querySelector("img").src = it.url;
+        var bs = d.querySelectorAll("button");
+        bs[0].onclick = function () { rotateItem(s, it); };
+        bs[1].onclick = function () { URL.revokeObjectURL(it.url); st.items.splice(st.items.indexOf(it), 1); drawThumbs(s); refresh(); };
+        box.appendChild(d);
+      });
+      var anyWarn = st.items.some(function (x) { return x.warn; });
+      var wm = el.querySelector(".warnmsg");
+      wm.classList.toggle("on", anyWarn);
+      wm.textContent = anyWarn ? "⚠️ Ada gambar yang mungkin kabur / gelap. Bank boleh tolak — lebih baik buang (✕) dan ambil semula di tempat terang." : "";
+      var add = el.querySelector(".addrow");
+      add.style.display = st.items.length >= s.max ? "none" : "";
+      var c = el.querySelector(".confirm"); if (c) c.style.display = st.items.length ? "" : "none";
+    }
+
+    function slotDone(s) { var st = state[s.id]; return st.items.length > 0 && (!s.confirm || st.ok); }
+    function refresh() {
+      var req = SLOTS.filter(function (s) { return s.req; }), done = req.filter(slotDone).length;
+      SLOTS.forEach(function (s) { var el = $("slot-" + s.id); el.classList.toggle("done", slotDone(s)); if (slotDone(s)) el.classList.remove("miss"); });
+      $("progNum").textContent = done + "/" + req.length;
+      $("progTxt").textContent = done === req.length ? "✅ Semua dokumen wajib lengkap" : "Dokumen wajib lengkap";
+      $("meter").style.width = (100 * done / req.length) + "%";
+      $("make").classList.toggle("off", done !== req.length);
+    }
+
+    // ---------- image processing ----------
+    var MAXE = 1800;
+    function loadImage(file) {
+      return new Promise(function (res, rej) {
+        var url = URL.createObjectURL(file), img = new Image();
+        img.onload = function () { res({ img: img, url: url }); };
+        img.onerror = function () { URL.revokeObjectURL(url); rej(new Error("img")); };
+        img.src = url;
+      });
+    }
+    function toCanvas(src, w, h, maxE) {
+      var k = Math.min(1, maxE / Math.max(w, h)), c = document.createElement("canvas");
+      c.width = Math.max(1, Math.round(w * k)); c.height = Math.max(1, Math.round(h * k));
+      var x = c.getContext("2d"); x.fillStyle = "#fff"; x.fillRect(0, 0, c.width, c.height); x.drawImage(src, 0, 0, c.width, c.height);
+      return c;
+    }
+    // quality check: brightness + sharpness (Laplacian variance on small grey copy)
+    function quality(c) {
+      var k = Math.min(1, 500 / Math.max(c.width, c.height)), w = Math.round(c.width * k), h = Math.round(c.height * k);
+      var t = document.createElement("canvas"); t.width = w; t.height = h; t.getContext("2d").drawImage(c, 0, 0, w, h);
+      var d = t.getContext("2d").getImageData(0, 0, w, h).data, g = new Float32Array(w * h), sum = 0;
+      for (var i = 0; i < w * h; i++) { var v = 0.299 * d[i * 4] + 0.587 * d[i * 4 + 1] + 0.114 * d[i * 4 + 2]; g[i] = v; sum += v; }
+      var mean = sum / (w * h), n = 0, m = 0, m2 = 0;
+      for (var y = 1; y < h - 1; y++) for (var x = 1; x < w - 1; x++) {
+        var p = y * w + x, L = 4 * g[p] - g[p - 1] - g[p + 1] - g[p - w] - g[p + w];
+        n++; m += L; m2 += L * L;
+      }
+      var vari = n ? m2 / n - (m / n) * (m / n) : 999;
+      if (mean < 70) return "Gelap";
+      if (vari < 35) return "Mungkin kabur";
+      if (Math.max(c.width, c.height) < 700) return "Resolusi rendah";
+      return "";
+    }
+    // gentle auto-level so paper looks white and text darker
+    function enhance(c) {
+      var x = c.getContext("2d"), im = x.getImageData(0, 0, c.width, c.height), d = im.data, hist = new Uint32Array(256), N = c.width * c.height;
+      for (var i = 0; i < d.length; i += 16) hist[(0.299 * d[i] + 0.587 * d[i + 1] + 0.114 * d[i + 2]) | 0]++;
+      var tot = 0; for (var j = 0; j < 256; j++) tot += hist[j];
+      var lo = 0, hi = 255, acc = 0;
+      for (j = 0; j < 256; j++) { acc += hist[j]; if (acc > tot * 0.01) { lo = j; break; } }
+      acc = 0; for (j = 255; j >= 0; j--) { acc += hist[j]; if (acc > tot * 0.02) { hi = j; break; } }
+      if (hi - lo < 40 || (lo < 8 && hi > 247)) return c;
+      var lut = new Uint8ClampedArray(256), span = hi - lo;
+      for (j = 0; j < 256; j++) lut[j] = Math.round((j - lo) * 255 / span);
+      for (i = 0; i < d.length; i += 4) { d[i] = lut[d[i]]; d[i + 1] = lut[d[i + 1]]; d[i + 2] = lut[d[i + 2]]; }
+      x.putImageData(im, 0, 0);
+      return c;
+    }
+    function canvasBlob(c, qual) { return new Promise(function (res) { c.toBlob(function (b) { res(b); }, "image/jpeg", qual); }); }
+    async function makeItem(c, warn, qual) {
+      var b = await canvasBlob(c, qual);
+      return { blob: b, w: c.width, h: c.height, warn: warn, url: URL.createObjectURL(b), q: qual };
+    }
+    async function rotateItem(s, it) {
+      var r = await loadImage(it.blob), c = document.createElement("canvas");
+      c.width = r.img.naturalHeight; c.height = r.img.naturalWidth;
+      var x = c.getContext("2d"); x.translate(c.width, 0); x.rotate(Math.PI / 2); x.drawImage(r.img, 0, 0);
+      URL.revokeObjectURL(r.url); URL.revokeObjectURL(it.url);
+      var n = await makeItem(c, it.warn, it.q);
+      Object.assign(it, n); drawThumbs(s);
+    }
+
+    async function pdfToItems(file, qual) {
+      if (!window.pdfjsLib) throw new Error("pdflib");
+      var data = new Uint8Array(await file.arrayBuffer());
+      var task = pdfjsLib.getDocument({ data: data });
+      task.onPassword = function (update, reason) {
+        var msg = (reason === 2 ? "Kata laluan salah. Cuba lagi.\n\n" : "") + "Fail \"" + file.name + "\" berkunci.\nMasukkan kata laluan (biasanya no. IC atau tarikh lahir):";
+        var pw = window.prompt(msg);
+        if (pw === null) { task.destroy(); } else update(pw);
+      };
+      var pdf = await task.promise, out = [], pages = Math.min(pdf.numPages, 30);
+      for (var p = 1; p <= pages; p++) {
+        var page = await pdf.getPage(p), v1 = page.getViewport({ scale: 1 }), sc = Math.min(2.5, 1500 / Math.max(v1.width, v1.height));
+        var vp = page.getViewport({ scale: sc }), c = document.createElement("canvas");
+        c.width = Math.round(vp.width); c.height = Math.round(vp.height);
+        var x = c.getContext("2d"); x.fillStyle = "#fff"; x.fillRect(0, 0, c.width, c.height);
+        await page.render({ canvasContext: x, viewport: vp }).promise;
+        out.push(await makeItem(c, "", qual));
+        page.cleanup();
+      }
+      pdf.destroy();
+      return out;
+    }
+
+    async function addFiles(s, files) {
+      var el = $("slot-" + s.id), busy = el.querySelector(".busy"), st = state[s.id];
+      busy.classList.add("on");
+      var qual = s.kind === "card" ? 0.88 : 0.78;
+      for (var i = 0; i < files.length; i++) {
+        if (st.items.length >= s.max) break;
+        var f = files[i];
+        try {
+          if (f.type === "application/pdf" || /\.pdf$/i.test(f.name)) {
+            if (s.max === 1) { // IC/lesen from a PDF: take first page only
+              var one = await pdfToItems(f, qual); if (one.length) st.items.push(one[0]); one.slice(1).forEach(function (o) { URL.revokeObjectURL(o.url); });
+            } else {
+              var its = await pdfToItems(f, qual);
+              its.forEach(function (it) { if (st.items.length < s.max) st.items.push(it); else URL.revokeObjectURL(it.url); });
+            }
+          } else {
+            var r = await loadImage(f), c = toCanvas(r.img, r.img.naturalWidth, r.img.naturalHeight, MAXE);
+            URL.revokeObjectURL(r.url);
+            var warn = quality(c); enhance(c);
+            st.items.push(await makeItem(c, warn, qual));
+          }
+        } catch (e) {
+          if (e && e.name === "PasswordException") alert("Fail \"" + f.name + "\" tak dibuka — kata laluan diperlukan.");
+          else alert("Fail \"" + f.name + "\" tak dapat dibaca. Cuba ambil gambar / screenshot dokumen tu.");
+        }
+        drawThumbs(s); refresh();
+      }
+      busy.classList.remove("on");
+      drawThumbs(s); refresh();
+    }
+
+    // ---------- build PDF ----------
+    function clean(t) { return String(t).normalize("NFKD").replace(/[–—]/g, "-").replace(/[^\x20-\x7E]/g, "").trim(); }
+    function nama() { return $("nama").value.trim().toUpperCase().replace(/\s+/g, " "); }
+    function tarikh() { var d = new Date(); return ("0" + d.getDate()).slice(-2) + "/" + ("0" + (d.getMonth() + 1)).slice(-2) + "/" + d.getFullYear(); }
+
+    async function buildPdf() {
+      var P = PDFLib, doc = await P.PDFDocument.create(), W = 595.28, H = 841.89, M = 28;
+      var f = await doc.embedFont(P.StandardFonts.Helvetica), fb = await doc.embedFont(P.StandardFonts.HelveticaBold);
+      var grey = P.rgb(0.35, 0.38, 0.44), ink = P.rgb(0.06, 0.09, 0.16), blue = P.rgb(0.08, 0.4, 0.85);
+      var NM = clean(nama()), index = [];
+      doc.setTitle("Dokumen loan " + NM); doc.setAuthor(NM); doc.setCreator("TSM Perodua - Hantar Dokumen");
+
+      var cover = doc.addPage([W, H]);
+      function head(page, label) {
+        page.drawText(clean(label).toUpperCase(), { x: M, y: H - M - 8, size: 9, font: fb, color: blue });
+        var r = NM + "  |  " + tarikh(); page.drawText(r, { x: W - M - f.widthOfTextAtSize(r, 8), y: H - M - 8, size: 8, font: f, color: grey });
+      }
+      async function place(page, it, x, y, bw, bh) {
+        var img = await doc.embedJpg(await it.blob.arrayBuffer()), k = Math.min(bw / img.width, bh / img.height);
+        var w = img.width * k, h = img.height * k;
+        page.drawImage(img, { x: x + (bw - w) / 2, y: y + (bh - h) / 2, width: w, height: h });
+      }
+      var top = H - M - 22, boxH = top - M;
+      // IC & lesen: depan + belakang on one page
+      var pairs = [["ic", "Kad Pengenalan (depan & belakang)"], ["ls", "Lesen Memandu (depan & belakang)"]];
+      for (var pi = 0; pi < pairs.length; pi++) {
+        var ss = SLOTS.filter(function (s) { return s.pair === pairs[pi][0] && state[s.id].items.length; });
+        if (!ss.length) continue;
+        var pg = doc.addPage([W, H]); head(pg, pairs[pi][1]); index.push([pairs[pi][1], doc.getPageCount()]);
+        var half = (boxH - 14) / 2;
+        for (var k = 0; k < ss.length; k++) await place(pg, state[ss[k].id].items[0], M, top - half * (k + 1) - 14 * k, W - 2 * M, half);
+      }
+      // full-page documents
+      var docs = SLOTS.filter(function (s) { return s.kind === "doc" && state[s.id].items.length; });
+      for (var di = 0; di < docs.length; di++) {
+        var s = docs[di], items = state[s.id].items;
+        index.push([s.name + " (" + items.length + " ms)", doc.getPageCount() + 1]);
+        for (var ii = 0; ii < items.length; ii++) {
+          var p2 = doc.addPage([W, H]); head(p2, s.name + (items.length > 1 ? "  -  " + (ii + 1) + "/" + items.length : ""));
+          await place(p2, items[ii], M, M, W - 2 * M, boxH);
+        }
+      }
+      // cover page
+      var y = H - 70;
+      cover.drawText("TSM PERODUA", { x: 50, y: y, size: 11, font: fb, color: blue }); y -= 30;
+      cover.drawText("DOKUMEN PERMOHONAN LOAN KERETA", { x: 50, y: y, size: 18, font: fb, color: ink }); y -= 40;
+      [["Nama", NM], ["Tarikh hantar", tarikh()], ["Sales advisor", sa.name], ["Jumlah muka surat", String(doc.getPageCount())]].forEach(function (r) {
+        cover.drawText(r[0], { x: 50, y: y, size: 11, font: f, color: grey });
+        cover.drawText(clean(r[1]), { x: 190, y: y, size: 12, font: fb, color: ink }); y -= 22;
+      });
+      y -= 18; cover.drawText("SENARAI DOKUMEN", { x: 50, y: y, size: 11, font: fb, color: blue }); y -= 24;
+      index.forEach(function (r) {
+        cover.drawRectangle({ x: 50, y: y - 2, width: 11, height: 11, color: P.rgb(0.09, 0.64, 0.29) });
+        cover.drawText(clean(r[0]), { x: 72, y: y, size: 11, font: f, color: ink });
+        var t = "ms " + r[1]; cover.drawText(t, { x: W - 50 - f.widthOfTextAtSize(t, 10), y: y, size: 10, font: f, color: grey }); y -= 20;
+      });
+      var miss = SLOTS.filter(function (s) { return !state[s.id].items.length && s.req; });
+      y -= 16;
+      cover.drawText(miss.length ? "Belum ada: " + clean(miss.map(function (s) { return s.name; }).join(", ")) : "Semua dokumen wajib lengkap.", { x: 50, y: y, size: 10, font: fb, color: miss.length ? P.rgb(0.86, 0.15, 0.15) : P.rgb(0.09, 0.5, 0.25) });
+      cover.drawText("Dokumen ini hanya untuk permohonan pembiayaan kereta.", { x: 50, y: 50, size: 9, font: f, color: grey });
+      return { bytes: await doc.save(), pages: doc.getPageCount() };
+    }
+
+    // ---------- actions ----------
+    var lastFile = null;
+    function sheet(html) { $("sheetBox").innerHTML = html; $("sheet").classList.add("on"); }
+    function closeSheet() { $("sheet").classList.remove("on"); }
+    $("sheet").addEventListener("click", function (e) { if (e.target === $("sheet")) closeSheet(); });
+
+    $("make").addEventListener("click", async function () {
+      var n = nama();
+      if (!n) { $("nama").classList.add("err"); $("nama").scrollIntoView({ behavior: "smooth", block: "center" }); $("nama").focus(); return; }
+      $("nama").classList.remove("err");
+      var first = null;
+      SLOTS.forEach(function (s) {
+        if (!s.req || slotDone(s)) return;
+        var el = $("slot-" + s.id); el.classList.add("miss");
+        if (s.confirm && state[s.id].items.length) el.querySelector(".confirm").classList.add("miss");
+        if (!first) first = el;
+      });
+      if (first) { first.scrollIntoView({ behavior: "smooth", block: "center" }); return; }
+      if (!window.PDFLib) { alert("Sambungan internet lemah — muat semula laman ni dan cuba lagi."); return; }
+      sheet('<h2>Sedang siapkan PDF…</h2><div class="spin"></div><p style="text-align:center">Jangan tutup laman ni.</p>');
+      try {
+        var r = await buildPdf();
+        var fname = "DOKUMEN_LOAN_" + clean(n).replace(/[^A-Z0-9]+/g, "_").replace(/^_|_$/g, "").slice(0, 40) + ".pdf";
+        var blob = new Blob([r.bytes], { type: "application/pdf" });
+        lastFile = new File([blob], fname, { type: "application/pdf" });
+        var mb = (blob.size / 1048576).toFixed(1);
+        var canShare = !!(navigator.canShare && navigator.canShare({ files: [lastFile] }));
+        sheet(
+          '<h2>✅ PDF siap!</h2><p>' + (canShare
+            ? 'Tekan butang hijau → pilih <b>WhatsApp</b> → pilih chat <b>' + sa.name + '</b> → Hantar.'
+            : 'Download PDF dulu, kemudian buka WhatsApp <b>' + sa.name + '</b> → tekan 📎 → <b>Dokumen</b> → pilih fail ni.') + '</p>' +
+          '<div class="file"><span class="ic">PDF</span><div><b>' + fname + '</b><span>' + r.pages + ' muka surat · ' + mb + ' MB</span></div></div>' +
+          (canShare
+            ? '<button class="btn wa" id="share">📤 Hantar ke WhatsApp ' + sa.name + '</button><button class="btn ghost" id="dl">⬇️ Simpan PDF dalam telefon</button>'
+            : '<button class="btn wa" id="dl">⬇️ Download PDF</button><a class="btn ghost" id="wa" target="_blank" rel="noopener">💬 Buka WhatsApp ' + sa.name + ' & attach PDF</a>') +
+          '<button class="btn ghost" id="back">← Tambah / tukar dokumen</button>' +
+          '<p class="note">Selepas hantar, anda boleh padam gambar IC & dokumen dari galeri telefon untuk keselamatan.</p>'
+        );
+        if ($("share")) $("share").onclick = async function () {
+          try { await navigator.share({ files: [lastFile], title: fname }); } catch (e) { if (e && e.name !== "AbortError") download(); }
+        };
+        $("dl").onclick = download;
+        if ($("wa")) $("wa").href = "https://wa.me/" + sa.wa + "?text=" + encodeURIComponent("Salam " + sa.name + ", saya " + n + ". Ni dokumen loan saya (PDF).");
+        $("back").onclick = closeSheet;
+      } catch (e) {
+        sheet('<h2>Ada masalah 😕</h2><p>PDF tak dapat disiapkan. Cuba buang dokumen yang paling besar dan cuba lagi, atau hantar terus gambar ke WhatsApp ' + sa.name + '.</p><button class="btn ghost" id="back">Tutup</button>');
+        $("back").onclick = closeSheet;
+      }
+    });
+    function download() {
+      if (!lastFile) return;
+      var a = document.createElement("a"); a.href = URL.createObjectURL(lastFile); a.download = lastFile.name;
+      document.body.appendChild(a); a.click(); setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 4000);
+    }
+    $("nama").addEventListener("input", function () { $("nama").classList.remove("err"); });
+    window.addEventListener("beforeunload", function (e) {
+      var any = SLOTS.some(function (s) { return state[s.id].items.length; });
+      if (any && !lastFile) { e.preventDefault(); e.returnValue = ""; }
+    });
+
+    drawSlots(); SLOTS.forEach(drawThumbs); refresh();
+  })();
+  </script>
+</body>
+</html>
