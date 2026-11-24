@@ -203,9 +203,8 @@
       <div class="card">
         <div class="step"><i>3</i>Hutang sedia ada</div>
         <p class="hint" style="margin-top:8px">Isi yang ada sahaja. Biarkan kosong jika tiada.</p>
-        <label for="kad">Baki kad kredit <small>(jumlah semua kad)</small></label>
-        <div class="rm"><input id="kad" type="number" inputmode="numeric" min="0" step="100" placeholder="0" /></div>
-        <p class="hint">Bank kira <b>5% daripada baki</b> sebagai bayaran bulanan.</p>
+        <label for="kad">Kad kredit / sebulan <small>(jumlah semua kad)</small></label>
+        <div class="rm"><input id="kad" type="number" inputmode="numeric" min="0" placeholder="0" /></div>
         <div class="row2">
           <div><label for="ptptn">PTPTN / sebulan</label><div class="rm"><input id="ptptn" type="number" inputmode="numeric" min="0" placeholder="0" /></div></div>
           <div><label for="peribadi">Personal loan / sebulan</label><div class="rm"><input id="peribadi" type="number" inputmode="numeric" min="0" placeholder="0" /></div></div>
@@ -305,7 +304,7 @@
       </div>
 
       <button class="btn ghost" type="button" id="again" style="margin-top:16px">↺ Ubah maklumat &amp; kira semula</button>
-      <p class="note">Anggaran sahaja, bukan kelulusan bank. Bank akan semak CCRIS, CTOS, slip gaji &amp; penyata bank anda. DSR dikira atas gaji bersih; kad kredit 5% daripada baki. Baki sara hidup (NDI) minimum bank RM1,400. Margin maksimum 90% daripada harga OTR. AKPK, SAA &amp; blacklist tidak boleh memohon loan bank. Bulanan dikira ikut baki berkurangan (EIR), seperti Akta Sewa Beli yang dipinda (berkuat kuasa 1 Jun 2026); kadar sebenar ikut bank. Harga OTR anggaran; rebate ikut senarai bulan semasa, tertakluk terma Perodua.</p>
+      <p class="note">Anggaran sahaja, bukan kelulusan bank. Bank akan semak CCRIS, CTOS, slip gaji &amp; penyata bank anda. DSR dikira atas gaji bersih. Baki sara hidup (NDI) minimum bank RM1,400. Margin maksimum 90% daripada harga OTR. AKPK, SAA &amp; blacklist tidak boleh memohon loan bank. Bulanan dikira ikut baki berkurangan (EIR), seperti Akta Sewa Beli yang dipinda (berkuat kuasa 1 Jun 2026); kadar sebenar ikut bank. Harga OTR anggaran; rebate ikut senarai bulan semasa, tertakluk terma Perodua.</p>
     </section>
 
     <footer><b>TEAM SHAH MAHPOB</b><br>Sales &amp; Loan · Perodua<br><br>LAMAN CHECK KEWANGAN TSM PERODUA<br>Bukan laman rasmi Perodua.</footer>
@@ -356,7 +355,7 @@
 
     function compute() {
       const G = num("gaji"), umur = num("umur"), sewa = S.rumah === "sewa" ? num("sewa") : 0;
-      const kad = num("kad"), kadMo = kad * 0.05;
+      const kadMo = num("kad");
       const parts = { kad: kadMo, ptptn: num("ptptn"), peribadi: num("peribadi"), rumahLoan: num("rumahLoan"), kereta: num("kereta"), lain: num("lain") };
       const K = Object.values(parts).reduce((a, b) => a + b, 0);
       const tooOld = umur >= 70, stop = S.rekod === "blok" || tooOld;
@@ -386,7 +385,7 @@
       const loanMax = loanFor(ansOk, rL, n);
       const carLoanTop = Math.max(0, ...D.flatMap((m) => m.vars.map((v) => v.price - v.dpMin)));
       const ndiBound = G - K - NDI_OK < DSR_OK * G - K, ndiBoundMax = G - K - NDI_MIN < DSR_MAX * G - K;
-      return { G, umur, sewa, kad, kadMo, parts, K, n, margin, ansOk, ansMax, customR, badRate, rL, D, loanMax, carLoanTop, tooOld, stop, ndiBound, ndiBoundMax };
+      return { G, umur, sewa, kadMo, parts, K, n, margin, ansOk, ansMax, customR, badRate, rL, D, loanMax, carLoanTop, tooOld, stop, ndiBound, ndiBoundMax };
     }
 
     // ringkasan rebate bulan ini (dari /rebate.js)
@@ -461,7 +460,7 @@
         const P = [];
         if (room > 0) P.push(`<b>Kurangkan hutang ${rm(Math.ceil(Math.max(0, K - room) / 10) * 10)} sebulan</b> supaya layak ${cheap.name} (${rm(cheap.moMin)}/bln). Mula dengan yang kecil: Atome / SPayLater, ansuran telefon, personal loan kecil.`);
         else P.push(`<b>Tambah pemohon bersama</b> (pasangan atau ahli keluarga yang bekerja). Gaji ${rm(G)} seorang belum cukup untuk ansuran kereta + baki sara hidup RM1,400.`);
-        if (c.kadMo > 0) P.push(`<b>Settle kad kredit ${rm(c.kad)}</b>: komitmen turun ${rm(c.kadMo)} sebulan. Setiap RM1,000 baki dibayar = RM50 sebulan lega. Tutup kad yang tak guna.`);
+        if (c.kadMo > 0) P.push(`<b>Settle kad kredit</b>: komitmen turun ${rm(c.kadMo)} sebulan. Tutup kad yang tak guna.`);
         P.push(`<b>Pilih model lebih rendah</b>: ${cheap.name} hanya ${rm(cheap.moMin)} sebulan (${c.n} tahun).`);
         if (ref) { const dp10 = Math.round(ref.price * 0.1 / 100) * 100, mo2 = monthly(Math.max(0, ref.price - ref.dpMin - dp10), ref.r, c.n); P.push(`<b>Tambah downpayment ${rm(dp10)}</b> untuk ${ref.name}: bulanan turun dari ${rm(ref.moMin)} ke ${rm(mo2)}.`); }
         P.push("<b>Sediakan penjamin</b> (ibu bapa, pasangan atau adik-beradik) yang ada gaji tetap &amp; rekod bayaran bersih.");
@@ -517,7 +516,7 @@
       if (S.rekod === "blok") T.push(["⛔", "<b>AKPK / SAA / blacklist tak boleh apply loan bank.</b> Selesaikan hutang dan dapatkan surat pelepasan / penyelesaian dahulu. Pilihan lain: pemohon lain (ahli keluarga) atau tunai."]);
       if (S.rekod === "lewat2") T.push(["⚠️", "<b>Jelaskan semua tunggakan dulu</b>, set auto-debit, dan pastikan rekod bersih 3–6 bulan sebelum apply."]);
       if (S.rekod === "lewat1") T.push(["⚠️", "<b>Jelaskan bulan tertunggak dulu</b>, set auto-debit, dan tunggu 1–2 bulan sampai CCRIS kemas kini."]);
-      if (c.kadMo > 0 && !merah) T.push(["💳", `Baki kad kredit ${rm(c.kad)} dikira <b>${rm(c.kadMo)}/bulan</b>. Setiap RM1,000 dibayar turun, bajet ansuran naik RM50. Tutup kad yang tak guna.`]);
+      if (c.kadMo > 0 && !merah) T.push(["💳", `Kad kredit ${rm(c.kadMo)} sebulan dikira sebagai hutang. <b>Langsaikan baki kad</b> sebelum apply supaya bajet ansuran naik. Tutup kad yang tak guna.`]);
       if (c.parts.lain > 0) T.push(["🧾", "Bank kira <b>Atome, SPayLater &amp; ansuran telefon</b> sebagai hutang. Langsaikan yang kecil sebelum apply."]);
       if (picks.length && pickType === "amb") T.push(["💰", `Untuk ${picks[0].name}, sediakan <b>downpayment ${rm(picks[0].dpOk)}</b> supaya bulanan jadi ${rm(picks[0].moOk)}.`]);
       // DSR 75%+ (kereta dengan downpayment minimum): pilihan penjamin atau tambah downpayment ~10% harga
