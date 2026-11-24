@@ -469,7 +469,7 @@
         if (c.kadMo > 0) P.push(`<b>Settle kad kredit</b>: komitmen turun ${rm(c.kadMo)} sebulan. Tutup kad yang tak guna.`);
         P.push(`<b>Pilih model lebih rendah</b>: ${cheap.name} hanya ${rm(cheap.moMin)} sebulan (${c.n} tahun).`);
         if (ref) { const dp10 = Math.round(ref.price * 0.1 / 100) * 100, mo2 = monthly(Math.max(0, ref.price - ref.dpMin - dp10), ref.r, c.n); P.push(`<b>Tambah downpayment ${rm(dp10)}</b> untuk ${ref.name}: bulanan turun dari ${rm(ref.moMin)} ke ${rm(mo2)}.`); }
-        P.push("<b>Sediakan penjamin</b> (ibu bapa, pasangan atau adik-beradik) yang ada gaji tetap &amp; rekod bayaran bersih.");
+        P.push("<b>Sediakan penjamin</b> sama ada <b>suami / isteri, ibu / ayah, atau adik-beradik yang bekerja</b>, dengan gaji tetap &amp; rekod bayaran bersih.");
         P.push("<b>Tunjuk pendapatan tambahan</b>: elaun tetap, OT atau bisnes sampingan yang masuk akaun bank setiap bulan (penyata 6 bulan).");
         P.push(`<b>WhatsApp ${ADVISOR}</b>: kami susun strategi ikut kes anda, percuma.`);
         $("sol").innerHTML = `<div class="t">🔴 JALAN PENYELESAIAN UNTUK ANDA</div><ol>${P.map((t) => `<li><span>${t}</span></li>`).join("")}</ol>`;
@@ -538,7 +538,7 @@
           const dFull = (K + ref.moMin) / G * 100;
           if (dFull >= 75) {
             const dp10 = Math.round(ref.price * 0.1 / 100) * 100, newMo = monthly(Math.max(0, ref.price - ref.dpMin - dp10), ref.r, c.n), newD = (K + newMo) / G * 100;
-            T.push(["🤝", `<b>Pilihan 1: Sediakan seorang penjamin.</b> Dengan ${ref.name}, DSR anda ${dFull.toFixed(0)}% (75% ke atas). Penjamin yang ada gaji tetap &amp; rekod bayaran bersih (contohnya ibu bapa, pasangan atau adik-beradik) boleh bantu bank luluskan permohonan.`]);
+            T.push(["🤝", `<b>Pilihan 1: Sediakan seorang penjamin.</b> Dengan ${ref.name}, DSR anda ${dFull.toFixed(0)}% (75% ke atas). Penjamin sama ada suami / isteri, ibu / ayah, atau adik-beradik yang bekerja, dengan gaji tetap &amp; rekod bayaran bersih, boleh bantu bank luluskan permohonan.`]);
             T.push(["💵", `<b>Pilihan 2: Tambah downpayment ${rm(dp10)}</b> (lebih kurang 10% harga ${ref.name}). Bulanan turun dari ${rm(ref.moMin)} ke <b>${rm(newMo)}</b>, DSR jadi ${newD.toFixed(0)}%.`]);
           }
         }
