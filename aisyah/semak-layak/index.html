@@ -70,16 +70,25 @@
     .sol { display: none; margin-top: 12px; padding: 14px; border-radius: 16px; background: rgba(220,38,38,.07); border: 2px solid rgba(220,38,38,.45); }
     .sol.on { display: block; }
     .sol .t { font-size: 12px; font-weight: 900; letter-spacing: .12em; color: var(--bad); }
-    .sol ol { margin-top: 8px; padding-left: 0; list-style: none; counter-reset: s; display: grid; gap: 8px; }
-    .sol li { counter-increment: s; display: grid; grid-template-columns: 24px minmax(0,1fr); gap: 8px; font-size: 13px; font-weight: 600; color: var(--w); }
-    .sol li::before { content: counter(s); width: 22px; height: 22px; border-radius: 7px; background: var(--bad); color: #fff; display: grid; place-items: center; font-size: 12px; font-weight: 900; }
+    .sol ol { margin-top: 8px; padding-left: 0; list-style: none; display: grid; gap: 8px; }
+    .sol li { display: grid; grid-template-columns: 24px minmax(0,1fr); gap: 8px; font-size: 13px; font-weight: 600; color: var(--w); }
+    .sol li i { font-style: normal; width: 22px; height: 22px; line-height: 22px; text-align: center; border-radius: 7px; background: var(--bad); color: #fff; font-size: 12px; font-weight: 900; }
     .sol li b { color: var(--bad); }
     .gauge { margin-top: 16px; }
     .gauge .lbl { display: flex; justify-content: space-between; font-size: 12px; font-weight: 800; color: var(--g); letter-spacing: .06em; text-transform: uppercase; }
     .gauge .lbl b { font-size: 22px; color: var(--w); letter-spacing: 0; }
     .gbar { position: relative; height: 18px; margin-top: 26px; border-radius: 6px; background: var(--c2); }
-    .gbar .now { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 6px 0 0 6px; background: var(--g); }
-    .gbar .car { position: absolute; top: 0; bottom: 0; background: #1565d8; border-radius: 0 6px 6px 0; }
+    .gbar .zone { position: absolute; top: 0; bottom: 0; }
+    .zone.z1 { left: 30%; width: 35%; background: rgba(22,163,74,.25); } .zone.z2 { left: 65%; width: 10%; background: rgba(234,179,8,.35); }
+    .zone.z3 { left: 75%; width: 5%; background: rgba(249,115,22,.4); } .zone.z4 { left: 80%; width: 20%; border-radius: 0 6px 6px 0; background: rgba(220,38,38,.2); }
+    .zleg { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 4px 10px; margin-top: 8px; font-size: 10.5px; font-weight: 800; color: var(--g); }
+    .zleg i { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 5px; vertical-align: -1px; }
+    .gauge .dval { display: flex; align-items: center; gap: 8px; }
+    .dtags { display: flex; flex-direction: column; align-items: flex-end; gap: 3px; }
+    .dtag { white-space: nowrap; font-style: normal; font-size: 10px; font-weight: 900; letter-spacing: .08em; padding: 4px 8px; border-radius: 999px; background: rgba(22,163,74,.14); color: var(--ok); }
+    .dtag.amb { background: #fef3c7; color: #a16207; } .dtag.org { background: #ffedd5; color: #c2410c; } .dtag.bad { background: var(--bad); color: #fff; }
+    .gbar .now { z-index: 1; position: absolute; left: 0; top: 4px; bottom: 4px; border-radius: 6px 0 0 6px; background: var(--g); }
+    .gbar .car { z-index: 1; position: absolute; top: 4px; bottom: 4px; background: #1565d8; border-radius: 0 6px 6px 0; }
     .gbar .z { position: absolute; top: -5px; bottom: -5px; border-left: 2px dashed; }
     .gbar .z span { position: absolute; top: -18px; left: -12px; font-size: 10px; font-weight: 900; }
     .glegend { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 10px; font-size: 11px; font-weight: 700; color: var(--g); }
@@ -113,20 +122,25 @@
     .tips li { display: grid; grid-template-columns: 28px minmax(0,1fr); gap: 10px; padding: 12px; border-radius: 14px; background: var(--c2); font-size: 14px; font-weight: 600; color: var(--w); }
     .tips li span:first-child { font-size: 18px; line-height: 1.2; }
     .tips li b { color: var(--y); }
-    .docs { margin-top: 10px; display: grid; gap: 6px; list-style: none; }
-    .docs li { font-size: 14px; font-weight: 600; padding-left: 26px; position: relative; }
-    .docs li::before { content: "✓"; position: absolute; left: 4px; color: var(--ok); font-weight: 900; }
     details.all { margin-top: 10px; }
     details.all summary { cursor: pointer; font-weight: 800; font-size: 14px; color: var(--o); padding: 10px 0; list-style: none; }
     details.all summary::-webkit-details-marker { display: none; }
-    .mt { margin-top: 12px; }
-    .mt h4 { font-size: 14px; font-weight: 900; margin-bottom: 6px; }
-    .vr { display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 2px 10px; padding: 9px 0; border-bottom: 1px solid var(--ln); font-size: 13px; }
+    .mt { margin-top: 14px; border: 2px solid var(--ln); border-radius: 18px; overflow: hidden; background: var(--card); }
+    .mt-h { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 12px 14px; background: var(--c2); border-bottom: 2px solid var(--ln); }
+    .mt-h b { font-size: 17px; font-weight: 900; } .mt-h small { margin-left: 6px; font-size: 11px; font-weight: 800; color: var(--g); }
+    .mt-h em { font-style: normal; font-size: 11px; font-weight: 900; padding: 4px 9px; border-radius: 999px; background: #fff; color: var(--g); white-space: nowrap; }
+    .mt-h em.ok { background: rgba(22,163,74,.12); color: var(--ok); }
+    .vr { padding: 12px 14px; border-bottom: 1px solid var(--ln); }
     .vr:last-child { border-bottom: 0; }
-    .vr .nm { font-weight: 700; } .vr .nm small { display: block; color: var(--g); font-weight: 600; font-size: 11px; }
-    .vr .st { text-align: right; font-weight: 800; white-space: nowrap; font-size: 12px; }
-    .vr .st b { display: block; font-size: 15px; color: var(--w); }
-    .st.ok { color: var(--ok); } .st.amb { color: var(--y); } .st.no { color: var(--bad); }
+    .vt { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; }
+    .vt b { font-size: 14px; font-weight: 900; line-height: 1.25; }
+    .bd { flex: none; font-size: 10px; font-weight: 900; letter-spacing: .04em; padding: 4px 8px; border-radius: 999px; white-space: nowrap; }
+    .bd.ok { background: rgba(22,163,74,.12); color: var(--ok); } .bd.amb { background: rgba(245,158,11,.16); color: var(--y); } .bd.no { background: rgba(220,38,38,.1); color: var(--bad); }
+    .vg { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 6px; margin-top: 8px; }
+    .vg span { padding: 7px 8px; border-radius: 10px; background: var(--c2); font-size: 10px; font-weight: 800; letter-spacing: .04em; color: var(--g); text-transform: uppercase; }
+    .vg span b { display: block; margin-top: 2px; font-size: 14px; letter-spacing: 0; color: var(--w); text-transform: none; }
+    .vg span.mo { background: rgba(21,101,216,.08); } .vg span.mo b { color: var(--o); }
+    .vn { margin-top: 6px; font-size: 11px; font-weight: 600; color: var(--g); }
     .rbx { margin-top: 14px; padding: 12px 14px; border-radius: 14px; background: rgba(22,163,74,.07); border: 2px solid rgba(22,163,74,.3); font-size: 12px; font-weight: 600; color: var(--w); }
     .rbx b.t { display: block; font-size: 12px; font-weight: 900; letter-spacing: .1em; color: var(--ok); margin-bottom: 4px; }
     .rbx div { display: flex; justify-content: space-between; gap: 8px; padding: 2px 0; } .rbx div b { white-space: nowrap; }
@@ -144,11 +158,42 @@
     footer b { color: var(--w); letter-spacing: .12em; }
     .sticky { position: fixed; left: 0; right: 0; bottom: 0; padding: 12px 16px calc(12px + env(safe-area-inset-bottom)); background: linear-gradient(180deg, rgba(242,246,252,0), rgba(242,246,252,.96) 30%); z-index: 10; }
     .sticky .btn { max-width: 488px; margin: 0 auto; box-shadow: 0 10px 30px rgba(37,211,102,.35); }
+    /* simpan & hantar */
+    .sendbox { margin-top: 14px; padding: 18px; border-radius: 22px; background: var(--card); border: 2px solid var(--ln); }
+    .sb-t { font-size: 13px; font-weight: 900; letter-spacing: .12em; color: var(--w); }
+    .sb-s { margin-top: 4px; font-size: 13px; font-weight: 600; color: var(--g); }
+    .sb-2 { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 8px; margin-top: 12px; }
+    .sb-2 .btn { min-height: 52px; font-size: 14px; padding: 8px 10px; }
+    .btn.share { background: var(--o); color: #fff; }
+    .ct { display: grid; gap: 8px; margin-top: 8px; }
+    .cti { display: grid; grid-template-columns: 46px minmax(0,1fr) auto; gap: 10px; align-items: center; padding: 10px; border-radius: 16px; background: var(--c2); border: 2px solid var(--ln); }
+    .cti img { width: 46px; height: 46px; border-radius: 12px; object-fit: cover; }
+    .cti b { display: block; font-size: 15px; font-weight: 900; } .cti small { display: block; font-size: 11px; font-weight: 700; color: var(--g); }
+    .cti a { padding: 10px 12px; border-radius: 12px; background: var(--gr); color: #06290f; font-weight: 900; font-size: 13px; white-space: nowrap; }
+    .toast { position: fixed; left: 50%; bottom: 96px; transform: translateX(-50%); z-index: 60; padding: 12px 16px; border-radius: 14px; background: var(--w); color: #fff; font-weight: 800; font-size: 14px; display: none; max-width: 90vw; text-align: center; }
+    .toast.on { display: block; }
+    /* laporan gambar (dijana untuk simpan / share) */
+    #exp { position: fixed; left: -10000px; top: 0; }
+    .pg { width: 400px; padding: 22px 20px 16px; background: #fff; color: var(--w); font-family: "Montserrat", sans-serif; }
+    .pg-hd { display: flex; align-items: center; gap: 10px; padding-bottom: 12px; border-bottom: 3px solid var(--o); }
+    .pg-hd img { height: 30px; width: auto; }
+    .pg-hd .tt { flex: 1; min-width: 0; } .pg-hd .tt b { display: block; font-size: 15px; font-weight: 900; letter-spacing: .06em; } .pg-hd .tt span { display: block; font-size: 9px; font-weight: 800; letter-spacing: .1em; color: var(--g); }
+    .pg-hd .dt { text-align: right; font-size: 10px; font-weight: 800; color: var(--g); white-space: nowrap; }
+    .pg-for { margin-top: 12px; font-size: 10px; font-weight: 800; letter-spacing: .12em; color: var(--g); text-transform: uppercase; } .pg-for b { display: block; margin-top: 2px; font-size: 18px; letter-spacing: 0; text-transform: none; color: var(--w); }
+    .pg-sec { margin-top: 16px; padding-bottom: 5px; border-bottom: 1px solid var(--ln); font-size: 10px; font-weight: 900; letter-spacing: .16em; color: var(--o); text-transform: uppercase; }
+    .pg-tbl { width: 100%; border-collapse: collapse; margin-top: 4px; font-size: 12px; }
+    .pg-tbl td { padding: 5px 0; border-bottom: 1px dashed var(--ln); font-weight: 600; } .pg-tbl td:last-child { text-align: right; font-weight: 800; white-space: nowrap; }
+    .pg-tbl tr.ttl td { border-bottom: 0; border-top: 2px solid var(--w); font-weight: 900; }
+    .pg .pill { margin-top: 14px; } .pg .verdict { font-size: 14px; }
+    .pg-note { margin-top: 14px; font-size: 9.5px; font-weight: 600; color: var(--g); line-height: 1.5; }
+    .pg-ft { margin-top: 14px; padding-top: 10px; border-top: 2px solid var(--ln); display: flex; justify-content: space-between; gap: 10px; font-size: 9.5px; font-weight: 700; color: var(--g); line-height: 1.5; }
+    .pg-ft b { color: var(--w); } .pg-ft .pn { white-space: nowrap; font-weight: 900; color: var(--o); }
     /* image preview (fallback untuk simpan) */
     .ov { position: fixed; inset: 0; z-index: 50; background: rgba(10,8,7,.97); display: none; flex-direction: column; align-items: center; padding: 18px 16px calc(18px + env(safe-area-inset-bottom)); gap: 12px; overflow-y: auto; }
     .ov.on { display: flex; }
     .ov p { color: #fff; font-weight: 800; font-size: 15px; text-align: center; max-width: 420px; }
-    .ov img { width: 100%; max-width: 420px; border-radius: 16px; -webkit-touch-callout: default; }
+    .ov img { width: 100%; max-width: 420px; border-radius: 16px; -webkit-touch-callout: default; box-shadow: 0 6px 24px rgba(0,0,0,.4); }
+    #ovImgs { display: grid; gap: 12px; width: 100%; max-width: 420px; }
     .ov .row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; width: 100%; max-width: 420px; }
   </style>
 </head>
@@ -251,16 +296,18 @@
         <div class="sol" id="sol"></div>
 
         <div class="gauge">
-          <div class="lbl"><span id="dsrLbl">DSR dengan kereta</span><b id="dsrCar">0%</b></div>
+          <div class="lbl"><span id="dsrLbl">DSR dengan kereta</span><span class="dval"><span class="dtags"><em class="dtag" id="dsrTag">SIHAT</em><em class="dtag bad" id="ndiTag" style="display:none">NDI KURANG</em></span><b id="dsrCar">0%</b></span></div>
           <div class="gbar" id="gbar"><div class="now" id="gNow"></div><div class="car" id="gCar"></div>
-            <div class="z" style="left:60%;border-color:var(--y)"><span style="color:var(--y)">60%</span></div>
-            <div class="z" style="left:70%;border-color:var(--y)"><span style="color:var(--y)">70%</span></div>
+            <div class="zone z1"></div><div class="zone z2"></div><div class="zone z3"></div><div class="zone z4"></div>
+            <div class="z" style="left:30%;border-color:var(--ok)"><span style="color:var(--ok)">30%</span></div>
+            <div class="z" style="left:65%;border-color:#a16207"><span style="color:#a16207">65%</span></div>
             <div class="z" style="left:80%;border-color:var(--bad)"><span style="color:var(--bad)">80%</span></div></div>
-          <div class="glegend"><span><i style="background:var(--g)"></i>Hutang sekarang <b id="dsrNow" style="color:var(--w)">0%</b></span><span><i style="background:var(--o)"></i>Ansuran kereta dicadang</span></div>
+          <div class="glegend"><span><i style="background:var(--g)"></i>Hutang sekarang <b id="dsrNow" style="color:var(--w)">0%</b></span><span><i style="background:var(--o)"></i><span id="gLeg">Ansuran kereta dicadang</span></span></div>
+          <div class="zleg"><span><i style="background:rgba(22,163,74,.45)"></i>30–65% Sihat</span><span><i style="background:rgba(234,179,8,.6)"></i>65–75% Sederhana</span><span><i style="background:rgba(249,115,22,.65)"></i>75–80% Tinggi</span><span><i style="background:var(--bad)"></i>80%+ High komitmen</span></div>
         </div>
 
         <div class="tiles">
-          <div class="tile hl"><small>Bulanan kereta sesuai</small><b id="tAns">RM0</b><em id="tAnsE">DSR 60%</em></div>
+          <div class="tile hl"><small>Bulanan kereta sesuai</small><b id="tAns">RM0</b><em id="tAnsE">DSR 65%</em></div>
           <div class="tile"><small>Bulanan maksimum</small><b id="tMax">RM0</b><em id="tMaxE">DSR 70%, lebih ketat</em></div>
           <div class="tile"><small>Margin loan</small><b id="tMargin">90%</b><em id="tMarginE">daripada harga OTR</em></div>
           <div class="tile"><small>Loan maksimum</small><b id="tLoan">RM0</b><em id="tLoanE">9 tahun</em></div>
@@ -280,9 +327,17 @@
       </div>
 
       <div class="acts">
-        <button class="btn save" type="button" id="saveBtn">📥 Simpan gambar keputusan ke galeri</button>
-        <a class="btn wa" id="waRes" href="#" target="_blank" rel="noopener">💬 Hantar keputusan ke WhatsApp Aishah</a>
-        <div id="pakar" style="display:grid;gap:10px"></div>
+        <div class="sendbox">
+          <div class="sb-t">📸 SIMPAN &amp; HANTAR KEPUTUSAN</div>
+          <p class="sb-s" id="sbS">Laporan keputusan anda dalam bentuk gambar.</p>
+          <div class="sb-2">
+            <button class="btn save" type="button" id="saveBtn">📥 Download ke galeri</button>
+            <button class="btn share" type="button" id="shareBtn">📤 Share gambar</button>
+          </div>
+          <div class="pk" style="margin-top:16px">Hantar keputusan kepada kami</div>
+          <div class="ct" id="ct"></div>
+          <p class="hint">Tekan WhatsApp, kemudian <b>lampirkan gambar</b> yang dah disimpan.</p>
+        </div>
       </div>
 
       <div class="card">
@@ -290,10 +345,6 @@
         <ul class="tips" id="tips"></ul>
       </div>
 
-      <div class="card">
-        <div class="step"><i>📄</i>Dokumen untuk apply</div>
-        <ul class="docs" id="docs"></ul>
-      </div>
 
       <div class="card">
         <div class="step"><i>🔗</i>Rujukan berguna</div>
@@ -305,22 +356,23 @@
 
       <div class="card">
         <div class="step"><i>🚗</i>Semua model Perodua</div>
-        <p class="hint" style="margin-top:8px">Bulanan dikira ikut baki berkurangan (EIR), 9 tahun, dengan downpayment minimum. Harga OTR asal tolak rebate bulan ini (ikut varian).</p>
+        <p class="hint" style="margin-top:8px">Harga = OTR tolak rebate semasa. Bulanan dikira ikut baki berkurangan (EIR), 9 tahun, dengan downpayment minimum.</p>
         <div id="all"></div>
       </div>
 
       <button class="btn ghost" type="button" id="again" style="margin-top:16px">↺ Ubah maklumat &amp; kira semula</button>
-      <p class="note">Anggaran sahaja, bukan kelulusan bank. Bank akan semak CCRIS, CTOS, slip gaji &amp; penyata bank anda. DSR dikira atas gaji bersih. Baki sara hidup (NDI) minimum bank RM1,400. Margin maksimum 90% daripada harga OTR. AKPK, SAA &amp; blacklist tidak boleh memohon loan bank. Bulanan dikira ikut baki berkurangan (EIR), seperti Akta Sewa Beli yang dipinda (berkuat kuasa 1 Jun 2026); kadar sebenar ikut bank. Harga OTR anggaran; rebate ikut senarai bulan semasa, tertakluk terma Perodua.</p>
+      <p class="note">Anggaran sahaja, bukan kelulusan bank. Bank akan semak CCRIS, CTOS, slip gaji &amp; penyata bank anda. DSR dikira atas gaji bersih. DSR 30%–65% sihat, 65%–75% sederhana, 75%–80% tinggi, 80% ke atas high komitmen. Baki sara hidup (NDI) minimum bank RM1,400. Margin maksimum 90% daripada harga OTR. AKPK, SAA &amp; blacklist tidak boleh memohon loan bank. Bulanan dikira ikut baki berkurangan (EIR), seperti Akta Sewa Beli yang dipinda (berkuat kuasa 1 Jun 2026); kadar sebenar ikut bank. Harga OTR anggaran; rebate ikut senarai bulan semasa, tertakluk terma Perodua.</p>
     </section>
 
     <footer><b>TEAM SHAH MAHPOB</b><br>Sales &amp; Loan · Perodua<br><br>LAMAN CHECK KEWANGAN TSM PERODUA<br>Bukan laman rasmi Perodua.</footer>
   </main>
   <div class="sticky"><a class="btn wa" data-wa="Salam Aishah, saya nak tanya pasal kelayakan loan kereta Perodua." href="#">💬 WhatsApp Aishah</a></div>
 
+  <div class="toast" id="toast"></div>
   <div class="ov" id="ov">
     <p id="ovMsg">Tekan lama pada gambar → <u>Simpan ke Foto / Galeri</u></p>
-    <img id="ovImg" alt="Keputusan Magic DSR" />
-    <div class="row"><a class="btn save" id="ovDl" download="keputusan-loan.png" href="#">⬇ Muat turun</a><button class="btn ghost" type="button" id="ovX">Tutup</button></div>
+    <div id="ovImgs"></div>
+    <div class="row"><button class="btn save" type="button" id="ovDl">⬇ Download</button><button class="btn ghost" type="button" id="ovX">Tutup</button></div>
   </div>
 
   <script src="/kalkulator/data.js"></script>
@@ -333,10 +385,11 @@
     const wa = (msg) => `https://wa.me/${WA}?text=${encodeURIComponent(msg)}`;
     document.querySelectorAll("[data-wa]").forEach((a) => { a.href = wa(a.dataset.wa); a.target = "_blank"; a.rel = "noopener"; });
     const ph = (n) => "0" + n.slice(2, 4) + "-" + n.slice(4, 7) + " " + n.slice(7);
-    const PAKAR = ADVISOR === "Shah" ? [{ n: "Aishah", wa: "60182031020", img: "/aisyah/img/aisyah.jpg" }, { n: "Fendi", wa: "60189038194", img: "/fendi/img/fendi.jpg" }] : [];
-    $("waNums").innerHTML = PAKAR.length ? [{ n: ADVISOR, wa: WA }].concat(PAKAR).map((p) => `${p.n} ${ph(p.wa)}`).join("<br>") : `WhatsApp<br>${ph(WA)}`;
-    if (PAKAR.length) $("pakar").innerHTML = `<div class="pk">Atau hantar kepada Pakar Loan kami</div>` + PAKAR.map((p, i) => `<div class="exp"><img src="${p.img}" alt="${p.n}" width="56" height="56" /><div><small>Pakar Loan Anda</small><b>${p.n.toUpperCase()}</b><span>${ph(p.wa)}</span></div><a class="btn wa" id="waP${i}" href="https://wa.me/${p.wa}" target="_blank" rel="noopener">💬 Hantar keputusan ke WhatsApp ${p.n}</a></div>`).join("");
-    $("waRes").textContent = `💬 Hantar keputusan ke WhatsApp ${ADVISOR}`;
+    const PAKAR = ADVISOR === "Shah" ? [{ n: "Aishah", wa: "60182031020", img: "/aisyah/img/aisyah.jpg", role: "Pakar Loan" }, { n: "Fendi", wa: "60189038194", img: "/fendi/img/fendi.jpg", role: "Pakar Loan" }] : [];
+    const IMG = { Shah: "/img/shah.jpg", Aishah: "/aisyah/img/aisyah.jpg", Fendi: "/fendi/img/fendi.jpg" };
+    const CT = [{ n: ADVISOR, wa: WA, img: IMG[ADVISOR], role: ADVISOR === "Shah" ? "Sales Advisor" : "Pakar Loan" }].concat(PAKAR);
+    $("waNums").innerHTML = PAKAR.length ? CT.map((p) => `${p.n} ${ph(p.wa)}`).join("<br>") : `WhatsApp<br>${ph(WA)}`;
+    $("ct").innerHTML = CT.map((p, i) => `<div class="cti"><img src="${p.img}" alt="${p.n}" width="46" height="46" /><div><b>${p.n.toUpperCase()}</b><small>${p.role}</small><small>${ph(p.wa)}</small></div><a id="waC${i}" href="https://wa.me/${p.wa}" target="_blank" rel="noopener">💬 WhatsApp</a></div>`).join("");
 
     // ---------- pilihan (chips) ----------
     const S = { job: "swasta", lesen: "ada", rumah: "keluarga", rekod: "baik", minat: "" };
@@ -351,7 +404,7 @@
     const num = (id) => Math.max(0, +$(id).value || 0);
 
     // ---------- kiraan ----------
-    const MARGIN_MAX = 0.9, DSR_OK = 0.6, DSR_MAX = 0.7, NDI_OK = 1400, NDI_MIN = 1400;
+    const MARGIN_MAX = 0.9, DSR_OK = 0.65, DSR_MAX = 0.7, NDI_OK = 1400, NDI_MIN = 1400;
     // Sejak 1 Jun 2026 (Akta Sewa Beli dipinda) loan kereta dikira ikut baki berkurangan. r = EIR % setahun, n = tahun.
     const annuity = (i, k) => (i ? i / (1 - Math.pow(1 + i, -k)) : 1 / k);
     const monthly = (loan, r, n) => (loan > 0 ? loan * annuity(r / 1200, n * 12) : 0);
@@ -409,6 +462,7 @@
       $("totK").textContent = rm(K);
       $("rate").classList.toggle("err", c.badRate);
       $("rateHint").innerHTML = c.badRate ? "<b>Kadar ni nampak terlalu tinggi</b> (contoh betul: 5.16). Kiraan guna kadar biasa setiap model." : RATE_HINT;
+      PAGES = null; GEN++;
       if (!shown) return;
       const nama = $("nama").value.trim();
       $("rName").textContent = nama ? `${nama.split(" ")[0]}, ini kelayakan anda` : "Kelayakan anda";
@@ -437,11 +491,22 @@
       const carMo = picks[0] ? (pickType === "ok" ? picks[0].moMin : picks[0].moOk) : 0;
       const dN = G ? K / G * 100 : 0, dC = G ? (K + carMo) / G * 100 : 0, dsrNow = dN;
       const merah = !blok && (dN >= 80 || dC >= 80); // DSR 80%+ : merah + jalan penyelesaian (jangan sebut gagal)
+      // tiada kereta sesuai: tetap tunjuk DSR kalau ambil model pilihan (varian paling murah) supaya customer nampak sebabnya
+      const pool0 = S.minat ? all.filter((v) => v.model === S.minat) : all;
+      const refCar = !carMo && !blok && G && pool0.length ? pool0.slice().sort((a, b) => a.moMin - b.moMin)[0] : null;
+      const showMo = carMo || (refCar ? refCar.moMin : 0), dS = G ? (K + showMo) / G * 100 : 0;
+      // terangkan had mana yang menghalang: DSR 65% atau NDI (kos sara hidup) RM1,400
+      const why = (v) => {
+        const d = (K + v.moMin) / G * 100, nd = G - K - v.moMin;
+        if (d <= 65 && nd < NDI_OK) return `Dengan ${v.name} (${rm(v.moMin)}/bln), DSR anda ${d.toFixed(1)}% masih sihat, tapi baki kos sara hidup (NDI) tinggal ${rm(nd)}. Bank mahu sekurang-kurangnya RM1,400 untuk makan, minyak, sewa rumah & bil.`;
+        if (d > 65) return `Dengan ${v.name} (${rm(v.moMin)}/bln), DSR anda jadi ${d.toFixed(1)}%, melebihi had sihat 65%.${nd < NDI_OK ? ` Baki kos sara hidup (NDI) pula tinggal ${rm(nd)}, bawah RM1,400.` : ""}`;
+        return "";
+      };
       let lv = "rendah", vt, susun = false;
       const jom = " Jangan risau, jom kita susun strategi kewangan anda bersama-sama.";
       if (S.rekod === "blok") vt = "Rekod AKPK, SAA atau blacklist: bank tidak boleh meluluskan loan kereta. Selesaikan dulu dan dapatkan surat pelepasan. WhatsApp kami untuk pilihan lain.";
       else if (c.tooOld) vt = `Bank biasanya hadkan umur tamat loan sekitar 70 tahun. Jalan lain: anak atau ahli keluarga sebagai pemohon utama, atau beli secara tunai. WhatsApp ${ADVISOR} untuk bantuan.`;
-      else if (merah) { susun = true; vt = `DSR anda ${Math.round(Math.max(dN, dC))}%, melebihi 80%. Bank biasanya terima sehingga 60–70%, tapi ini masih boleh disusun. Ikut jalan penyelesaian di bawah.`; }
+      else if (merah) { susun = true; vt = `DSR anda ${Math.round(Math.max(dN, dC))}%, melebihi 80% (high komitmen). DSR sihat ialah 30% hingga 65%, dan ini masih boleh disusun. Ikut jalan penyelesaian di bawah.`; }
       else if (ansOk <= 0) { susun = true; vt = G - K <= NDI_OK ? `Selepas komitmen, baki gaji anda ${rm(G - K)}. Bank mahu baki sara hidup sekurang-kurangnya RM1,400 selepas ansuran kereta, jadi ruang ansuran belum ada.${jom}` : `Komitmen anda sekarang ${dN.toFixed(0)}% daripada gaji, jadi ruang untuk ansuran kereta masih terhad.${jom}`; }
       else if (alt) { lv = "sederhana"; vt = `${S.minat} belum sesuai dengan bajet ansuran ${rm(ansOk)} sebulan. Model di bawah sesuai dengan gaji anda, atau WhatsApp ${ADVISOR} untuk pilihan penjamin / pemohon bersama.`; }
       else if (pickType === "ok" && picks.length) { lv = "tinggi"; vt = `Gaji anda mampu ansuran sehingga ${rm(ansOk)} sebulan dengan selesa.`; }
@@ -450,8 +515,10 @@
       if (susun && !merah) lv = "sederhana";
       if (S.rekod === "lewat2" && lv !== "rendah") { lv = "rendah"; vt = "Ada tunggakan 2 bulan+. Bank biasanya tolak sehingga tunggakan dijelaskan dan rekod bersih beberapa bulan. Kiraan di bawah ialah anggaran selepas itu."; }
       if (lv === "tinggi" && (S.rekod === "lewat1" || S.lesen !== "ada")) { lv = "sederhana"; vt += S.rekod === "lewat1" ? " Tapi jelaskan tunggakan dulu sebelum apply." : " Tapi perlu selesaikan soal lesen memandu."; }
+      if (refCar && !merah && S.rekod !== "lewat2" && why(refCar)) vt = why(refCar) + jom;
+      if (alt && S.minat) { const mv0 = all.filter((v) => v.model === S.minat).sort((a, b) => a.moMin - b.moMin)[0]; if (mv0 && why(mv0)) vt = why(mv0) + ` Model di bawah lebih sesuai dengan gaji anda, atau WhatsApp ${ADVISOR} untuk pilihan penjamin.`; }
       if (merah) lv = "merah";
-      $("pill").dataset.lv = lv; $("pill").textContent = { tinggi: "✓ PELUANG TINGGI", sederhana: "⚠ PELUANG SEDERHANA", rendah: "✕ PELUANG RENDAH", merah: `🔴 DSR ${Math.round(Math.max(dN, dC))}% · ADA PENYELESAIAN` }[lv];
+      $("pill").dataset.lv = lv; $("pill").textContent = { tinggi: "✓ PELUANG TINGGI", sederhana: "⚠ PELUANG SEDERHANA", rendah: "✕ PELUANG RENDAH", merah: `🔴 HIGH KOMITMEN · DSR ${Math.round(Math.max(dN, dC))}%` }[lv];
       if (susun && !blok && !merah) $("pill").textContent = "⚠ PERLU SUSUN STRATEGI";
       if (c.tooOld && S.rekod !== "blok") $("pill").textContent = "⚠ UMUR MELEBIHI HAD LOAN";
       if (S.rekod === "blok") $("pill").textContent = "✕ TAK BOLEH APPLY LOAN BANK";
@@ -472,15 +539,20 @@
         P.push("<b>Sediakan penjamin</b> sama ada <b>suami / isteri, ibu / ayah, atau adik-beradik yang bekerja</b>, dengan gaji tetap &amp; rekod bayaran bersih.");
         P.push("<b>Tunjuk pendapatan tambahan</b>: elaun tetap, OT atau bisnes sampingan yang masuk akaun bank setiap bulan (penyata 6 bulan).");
         P.push(`<b>WhatsApp ${ADVISOR}</b>: kami susun strategi ikut kes anda, percuma.`);
-        $("sol").innerHTML = `<div class="t">🔴 JALAN PENYELESAIAN UNTUK ANDA</div><ol>${P.map((t) => `<li><span>${t}</span></li>`).join("")}</ol>`;
+        $("sol").innerHTML = `<div class="t">🔴 JALAN PENYELESAIAN UNTUK ANDA</div><ol>${P.map((t, i) => `<li><i>${i + 1}</i><span>${t}</span></li>`).join("")}</ol>`;
         $("sol").classList.add("on");
       } else $("sol").classList.remove("on");
 
       // gauge
-      $("dsrNow").textContent = dN.toFixed(1) + "%"; $("dsrCar").textContent = dC.toFixed(1) + "%"; $("dsrLbl").textContent = carMo ? "DSR dengan kereta" : "DSR sekarang";
+      $("dsrNow").textContent = dN.toFixed(1) + "%"; $("dsrCar").textContent = dS.toFixed(1) + "%";
+      $("dsrLbl").textContent = carMo ? "DSR dengan kereta" : refCar ? `DSR kalau ambil ${refCar.name}` : "DSR sekarang";
+      $("gLeg").textContent = refCar ? `Ansuran ${refCar.name} (${rm(refCar.moMin)})` : "Ansuran kereta dicadang";
+      $("gCar").style.opacity = refCar ? ".55" : "";
+      const dShow = showMo ? dS : dN, tag = dShow >= 80 ? ["HIGH KOMITMEN", "bad"] : dShow >= 75 ? ["TINGGI", "org"] : dShow > 65 ? ["SEDERHANA", "amb"] : ["SIHAT", ""];
+      $("dsrTag").textContent = tag[0]; $("dsrTag").className = "dtag " + tag[1];
       $("dsrCar").style.color = merah ? "var(--bad)" : "";
       $("gNow").style.width = Math.min(100, dN) + "%"; $("gNow").style.background = merah ? "var(--bad)" : "";
-      $("gCar").style.left = Math.min(100, dN) + "%"; $("gCar").style.width = Math.max(0, Math.min(100, dC) - Math.min(100, dN)) + "%";
+      $("gCar").style.left = Math.min(100, dN) + "%"; $("gCar").style.width = Math.max(0, Math.min(100, dS) - Math.min(100, dN)) + "%";
 
       // tiles
       $("tAns").textContent = rm(ansOk); $("tMax").textContent = rm(ansMax);
@@ -489,17 +561,18 @@
       $("tMarginE").textContent = blok ? "tak boleh apply bank" : picks[0] ? `downpayment min ${rm(picks[0].dpMin)}` : "daripada harga OTR";
       if (c.carLoanTop > 0 && c.loanMax >= c.carLoanTop) { $("tLoan").textContent = "Semua model"; $("tLoanE").textContent = `gaji cukup · ${c.n} tahun`; }
       else { $("tLoan").textContent = rm(c.loanMax); $("tLoanE").textContent = `${c.n} tahun · EIR ${c.rL}%`; }
-      const ndi = G - K - carMo;
+      const ndi = G - K - showMo;
+      $("ndiTag").style.display = G && !blok && ndi < NDI_OK ? "" : "none";
       // NDI = kos sara hidup (makan, minyak, sewa rumah, bil). Bank mahu minimum RM1,400 selepas semua hutang + kereta.
       const ndiOk = ndi >= NDI_OK;
       $("tNdi").textContent = rm(ndi); $("tNdi").style.color = ndiOk ? "" : "var(--bad)";
       $("tNdiE").textContent = ndiOk ? "✓ lepasi minimum RM1,400" : `kurang ${rm(NDI_OK - ndi)} dari RM1,400`;
       $("ndiBox").className = "ndibox" + (ndiOk ? "" : " low");
-      $("ndiBox").innerHTML = `💡 <span class="h">NDI = KOS SARA HIDUP</span> iaitu baki gaji selepas bayar semua hutang${carMo ? " &amp; ansuran kereta" : ""}. Duit ni untuk <b>makan, minyak, sewa rumah, bil &amp; lain-lain</b>. Bank mahu baki sekurang-kurangnya <span class="h">RM1,400 sebulan</span>. Baki anda: <b>${rm(ndi)}</b> ${ndiOk ? "✓ cukup" : "⚠ belum cukup"}.`;
-      $("tAnsE").textContent = c.ndiBound ? "had baki sara hidup RM1,400" : "DSR 60%";
+      $("ndiBox").innerHTML = `💡 <span class="h">NDI = KOS SARA HIDUP</span> iaitu baki gaji selepas bayar semua hutang${showMo ? ` &amp; ansuran ${refCar ? refCar.name : "kereta"}` : ""}. Duit ni untuk <b>makan, minyak, sewa rumah, bil &amp; lain-lain</b>. Bank mahu baki sekurang-kurangnya <span class="h">RM1,400 sebulan</span>. Baki anda: <b>${rm(ndi)}</b> ${ndiOk ? "✓ cukup" : "⚠ belum cukup"}.`;
+      $("tAnsE").textContent = c.ndiBound ? "had baki sara hidup RM1,400" : "DSR 65%";
       $("tMaxE").textContent = ansMax > ansOk + 1 ? "DSR 70%, lebih ketat" : c.ndiBoundMax ? "sama, had baki RM1,400" : "DSR 70%";
       if (susun && !blok) {
-        const target = Math.min(...all.map((v) => v.moMin)), room = Math.min(0.6 * G - target, G - 1400 - target), need = Math.ceil(Math.max(0, K - room) / 10) * 10;
+        const target = Math.min(...all.map((v) => v.moMin)), room = Math.min(DSR_OK * G - target, G - 1400 - target), need = Math.ceil(Math.max(0, K - room) / 10) * 10;
         $("tAnsE").textContent = room > 0 ? `kurangkan hutang ${rm(need)}/bln untuk mula` : "perlu tambah pendapatan / pemohon bersama";
         $("tLoanE").textContent = "selepas susun hutang";
       }
@@ -515,12 +588,16 @@
       }).join("") : `<div class="none">Tiada ${S.minat || "model"} yang sesuai buat masa ini. Ikut cadangan di bawah, atau WhatsApp ${ADVISOR} untuk pilihan lain (penjamin / pemohon bersama).</div>`;
 
       // semua model
-      const lab = { ok: ["ok", "✓ Sesuai"], dp: ["amb", "⚠ Perlu downpayment"], max: ["amb", "⚠ DSR tinggi"], no: ["no", "✕ Belum sesuai"] };
-      $("all").innerHTML = c.D.map((m) => `<div class="mt"><h4>${m.model} <small style="color:var(--g);font-weight:700">· EIR ${m.r}%</small></h4>` + m.vars.map((v) => {
-        const [cl, t] = lab[v.st];
-        const sub = v.st === "dp" ? `Downpayment ${rm(v.dpOk)} → ${rm(v.moOk)}/bln` : `Downpayment ${rm(v.dpMin)} → ${rm(v.moMin)}/bln`;
-        return `<div class="vr"><span class="nm">${v.name}<small>OTR ${rm(v.otr)}${v.rb ? ` − rebate ${rm(v.rb)}` : ""} · ${sub}</small></span><span class="st ${cl}"><b>${rm(v.st === "dp" ? v.moOk : v.moMin)}</b>${t}</span></div>`;
-      }).join("") + `</div>`).join("");
+      const lab = { ok: ["ok", "✓ Sesuai"], dp: ["amb", "⚠ Tambah DP"], max: ["amb", "⚠ DSR tinggi"], no: ["no", "Belum sesuai"] };
+      $("all").innerHTML = c.D.map((m) => {
+        const nOk = m.vars.filter((v) => v.st === "ok").length;
+        return `<div class="mt"><div class="mt-h"><span><b>${m.model}</b><small>EIR ${m.r}%</small></span><em class="${nOk ? "ok" : ""}">${nOk}/${m.vars.length} sesuai</em></div>` + m.vars.map((v) => {
+          const [cl, t] = lab[v.st], dp = v.st === "dp" ? v.dpOk : v.dpMin, mo = v.st === "dp" ? v.moOk : v.moMin;
+          return `<div class="vr"><div class="vt"><b>${v.name}</b><span class="bd ${cl}">${t}</span></div>
+            <div class="vg"><span>Harga<b>${rm(v.price)}</b></span><span>DP<b>${dp < 100 ? "RM0" : rm(dp)}</b></span><span class="mo">Bulanan<b>${rm(mo)}</b></span></div>
+            <div class="vn">${v.rb ? `OTR ${rm(v.otr)} − rebate ${rm(v.rb)}` : `OTR ${rm(v.otr)} · tiada rebate`}</div></div>`;
+        }).join("") + `</div>`;
+      }).join("");
 
       // tips
       const T = [];
@@ -551,17 +628,6 @@
       else T.push(["🚫", "<b>Jangan mohon kad kredit / loan baru</b> sebelum loan kereta lulus. Setiap semakan bank menurunkan skor."]);
       $("tips").innerHTML = T.map(([i, t]) => `<li><span>${i}</span><span>${t}</span></li>`).join("");
 
-      // dokumen
-      const base = ["Salinan IC (depan &amp; belakang)", "Salinan lesen memandu"];
-      const docs = {
-        kerajaan: ["Slip gaji 3 bulan terkini", "Surat pengesahan jawatan"],
-        swasta: ["Slip gaji 3 bulan terkini", "Penyata KWSP terkini", "Penyata bank 3 bulan (gaji masuk)"],
-        kontrak: ["Slip gaji 3 bulan terkini", "Surat / kontrak kerja", "Penyata KWSP terkini", "Penyata bank 3 bulan"],
-        sendiri: ["Sijil SSM", "Penyata bank 6 bulan", "Borang B LHDN + resit bayaran"],
-        gig: ["Penyata pendapatan app 6 bulan", "Penyata bank 6 bulan", "Borang BE / B LHDN (jika ada)"],
-      }[S.job];
-      $("docs").innerHTML = base.concat(docs).map((d) => `<li>${d}</li>`).join("");
-
       // WhatsApp
       const job = { kerajaan: "Kerajaan", swasta: "Swasta (tetap)", kontrak: "Kontrak", sendiri: "Bekerja sendiri", gig: "P-hailing / gig" }[S.job];
       const msgFor = (nm) => `Salam ${nm}, saya dah buat Magic DSR Calculator${nama ? ` (nama: ${nama})` : ""}:
@@ -571,9 +637,9 @@
 • Rekod bayaran: ${{ baik: "semua ikut masa", lewat1: "pernah lewat 1 bulan", lewat2: "lewat 2 bulan+", blok: "AKPK / SAA / blacklist" }[S.rekod]}
 • Bulanan sesuai ${rm(ansOk)} (maks ${rm(ansMax)}) · ${$("pill").textContent.replace(/^[^A-Z]+/, "")}
 ${picks.length ? "• Cadangan: " + picks.map((v) => `${v.name} ${rm(pickType === "ok" ? v.moMin : v.moOk)}/bln`).join(", ") : ""}
-Boleh bantu saya apply?`;
-      $("waRes").href = wa(msgFor(ADVISOR));
-      PAKAR.forEach((p, i) => { $("waP" + i).href = `https://wa.me/${p.wa}?text=${encodeURIComponent(msgFor(p.n))}`; });
+Saya lampirkan gambar laporan Magic DSR. Boleh bantu saya apply?`;
+      CT.forEach((p, i) => { $("waC" + i).href = `https://wa.me/${p.wa}?text=${encodeURIComponent(msgFor(p.n))}`; });
+      schedulePages();
     }
 
     document.querySelectorAll("input").forEach((i) => i.addEventListener("input", () => { i.classList.remove("err"); run(); }));
@@ -587,30 +653,85 @@ Boleh bantu saya apply?`;
     });
     $("again").onclick = () => window.scrollTo({ top: 0, behavior: "smooth" });
 
-    // ---------- simpan gambar ----------
+    // ---------- laporan gambar: simpan / share ----------
+    let PAGES = null, GEN = 0, pgTimer = 0;
+    const JOBS = { kerajaan: "Kerajaan", swasta: "Swasta (tetap)", kontrak: "Kontrak", sendiri: "Bekerja sendiri", gig: "P-hailing / gig" };
+    const esc = (t) => String(t).replace(/[&<>"]/g, (ch) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[ch]));
+    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
     function loadH2C() {
       if (window.html2canvas) return Promise.resolve();
-      return new Promise((ok, no) => { const s = document.createElement("script"); s.src = "https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"; s.onload = ok; s.onerror = no; document.head.appendChild(s); });
+      return new Promise((ok, no) => { const sc = document.createElement("script"); sc.src = "https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"; sc.onload = ok; sc.onerror = no; document.head.appendChild(sc); });
     }
-    $("saveBtn").onclick = async () => {
-      const b = $("saveBtn"), old = b.textContent; b.textContent = "Sedang sediakan gambar…"; b.disabled = true;
+    // sediakan gambar awal-awal (lepas keputusan berubah) supaya butang Share terus jalan
+    function schedulePages() { clearTimeout(pgTimer); pgTimer = setTimeout(() => { makePages().catch(() => {}); }, 900); }
+    async function makePages() {
+      if (PAGES) return PAGES;
+      const gen = GEN;
+      await loadH2C(); if (document.fonts) await document.fonts.ready;
+      const box = document.createElement("div"); box.id = "exp"; document.body.appendChild(box);
       try {
-        await loadH2C(); if (document.fonts) await document.fonts.ready;
-        const cv = await html2canvas($("shot"), { scale: 3, backgroundColor: "#ffffff", useCORS: true, logging: false });
-        const blob = await new Promise((r) => cv.toBlob(r, "image/png"));
-        const fname = `magic-dsr-${($("nama").value.trim().split(" ")[0] || "saya").toLowerCase()}.png`;
-        const file = new File([blob], fname, { type: "image/png" });
-        const url = URL.createObjectURL(blob);
-        $("ovImg").src = url; $("ovDl").href = url; $("ovDl").download = fname;
-        let shared = false;
-        if (navigator.canShare && navigator.canShare({ files: [file] })) {
-          try { await navigator.share({ files: [file], title: "Keputusan Magic DSR" }); shared = true; } catch (err) { if (err && err.name === "AbortError") shared = true; }
+        const c = compute(), nama = $("nama").value.trim();
+        const tarikh = new Date().toLocaleDateString("ms-MY", { day: "numeric", month: "long", year: "numeric" });
+        const cl = (el) => { const n = el.cloneNode(true); n.removeAttribute("id"); n.querySelectorAll("[id]").forEach((x) => x.removeAttribute("id")); return n; };
+        const q = (sel) => cl(document.querySelector(sel));
+        const hd = `<div class="pg-hd"><img src="/img/perodua-logo.png" alt="" /><div class="tt"><b>LAPORAN MAGIC DSR</b><span>TEAM SHAH MAHPOB · PERODUA</span></div><div class="dt">${tarikh}</div></div>`;
+        const ft = (i, n) => `<div class="pg-ft"><div><b>Hubungi kami di WhatsApp</b><br>${CT.map((p) => `${p.n} ${ph(p.wa)}`).join(" · ")}<br>Anggaran sahaja, bukan kelulusan bank.</div>${n > 1 ? `<div class="pn">${i} / ${n}</div>` : ""}</div>`;
+        const lbl = { kad: "Kad kredit", ptptn: "PTPTN", peribadi: "Personal loan", rumahLoan: "Loan rumah", kereta: "Loan kereta / motor lain", lain: "Lain-lain (BNPL, ansuran)" };
+        const debts = Object.entries(c.parts).filter(([, v]) => v > 0).map(([k, v]) => `<tr><td>${lbl[k]}</td><td>${rm(v)}</td></tr>`).join("");
+        const info = `<div class="pg-sec">Maklumat kewangan</div><table class="pg-tbl">
+          <tr><td>Pekerjaan</td><td>${JOBS[S.job]}</td></tr>${c.umur ? `<tr><td>Umur</td><td>${c.umur} tahun</td></tr>` : ""}
+          <tr><td>Gaji bersih sebulan</td><td>${rm(c.G)}</td></tr>${debts || `<tr><td>Hutang sedia ada</td><td>Tiada</td></tr>`}
+          <tr class="ttl"><td>Jumlah komitmen sebulan</td><td>${rm(c.K)}</td></tr></table>`;
+        const forLine = `<div class="pg-for">Disediakan untuk<b>${esc(nama) || "Pelanggan"}</b></div>`;
+        const note = `<p class="pg-note">DSR = jumlah komitmen bulanan ÷ gaji bersih × 100. DSR 30–65% sihat, 65–75% sederhana, 75–80% tinggi, 80%+ high komitmen. NDI (kos sara hidup) minimum bank RM1,400. Ansuran dikira ikut baki berkurangan (EIR), ${c.n} tahun. Harga OTR tolak rebate semasa. Tertakluk kepada kelulusan bank.</p>`;
+        const A = () => [forLine, q("#pill"), q("#verdict"), info, q("#shot .gauge"), q("#shot .tiles"), q("#ndiBox")];
+        const B = () => [$("sol").classList.contains("on") ? q("#sol") : "", `<div class="pg-sec">Kereta yang sesuai dengan anda</div>`, q("#rec"), note];
+        const mk = (parts) => { const d = document.createElement("div"); d.className = "pg"; parts.forEach((x) => { if (!x) return; if (typeof x === "string") d.insertAdjacentHTML("beforeend", x); else d.appendChild(x); }); box.appendChild(d); return d; };
+        let pages = [mk([hd, ...A(), ...B(), ft(1, 1)])];
+        await Promise.all([...box.querySelectorAll("img")].map((im) => im.complete ? 0 : new Promise((r) => { im.onload = im.onerror = r; })));
+        if (pages[0].offsetHeight > 900) { pages[0].remove(); pages = [mk([hd, ...A(), ft(1, 2)]), mk([hd, ...B(), ft(2, 2)])]; }
+        const first = (nama.split(" ")[0] || "saya").toLowerCase().replace(/[^a-z0-9]/g, "") || "saya";
+        const out = [];
+        for (let i = 0; i < pages.length; i++) {
+          const cv = await html2canvas(pages[i], { scale: 1080 / 400, backgroundColor: "#ffffff", useCORS: true, logging: false });
+          const blob = await new Promise((r) => cv.toBlob(r, "image/png"));
+          const fname = `magic-dsr-${first}${pages.length > 1 ? "-" + (i + 1) : ""}.png`;
+          out.push({ blob, fname, file: new File([blob], fname, { type: "image/png" }), url: URL.createObjectURL(blob) });
         }
-        if (!shared) $("ov").classList.add("on");
-      } catch (err) {
-        alert("Maaf, gambar tak dapat dijana. Sila screenshot skrin keputusan.");
-      } finally { b.textContent = old; b.disabled = false; }
-    };
+        if (gen === GEN) { PAGES = out; $("sbS").textContent = `Laporan keputusan anda: ${out.length} gambar${out.length > 1 ? " (2 halaman)" : ""}, siap untuk disimpan.`; }
+        return out;
+      } finally { box.remove(); }
+    }
+    function toast(t) { const el = $("toast"); el.textContent = t; el.classList.add("on"); clearTimeout(el._t); el._t = setTimeout(() => el.classList.remove("on"), 3500); }
+    function showOv(P, msg) {
+      $("ovImgs").innerHTML = ""; P.forEach((p) => { const im = new Image(); im.src = p.url; im.alt = "Laporan Magic DSR"; $("ovImgs").appendChild(im); });
+      $("ovMsg").innerHTML = msg || "Tekan lama pada gambar → <u>Simpan ke Foto / Galeri</u>";
+      $("ov").classList.add("on");
+    }
+    function download(P) { P.forEach((p, i) => setTimeout(() => { const a = document.createElement("a"); a.href = p.url; a.download = p.fname; document.body.appendChild(a); a.click(); a.remove(); }, i * 700)); }
+    async function busy(btn, fn) {
+      const old = btn.textContent; btn.textContent = "Sedang sediakan…"; btn.disabled = true;
+      try { await fn(); } catch (err) { alert("Maaf, gambar tak dapat dijana. Sila screenshot skrin keputusan."); }
+      finally { btn.textContent = old; btn.disabled = false; }
+    }
+    async function share(P) {
+      const files = P.map((p) => p.file);
+      if (!(navigator.canShare && navigator.canShare({ files }))) return false;
+      try { await navigator.share({ files, title: "Laporan Magic DSR" }); } catch (err) { if (err && err.name !== "AbortError") return false; }
+      return true;
+    }
+    $("saveBtn").onclick = () => busy($("saveBtn"), async () => {
+      const P = await makePages();
+      if (isIOS) { if (!(await share(P))) showOv(P); return; }   // iPhone: menu share → "Simpan Imej" masuk ke Foto
+      download(P);
+      toast(`✓ ${P.length} gambar disimpan ke galeri (folder Download)`);
+      showOv(P, `✓ Gambar dah di-download. Tak jumpa dalam galeri? Tekan lama gambar → <u>Simpan</u>`);
+    });
+    $("shareBtn").onclick = () => busy($("shareBtn"), async () => {
+      const P = await makePages();
+      if (!(await share(P))) showOv(P, "Browser ni tak boleh share terus. Tekan lama gambar → <u>Simpan</u>, kemudian hantar melalui WhatsApp.");
+    });
+    $("ovDl").onclick = () => { if (PAGES) download(PAGES); };
     $("ovX").onclick = () => $("ov").classList.remove("on");
     run();
   </script>
