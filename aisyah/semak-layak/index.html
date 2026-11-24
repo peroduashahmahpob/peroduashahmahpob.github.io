@@ -90,6 +90,10 @@
     .tile b { display: block; margin-top: 4px; font-size: 22px; font-weight: 900; letter-spacing: -.01em; }
     .tile em { display: block; font-style: normal; font-size: 11px; color: var(--g); font-weight: 600; margin-top: 2px; }
     .tile.hl { background: rgba(21,101,216,.08); border: 2px solid rgba(21,101,216,.45); } .tile.hl b { color: var(--o); }
+    .tile.ndi { background: #fff7e6; border: 2px solid #f59e0b; } .tile.ndi small { color: #b45309; }
+    .ndibox { margin-top: 10px; padding: 12px 14px; border-radius: 16px; background: #fff7e6; border: 2px solid #f59e0b; font-size: 13px; font-weight: 600; color: var(--w); line-height: 1.5; }
+    .ndibox.low { background: #fef2f2; border-color: var(--bad); }
+    .ndibox .h { background: #fde68a; color: #7c2d12; padding: 1px 5px; border-radius: 5px; font-weight: 900; }
     .sec { margin-top: 18px; font-size: 11px; font-weight: 900; letter-spacing: .16em; color: var(--g); text-transform: uppercase; }
     .rec { display: grid; gap: 8px; margin-top: 8px; }
     .rc { display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 4px 10px; padding: 12px 14px; border-radius: 16px; background: var(--c2); border-left: 4px solid var(--ok); }
@@ -260,9 +264,11 @@
           <div class="tile"><small>Bulanan maksimum</small><b id="tMax">RM0</b><em id="tMaxE">DSR 70%, lebih ketat</em></div>
           <div class="tile"><small>Margin loan</small><b id="tMargin">90%</b><em id="tMarginE">daripada harga OTR</em></div>
           <div class="tile"><small>Loan maksimum</small><b id="tLoan">RM0</b><em id="tLoanE">9 tahun</em></div>
-          <div class="tile"><small>Baki sara hidup (NDI)</small><b id="tNdi">RM0</b><em id="tNdiE">selepas ansuran</em></div>
+          <div class="tile ndi"><small>NDI · kos sara hidup</small><b id="tNdi">RM0</b><em id="tNdiE">minimum bank RM1,400</em></div>
           <div class="tile"><small>Komitmen sekarang</small><b id="tK">RM0</b><em id="tKE">sebulan</em></div>
         </div>
+
+        <div class="ndibox" id="ndiBox"></div>
 
         <div class="sec">Kereta yang sesuai dengan anda</div>
         <div class="rec" id="rec"></div>
@@ -484,7 +490,12 @@
       if (c.carLoanTop > 0 && c.loanMax >= c.carLoanTop) { $("tLoan").textContent = "Semua model"; $("tLoanE").textContent = `gaji cukup · ${c.n} tahun`; }
       else { $("tLoan").textContent = rm(c.loanMax); $("tLoanE").textContent = `${c.n} tahun · EIR ${c.rL}%`; }
       const ndi = G - K - carMo;
-      $("tNdi").textContent = rm(ndi); $("tNdiE").textContent = c.sewa ? `${rm(ndi - c.sewa)} lepas sewa` : carMo ? "selepas ansuran kereta" : "selepas hutang sekarang";
+      // NDI = kos sara hidup (makan, minyak, sewa rumah, bil). Bank mahu minimum RM1,400 selepas semua hutang + kereta.
+      const ndiOk = ndi >= NDI_OK;
+      $("tNdi").textContent = rm(ndi); $("tNdi").style.color = ndiOk ? "" : "var(--bad)";
+      $("tNdiE").textContent = ndiOk ? "✓ lepasi minimum RM1,400" : `kurang ${rm(NDI_OK - ndi)} dari RM1,400`;
+      $("ndiBox").className = "ndibox" + (ndiOk ? "" : " low");
+      $("ndiBox").innerHTML = `💡 <span class="h">NDI = KOS SARA HIDUP</span> iaitu baki gaji selepas bayar semua hutang${carMo ? " &amp; ansuran kereta" : ""}. Duit ni untuk <b>makan, minyak, sewa rumah, bil &amp; lain-lain</b>. Bank mahu baki sekurang-kurangnya <span class="h">RM1,400 sebulan</span>. Baki anda: <b>${rm(ndi)}</b> ${ndiOk ? "✓ cukup" : "⚠ belum cukup"}.`;
       $("tAnsE").textContent = c.ndiBound ? "had baki sara hidup RM1,400" : "DSR 60%";
       $("tMaxE").textContent = ansMax > ansOk + 1 ? "DSR 70%, lebih ketat" : c.ndiBoundMax ? "sama, had baki RM1,400" : "DSR 70%";
       if (susun && !blok) {
