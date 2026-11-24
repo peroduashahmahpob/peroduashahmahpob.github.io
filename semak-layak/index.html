@@ -281,9 +281,14 @@
 
       <div class="card">
         <div class="step"><i>2</i>Pendapatan</div>
-        <label for="gaji">Gaji bersih sebulan</label>
+        <div class="row2">
+          <div><label for="basic">Gaji basic / sebulan</label><div class="rm"><input id="basic" type="number" inputmode="numeric" min="0" step="100" placeholder="cth 2500" /></div></div>
+          <div><label for="otk">OT / komisen <small>(anggaran)</small></label><div class="rm"><input id="otk" type="number" inputmode="numeric" min="0" step="50" placeholder="cth 600" /></div></div>
+        </div>
+        <p class="hint">Gaji basic ikut slip gaji. OT / komisen: <b>anggaran purata sebulan</b>, biarkan kosong jika tiada.</p>
+        <label for="gaji">Gaji bersih sebulan <small>(yang masuk akaun)</small></label>
         <div class="rm big"><input id="gaji" type="number" inputmode="numeric" min="0" step="100" placeholder="cth 3500" /></div>
-        <p class="hint">Gaji bersih = yang masuk akaun, <b>selepas KWSP, PERKESO &amp; cukai</b>. Lihat slip gaji.</p>
+        <p class="hint">Gaji bersih = jumlah yang masuk akaun (basic + OT / komisen + elaun), <b>selepas KWSP, PERKESO &amp; cukai</b>. DSR dikira atas gaji bersih.</p>
       </div>
 
       <div class="card">
@@ -672,6 +677,7 @@
       const job = { kerajaan: "Kerajaan", swasta: "Swasta (tetap)", kontrak: "Kontrak", sendiri: "Bekerja sendiri", gig: "P-hailing / gig" }[S.job];
       const msgFor = (nm) => `Salam ${nm}, saya dah buat Magic DSR Calculator${nama ? ` (nama: ${nama})` : ""}:
 • Umur ${c.umur || "-"} · ${job} · lesen: ${S.lesen === "ada" ? "ada" : S.lesen === "L" ? "sedang ambil" : "tiada"} · ${S.rumah === "sewa" ? `rumah sewa ${rm(c.sewa)}` : S.rumah === "sendiri" ? "rumah sendiri" : "tinggal dengan keluarga"}
+• Gaji basic ${num("basic") ? rm(num("basic")) : "-"} · OT/komisen ~${num("otk") ? rm(num("otk")) : "RM0"}
 • Gaji bersih ${rm(G)} · komitmen ${rm(K)} (DSR sekarang ${dN.toFixed(0)}%)
 • Minat: ${S.minat || "belum pasti"}
 • Rekod bayaran: ${{ baik: "semua ikut masa", lewat1: "pernah lewat 1 bulan", lewat2: "lewat 2 bulan+", blok: "AKPK / SAA / blacklist" }[S.rekod]}
@@ -729,7 +735,8 @@ Saya lampirkan gambar laporan Magic DSR. Boleh bantu saya apply?`;
           <div class="a4-2">
             <div><div class="a4-h">Maklumat kewangan</div><table class="a4-tbl">
               <tr><td>Pekerjaan</td><td>${JOBS[S.job]}</td></tr>${c.umur ? `<tr><td>Umur</td><td>${c.umur} tahun</td></tr>` : ""}
-              <tr><td>Gaji bersih sebulan</td><td>${rm(c.G)}</td></tr>${debts || `<tr><td>Hutang sedia ada</td><td>Tiada</td></tr>`}
+              <tr><td>Gaji basic</td><td>${num("basic") ? rm(num("basic")) : "Tidak diisi"}</td></tr><tr><td>OT / komisen (anggaran)</td><td>${num("otk") ? rm(num("otk")) : "Tiada"}</td></tr>
+              <tr><td><b>Gaji bersih sebulan</b></td><td>${rm(c.G)}</td></tr>${debts || `<tr><td>Hutang sedia ada</td><td>Tiada</td></tr>`}
               <tr class="ttl"><td>Jumlah komitmen</td><td>${rm(c.K)}</td></tr></table></div>
             <div><div class="a4-h">Angka utama</div>
               <div class="a4-k"><small>${esc(T("dsrLbl"))}</small><b>${dVal.toFixed(1)}%<span class="a4-tag" style="background:${tagC[0]};color:${tagC[1]}">${esc(T("dsrTag"))}</span>${R.blok || !ndiLow ? "" : `<span class="a4-tag" style="background:#dc2626;color:#fff">NDI KURANG</span>`}</b>${R.showMo ? `<em>DSR sekarang (tanpa kereta): ${(R.dN || 0).toFixed(1)}%</em>` : `<em>Jumlah komitmen ÷ gaji bersih</em>`}</div>
