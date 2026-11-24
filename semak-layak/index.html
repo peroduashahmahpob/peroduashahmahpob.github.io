@@ -264,6 +264,11 @@
           <button type="button" data-v="sendiri">Bekerja sendiri</button>
           <button type="button" data-v="gig">Grab / p-hailing</button>
         </div>
+        <div class="row2">
+          <div><label for="basic">Gaji basic / sebulan</label><div class="rm"><input id="basic" type="number" inputmode="numeric" min="0" step="100" placeholder="cth 2500" /></div></div>
+          <div><label for="otk">OT / komisen <small>(anggaran)</small></label><div class="rm"><input id="otk" type="number" inputmode="numeric" min="0" step="50" placeholder="cth 600" /></div></div>
+        </div>
+        <p class="hint">Gaji basic ikut slip gaji. OT / komisen: <b>anggaran purata sebulan</b>, biarkan kosong jika tiada.</p>
         <div class="lab">Lesen memandu</div>
         <div class="chips" data-k="lesen">
           <button type="button" data-v="ada" aria-pressed="true">Ada (P / CDL)</button>
@@ -281,11 +286,6 @@
 
       <div class="card">
         <div class="step"><i>2</i>Pendapatan</div>
-        <div class="row2">
-          <div><label for="basic">Gaji basic / sebulan</label><div class="rm"><input id="basic" type="number" inputmode="numeric" min="0" step="100" placeholder="cth 2500" /></div></div>
-          <div><label for="otk">OT / komisen <small>(anggaran)</small></label><div class="rm"><input id="otk" type="number" inputmode="numeric" min="0" step="50" placeholder="cth 600" /></div></div>
-        </div>
-        <p class="hint">Gaji basic ikut slip gaji. OT / komisen: <b>anggaran purata sebulan</b>, biarkan kosong jika tiada.</p>
         <label for="gaji">Gaji bersih sebulan <small>(yang masuk akaun)</small></label>
         <div class="rm big"><input id="gaji" type="number" inputmode="numeric" min="0" step="100" placeholder="cth 3500" /></div>
         <p class="hint">Gaji bersih = jumlah yang masuk akaun (basic + OT / komisen + elaun), <b>selepas KWSP, PERKESO &amp; cukai</b>. DSR dikira atas gaji bersih.</p>
