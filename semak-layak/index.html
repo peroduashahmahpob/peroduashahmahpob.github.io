@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>Semak Kelayakan Loan Kereta | Shah Mahpob</title>
+  <title>Magic DSR Calculator | Shah Mahpob</title>
   <meta name="description" content="Semak DSR, margin loan dan bulanan kereta Perodua yang sesuai dengan gaji anda. Percuma, 2 minit, tak perlu laporan CTOS/CCRIS." />
-  <meta property="og:title" content="Semak Kelayakan Loan Kereta · Team Shah Mahpob" />
+  <meta property="og:title" content="Magic DSR Calculator · Team Shah Mahpob" />
   <meta property="og:description" content="Masukkan gaji & hutang · dapat DSR, margin loan & bulanan kereta yang sesuai · simpan keputusan ke galeri" />
   <meta name="theme-color" content="#1565d8" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -66,10 +66,18 @@
     .pill { display: inline-flex; align-items: center; gap: 8px; margin-top: 14px; padding: 8px 14px; border-radius: 999px; font-size: 13px; font-weight: 900; letter-spacing: .1em; }
     .pill[data-lv="tinggi"] { background: var(--ok); color: #fff; } .pill[data-lv="sederhana"] { background: #f59e0b; color: #1f1300; } .pill[data-lv="rendah"] { background: var(--bad); color: #fff; }
     .verdict { margin-top: 10px; font-size: 15px; font-weight: 700; color: var(--w); }
+    .pill[data-lv="merah"] { background: var(--bad); color: #fff; }
+    .sol { display: none; margin-top: 12px; padding: 14px; border-radius: 16px; background: rgba(220,38,38,.07); border: 2px solid rgba(220,38,38,.45); }
+    .sol.on { display: block; }
+    .sol .t { font-size: 12px; font-weight: 900; letter-spacing: .12em; color: var(--bad); }
+    .sol ol { margin-top: 8px; padding-left: 0; list-style: none; counter-reset: s; display: grid; gap: 8px; }
+    .sol li { counter-increment: s; display: grid; grid-template-columns: 24px minmax(0,1fr); gap: 8px; font-size: 13px; font-weight: 600; color: var(--w); }
+    .sol li::before { content: counter(s); width: 22px; height: 22px; border-radius: 7px; background: var(--bad); color: #fff; display: grid; place-items: center; font-size: 12px; font-weight: 900; }
+    .sol li b { color: var(--bad); }
     .gauge { margin-top: 16px; }
     .gauge .lbl { display: flex; justify-content: space-between; font-size: 12px; font-weight: 800; color: var(--g); letter-spacing: .06em; text-transform: uppercase; }
     .gauge .lbl b { font-size: 22px; color: var(--w); letter-spacing: 0; }
-    .gbar { position: relative; height: 18px; margin-top: 8px; border-radius: 6px; background: var(--c2); }
+    .gbar { position: relative; height: 18px; margin-top: 26px; border-radius: 6px; background: var(--c2); }
     .gbar .now { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 6px 0 0 6px; background: var(--g); }
     .gbar .car { position: absolute; top: 0; bottom: 0; background: #1565d8; border-radius: 0 6px 6px 0; }
     .gbar .z { position: absolute; top: -5px; bottom: -5px; border-left: 2px dashed; }
@@ -147,7 +155,7 @@
     <header>
       <div style="margin-bottom:14px"><span class="plogo"><img src="/img/perodua-logo.png" alt="Perodua" width="59" height="40" /></span></div>
       <div class="kick">Percuma · 2 minit</div>
-      <h1>SEMAK KELAYAKAN LOAN<span>TEAM SHAH MAHPOB</span></h1>
+      <h1>MAGIC DSR CALCULATOR<span>TEAM SHAH MAHPOB</span></h1>
       <div class="trust">
         <div>✓ <b>Tak perlu laporan CTOS / CCRIS</b>, isi gaji &amp; hutang sahaja</div>
         <div>✓ Dapat <b>DSR, margin loan &amp; bulanan kereta</b> yang sesuai</div>
@@ -221,9 +229,9 @@
         <div class="lab">Model yang anda minat</div>
         <div class="chips" data-k="minat" id="minat"><button type="button" data-v="" aria-pressed="true">Belum pasti</button></div>
         <div class="rbx" id="rbx"></div>
-        <label for="rate">Kadar faedah bank <small>(kadar rata)</small></label>
+        <label for="rate">Kadar faedah bank <small>(EIR, baki berkurangan)</small></label>
         <div class="pc"><input id="rate" type="number" inputmode="decimal" min="0" max="10" step="0.05" placeholder="Auto ikut model" /></div>
-        <p class="hint">Biarkan kosong untuk guna kadar biasa setiap model (2.3% – 2.8%).</p>
+        <p class="hint" id="rateHint">Biarkan kosong untuk guna kadar biasa setiap model (EIR ~4.3% – 5.2%, sama bulanan dengan flat 2.3% – 2.8%). Sejak 1 Jun 2026 loan kereta dikira ikut <b>baki berkurangan</b>.</p>
         <button class="btn go" type="submit">Lihat keputusan saya →</button>
         <p class="formerr" id="ferr">Sila isi gaji bersih dahulu.</p>
       </div>
@@ -232,23 +240,25 @@
     <section id="result">
       <div class="shot" id="shot">
         <div class="sh-top">
-          <div><div class="k">KEPUTUSAN SEMAKAN LOAN</div><h2 id="rName">Kelayakan anda</h2></div>
+          <div><div class="k">KEPUTUSAN MAGIC DSR</div><h2 id="rName">Kelayakan anda</h2></div>
           <div class="d" id="rDate"></div>
         </div>
         <div class="pill" id="pill" data-lv="tinggi">PELUANG TINGGI</div>
         <p class="verdict" id="verdict"></p>
+        <div class="sol" id="sol"></div>
 
         <div class="gauge">
           <div class="lbl"><span id="dsrLbl">DSR dengan kereta</span><b id="dsrCar">0%</b></div>
           <div class="gbar" id="gbar"><div class="now" id="gNow"></div><div class="car" id="gCar"></div>
             <div class="z" style="left:60%;border-color:var(--y)"><span style="color:var(--y)">60%</span></div>
-            <div class="z" style="left:70%;border-color:var(--bad)"><span style="color:var(--bad)">70%</span></div></div>
+            <div class="z" style="left:70%;border-color:var(--y)"><span style="color:var(--y)">70%</span></div>
+            <div class="z" style="left:80%;border-color:var(--bad)"><span style="color:var(--bad)">80%</span></div></div>
           <div class="glegend"><span><i style="background:var(--g)"></i>Hutang sekarang <b id="dsrNow" style="color:var(--w)">0%</b></span><span><i style="background:var(--o)"></i>Ansuran kereta dicadang</span></div>
         </div>
 
         <div class="tiles">
           <div class="tile hl"><small>Bulanan kereta sesuai</small><b id="tAns">RM0</b><em id="tAnsE">DSR 60%</em></div>
-          <div class="tile"><small>Bulanan maksimum</small><b id="tMax">RM0</b><em>DSR 70%, lebih ketat</em></div>
+          <div class="tile"><small>Bulanan maksimum</small><b id="tMax">RM0</b><em id="tMaxE">DSR 70%, lebih ketat</em></div>
           <div class="tile"><small>Margin loan</small><b id="tMargin">90%</b><em id="tMarginE">daripada harga OTR</em></div>
           <div class="tile"><small>Loan maksimum</small><b id="tLoan">RM0</b><em id="tLoanE">9 tahun</em></div>
           <div class="tile"><small>Baki sara hidup (NDI)</small><b id="tNdi">RM0</b><em id="tNdiE">selepas ansuran</em></div>
@@ -290,12 +300,12 @@
 
       <div class="card">
         <div class="step"><i>🚗</i>Semua model Perodua</div>
-        <p class="hint" style="margin-top:8px">Bulanan dikira 9 tahun dengan downpayment minimum. Harga OTR asal tolak rebate bulan ini (ikut varian).</p>
+        <p class="hint" style="margin-top:8px">Bulanan dikira ikut baki berkurangan (EIR), 9 tahun, dengan downpayment minimum. Harga OTR asal tolak rebate bulan ini (ikut varian).</p>
         <div id="all"></div>
       </div>
 
       <button class="btn ghost" type="button" id="again" style="margin-top:16px">↺ Ubah maklumat &amp; kira semula</button>
-      <p class="note">Anggaran sahaja, bukan kelulusan bank. Bank akan semak CCRIS, CTOS, slip gaji &amp; penyata bank anda. DSR dikira atas gaji bersih; kad kredit 5% daripada baki. Baki sara hidup (NDI) minimum bank RM1,400. Margin maksimum 90% daripada harga OTR. AKPK, SAA &amp; blacklist tidak boleh memohon loan bank. Bulanan guna kadar rata (flat rate). Harga OTR anggaran; rebate ikut senarai bulan semasa, tertakluk terma Perodua.</p>
+      <p class="note">Anggaran sahaja, bukan kelulusan bank. Bank akan semak CCRIS, CTOS, slip gaji &amp; penyata bank anda. DSR dikira atas gaji bersih; kad kredit 5% daripada baki. Baki sara hidup (NDI) minimum bank RM1,400. Margin maksimum 90% daripada harga OTR. AKPK, SAA &amp; blacklist tidak boleh memohon loan bank. Bulanan dikira ikut baki berkurangan (EIR), seperti Akta Sewa Beli yang dipinda (berkuat kuasa 1 Jun 2026); kadar sebenar ikut bank. Harga OTR anggaran; rebate ikut senarai bulan semasa, tertakluk terma Perodua.</p>
     </section>
 
     <footer><b>TEAM SHAH MAHPOB</b><br>Sales &amp; Loan · Perodua<br><br>LAMAN CHECK KEWANGAN TSM PERODUA<br>Bukan laman rasmi Perodua.</footer>
@@ -304,7 +314,7 @@
 
   <div class="ov" id="ov">
     <p id="ovMsg">Tekan lama pada gambar → <u>Simpan ke Foto / Galeri</u></p>
-    <img id="ovImg" alt="Keputusan semakan loan" />
+    <img id="ovImg" alt="Keputusan Magic DSR" />
     <div class="row"><a class="btn save" id="ovDl" download="keputusan-loan.png" href="#">⬇ Muat turun</a><button class="btn ghost" type="button" id="ovX">Tutup</button></div>
   </div>
 
@@ -337,29 +347,34 @@
 
     // ---------- kiraan ----------
     const MARGIN_MAX = 0.9, DSR_OK = 0.6, DSR_MAX = 0.7, NDI_OK = 1400, NDI_MIN = 1400;
-    const monthly = (loan, r, n) => loan * (1 + r / 100 * n) / (12 * n);
-    const loanFor = (mo, r, n) => mo * 12 * n / (1 + r / 100 * n);
+    // Sejak 1 Jun 2026 (Akta Sewa Beli dipinda) loan kereta dikira ikut baki berkurangan. r = EIR % setahun, n = tahun.
+    const annuity = (i, k) => (i ? i / (1 - Math.pow(1 + i, -k)) : 1 / k);
+    const monthly = (loan, r, n) => (loan > 0 ? loan * annuity(r / 1200, n * 12) : 0);
+    const loanFor = (mo, r, n) => (mo > 0 ? mo / annuity(r / 1200, n * 12) : 0);
+    // kadar flat dalam data.js -> EIR yang bagi bulanan sama untuk tempoh n tahun
+    const eirOf = (flat, n) => { const k = n * 12, pay = (1 + flat / 100 * n) / k; let lo = 0, hi = 0.05; for (let i = 0; i < 80; i++) { const m = (lo + hi) / 2; if (annuity(m, k) < pay) lo = m; else hi = m; } return Math.round((lo + hi) / 2 * 120000) / 100; };
 
     function compute() {
       const G = num("gaji"), umur = num("umur"), sewa = S.rumah === "sewa" ? num("sewa") : 0;
       const kad = num("kad"), kadMo = kad * 0.05;
       const parts = { kad: kadMo, ptptn: num("ptptn"), peribadi: num("peribadi"), rumahLoan: num("rumahLoan"), kereta: num("kereta"), lain: num("lain") };
       const K = Object.values(parts).reduce((a, b) => a + b, 0);
+      const tooOld = umur >= 70, stop = S.rekod === "blok" || tooOld;
       const n = umur > 61 ? Math.max(1, 70 - umur) : 9;
       let margin = MARGIN_MAX;
       if (["kontrak", "sendiri", "gig"].includes(S.job)) margin = 0.85;
       if (S.rekod === "lewat1" || S.rekod === "lewat2") margin = Math.min(margin, 0.85);
       const ansOk = Math.max(0, Math.min(DSR_OK * G - K, G - K - NDI_OK));
       const ansMax = Math.max(0, Math.min(DSR_MAX * G - K, G - K - NDI_MIN));
-      const customR = +$("rate").value || 0;
+      const rIn = +$("rate").value || 0, badRate = rIn > 15, customR = badRate ? 0 : rIn;
       const D = (window.HARGA || []).map((m) => {
-        const r = customR || m.rate;
+        const r = customR || eirOf(m.rate, n);
         return { model: m.model, id: m.id, page: m.page, r, vars: m.variants.map((v) => {
           const rb = window.rebateFor ? window.rebateFor(v.name) : 0, price = v.otr - rb;
           const loanM = Math.min(price, margin * v.otr), dpMin = price - loanM, moMin = monthly(loanM, r, n);
           const loanOk = loanFor(ansOk, r, n), dpOk = Math.max(dpMin, price - loanOk), moOk = monthly(price - dpOk, r, n);
           let st = "no";
-          if (S.rekod !== "blok" && ansOk > 0) {
+          if (!stop && ansOk > 0) {
             if (moMin <= ansOk + 0.5) st = "ok";
             else if (dpOk <= price * 0.35) st = "dp";
             else if (moMin <= ansMax) st = "max";
@@ -367,9 +382,11 @@
           return { name: v.name, otr: v.otr, rb, price, dpMin, moMin, dpOk, moOk, st };
         }) };
       });
-      const mm = (window.HARGA || []).find((m) => m.model === S.minat), rL = customR || (mm ? mm.rate : 2.8);
+      const mm = (window.HARGA || []).find((m) => m.model === S.minat), rL = customR || eirOf(mm ? mm.rate : 2.8, n);
       const loanMax = loanFor(ansOk, rL, n);
-      return { G, umur, sewa, kad, kadMo, parts, K, n, margin, ansOk, ansMax, customR, rL, D, loanMax };
+      const carLoanTop = Math.max(0, ...D.flatMap((m) => m.vars.map((v) => v.price - v.dpMin)));
+      const ndiBound = G - K - NDI_OK < DSR_OK * G - K, ndiBoundMax = G - K - NDI_MIN < DSR_MAX * G - K;
+      return { G, umur, sewa, kad, kadMo, parts, K, n, margin, ansOk, ansMax, customR, badRate, rL, D, loanMax, carLoanTop, tooOld, stop, ndiBound, ndiBoundMax };
     }
 
     // ringkasan rebate bulan ini (dari /rebate.js)
@@ -381,9 +398,12 @@
       $("rbx").innerHTML = `<b class="t">✓ REBATE ${R.bulan} DITOLAK AUTOMATIK</b>${rows}<p style="margin-top:4px;color:var(--g)">Harga ikut OTR asal, rebate ikut varian.</p>`;
     })();
     let shown = false;
+    const RATE_HINT = $("rateHint").innerHTML;
     function run() {
       const c = compute(), { G, K, ansOk, ansMax } = c;
       $("totK").textContent = rm(K);
+      $("rate").classList.toggle("err", c.badRate);
+      $("rateHint").innerHTML = c.badRate ? "<b>Kadar ni nampak terlalu tinggi</b> (contoh betul: 5.16). Kiraan guna kadar biasa setiap model." : RATE_HINT;
       if (!shown) return;
       const nama = $("nama").value.trim();
       $("rName").textContent = nama ? `${nama.split(" ")[0]}, ini kelayakan anda` : "Kelayakan anda";
@@ -393,13 +413,14 @@
       const all = []; c.D.forEach((m) => m.vars.forEach((v) => all.push({ ...v, model: m.model, r: m.r })));
       const greens = all.filter((v) => v.st === "ok");
       const bestPerModel = {}; greens.forEach((v) => { if (!bestPerModel[v.model] || v.price > bestPerModel[v.model].price) bestPerModel[v.model] = v; });
-      let picks, pickType = "ok";
+      let picks, pickType = "ok", alt = false;
       if (S.minat) {
         const mv = all.filter((v) => v.model === S.minat);
         const g = mv.filter((v) => v.st === "ok").sort((a, b) => b.price - a.price);
         if (g.length) picks = g.slice(0, 3);
         else { picks = mv.filter((v) => v.st !== "no").sort((a, b) => a.dpOk - b.dpOk).slice(0, 3); pickType = "amb"; }
-        if (!picks.length) picks = [];
+        // model pilihan belum sesuai: tunjuk model lain yang sesuai dengan gaji
+        if (!picks.length) { picks = Object.values(bestPerModel).sort((a, b) => b.price - a.price).slice(0, 3); pickType = "ok"; alt = picks.length > 0; }
       } else {
         const bm = Object.values(bestPerModel).sort((a, b) => b.price - a.price);
         picks = bm.length > 3 ? [bm[0], bm[Math.floor((bm.length - 1) / 2)], bm[bm.length - 1]] : bm;
@@ -407,44 +428,73 @@
       if (!picks.length && !S.minat) { picks = all.filter((v) => v.st === "dp" || v.st === "max").sort((a, b) => a.dpOk - b.dpOk).slice(0, 3); pickType = "amb"; }
 
       // tahap
+      const blok = c.stop;
+      const carMo = picks[0] ? (pickType === "ok" ? picks[0].moMin : picks[0].moOk) : 0;
+      const dN = G ? K / G * 100 : 0, dC = G ? (K + carMo) / G * 100 : 0, dsrNow = dN;
+      const merah = !blok && (dN >= 80 || dC >= 80); // DSR 80%+ : merah + jalan penyelesaian (jangan sebut gagal)
       let lv = "rendah", vt, susun = false;
-      const dsrNow = G ? K / G * 100 : 0, jom = " Tapi jangan risau, jom kita susun strategi kewangan anda bersama-sama.";
+      const jom = " Jangan risau, jom kita susun strategi kewangan anda bersama-sama.";
       if (S.rekod === "blok") vt = "Rekod AKPK, SAA atau blacklist: bank tidak boleh meluluskan loan kereta. Selesaikan dulu dan dapatkan surat pelepasan. WhatsApp kami untuk pilihan lain.";
-      else if (ansOk <= 0) { susun = true; vt = dsrNow >= 80 ? `Komitmen anda sudah terlalu tinggi, ${dsrNow.toFixed(0)}% daripada gaji.${jom}` : `Komitmen anda sekarang ${dsrNow.toFixed(0)}% daripada gaji, jadi ruang untuk ansuran kereta masih terhad.${jom}`; }
-      else if (S.minat && !picks.length) vt = `Bajet ansuran selesa ${rm(ansOk)} sebulan belum cukup untuk ${S.minat}. Lihat model lain di bawah.`;
+      else if (c.tooOld) vt = `Bank biasanya hadkan umur tamat loan sekitar 70 tahun. Jalan lain: anak atau ahli keluarga sebagai pemohon utama, atau beli secara tunai. WhatsApp ${ADVISOR} untuk bantuan.`;
+      else if (merah) { susun = true; vt = `DSR anda ${Math.round(Math.max(dN, dC))}%, melebihi 80%. Bank biasanya terima sehingga 60–70%, tapi ini masih boleh disusun. Ikut jalan penyelesaian di bawah.`; }
+      else if (ansOk <= 0) { susun = true; vt = G - K <= NDI_OK ? `Selepas komitmen, baki gaji anda ${rm(G - K)}. Bank mahu baki sara hidup sekurang-kurangnya RM1,400 selepas ansuran kereta, jadi ruang ansuran belum ada.${jom}` : `Komitmen anda sekarang ${dN.toFixed(0)}% daripada gaji, jadi ruang untuk ansuran kereta masih terhad.${jom}`; }
+      else if (alt) { lv = "sederhana"; vt = `${S.minat} belum sesuai dengan bajet ansuran ${rm(ansOk)} sebulan. Model di bawah sesuai dengan gaji anda, atau WhatsApp ${ADVISOR} untuk pilihan penjamin / pemohon bersama.`; }
       else if (pickType === "ok" && picks.length) { lv = "tinggi"; vt = `Gaji anda mampu ansuran sehingga ${rm(ansOk)} sebulan dengan selesa.`; }
       else if (picks.length) { lv = "sederhana"; vt = `Bajet ansuran selesa ${rm(ansOk)} sebulan. Perlu downpayment lebih atau kurangkan hutang.`; }
-      else { susun = true; vt = `Bajet ansuran ${rm(ansOk)} sebulan belum cukup untuk model Perodua sekarang.${jom}`; }
-      if (susun && dsrNow < 80) lv = "sederhana";
+      else { susun = true; vt = `Bajet ansuran ${rm(ansOk)} sebulan belum cukup untuk model ${S.minat || "Perodua"} sekarang.${jom}`; }
+      if (susun && !merah) lv = "sederhana";
       if (S.rekod === "lewat2" && lv !== "rendah") { lv = "rendah"; vt = "Ada tunggakan 2 bulan+. Bank biasanya tolak sehingga tunggakan dijelaskan dan rekod bersih beberapa bulan. Kiraan di bawah ialah anggaran selepas itu."; }
       if (lv === "tinggi" && (S.rekod === "lewat1" || S.lesen !== "ada")) { lv = "sederhana"; vt += S.rekod === "lewat1" ? " Tapi jelaskan tunggakan dulu sebelum apply." : " Tapi perlu selesaikan soal lesen memandu."; }
-      $("pill").dataset.lv = lv; $("pill").textContent = { tinggi: "✓ PELUANG TINGGI", sederhana: "⚠ PELUANG SEDERHANA", rendah: "✕ PELUANG RENDAH" }[lv];
-      if (susun && S.rekod !== "blok") $("pill").textContent = dsrNow >= 80 ? "✕ KOMITMEN TERLALU TINGGI" : "⚠ PERLU SUSUN STRATEGI";
+      if (merah) lv = "merah";
+      $("pill").dataset.lv = lv; $("pill").textContent = { tinggi: "✓ PELUANG TINGGI", sederhana: "⚠ PELUANG SEDERHANA", rendah: "✕ PELUANG RENDAH", merah: `🔴 DSR ${Math.round(Math.max(dN, dC))}% · ADA PENYELESAIAN` }[lv];
+      if (susun && !blok && !merah) $("pill").textContent = "⚠ PERLU SUSUN STRATEGI";
+      if (c.tooOld && S.rekod !== "blok") $("pill").textContent = "⚠ UMUR MELEBIHI HAD LOAN";
       if (S.rekod === "blok") $("pill").textContent = "✕ TAK BOLEH APPLY LOAN BANK";
       $("verdict").textContent = vt;
 
+      // DSR 80%+ : senarai jalan penyelesaian (masuk dalam gambar)
+      if (merah) {
+        const cheap = all.slice().sort((a, b) => a.moMin - b.moMin)[0];
+        const pool = S.minat ? all.filter((v) => v.model === S.minat) : all;
+        const ref = picks[0] || pool.slice().sort((a, b) => a.moMin - b.moMin)[0];
+        const room = Math.min(DSR_OK * G - cheap.moMin, G - NDI_OK - cheap.moMin);
+        const P = [];
+        if (room > 0) P.push(`<b>Kurangkan hutang ${rm(Math.ceil(Math.max(0, K - room) / 10) * 10)} sebulan</b> supaya layak ${cheap.name} (${rm(cheap.moMin)}/bln). Mula dengan yang kecil: Atome / SPayLater, ansuran telefon, personal loan kecil.`);
+        else P.push(`<b>Tambah pemohon bersama</b> (pasangan atau ahli keluarga yang bekerja). Gaji ${rm(G)} seorang belum cukup untuk ansuran kereta + baki sara hidup RM1,400.`);
+        if (c.kadMo > 0) P.push(`<b>Settle kad kredit ${rm(c.kad)}</b>: komitmen turun ${rm(c.kadMo)} sebulan. Setiap RM1,000 baki dibayar = RM50 sebulan lega. Tutup kad yang tak guna.`);
+        P.push(`<b>Pilih model lebih rendah</b>: ${cheap.name} hanya ${rm(cheap.moMin)} sebulan (${c.n} tahun).`);
+        if (ref) { const dp10 = Math.round(ref.price * 0.1 / 100) * 100, mo2 = monthly(Math.max(0, ref.price - ref.dpMin - dp10), ref.r, c.n); P.push(`<b>Tambah downpayment ${rm(dp10)}</b> untuk ${ref.name}: bulanan turun dari ${rm(ref.moMin)} ke ${rm(mo2)}.`); }
+        P.push("<b>Sediakan penjamin</b> (ibu bapa, pasangan atau adik-beradik) yang ada gaji tetap &amp; rekod bayaran bersih.");
+        P.push("<b>Tunjuk pendapatan tambahan</b>: elaun tetap, OT atau bisnes sampingan yang masuk akaun bank setiap bulan (penyata 6 bulan).");
+        P.push(`<b>WhatsApp ${ADVISOR}</b>: kami susun strategi ikut kes anda, percuma.`);
+        $("sol").innerHTML = `<div class="t">🔴 JALAN PENYELESAIAN UNTUK ANDA</div><ol>${P.map((t) => `<li><span>${t}</span></li>`).join("")}</ol>`;
+        $("sol").classList.add("on");
+      } else $("sol").classList.remove("on");
+
       // gauge
-      const carMo = picks[0] ? (pickType === "ok" ? picks[0].moMin : picks[0].moOk) : 0;
-      const dN = G ? K / G * 100 : 0, dC = G ? (K + carMo) / G * 100 : 0;
       $("dsrNow").textContent = dN.toFixed(1) + "%"; $("dsrCar").textContent = dC.toFixed(1) + "%"; $("dsrLbl").textContent = carMo ? "DSR dengan kereta" : "DSR sekarang";
-      $("gNow").style.width = Math.min(100, dN) + "%";
+      $("dsrCar").style.color = merah ? "var(--bad)" : "";
+      $("gNow").style.width = Math.min(100, dN) + "%"; $("gNow").style.background = merah ? "var(--bad)" : "";
       $("gCar").style.left = Math.min(100, dN) + "%"; $("gCar").style.width = Math.max(0, Math.min(100, dC) - Math.min(100, dN)) + "%";
 
       // tiles
       $("tAns").textContent = rm(ansOk); $("tMax").textContent = rm(ansMax);
-      $("tMargin").textContent = S.rekod === "blok" ? "—" : Math.round(c.margin * 100) + "%";
-      $("tMarginE").textContent = S.rekod === "blok" ? "tak boleh apply bank" : picks[0] ? `downpayment min ${rm(picks[0].dpMin)}` : "daripada harga OTR";
-      $("tLoan").textContent = rm(c.loanMax); $("tLoanE").textContent = `${c.n} tahun · kadar ${c.rL}%`;
+      $("tMax").style.color = merah ? "var(--bad)" : ""; $("tK").style.color = merah ? "var(--bad)" : "";
+      $("tMargin").textContent = blok ? "—" : Math.round(c.margin * 100) + "%";
+      $("tMarginE").textContent = blok ? "tak boleh apply bank" : picks[0] ? `downpayment min ${rm(picks[0].dpMin)}` : "daripada harga OTR";
+      if (c.carLoanTop > 0 && c.loanMax >= c.carLoanTop) { $("tLoan").textContent = "Semua model"; $("tLoanE").textContent = `gaji cukup · ${c.n} tahun`; }
+      else { $("tLoan").textContent = rm(c.loanMax); $("tLoanE").textContent = `${c.n} tahun · EIR ${c.rL}%`; }
       const ndi = G - K - carMo;
       $("tNdi").textContent = rm(ndi); $("tNdiE").textContent = c.sewa ? `${rm(ndi - c.sewa)} lepas sewa` : carMo ? "selepas ansuran kereta" : "selepas hutang sekarang";
-      $("tAnsE").textContent = "DSR 60%";
-      if (susun && S.rekod !== "blok") {
+      $("tAnsE").textContent = c.ndiBound ? "had baki sara hidup RM1,400" : "DSR 60%";
+      $("tMaxE").textContent = ansMax > ansOk + 1 ? "DSR 70%, lebih ketat" : c.ndiBoundMax ? "sama, had baki RM1,400" : "DSR 70%";
+      if (susun && !blok) {
         const target = Math.min(...all.map((v) => v.moMin)), room = Math.min(0.6 * G - target, G - 1400 - target), need = Math.ceil(Math.max(0, K - room) / 10) * 10;
         $("tAnsE").textContent = room > 0 ? `kurangkan hutang ${rm(need)}/bln untuk mula` : "perlu tambah pendapatan / pemohon bersama";
         $("tLoanE").textContent = "selepas susun hutang";
       }
       $("tK").textContent = rm(K); $("tKE").textContent = `DSR sekarang ${dN.toFixed(0)}%`;
-      if (S.rekod === "blok") { ["tAns", "tMax", "tLoan"].forEach((id) => { $(id).textContent = "—"; }); $("tLoanE").textContent = "tak boleh apply bank"; }
+      if (blok) { ["tAns", "tMax", "tLoan"].forEach((id) => { $(id).textContent = "—"; }); const why = c.tooOld && S.rekod !== "blok" ? "had umur loan ~70" : "tak boleh apply bank"; ["tAnsE", "tMaxE", "tLoanE"].forEach((id) => { $(id).textContent = why; }); }
 
       // cadangan kereta (dalam gambar)
       $("rec").innerHTML = picks.length ? picks.map((v) => {
@@ -456,7 +506,7 @@
 
       // semua model
       const lab = { ok: ["ok", "✓ Sesuai"], dp: ["amb", "⚠ Perlu downpayment"], max: ["amb", "⚠ DSR tinggi"], no: ["no", "✕ Belum sesuai"] };
-      $("all").innerHTML = c.D.map((m) => `<div class="mt"><h4>${m.model} <small style="color:var(--g);font-weight:700">· ${m.r}%</small></h4>` + m.vars.map((v) => {
+      $("all").innerHTML = c.D.map((m) => `<div class="mt"><h4>${m.model} <small style="color:var(--g);font-weight:700">· EIR ${m.r}%</small></h4>` + m.vars.map((v) => {
         const [cl, t] = lab[v.st];
         const sub = v.st === "dp" ? `Downpayment ${rm(v.dpOk)} → ${rm(v.moOk)}/bln` : `Downpayment ${rm(v.dpMin)} → ${rm(v.moMin)}/bln`;
         return `<div class="vr"><span class="nm">${v.name}<small>OTR ${rm(v.otr)}${v.rb ? ` − rebate ${rm(v.rb)}` : ""} · ${sub}</small></span><span class="st ${cl}"><b>${rm(v.st === "dp" ? v.moOk : v.moMin)}</b>${t}</span></div>`;
@@ -467,11 +517,11 @@
       if (S.rekod === "blok") T.push(["⛔", "<b>AKPK / SAA / blacklist tak boleh apply loan bank.</b> Selesaikan hutang dan dapatkan surat pelepasan / penyelesaian dahulu. Pilihan lain: pemohon lain (ahli keluarga) atau tunai."]);
       if (S.rekod === "lewat2") T.push(["⚠️", "<b>Jelaskan semua tunggakan dulu</b>, set auto-debit, dan pastikan rekod bersih 3–6 bulan sebelum apply."]);
       if (S.rekod === "lewat1") T.push(["⚠️", "<b>Jelaskan bulan tertunggak dulu</b>, set auto-debit, dan tunggu 1–2 bulan sampai CCRIS kemas kini."]);
-      if (c.kadMo > 0) T.push(["💳", `Baki kad kredit ${rm(c.kad)} dikira <b>${rm(c.kadMo)}/bulan</b>. Setiap RM1,000 dibayar turun, bajet ansuran naik RM50. Tutup kad yang tak guna.`]);
+      if (c.kadMo > 0 && !merah) T.push(["💳", `Baki kad kredit ${rm(c.kad)} dikira <b>${rm(c.kadMo)}/bulan</b>. Setiap RM1,000 dibayar turun, bajet ansuran naik RM50. Tutup kad yang tak guna.`]);
       if (c.parts.lain > 0) T.push(["🧾", "Bank kira <b>Atome, SPayLater &amp; ansuran telefon</b> sebagai hutang. Langsaikan yang kecil sebelum apply."]);
       if (picks.length && pickType === "amb") T.push(["💰", `Untuk ${picks[0].name}, sediakan <b>downpayment ${rm(picks[0].dpOk)}</b> supaya bulanan jadi ${rm(picks[0].moOk)}.`]);
       // DSR 75%+ (kereta dengan downpayment minimum): pilihan penjamin atau tambah downpayment ~10% harga
-      if (S.rekod !== "blok" && G) {
+      if (!blok && !merah && G) {
         const pool = S.minat ? all.filter((v) => v.model === S.minat) : all;
         const ref = picks[0] || pool.slice().sort((a, b) => a.moMin - b.moMin)[0];
         if (ref) {
@@ -504,12 +554,12 @@
 
       // WhatsApp
       const job = { kerajaan: "Kerajaan", swasta: "Swasta (tetap)", kontrak: "Kontrak", sendiri: "Bekerja sendiri", gig: "P-hailing / gig" }[S.job];
-      const msgFor = (nm) => `Salam ${nm}, saya dah buat Semak Kelayakan Loan${nama ? ` (nama: ${nama})` : ""}:
+      const msgFor = (nm) => `Salam ${nm}, saya dah buat Magic DSR Calculator${nama ? ` (nama: ${nama})` : ""}:
 • Umur ${c.umur || "-"} · ${job} · lesen: ${S.lesen === "ada" ? "ada" : S.lesen === "L" ? "sedang ambil" : "tiada"} · ${S.rumah === "sewa" ? `rumah sewa ${rm(c.sewa)}` : S.rumah === "sendiri" ? "rumah sendiri" : "tinggal dengan keluarga"}
 • Gaji bersih ${rm(G)} · komitmen ${rm(K)} (DSR sekarang ${dN.toFixed(0)}%)
 • Minat: ${S.minat || "belum pasti"}
 • Rekod bayaran: ${{ baik: "semua ikut masa", lewat1: "pernah lewat 1 bulan", lewat2: "lewat 2 bulan+", blok: "AKPK / SAA / blacklist" }[S.rekod]}
-• Bulanan sesuai ${rm(ansOk)} (maks ${rm(ansMax)}) · peluang ${lv.toUpperCase()}
+• Bulanan sesuai ${rm(ansOk)} (maks ${rm(ansMax)}) · ${$("pill").textContent.replace(/^[^A-Z]+/, "")}
 ${picks.length ? "• Cadangan: " + picks.map((v) => `${v.name} ${rm(pickType === "ok" ? v.moMin : v.moOk)}/bln`).join(", ") : ""}
 Boleh bantu saya apply?`;
       $("waRes").href = wa(msgFor(ADVISOR));
@@ -519,7 +569,9 @@ Boleh bantu saya apply?`;
     document.querySelectorAll("input").forEach((i) => i.addEventListener("input", () => { i.classList.remove("err"); run(); }));
     $("f").addEventListener("submit", (e) => {
       e.preventDefault();
-      if (!num("gaji")) { $("gaji").classList.add("err"); $("ferr").style.display = "block"; $("gaji").focus(); return; }
+      const u = num("umur");
+      if (u && u < 18) { $("umur").classList.add("err"); $("ferr").textContent = "Umur minimum untuk loan kereta ialah 18 tahun."; $("ferr").style.display = "block"; shown = false; $("result").classList.remove("on"); $("umur").focus(); return; }
+      if (!num("gaji")) { $("gaji").classList.add("err"); $("ferr").textContent = "Sila isi gaji bersih dahulu."; $("ferr").style.display = "block"; $("gaji").focus(); return; }
       $("ferr").style.display = "none"; shown = true; $("result").classList.add("on"); run();
       $("result").scrollIntoView({ behavior: "smooth" });
     });
@@ -536,13 +588,13 @@ Boleh bantu saya apply?`;
         await loadH2C(); if (document.fonts) await document.fonts.ready;
         const cv = await html2canvas($("shot"), { scale: 3, backgroundColor: "#ffffff", useCORS: true, logging: false });
         const blob = await new Promise((r) => cv.toBlob(r, "image/png"));
-        const fname = `keputusan-loan-${($("nama").value.trim().split(" ")[0] || "saya").toLowerCase()}.png`;
+        const fname = `magic-dsr-${($("nama").value.trim().split(" ")[0] || "saya").toLowerCase()}.png`;
         const file = new File([blob], fname, { type: "image/png" });
         const url = URL.createObjectURL(blob);
         $("ovImg").src = url; $("ovDl").href = url; $("ovDl").download = fname;
         let shared = false;
         if (navigator.canShare && navigator.canShare({ files: [file] })) {
-          try { await navigator.share({ files: [file], title: "Keputusan Semakan Loan" }); shared = true; } catch (err) { if (err && err.name === "AbortError") shared = true; }
+          try { await navigator.share({ files: [file], title: "Keputusan Magic DSR" }); shared = true; } catch (err) { if (err && err.name === "AbortError") shared = true; }
         }
         if (!shared) $("ov").classList.add("on");
       } catch (err) {
