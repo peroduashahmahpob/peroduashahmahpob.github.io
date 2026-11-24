@@ -188,6 +188,43 @@
     .pg-note { margin-top: 14px; font-size: 9.5px; font-weight: 600; color: var(--g); line-height: 1.5; }
     .pg-ft { margin-top: 14px; padding-top: 10px; border-top: 2px solid var(--ln); display: flex; justify-content: space-between; gap: 10px; font-size: 9.5px; font-weight: 700; color: var(--g); line-height: 1.5; }
     .pg-ft b { color: var(--w); } .pg-ft .pn { white-space: nowrap; font-weight: 900; color: var(--o); }
+    /* laporan A4 (794 x 1123 = nisbah kertas A4) */
+    .a4 { width: 794px; min-height: 1123px; padding: 40px 50px 30px; background: #fff; color: #0f172a; font-family: "Montserrat", sans-serif; display: flex; flex-direction: column; }
+    .a4-hd { display: flex; align-items: center; gap: 16px; padding-bottom: 16px; border-bottom: 4px solid #1565d8; }
+    .a4-hd img { height: 46px; width: auto; }
+    .a4-hd .tt b { display: block; font-size: 27px; font-weight: 900; letter-spacing: .04em; } .a4-hd .tt span { display: block; font-size: 13px; font-weight: 800; letter-spacing: .12em; color: #556070; }
+    .a4-hd .dt { margin-left: auto; text-align: right; font-size: 14px; font-weight: 700; color: #556070; } .a4-hd .dt b { display: block; color: #0f172a; font-size: 15px; }
+    .a4-for { margin-top: 14px; font-size: 12px; font-weight: 800; letter-spacing: .14em; color: #556070; text-transform: uppercase; } .a4-for b { display: block; margin-top: 2px; font-size: 26px; letter-spacing: 0; text-transform: none; color: #0f172a; }
+    .a4-st { margin-top: 12px; padding: 14px 20px; border-radius: 18px; border: 3px solid #16a34a; background: #f0fdf4; }
+    .a4-st.sederhana { border-color: #f59e0b; background: #fffbeb; } .a4-st.rendah, .a4-st.merah { border-color: #dc2626; background: #fef2f2; }
+    .a4-st .p { font-size: 20px; font-weight: 900; letter-spacing: .05em; } .a4-st p { margin-top: 4px; font-size: 16px; font-weight: 600; line-height: 1.5; }
+    .a4-h { margin-top: 16px; padding-bottom: 6px; border-bottom: 2px solid #d5e0ef; font-size: 13px; font-weight: 900; letter-spacing: .16em; color: #1565d8; text-transform: uppercase; }
+    .a4-2 { display: grid; grid-template-columns: minmax(0,1.1fr) minmax(0,1fr); gap: 24px; }
+    .a4-tbl { width: 100%; border-collapse: collapse; margin-top: 4px; } .a4-tbl td { padding: 6px 0; border-bottom: 1px dashed #d5e0ef; font-size: 16px; font-weight: 600; } .a4-tbl td:last-child { text-align: right; font-weight: 800; white-space: nowrap; }
+    .a4-tbl tr.ttl td { border-bottom: 0; border-top: 2px solid #0f172a; font-weight: 900; font-size: 17px; }
+    .a4-k { margin-top: 8px; padding: 9px 14px; border-radius: 14px; background: #edf3fb; } .a4-k small { display: block; font-size: 12px; font-weight: 800; letter-spacing: .1em; color: #556070; text-transform: uppercase; }
+    .a4-k b { display: block; margin-top: 1px; font-size: 26px; font-weight: 900; } .a4-k em { display: block; font-style: normal; font-size: 13px; font-weight: 700; color: #556070; }
+    .a4-k.blue b { color: #1565d8; } .a4-k.ndi { background: #fff7e6; border: 2px solid #f59e0b; } .a4-k.ndi.low b { color: #dc2626; }
+    .a4-tag { display: inline-block; margin-left: 8px; padding: 4px 10px; border-radius: 999px; font-size: 12px; font-weight: 900; letter-spacing: .06em; vertical-align: 6px; }
+    .a4-bar { position: relative; height: 26px; margin-top: 28px; border-radius: 8px; background: #edf3fb; }
+    .a4-bar .zn { position: absolute; top: 0; bottom: 0; } .a4-bar .fl { position: absolute; top: 7px; bottom: 7px; left: 0; border-radius: 5px; z-index: 1; }
+    .a4-bar .mk { position: absolute; top: -6px; bottom: -6px; border-left: 2px dashed; z-index: 2; } .a4-bar .mk span { position: absolute; top: -22px; left: -16px; font-size: 13px; font-weight: 900; }
+    .a4-leg { display: flex; flex-wrap: wrap; gap: 8px 18px; margin-top: 12px; font-size: 13px; font-weight: 700; color: #556070; } .a4-leg i { display: inline-block; width: 12px; height: 12px; border-radius: 3px; margin-right: 6px; vertical-align: -1px; }
+    .a4-4 { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 10px; margin-top: 14px; }
+    .a4-4 div { padding: 10px 12px; border-radius: 12px; background: #edf3fb; } .a4-4 small { display: block; font-size: 11px; font-weight: 800; letter-spacing: .08em; color: #556070; text-transform: uppercase; } .a4-4 b { display: block; margin-top: 3px; font-size: 19px; font-weight: 900; } .a4-4 em { display: block; font-style: normal; font-size: 11.5px; font-weight: 600; color: #556070; }
+    .a4-box { margin-top: 14px; padding: 12px 18px; border-radius: 16px; background: #fff7e6; border: 2px solid #f59e0b; font-size: 14.5px; font-weight: 600; line-height: 1.55; }
+    .a4-box .h { background: #fde68a; color: #7c2d12; padding: 1px 6px; border-radius: 5px; font-weight: 900; }
+    .a4-car { margin-top: 10px; padding: 12px 16px; border-radius: 16px; border: 2px solid #d5e0ef; border-left: 6px solid #16a34a; } .a4-car.amb { border-left-color: #f59e0b; }
+    .a4-car .n { font-size: 19px; font-weight: 900; } .a4-car .s { font-size: 13px; font-weight: 600; color: #556070; margin-top: 2px; }
+    .a4-car .g { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 10px; margin-top: 8px; } .a4-car .g div { padding: 8px 12px; border-radius: 10px; background: #edf3fb; font-size: 12px; font-weight: 800; letter-spacing: .06em; color: #556070; text-transform: uppercase; }
+    .a4-car .g b { display: block; font-size: 20px; letter-spacing: 0; color: #0f172a; text-transform: none; } .a4-car .g div.mo { background: rgba(21,101,216,.1); } .a4-car .g div.mo b { color: #1565d8; }
+    .a4-ol { margin-top: 8px; display: grid; gap: 7px; list-style: none; } .a4-ol li { display: grid; grid-template-columns: 28px minmax(0,1fr); gap: 12px; font-size: 14.5px; font-weight: 600; line-height: 1.5; }
+    .a4-ol li i { font-style: normal; width: 28px; height: 28px; line-height: 28px; text-align: center; border-radius: 9px; color: #fff; font-weight: 900; font-size: 15px; background: #1565d8; } .a4-ol.red li i { background: #dc2626; } .a4-ol.red li b { color: #dc2626; } .a4-ol li b { color: #b45309; }
+    .a4-faham { margin-top: 14px; padding: 12px 18px; border-radius: 16px; background: #edf3fb; font-size: 13.5px; font-weight: 600; line-height: 1.6; } .a4-faham b { color: #0f172a; }
+    .a4-faham table { width: 100%; border-collapse: collapse; margin-top: 8px; } .a4-faham td { padding: 4px 8px; font-size: 13.5px; font-weight: 700; } .a4-faham td:first-child { width: 120px; border-radius: 6px; text-align: center; font-weight: 900; }
+    .a4-ft { margin-top: auto; padding-top: 14px; border-top: 2px solid #d5e0ef; display: flex; justify-content: space-between; gap: 16px; font-size: 12.5px; font-weight: 700; color: #556070; line-height: 1.6; }
+    .a4-ft b { color: #0f172a; } .a4-ft .pn { font-size: 15px; font-weight: 900; color: #1565d8; white-space: nowrap; }
+    .a4-sp { flex: 0 0 12px; }
     /* image preview (fallback untuk simpan) */
     .ov { position: fixed; inset: 0; z-index: 50; background: rgba(10,8,7,.97); display: none; flex-direction: column; align-items: center; padding: 18px 16px calc(18px + env(safe-area-inset-bottom)); gap: 12px; overflow-y: auto; }
     .ov.on { display: flex; }
@@ -387,7 +424,7 @@
     const ph = (n) => "0" + n.slice(2, 4) + "-" + n.slice(4, 7) + " " + n.slice(7);
     const PAKAR = ADVISOR === "Shah" ? [{ n: "Aishah", wa: "60182031020", img: "/aisyah/img/aisyah.jpg", role: "Pakar Loan" }, { n: "Fendi", wa: "60189038194", img: "/fendi/img/fendi.jpg", role: "Pakar Loan" }] : [];
     const IMG = { Shah: "/img/shah.jpg", Aishah: "/aisyah/img/aisyah.jpg", Fendi: "/fendi/img/fendi.jpg" };
-    const CT = [{ n: ADVISOR, wa: WA, img: IMG[ADVISOR], role: ADVISOR === "Shah" ? "Sales Advisor" : "Pakar Loan" }].concat(PAKAR);
+    const CT = [{ n: ADVISOR, wa: WA, img: IMG[ADVISOR], role: ADVISOR === "Shah" ? "Ketua Pasukan" : "Pakar Loan" }].concat(PAKAR);
     $("waNums").innerHTML = PAKAR.length ? CT.map((p) => `${p.n} ${ph(p.wa)}`).join("<br>") : `WhatsApp<br>${ph(WA)}`;
     $("ct").innerHTML = CT.map((p, i) => `<div class="cti"><img src="${p.img}" alt="${p.n}" width="46" height="46" /><div><b>${p.n.toUpperCase()}</b><small>${p.role}</small><small>${ph(p.wa)}</small></div><a id="waC${i}" href="https://wa.me/${p.wa}" target="_blank" rel="noopener">💬 WhatsApp</a></div>`).join("");
 
@@ -493,7 +530,7 @@
       const merah = !blok && (dN >= 80 || dC >= 80); // DSR 80%+ : merah + jalan penyelesaian (jangan sebut gagal)
       // tiada kereta sesuai: tetap tunjuk DSR kalau ambil model pilihan (varian paling murah) supaya customer nampak sebabnya
       const pool0 = S.minat ? all.filter((v) => v.model === S.minat) : all;
-      const refCar = !carMo && !blok && G && pool0.length ? pool0.slice().sort((a, b) => a.moMin - b.moMin)[0] : null;
+      const refCar = !carMo && !blok && !merah && G && pool0.length ? pool0.slice().sort((a, b) => a.moMin - b.moMin)[0] : null;
       const showMo = carMo || (refCar ? refCar.moMin : 0), dS = G ? (K + showMo) / G * 100 : 0;
       // terangkan had mana yang menghalang: DSR 65% atau NDI (kos sara hidup) RM1,400
       const why = (v) => {
@@ -525,6 +562,7 @@
       $("verdict").textContent = vt;
 
       // DSR 80%+ : senarai jalan penyelesaian (masuk dalam gambar)
+      let solP = null;
       if (merah) {
         const cheap = all.slice().sort((a, b) => a.moMin - b.moMin)[0];
         const pool = S.minat ? all.filter((v) => v.model === S.minat) : all;
@@ -539,6 +577,7 @@
         P.push("<b>Sediakan penjamin</b> sama ada <b>suami / isteri, ibu / ayah, atau adik-beradik yang bekerja</b>, dengan gaji tetap &amp; rekod bayaran bersih.");
         P.push("<b>Tunjuk pendapatan tambahan</b>: elaun tetap, OT atau bisnes sampingan yang masuk akaun bank setiap bulan (penyata 6 bulan).");
         P.push(`<b>WhatsApp ${ADVISOR}</b>: kami susun strategi ikut kes anda, percuma.`);
+        solP = P;
         $("sol").innerHTML = `<div class="t">🔴 JALAN PENYELESAIAN UNTUK ANDA</div><ol>${P.map((t, i) => `<li><i>${i + 1}</i><span>${t}</span></li>`).join("")}</ol>`;
         $("sol").classList.add("on");
       } else $("sol").classList.remove("on");
@@ -627,6 +666,7 @@
       if (lv === "tinggi" && !T.length) T.push(["🎉", "Profil anda kemas. <b>Jangan mohon kad / loan baru</b> sebelum kereta lulus."]);
       else T.push(["🚫", "<b>Jangan mohon kad kredit / loan baru</b> sebelum loan kereta lulus. Setiap semakan bank menurunkan skor."]);
       $("tips").innerHTML = T.map(([i, t]) => `<li><span>${i}</span><span>${t}</span></li>`).join("");
+      REP = { lv, picks, pickType, solP, tips: T, dN, dS, showMo, refCar, ndi, tag, blok };
 
       // WhatsApp
       const job = { kerajaan: "Kerajaan", swasta: "Swasta (tetap)", kontrak: "Kontrak", sendiri: "Bekerja sendiri", gig: "P-hailing / gig" }[S.job];
@@ -654,7 +694,7 @@ Saya lampirkan gambar laporan Magic DSR. Boleh bantu saya apply?`;
     $("again").onclick = () => window.scrollTo({ top: 0, behavior: "smooth" });
 
     // ---------- laporan gambar: simpan / share ----------
-    let PAGES = null, GEN = 0, pgTimer = 0;
+    let PAGES = null, GEN = 0, pgTimer = 0, REP = null;
     const JOBS = { kerajaan: "Kerajaan", swasta: "Swasta (tetap)", kontrak: "Kontrak", sendiri: "Bekerja sendiri", gig: "P-hailing / gig" };
     const esc = (t) => String(t).replace(/[&<>"]/g, (ch) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[ch]));
     const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
@@ -672,33 +712,71 @@ Saya lampirkan gambar laporan Magic DSR. Boleh bantu saya apply?`;
       try {
         const c = compute(), nama = $("nama").value.trim();
         const tarikh = new Date().toLocaleDateString("ms-MY", { day: "numeric", month: "long", year: "numeric" });
-        const cl = (el) => { const n = el.cloneNode(true); n.removeAttribute("id"); n.querySelectorAll("[id]").forEach((x) => x.removeAttribute("id")); return n; };
-        const q = (sel) => cl(document.querySelector(sel));
-        const hd = `<div class="pg-hd"><img src="/img/perodua-logo.png" alt="" /><div class="tt"><b>LAPORAN MAGIC DSR</b><span>TEAM SHAH MAHPOB · PERODUA</span></div><div class="dt">${tarikh}</div></div>`;
-        const ft = (i, n) => `<div class="pg-ft"><div><b>Hubungi kami di WhatsApp</b><br>${CT.map((p) => `${p.n} ${ph(p.wa)}`).join(" · ")}<br>Anggaran sahaja, bukan kelulusan bank.</div>${n > 1 ? `<div class="pn">${i} / ${n}</div>` : ""}</div>`;
+        const R = REP || {};
         const lbl = { kad: "Kad kredit", ptptn: "PTPTN", peribadi: "Personal loan", rumahLoan: "Loan rumah", kereta: "Loan kereta / motor lain", lain: "Lain-lain (BNPL, ansuran)" };
         const debts = Object.entries(c.parts).filter(([, v]) => v > 0).map(([k, v]) => `<tr><td>${lbl[k]}</td><td>${rm(v)}</td></tr>`).join("");
-        const info = `<div class="pg-sec">Maklumat kewangan</div><table class="pg-tbl">
-          <tr><td>Pekerjaan</td><td>${JOBS[S.job]}</td></tr>${c.umur ? `<tr><td>Umur</td><td>${c.umur} tahun</td></tr>` : ""}
-          <tr><td>Gaji bersih sebulan</td><td>${rm(c.G)}</td></tr>${debts || `<tr><td>Hutang sedia ada</td><td>Tiada</td></tr>`}
-          <tr class="ttl"><td>Jumlah komitmen sebulan</td><td>${rm(c.K)}</td></tr></table>`;
-        const forLine = `<div class="pg-for">Disediakan untuk<b>${esc(nama) || "Pelanggan"}</b></div>`;
-        const note = `<p class="pg-note">DSR = jumlah komitmen bulanan ÷ gaji bersih × 100. DSR 30–65% sihat, 65–75% sederhana, 75–80% tinggi, 80%+ high komitmen. NDI (kos sara hidup) minimum bank RM1,400. Ansuran dikira ikut baki berkurangan (EIR), ${c.n} tahun. Harga OTR tolak rebate semasa. Tertakluk kepada kelulusan bank.</p>`;
-        const A = () => [forLine, q("#pill"), q("#verdict"), info, q("#shot .gauge"), q("#shot .tiles"), q("#ndiBox")];
-        const B = () => [$("sol").classList.contains("on") ? q("#sol") : "", `<div class="pg-sec">Kereta yang sesuai dengan anda</div>`, q("#rec"), note];
-        const mk = (parts) => { const d = document.createElement("div"); d.className = "pg"; parts.forEach((x) => { if (!x) return; if (typeof x === "string") d.insertAdjacentHTML("beforeend", x); else d.appendChild(x); }); box.appendChild(d); return d; };
-        let pages = [mk([hd, ...A(), ...B(), ft(1, 1)])];
+        const T = (id) => $(id).textContent;
+        const hd = `<div class="a4-hd"><img src="/img/perodua-logo.png" alt="" /><div class="tt"><b>LAPORAN MAGIC DSR</b><span>TEAM SHAH MAHPOB · SALES &amp; LOAN PERODUA</span></div><div class="dt">Tarikh<b>${tarikh}</b></div></div>`;
+        const ft = (i) => `<div class="a4-ft"><div><b>Hubungi kami di WhatsApp:</b> ${CT.map((p) => `<span style="white-space:nowrap">${p.n} ${ph(p.wa)}</span>`).join(" · ")}<br>Laporan ini anggaran sahaja, bukan kelulusan bank. Bukan laman rasmi Perodua.</div><div class="pn">Halaman ${i} / 2</div></div>`;
+        const tagC = { "": ["#dcfce7", "#15803d"], amb: ["#fef3c7", "#a16207"], org: ["#ffedd5", "#c2410c"], bad: ["#dc2626", "#fff"] }[(R.tag || ["", ""])[1]];
+        const dVal = R.showMo ? R.dS : R.dN, ndiLow = R.ndi < NDI_OK;
+        const zones = `<div class="zn" style="left:30%;width:35%;background:rgba(22,163,74,.25)"></div><div class="zn" style="left:65%;width:10%;background:rgba(234,179,8,.35)"></div><div class="zn" style="left:75%;width:5%;background:rgba(249,115,22,.4)"></div><div class="zn" style="left:80%;width:20%;border-radius:0 8px 8px 0;background:rgba(220,38,38,.2)"></div>`;
+        const marks = [[30, "#16a34a"], [65, "#a16207"], [80, "#dc2626"]].map(([x, col]) => `<div class="mk" style="left:${x}%;border-color:${col}"><span style="color:${col}">${x}%</span></div>`).join("");
+        const fills = `<div class="fl" style="width:${Math.min(100, R.dN || 0)}%;background:#556070"></div>` + (R.showMo ? `<div class="fl" style="left:${Math.min(100, R.dN)}%;width:${Math.max(0, Math.min(100, R.dS) - Math.min(100, R.dN))}%;background:#1565d8;${R.refCar ? "opacity:.55;" : ""}border-radius:0 5px 5px 0"></div>` : "");
+        const page1 = `${hd}
+          <div class="a4-for">Disediakan untuk<b>${esc(nama) || "Pelanggan"}</b></div>
+          <div class="a4-st ${R.lv || ""}"><div class="p">${esc(T("pill"))}</div><p>${esc(T("verdict"))}</p></div>
+          <div class="a4-2">
+            <div><div class="a4-h">Maklumat kewangan</div><table class="a4-tbl">
+              <tr><td>Pekerjaan</td><td>${JOBS[S.job]}</td></tr>${c.umur ? `<tr><td>Umur</td><td>${c.umur} tahun</td></tr>` : ""}
+              <tr><td>Gaji bersih sebulan</td><td>${rm(c.G)}</td></tr>${debts || `<tr><td>Hutang sedia ada</td><td>Tiada</td></tr>`}
+              <tr class="ttl"><td>Jumlah komitmen</td><td>${rm(c.K)}</td></tr></table></div>
+            <div><div class="a4-h">Angka utama</div>
+              <div class="a4-k"><small>${esc(T("dsrLbl"))}</small><b>${dVal.toFixed(1)}%<span class="a4-tag" style="background:${tagC[0]};color:${tagC[1]}">${esc(T("dsrTag"))}</span>${R.blok || !ndiLow ? "" : `<span class="a4-tag" style="background:#dc2626;color:#fff">NDI KURANG</span>`}</b>${R.showMo ? `<em>DSR sekarang (tanpa kereta): ${(R.dN || 0).toFixed(1)}%</em>` : `<em>Jumlah komitmen ÷ gaji bersih</em>`}</div>
+              <div class="a4-k blue"><small>Bulanan kereta sesuai</small><b>${esc(T("tAns"))}</b><em>${esc(T("tAnsE"))}</em></div>
+              <div class="a4-k ndi ${ndiLow ? "low" : ""}"><small>Baki kos sara hidup (NDI)</small><b>${rm(R.ndi)}</b><em>${ndiLow ? `Kurang ${rm(NDI_OK - R.ndi)} dari minimum RM1,400` : "✓ Lepasi minimum bank RM1,400"}</em></div>
+            </div>
+          </div>
+          <div class="a4-h">Tahap DSR anda</div>
+          <div class="a4-bar">${zones}${fills}${marks}</div>
+          <div class="a4-leg"><span><i style="background:#556070"></i>Hutang sekarang</span><span><i style="background:#1565d8"></i>${esc(T("gLeg"))}</span><span><i style="background:rgba(22,163,74,.5)"></i>30–65% Sihat</span><span><i style="background:rgba(234,179,8,.65)"></i>65–75% Sederhana</span><span><i style="background:rgba(249,115,22,.7)"></i>75–80% Tinggi</span><span><i style="background:#dc2626"></i>80%+ High komitmen</span></div>
+          <div class="a4-4">
+            <div><small>Bulanan maksimum</small><b>${esc(T("tMax"))}</b><em>${esc(T("tMaxE"))}</em></div>
+            <div><small>Margin loan</small><b>${esc(T("tMargin"))}</b><em>${esc(T("tMarginE"))}</em></div>
+            <div><small>Loan maksimum</small><b>${esc(T("tLoan"))}</b><em>${esc(T("tLoanE"))}</em></div>
+            <div><small>Komitmen sekarang</small><b>${esc(T("tK"))}</b><em>${esc(T("tKE"))}</em></div>
+          </div>
+          <div class="a4-box">💡 <span class="h">NDI = KOS SARA HIDUP</span> iaitu baki gaji selepas bayar semua hutang${R.showMo ? " dan ansuran kereta" : ""}. Duit ni untuk <b>makan, minyak, sewa rumah, bil &amp; lain-lain</b>. Bank mahu baki sekurang-kurangnya <span class="h">RM1,400 sebulan</span>. Baki anda: <b>${rm(R.ndi)}</b> ${ndiLow ? "⚠ belum cukup" : "✓ cukup"}.</div>
+          <div class="a4-sp"></div>${ft(1)}`;
+        const picks = R.picks || [], okT = R.pickType === "ok";
+        const cars = picks.length ? picks.map((v) => { const mo = okT ? v.moMin : v.moOk, dp = okT ? v.dpMin : v.dpOk; return `<div class="a4-car ${okT ? "" : "amb"}"><div class="n">${v.name}</div><div class="s">${v.rb ? `Harga OTR ${rm(v.otr)} tolak rebate ${rm(v.rb)}` : `Harga OTR ${rm(v.otr)} (tiada rebate)`} · tempoh ${c.n} tahun</div>
+            <div class="g"><div>Harga<b>${rm(v.price)}</b></div><div>Downpayment<b>${dp < 100 ? "RM0" : rm(dp)}</b></div><div class="mo">Bulanan<b>${rm(mo)}</b></div></div></div>`; }).join("")
+          : `<div class="a4-box" style="background:#edf3fb;border-color:#d5e0ef">Buat masa ini tiada ${S.minat || "model"} yang sesuai dengan bajet ansuran anda. Ikut cadangan di bawah, atau WhatsApp kami untuk pilihan penjamin / pemohon bersama.</div>`;
+        const list = R.solP ? `<div class="a4-h" style="color:#dc2626">🔴 Jalan penyelesaian untuk anda</div><ol class="a4-ol red">${R.solP.map((t, i) => `<li><i>${i + 1}</i><span>${t}</span></li>`).join("")}</ol>`
+          : `<div class="a4-h">Cadangan untuk anda</div><ol class="a4-ol">${(R.tips || []).map(([, t], i) => `<li><i>${i + 1}</i><span>${t}</span></li>`).join("")}</ol>`;
+        const page2 = `${hd}
+          <div class="a4-h" style="margin-top:18px">Kereta yang sesuai dengan anda</div>${cars}
+          ${list}
+          <div class="a4-faham"><b>Faham angka anda</b><br><b>DSR</b> = jumlah hutang bulanan ÷ gaji bersih × 100. Makin rendah, makin baik.
+            <table><tr><td style="background:rgba(22,163,74,.2);color:#15803d">30–65%</td><td>Sihat. Bank selesa.</td></tr><tr><td style="background:#fef3c7;color:#a16207">65–75%</td><td>Sederhana. Sesetengah bank masih terima.</td></tr><tr><td style="background:#ffedd5;color:#c2410c">75–80%</td><td>Tinggi. Perlu penjamin atau downpayment lebih.</td></tr><tr><td style="background:#dc2626;color:#fff">80%+</td><td>High komitmen. Susun hutang dulu.</td></tr></table>
+            <div style="margin-top:8px"><b>NDI (kos sara hidup)</b> = gaji tolak semua hutang &amp; ansuran kereta. Bank mahu sekurang-kurangnya <b>RM1,400</b>. Ansuran dikira ikut baki berkurangan (EIR), harga OTR tolak rebate semasa.</div></div>
+          <div class="a4-sp"></div>${ft(2)}`;
+        const mk = (html) => { const d = document.createElement("div"); d.className = "a4"; d.innerHTML = html; box.appendChild(d); return d; };
+        const pages = [mk(page1), mk(page2)];
         await Promise.all([...box.querySelectorAll("img")].map((im) => im.complete ? 0 : new Promise((r) => { im.onload = im.onerror = r; })));
-        if (pages[0].offsetHeight > 900) { pages[0].remove(); pages = [mk([hd, ...A(), ft(1, 2)]), mk([hd, ...B(), ft(2, 2)])]; }
         const first = (nama.split(" ")[0] || "saya").toLowerCase().replace(/[^a-z0-9]/g, "") || "saya";
         const out = [];
         for (let i = 0; i < pages.length; i++) {
-          const cv = await html2canvas(pages[i], { scale: 1080 / 400, backgroundColor: "#ffffff", useCORS: true, logging: false });
+          const src = await html2canvas(pages[i], { scale: 2, backgroundColor: "#ffffff", useCORS: true, logging: false });
+          const W = 1588, H = 2246, k = Math.min(1, H / src.height, W / src.width);   // A4 = 1 : 1.414
+          const cv = document.createElement("canvas"); cv.width = W; cv.height = H;
+          const cx = cv.getContext("2d"); cx.fillStyle = "#ffffff"; cx.fillRect(0, 0, W, H);
+          cx.imageSmoothingQuality = "high"; cx.drawImage(src, (W - src.width * k) / 2, 0, src.width * k, src.height * k);
           const blob = await new Promise((r) => cv.toBlob(r, "image/png"));
-          const fname = `magic-dsr-${first}${pages.length > 1 ? "-" + (i + 1) : ""}.png`;
+          const fname = `magic-dsr-${first}-halaman-${i + 1}.png`;
           out.push({ blob, fname, file: new File([blob], fname, { type: "image/png" }), url: URL.createObjectURL(blob) });
         }
-        if (gen === GEN) { PAGES = out; $("sbS").textContent = `Laporan keputusan anda: ${out.length} gambar${out.length > 1 ? " (2 halaman)" : ""}, siap untuk disimpan.`; }
+        if (gen === GEN) { PAGES = out; $("sbS").textContent = `Laporan saiz A4: ${out.length} halaman, siap untuk disimpan atau dihantar.`; }
         return out;
       } finally { box.remove(); }
     }
