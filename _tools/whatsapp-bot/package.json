@@ -1,0 +1,13 @@
+{
+  "name": "whatsapp-bot",
+  "private": true,
+  "type": "module",
+  "description": "Bot WhatsApp AI (draf/auto) melalui Zernio + Netlify Functions + Claude",
+  "scripts": {
+    "test": "node test/run-tests.mjs"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "1.8.0",
+    "@netlify/blobs": "11.1.9"
+  }
+}

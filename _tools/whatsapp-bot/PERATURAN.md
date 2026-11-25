@@ -1,10 +1,11 @@
 # Bot WhatsApp AI: keperluan
 
-Status: perancangan (belum dibina).
+Status: kod siap & diuji (`npm test`), menunggu pemilik buat akaun (lihat PANDUAN.md). Mod mula: draf (lulus di Telegram).
 
 ## Keputusan setakat ini
 - Mesti guna WhatsApp API rasmi (elak ban). Tiada QR/Baileys.
-- Cadangan: Zernio (Coexistence) + bot kecil di Netlify Functions + Claude Haiku 5.5.
+- Seni bina: Zernio (Coexistence) -> Netlify Functions (`functions/`) -> Claude (asal `claude-opus-5-5`, effort low) -> draf ke Telegram pemilik -> butang Hantar -> Zernio.
+- Bukan Hermes: Hermes direka sebagai pembantu peribadi; ingatan antara pelanggan tidak terasing dan perlu VPS.
 - Nombor: disahkan oleh pemilik, sudah guna WhatsApp Business app -> sesuai untuk Coexistence.
 
 ## Peraturan isi kandungan bot
