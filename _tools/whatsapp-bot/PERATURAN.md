@@ -5,7 +5,7 @@ Status: perancangan (belum dibina).
 ## Keputusan setakat ini
 - Mesti guna WhatsApp API rasmi (elak ban). Tiada QR/Baileys.
 - Cadangan: Zernio (Coexistence) + bot kecil di Netlify Functions + Claude Haiku 5.5.
-- Nombor: belum disahkan (0189048194 vs 0189038194 di website).
+- Nombor: disahkan oleh pemilik, sudah guna WhatsApp Business app -> sesuai untuk Coexistence.
 
 ## Peraturan isi kandungan bot
 - JANGAN guna perkataan "test drive" langsung, dan jangan tawarkan test drive.
