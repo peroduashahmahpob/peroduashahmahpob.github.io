@@ -123,7 +123,15 @@
     }
     var SECTIONS = [
       { key: "A", title: "Kereta yang diminati", page: 1, fields: [
-        { id: "model", label: "Model kereta", type: "sel", opts: ["Axia","Bezza","Myvi","Ativa","Alza","Aruz","Traz"], req: 1 },
+        { id: "model", label: "Model & varian", type: "sel", req: 1, groups: {
+          "Axia": ["Axia 1.0 G", "Axia 1.0 X", "Axia 1.0 SE", "Axia 1.0 AV"],
+          "Bezza": ["Bezza 1.0 G (Manual)", "Bezza 1.0 G (Auto)", "Bezza 1.3 X", "Bezza 1.3 AV (Advance)"],
+          "Myvi": ["Myvi 1.3 G", "Myvi 1.5 X", "Myvi 1.5 H", "Myvi 1.5 AV (Advance)"],
+          "Ativa": ["Ativa 1.0 Turbo X", "Ativa 1.0 Turbo H", "Ativa 1.0 Turbo AV (Advance)"],
+          "Alza": ["Alza 1.5 X", "Alza 1.5 H", "Alza 1.5 AV (Advance)"],
+          "Aruz": ["Aruz 1.5 X", "Aruz 1.5 AV (Advance)"],
+          "Traz": ["Traz 1.5 X", "Traz 1.5 H"]
+        }},
         { id: "warna", label: "Warna", ph: "cth: Granite Grey" }
       ]},
       { key: "B", title: "Maklumat pemohon", page: 1, fields: [
@@ -131,8 +139,10 @@
         { id: "ic", label: "No IC", type: "ic", req: 1 },
         { id: "hp", label: "No tel HP", type: "tel", req: 1 },
         { id: "email", label: "Email", type: "email", req: 1, full: 1 },
+        { id: "ibu_nama", label: "Nama ibu (ikut IC)", req: 1, full: 1 },
+        { id: "ibu_tel", label: "No tel ibu", type: "tel" },
         { id: "telrumah", label: "No tel rumah", type: "tel" },
-        addr("p_", "Alamat rumah (yang diduduki sekarang)"),
+        addr("p_","Alamat rumah (yang diduduki sekarang)"),
         { id: "surat", label: "Alamat surat-menyurat", type: "surat", req: 1, full: 1 },
         { id: "strumah", label: "Status rumah", type: "chips", opts: ["Sendiri","Family","Sewa"], req: 1, full: 1 },
         { id: "status", label: "Status perkahwinan", type: "chips", opts: ["Bujang","Berkahwin","Duda / Janda"], req: 1, full: 1 },
@@ -196,7 +206,11 @@
         case "ic": inner = '<input id="' + f.id + '" type="text" inputmode="numeric" maxlength="14" placeholder="900101-10-1234" />'; break;
         case "num": inner = '<input id="' + f.id + '" type="text" inputmode="numeric" maxlength="2"' + ph + ' />'; break;
         case "rm": inner = '<input id="' + f.id + '" type="text" inputmode="decimal" placeholder="cth: 3500" />'; break;
-        case "sel": inner = '<select id="' + f.id + '">' + opts(f.opts) + '</select>'; break;
+        case "sel": inner = '<select id="' + f.id + '">' + (f.groups
+          ? '<option value="">Pilih model & varian…</option>' + Object.keys(f.groups).map(function (g) {
+              return '<optgroup label="' + esc(g) + '">' + f.groups[g].map(function (o) { return '<option>' + esc(o) + '</option>'; }).join("") + '</optgroup>';
+            }).join("")
+          : opts(f.opts)) + '</select>'; break;
         case "bank": inner = '<select id="' + f.id + '">' + opts(BANK.concat(["Lain-lain"]), "Pilih bank…") + '</select><input id="' + f.id + '_x" class="up hide" type="text" placeholder="Nama bank" style="margin-top:6px" />'; break;
         case "chips": inner = chips(f.id, f.opts); break;
         case "area": inner = '<textarea id="' + f.id + '" class="up" rows="2"' + ph + '></textarea>'; break;
