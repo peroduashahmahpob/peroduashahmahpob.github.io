@@ -480,6 +480,13 @@
 
     // ---------- build PDF ----------
     function clean(t) { return String(t).normalize("NFKD").replace(/[–—]/g, "-").replace(/[^\x20-\x7E]/g, "").trim(); }
+    // Nama fail ikut cara team: "Nurul Amirah Myvi X.pdf" — nama pendek (tanpa bin/binti…) + model
+    function fileName(n, m) {
+      var nm = clean(n).split(/\s+(?:BIN|BINTI|BT|BTE|A\/L|A\/P|AL|AP)\s+/)[0];
+      var tc = function (w) { return /\d/.test(w) || w.length <= 2 ? w : w.charAt(0) + w.slice(1).toLowerCase(); };
+      var t = (nm + " " + clean(m)).replace(/[^A-Z0-9. ]+/gi, " ").trim().replace(/\s+/g, " ").split(" ").map(tc).join(" ");
+      return (t.slice(0, 60) || "Dokumen loan") + ".pdf";
+    }
     function model() { return $("model").value.trim().toUpperCase().replace(/\s+/g, " "); }
     function nama() { return $("nama").value.trim().toUpperCase().replace(/\s+/g, " "); }
     function tarikh() { var d = new Date(); return ("0" + d.getDate()).slice(-2) + "/" + ("0" + (d.getMonth() + 1)).slice(-2) + "/" + d.getFullYear(); }
@@ -568,7 +575,7 @@
       sheet('<h2>Sedang siapkan PDF…</h2><div class="spin"></div><p style="text-align:center">Jangan tutup laman ni.</p>');
       try {
         var r = await buildPdf();
-        var fname = "DOKUMEN_LOAN_" + clean(n).replace(/[^A-Z0-9]+/g, "_").replace(/^_|_$/g, "").slice(0, 40) + ".pdf";
+        var fname = fileName(n, model());
         var blob = new Blob([r.bytes], { type: "application/pdf" });
         lastFile = new File([blob], fname, { type: "application/pdf" });
         var mb = (blob.size / 1048576).toFixed(1);
