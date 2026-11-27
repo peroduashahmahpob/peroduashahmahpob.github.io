@@ -123,6 +123,11 @@
     .team a:first-child small { background: var(--yellow); }
     .team small { white-space: nowrap; }
     @media (max-width: 520px) { .team { gap: 4px; } .team a { padding: 12px 2px 10px; } .team img { width: 76px; height: 76px; } .team b { font-size: 13px; } .team small { font-size: 12px; padding: 1px 6px; } }
+    .btns.stack { flex-direction: column; align-items: stretch; max-width: 320px; gap: 0; }
+    .btns.stack .btn { justify-content: center; margin-top: 10px; }
+    .contacts { margin: 6px 0 0 20px; }
+    .contacts li { padding: 5px 0; }
+    #hubungi { scroll-margin-top: 60px; }
     .sign { display: flex; align-items: center; gap: 12px; margin-top: 18px; }
     .sign img { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; }
     .sign small { display: block; color: var(--mute); font-size: 13px; }
@@ -152,7 +157,7 @@
 <body>
   <div class="top">
     <a class="crumb" href="/">🚗 <span>Panduan Beli Perodua</span></a>
-    <a class="wa-mini" data-wa="Salam Shah, saya baca Panduan Beli Perodua. Saya nak tanya." href="#">WhatsApp</a>
+    <a class="wa-mini" href="#hubungi">WhatsApp</a>
   </div>
 
   <div class="cover"><img src="/myvi/img/myvi-cranberry-red.jpg" alt="Perodua Myvi" width="690" height="363" /></div>
@@ -169,8 +174,8 @@
 
     <div class="team">
       <a href="/"><img src="/img/shah.jpg" alt="Shah Mahpob" width="88" height="88" /><b>SHAH MAHPOB</b><small>Ketua Pasukan</small></a>
-      <a href="/aisyah/"><img src="/aisyah/img/aisyah.jpg" alt="Aishah" width="88" height="88" /><b>AISHAH</b><small>Pakar Loan</small></a>
       <a href="/fendi/"><img src="/fendi/img/fendi.jpg" alt="Fendi" width="88" height="88" /><b>FENDI</b><small>Pakar Loan</small></a>
+      <a href="/aisyah/"><img src="/aisyah/img/aisyah.jpg" alt="Aishah" width="88" height="88" /><b>AISHAH</b><small>Pakar Loan</small></a>
     </div>
 
     <h2 id="dapat">🎁 Apa awak dapat?</h2>
@@ -214,13 +219,15 @@
       <a class="btn ghost" href="/kalkulator/">🧮 Kira bulanan</a>
       <a class="btn ghost" href="/semak-layak/">✅ Semak kelayakan (DSR)</a>
     </div>
-    <p style="margin-top:18px">Dah tahu model &amp; bajet? <b>Copy</b> mesej ni dan hantar ke WhatsApp saya:</p>
-    <div class="code" id="msg">Salam Shah, saya berminat nak beli Perodua.
+    <p style="margin-top:18px">Dah tahu model &amp; bajet? <b>Copy</b> mesej ni dan hantar ke WhatsApp kami:</p>
+    <div class="code" id="msg">Salam, saya berminat nak beli Perodua.
 Model: ____
 Bajet bulanan: RM____
 Negeri: ____</div>
-    <div class="btns">
-      <a class="btn" id="waMsg" href="#">💬 Hantar ke WhatsApp</a>
+    <div class="btns stack">
+      <a class="btn" data-send="shah" href="#">💬 WhatsApp Shah</a>
+      <a class="btn" data-send="fendi" href="#">💬 WhatsApp Fendi</a>
+      <a class="btn" data-send="aishah" href="#">💬 WhatsApp Aishah</a>
     </div>
 
     <h2 id="s3"><span class="n">3 ·</span> Submit loan &amp; booking 📄</h2>
@@ -261,13 +268,19 @@ Negeri: ____</div>
       <div><b>Siap!</b> Enjoy your journey. Ada apa-apa lepas ni, just get back to us 🤝</div>
     </div>
 
-    <div class="callout gray">
-      <span class="e">🔗</span>
-      <div><b>Nombor WhatsApp saya:</b> <a data-wa="Salam Shah, saya nak tanya pasal kereta Perodua." href="#">013-725 8194</a></div>
+    <div class="callout gray" id="hubungi">
+      <span class="e">💬</span>
+      <div><b>WhatsApp kami, pilih sesiapa:</b>
+        <ol class="contacts">
+          <li><a data-person="shah" href="#"><b>SHAH MAHPOB</b> · Ketua Pasukan<br>📞 013-725 8194</a></li>
+          <li><a data-person="fendi" href="#"><b>FENDI</b> · Pakar Loan<br>📞 018-903 8194</a></li>
+          <li><a data-person="aishah" href="#"><b>AISHAH</b> · Pakar Loan<br>📞 018-203 1020</a></li>
+        </ol>
+      </div>
     </div>
 
     <h2 id="faq">❓ Soalan lazim</h2>
-    <details><summary>Ada rebate bulan ni?</summary><div class="ans" id="rebateAns">WhatsApp saya untuk rebate &amp; promo terkini.</div></details>
+    <details><summary>Ada rebate bulan ni?</summary><div class="ans" id="rebateAns"><a href="#hubungi">WhatsApp kami</a> untuk rebate &amp; promo terkini.</div></details>
     <details><summary>Berapa lama sampai dapat kereta?</summary><div class="ans">Proses loan biasanya 3 hingga 7 hari. Lepas tu bergantung pada bila casis kereta masuk, ikut model, warna &amp; stok. Kami update awak setiap tahap, dan awak boleh <a href="/status/">semak status</a> bila-bila masa.</div></details>
     <details><summary>Saya duduk jauh. Boleh beli juga?</summary><div class="ans">Boleh. Kami urus dari mana-mana negeri, dan kereta dihantar naik lori ke tempat awak, tanpa caj.</div></details>
     <details><summary>Takut loan tak lulus…</summary><div class="ans">Sebab tu <a href="#s2">langkah 2</a> penting. Kami semak DSR dulu sebelum hantar ke bank. Nak faham lebih, baca <a href="/ebook/">ebook percuma: Rahsia Loan Approved</a>.</div></details>
@@ -299,8 +312,17 @@ Negeri: ____</div>
       setTimeout(() => (copy.textContent = "Copy"), 1800);
     };
     msg.appendChild(copy);
-    const waMsg = document.getElementById("waMsg");
-    waMsg.href = wa(msg.firstChild.textContent); waMsg.target = "_blank"; waMsg.rel = "noopener";
+    // 3 WhatsApp links: Shah, Fendi, Aishah
+    const TEAM = { shah: ["Shah", "60137258194"], fendi: ["Fendi", "60189038194"], aishah: ["Aishah", "60182031020"] };
+    const waTo = (num, m) => `https://wa.me/${num}?text=${encodeURIComponent(m)}`;
+    document.querySelectorAll("[data-send]").forEach((a) => {
+      const [n, num] = TEAM[a.dataset.send];
+      a.href = waTo(num, msg.firstChild.textContent.replace(/^Salam,/, `Salam ${n},`)); a.target = "_blank"; a.rel = "noopener";
+    });
+    document.querySelectorAll("[data-person]").forEach((a) => {
+      const [n, num] = TEAM[a.dataset.person];
+      a.href = waTo(num, `Salam ${n}, saya baca Panduan Beli Perodua. Saya nak tanya pasal kereta Perodua.`); a.target = "_blank"; a.rel = "noopener";
+    });
 
     // Models
     const MODELS = [
