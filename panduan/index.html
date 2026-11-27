@@ -91,6 +91,20 @@
     .model .t b { display: block; }
     .model .t small { color: var(--mute); font-size: 12.5px; }
 
+    /* flow map */
+    .flow { list-style: none; margin-top: 14px; position: relative; }
+    .flow::before { content: ""; position: absolute; left: 15px; top: 18px; bottom: 18px; width: 2px; background: var(--line); }
+    .flow li a { position: relative; display: flex; align-items: center; gap: 12px; padding: 7px 8px 7px 0; border-radius: 6px; text-decoration: none; }
+    .flow li a:hover { background: var(--hover); }
+    .flow i { flex: none; width: 32px; height: 32px; border-radius: 50%; background: var(--bg); border: 2px solid var(--line); display: grid; place-items: center; font-style: normal; font-weight: 600; font-size: 14px; position: relative; }
+    .flow span { flex: 1; min-width: 0; }
+    .flow span b { display: block; font-size: 15.5px; line-height: 1.35; }
+    .flow span small { display: block; color: var(--mute); font-size: 13.5px; line-height: 1.4; }
+    .tag { flex: none; padding: 1px 8px; border-radius: 4px; font: 500 12.5px/1.6 "Inter", sans-serif; font-style: normal; }
+    .tag.you { background: var(--yellow); } .tag.us { background: var(--blue); } .tag.bank { background: var(--purple); }
+    .flow li:nth-child(5) i { border-color: #4dab9a; }
+    .legend { margin-top: 10px; display: flex; flex-wrap: wrap; gap: 6px 14px; color: var(--mute); font-size: 13px; }
+
     details { margin-top: 4px; border-radius: 4px; }
     details summary { list-style: none; display: flex; gap: 8px; align-items: flex-start; padding: 5px 4px; cursor: pointer; font-weight: 500; border-radius: 4px; }
     details summary::-webkit-details-marker { display: none; }
@@ -132,11 +146,11 @@
   <main class="page">
     <div class="icon" aria-hidden="true">🚗</div>
     <h1>Panduan Beli Perodua ✨</h1>
-    <p class="caption">Semua yang awak perlu tahu, dalam satu page. Baca 3 minit je 🧡</p>
+    <p class="caption">Semua yang awak perlu tahu, dalam satu page. Baca 5 minit je 🧡</p>
 
     <div class="callout pink">
       <span class="e">👋</span>
-      <div><b>Hai, saya Shah, Sales Advisor Perodua.</b> Ramai tanya “macam mana nak mula?”. Jadi saya kumpul semua di sini, langkah demi langkah. Tak perlu pening, ikut je satu-satu.</div>
+      <div><b>Hai, saya Shah, Sales Advisor Perodua.</b> Ramai tanya “macam mana nak mula?” dan “lepas ni apa?”. Jadi saya tunjuk flow penuh di sini, dari pilih kereta sampai kunci di tangan. Tak perlu pening, ikut je satu-satu.</div>
     </div>
 
     <h2 id="dapat">🎁 Apa awak dapat bila beli dengan kami?</h2>
@@ -147,15 +161,40 @@
       <li><span class="e">🛡️</span><div><b>Bantu transfer NCD</b><small>Jimat premium insurans kereta baru.</small></div></li>
     </ul>
 
-    <div class="callout gray">
-      <span class="e">🔗</span>
-      <div><b>Nombor WhatsApp saya:</b> <a data-wa="Salam Shah, saya nak tanya pasal kereta Perodua." href="#">013-725 8194</a></div>
-    </div>
+    <hr />
+
+    <h2 id="flow">🗺️ Flow beli kereta, dari mula sampai rumah</h2>
+    <p>Ada 9 langkah. Tekan mana-mana langkah untuk baca lebih.</p>
+    <div class="legend"><span><em class="tag you">Awak</em> awak buat</span><span><em class="tag us">Kami</em> kami uruskan</span><span><em class="tag bank">Bank</em> bank proses</span></div>
+    <ol class="flow">
+      <li><a href="#s1"><i>1</i><span><b>Kenali kereta</b><small>Pilih model &amp; varian</small></span><em class="tag you">Awak</em></a></li>
+      <li><a href="#s2"><i>2</i><span><b>Tetapkan bajet bulanan</b><small>Kira bulanan &amp; semak kelayakan</small></span><em class="tag you">Awak</em></a></li>
+      <li><a href="#s3"><i>3</i><span><b>Submit loan &amp; booking</b><small>Hantar 4 dokumen</small></span><em class="tag you">Awak</em></a></li>
+      <li><a href="#s4"><i>4</i><span><b>Tunggu proses loan</b><small>Lebih kurang 3 hingga 7 hari</small></span><em class="tag bank">Bank</em></a></li>
+      <li><a href="#s5"><i>5</i><span><b>Loan lulus 🎉</b><small>Beli nombor plat &amp; sign agreement</small></span><em class="tag you">Awak</em></a></li>
+      <li><a href="#s6"><i>6</i><span><b>Tunggu casis kereta baru</b><small>Kereta awak diperuntukkan</small></span><em class="tag us">Kami</em></a></li>
+      <li><a href="#s7"><i>7</i><span><b>Buat bayaran</b><small>Bila casis dah ada</small></span><em class="tag you">Awak</em></a></li>
+      <li><a href="#s8"><i>8</i><span><b>Daftar kereta</b><small>Pendaftaran JPJ</small></span><em class="tag us">Kami</em></a></li>
+      <li><a href="#s9"><i>9</i><span><b>Set delivery &amp; terima kunci 🔑</b><small>Hantar ke rumah atau ambil di cawangan</small></span><em class="tag us">Kami</em></a></li>
+    </ol>
 
     <hr />
 
-    <h2 id="s1"><span class="n">1 ·</span> WhatsApp saya 💬</h2>
-    <p>Tekan butang di bawah, atau <b>copy</b> mesej ni dan hantar ke WhatsApp saya:</p>
+    <h2 id="s1"><span class="n">1 ·</span> Kenali kereta 🚗</h2>
+    <p>Mula dengan pilih <b>model</b> yang sesuai dengan keluarga &amp; kegunaan awak. Lepas tu tengok beza setiap <b>varian</b>. Tekan model untuk tengok harga, varian &amp; warna.</p>
+    <div class="models" id="models"></div>
+    <div class="callout yellow">
+      <span class="e">💡</span>
+      <div>Belum pasti model mana? Cuba <a href="/kuiz/">kuiz 1 minit</a> ni dulu, nanti dia cadangkan model yang sesuai.</div>
+    </div>
+
+    <h2 id="s2"><span class="n">2 ·</span> Tetapkan bajet bulanan 🧮</h2>
+    <p>Jangan ikut harga kereta je. Fikir <b>bulanan berapa yang selesa</b> untuk awak bayar setiap bulan. Kemudian semak <b>boleh lulus atau tak</b>, sebelum hantar ke bank.</p>
+    <div class="btns">
+      <a class="btn ghost" href="/kalkulator/">🧮 Kira bulanan</a>
+      <a class="btn ghost" href="/semak-layak/">✅ Semak kelayakan (DSR)</a>
+    </div>
+    <p style="margin-top:18px">Dah tahu model &amp; bajet? <b>Copy</b> mesej ni dan hantar ke WhatsApp saya:</p>
     <div class="code" id="msg">Salam Shah, saya berminat nak beli Perodua.
 Model: ____
 Bajet bulanan: RM____
@@ -163,47 +202,55 @@ Negeri: ____</div>
     <div class="btns">
       <a class="btn" id="waMsg" href="#">💬 Hantar ke WhatsApp</a>
     </div>
-    <div class="callout yellow">
-      <span class="e">💡</span>
-      <div>Belum pasti model mana? Tak apa. Cuba <a href="/kuiz/">kuiz 1 minit</a> ni dulu, nanti dia cadangkan model yang sesuai.</div>
-    </div>
 
-    <h2 id="s2"><span class="n">2 ·</span> Semak kelayakan loan 🧮</h2>
-    <p>Sebelum booking, kita semak dulu <b>boleh lulus atau tak</b>, dan <b>bulanan berapa yang selesa</b>. Awak boleh cuba sendiri:</p>
-    <div class="btns">
-      <a class="btn ghost" href="/semak-layak/">✅ Semak kelayakan (DSR)</a>
-      <a class="btn ghost" href="/kalkulator/">🧮 Kira bulanan</a>
-    </div>
-
-    <h2 id="s3"><span class="n">3 ·</span> Sediakan 4 dokumen 📄</h2>
-    <p>Tick bila dah siap:</p>
+    <h2 id="s3"><span class="n">3 ·</span> Submit loan &amp; booking 📄</h2>
+    <p>Sediakan 4 dokumen ni. Tick bila dah siap:</p>
     <ul class="todo">
       <li><input type="checkbox" id="d1" /><span><label for="d1">Kad pengenalan</label></span></li>
       <li><input type="checkbox" id="d2" /><span><label for="d2">Lesen memandu</label></span></li>
       <li><input type="checkbox" id="d3" /><span><label for="d3">Slip gaji 3 bulan terkini</label></span></li>
       <li><input type="checkbox" id="d4" /><span><label for="d4">Penyata bank 3 bulan terkini</label></span></li>
     </ul>
+    <p>Hantar semua dalam <b>satu PDF</b> yang jelas, siap dalam 3 minit:</p>
+    <div class="btns"><a class="btn ghost" href="/dokumen/">📤 Hantar dokumen loan</a></div>
+    <p style="margin-top:14px">Serentak dengan tu, kami buat <b>booking</b> dan hantar <b>quotation penuh</b> termasuk insurans. Ada kereta lama? Boleh <a href="/trade-in/">trade-in</a>, tak perlu urus JPJ &amp; PUSPAKOM sendiri.</p>
 
-    <h2 id="s4"><span class="n">4 ·</span> Booking &amp; quotation 🧾</h2>
-    <p>Saya hantar <b>quotation penuh</b>, termasuk insurans. Awak tahu setiap sen sebelum bayar. Ada kereta lama? Boleh <a href="/trade-in/">trade-in</a>, tak perlu urus JPJ &amp; PUSPAKOM sendiri.</p>
+    <h2 id="s4"><span class="n">4 ·</span> Tunggu proses loan ⏳</h2>
+    <p>Bank semak permohonan awak. Biasanya ambil masa <b>3 hingga 7 hari</b>. Awak tak perlu buat apa-apa. Kalau bank minta dokumen tambahan, kami terus WhatsApp awak.</p>
 
-    <h2 id="s5"><span class="n">5 ·</span> Terima kunci 🔑</h2>
-    <p>Kereta dihantar ke rumah, atau ambil di cawangan. Nak tahu kereta dah sampai mana? <a href="/status/">Semak status kereta</a>.</p>
+    <h2 id="s5"><span class="n">5 ·</span> Loan lulus 🎉</h2>
+    <p>Tahniah! Lepas loan lulus, ada 2 benda awak boleh buat:</p>
+    <ul class="plain">
+      <li><span class="e">🔢</span><div><b>Beli nombor plat</b> (kalau nak nombor pilihan)<small>Boleh beli sendiri di <a href="https://public.jpj.gov.my/public/login.zul" target="_blank" rel="noopener">portal JPJeBid</a>.</small></div></li>
+      <li><span class="e">✍️</span><div><b>Sign agreement</b><small>Tandatangan perjanjian loan. Boleh sign di tempat awak.</small></div></li>
+    </ul>
+
+    <h2 id="s6"><span class="n">6 ·</span> Tunggu casis kereta baru 🏭</h2>
+    <p>Kami tunggu <b>nombor casis</b> kereta baru awak masuk. Maksudnya, ada satu kereta betul-betul diperuntukkan untuk awak. Tempoh menunggu ikut model, warna &amp; stok. Kami update awak bila casis dah ada.</p>
+
+    <h2 id="s7"><span class="n">7 ·</span> Buat bayaran 💳</h2>
+    <p>Bila casis dah ada, awak buat bayaran ikut <b>quotation</b>. Semua jumlah dah diterangkan dari awal, jadi tiada kejutan.</p>
+
+    <h2 id="s8"><span class="n">8 ·</span> Daftar kereta 🪪</h2>
+    <p>Kami uruskan <b>pendaftaran JPJ</b> dan nombor plat kereta awak.</p>
+
+    <h2 id="s9"><span class="n">9 ·</span> Set delivery &amp; terima kunci 🔑</h2>
+    <p>Kita set tarikh delivery. Kereta <b>dihantar naik lori ke rumah awak</b>, atau awak ambil sendiri di cawangan. Nak tahu kereta dah sampai tahap mana? <a href="/status/">Semak status kereta</a>.</p>
     <div class="callout green">
       <span class="e">🎉</span>
       <div><b>Siap!</b> Enjoy your journey. Ada apa-apa lepas ni, just get back to us 🤝</div>
     </div>
 
-    <hr />
-
-    <h2 id="model">🚘 Pilih model</h2>
-    <p>Tekan model untuk tengok harga, varian &amp; kira bulanan.</p>
-    <div class="models" id="models"></div>
+    <div class="callout gray">
+      <span class="e">🔗</span>
+      <div><b>Nombor WhatsApp saya:</b> <a data-wa="Salam Shah, saya nak tanya pasal kereta Perodua." href="#">013-725 8194</a></div>
+    </div>
 
     <h2 id="faq">❓ Soalan lazim</h2>
     <details><summary>Ada rebate bulan ni?</summary><div class="ans" id="rebateAns">WhatsApp saya untuk rebate &amp; promo terkini.</div></details>
+    <details><summary>Berapa lama sampai dapat kereta?</summary><div class="ans">Proses loan biasanya 3 hingga 7 hari. Lepas tu bergantung pada bila casis kereta masuk, ikut model, warna &amp; stok. Kami update awak setiap tahap, dan awak boleh <a href="/status/">semak status</a> bila-bila masa.</div></details>
     <details><summary>Saya duduk jauh. Boleh beli juga?</summary><div class="ans">Boleh. Kami urus dari mana-mana negeri, dan kereta dihantar naik lori ke tempat awak, tanpa caj.</div></details>
-    <details><summary>Takut loan tak lulus…</summary><div class="ans">Sebab tu langkah 2 penting. Kami semak DSR dulu sebelum hantar ke bank. Nak faham lebih, baca <a href="/ebook/">ebook percuma: Rahsia Loan Approved</a>.</div></details>
+    <details><summary>Takut loan tak lulus…</summary><div class="ans">Sebab tu <a href="#s2">langkah 2</a> penting. Kami semak DSR dulu sebelum hantar ke bank. Nak faham lebih, baca <a href="/ebook/">ebook percuma: Rahsia Loan Approved</a>.</div></details>
     <details><summary>Ada kos tersembunyi?</summary><div class="ans">Tiada. Semua kos ada dalam quotation dan diterangkan satu-satu sebelum awak bayar.</div></details>
     <details><summary>Saya ada NCD insurans kereta lama. Boleh guna?</summary><div class="ans">Boleh. Kami bantu transfer NCD masa uruskan quotation, supaya premium insurans lebih murah.</div></details>
 
