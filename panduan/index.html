@@ -113,6 +113,16 @@
     details summary:hover { background: var(--hover); }
     details .ans { padding: 2px 4px 10px 26px; }
 
+    .team { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 18px; }
+    .team a { display: flex; flex-direction: column; align-items: center; text-align: center; padding: 14px 6px 12px; border-radius: 6px; text-decoration: none; transition: background .15s; }
+    .team a:hover { background: var(--hover); }
+    .team img { width: 88px; height: 88px; border-radius: 50%; object-fit: cover; border: 3px solid var(--bg); box-shadow: 0 0 0 2px var(--line); }
+    .team a:first-child img { box-shadow: 0 0 0 2px #e8a33d; }
+    .team b { margin-top: 10px; font-size: 14px; font-weight: 700; letter-spacing: .02em; line-height: 1.3; }
+    .team small { margin-top: 3px; padding: 1px 8px; border-radius: 4px; background: var(--blue); font-size: 12.5px; font-weight: 500; }
+    .team a:first-child small { background: var(--yellow); }
+    .team small { white-space: nowrap; }
+    @media (max-width: 520px) { .team { gap: 4px; } .team a { padding: 12px 2px 10px; } .team img { width: 76px; height: 76px; } .team b { font-size: 13px; } .team small { font-size: 12px; padding: 1px 6px; } }
     .sign { display: flex; align-items: center; gap: 12px; margin-top: 18px; }
     .sign img { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; }
     .sign small { display: block; color: var(--mute); font-size: 13px; }
@@ -154,7 +164,13 @@
 
     <div class="callout pink">
       <span class="e">👋</span>
-      <div><b>Hai, saya Shah, Sales Advisor Perodua.</b> Ramai tanya “macam mana nak mula?” dan “lepas ni apa?”. Jadi saya tunjuk flow penuh di sini, dari pilih kereta sampai kunci di tangan. Tak perlu pening, ikut je satu-satu.</div>
+      <div><b>Salam dan hye semua!</b> 😊 Salam pengenalan. Kami dari <b>TSM PERODUA</b>, terdiri daripada <b>SHAH MAHPOB</b>, <b>FENDI</b> dan <b>AISHAH</b>. 😄<br><br>Ramai tanya, “Macam mana proses beli kereta? Rumit tak?” 🤔 Jadi dekat page ni, kami tunjukkan <b>flow penuh</b> proses pembelian kereta idaman awak, sampai dapat kunci. 🔑 Tak perlu pening, ikut je satu persatu. 😊</div>
+    </div>
+
+    <div class="team">
+      <a href="/"><img src="/img/shah.jpg" alt="Shah Mahpob" width="88" height="88" /><b>SHAH MAHPOB</b><small>Ketua Pasukan</small></a>
+      <a href="/aisyah/"><img src="/aisyah/img/aisyah.jpg" alt="Aishah" width="88" height="88" /><b>AISHAH</b><small>Pakar Loan</small></a>
+      <a href="/fendi/"><img src="/fendi/img/fendi.jpg" alt="Fendi" width="88" height="88" /><b>FENDI</b><small>Pakar Loan</small></a>
     </div>
 
     <h2 id="dapat">🎁 Apa awak dapat?</h2>
