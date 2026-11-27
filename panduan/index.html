@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Panduan Beli Perodua | Shah Mahpob</title>
+  <meta name="description" content="Cara beli Perodua dengan Team Shah Mahpob, langkah demi langkah. Senang faham, tiada hidden cost, penghantaran satu Malaysia." />
+  <meta property="og:title" content="Panduan Beli Perodua dengan Shah 🚗" />
+  <meta property="og:description" content="Semua yang awak perlu tahu, dalam satu page. Langkah 1 sampai terima kunci." />
+  <meta property="og:image" content="/img/shah.jpg" />
+  <meta name="theme-color" content="#ffffff" />
+  <style>
+    :root {
+      --font: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol";
+      --bg: #ffffff; --tx: #2c2c2b; --mute: #787774; --line: #e9e9e7; --soft: #f7f6f3; --hover: #efefed;
+      --pink: #fbecee; --yellow: #fbf3db; --green: #edf3ec; --blue: #e7f3f8; --purple: #f6f3f9;
+      --link: #37352f; --wa: #1f9d55; --accent: #d9730d;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --bg: #191919; --tx: #e6e6e4; --mute: #9b9b98; --line: #2f2f2f; --soft: #252525; --hover: #2c2c2c;
+        --pink: #3a2a2e; --yellow: #3a3323; --green: #253129; --blue: #243139; --purple: #2f2a38;
+        --link: #e6e6e4; --wa: #3fcf7e; --accent: #ffa344;
+      }
+    }
+    :root[data-theme="dark"] {
+      --bg: #191919; --tx: #e6e6e4; --mute: #9b9b98; --line: #2f2f2f; --soft: #252525; --hover: #2c2c2c;
+      --pink: #3a2a2e; --yellow: #3a3323; --green: #253129; --blue: #243139; --purple: #2f2a38;
+      --link: #e6e6e4; --wa: #3fcf7e; --accent: #ffa344;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--tx); font: 400 16px/1.5 var(--font); -webkit-font-smoothing: antialiased; }
+    a { color: var(--link); text-decoration: underline; text-decoration-color: var(--mute); text-underline-offset: 3px; }
+    a:hover { text-decoration-color: var(--tx); }
+    b { font-weight: 600; }
+
+    /* top bar */
+    .top { position: sticky; top: 0; z-index: 5; display: flex; align-items: center; justify-content: space-between; gap: 12px; height: 46px; padding: 0 16px; background: var(--bg); font-size: 14px; }
+    .top .crumb { display: flex; align-items: center; gap: 6px; text-decoration: none; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .top .wa-mini { flex: none; padding: 5px 12px; border-radius: 6px; background: var(--wa); color: #fff; font-weight: 600; text-decoration: none; }
+
+    /* cover */
+    /* cover stays light in both themes (like a Notion cover photo); multiply hides the photo's white background */
+    .cover { height: 230px; background: linear-gradient(135deg, #fde6d8 0%, #fbecee 50%, #e7f0fb 100%); display: grid; place-items: end center; overflow: hidden; }
+    .cover img { width: min(520px, 88%); height: auto; display: block; margin-bottom: -6px; mix-blend-mode: multiply; }
+
+    .page { max-width: 708px; margin: 0 auto; padding: 0 16px 80px; }
+    .icon { font-size: 72px; line-height: 1; margin-top: -40px; position: relative; }
+    h1 { margin-top: 14px; font-size: 40px; line-height: 1.2; font-weight: 700; }
+    .caption { margin-top: 6px; color: var(--mute); font-size: 14px; }
+
+    h2 { margin-top: 36px; font-size: 24px; line-height: 1.3; font-weight: 600; scroll-margin-top: 60px; }
+    h2 .n { color: var(--mute); font-weight: 500; }
+    p { margin-top: 8px; }
+    hr { margin: 32px 0 0; border: 0; border-top: 1px solid var(--line); }
+
+    .callout { display: flex; gap: 12px; margin-top: 16px; padding: 16px 18px; border-radius: 6px; }
+    .callout .e { flex: none; font-size: 20px; line-height: 1.4; }
+    .callout.pink { background: var(--pink); } .callout.yellow { background: var(--yellow); }
+    .callout.green { background: var(--green); } .callout.gray { background: var(--soft); }
+
+    ul.plain { list-style: none; margin-top: 10px; }
+    ul.plain li { display: flex; gap: 10px; padding: 4px 0; }
+    ul.plain li .e { flex: none; width: 24px; text-align: center; }
+    ul.plain li small { display: block; color: var(--mute); font-size: 14px; }
+
+    .todo { list-style: none; margin-top: 10px; }
+    .todo li { display: flex; gap: 10px; align-items: flex-start; padding: 3px 0; }
+    .todo input { flex: none; width: 18px; height: 18px; margin-top: 4px; accent-color: #2383e2; cursor: pointer; }
+    .todo input:checked + span { color: var(--mute); text-decoration: line-through; }
+
+    .code { position: relative; margin-top: 12px; padding: 38px 18px 18px; border-radius: 6px; background: var(--soft); font: 14px/1.6 ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace; white-space: pre-wrap; word-break: break-word; }
+    .code button { position: absolute; top: 8px; right: 8px; padding: 3px 10px; border: 1px solid var(--line); border-radius: 5px; background: var(--bg); color: var(--mute); font: 500 12px var(--font); cursor: pointer; }
+    .code button:hover { color: var(--tx); }
+
+    .btn { display: inline-flex; align-items: center; gap: 8px; margin-top: 12px; padding: 9px 16px; border-radius: 6px; background: var(--wa); color: #fff; font-weight: 600; font-size: 15px; text-decoration: none; }
+    .btn.ghost { background: transparent; color: var(--tx); border: 1px solid var(--line); }
+    .btn.ghost:hover { background: var(--hover); }
+    .btns { display: flex; flex-wrap: wrap; gap: 0 10px; }
+
+    .models { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; margin-top: 14px; }
+    .model { display: block; border: 1px solid var(--line); border-radius: 6px; overflow: hidden; text-decoration: none; transition: background .15s; }
+    .model:hover { background: var(--hover); }
+    .model .pic { height: 88px; background: var(--soft); display: grid; place-items: center; }
+    .model .pic img { max-width: 92%; max-height: 80px; mix-blend-mode: multiply; }
+    .model .pic { background: #f7f6f3; }
+    .model .pic.none { font-size: 34px; }
+    .model .t { padding: 8px 10px 10px; font-size: 14px; }
+    .model .t b { display: block; }
+    .model .t small { color: var(--mute); font-size: 12.5px; }
+
+    /* flow map */
+    .flow { list-style: none; margin-top: 14px; position: relative; }
+    .flow::before { content: ""; position: absolute; left: 15px; top: 18px; bottom: 18px; width: 2px; background: var(--line); }
+    .flow li a { position: relative; display: flex; align-items: center; gap: 12px; padding: 7px 8px 7px 0; border-radius: 6px; text-decoration: none; }
+    .flow li a:hover { background: var(--hover); }
+    .flow i { flex: none; width: 32px; height: 32px; border-radius: 50%; background: var(--bg); border: 2px solid var(--line); display: grid; place-items: center; font-style: normal; font-weight: 600; font-size: 14px; position: relative; }
+    .flow span { flex: 1; min-width: 0; }
+    .flow span b { display: block; font-size: 16px; font-weight: 600; line-height: 1.35; }
+    .flow span small { display: block; color: var(--mute); font-size: 13.5px; line-height: 1.4; }
+    .tag { flex: none; padding: 1px 8px; border-radius: 4px; font: 500 12.5px/1.6 var(--font); font-style: normal; }
+    .tag.you { background: var(--yellow); } .tag.us { background: var(--blue); } .tag.bank { background: var(--purple); }
+    .flow li:nth-child(5) i { border-color: #4dab9a; }
+    .legend { margin-top: 10px; display: flex; flex-wrap: wrap; gap: 6px 14px; color: var(--mute); font-size: 13px; }
+
+    details { margin-top: 4px; border-radius: 4px; }
+    details summary { list-style: none; display: flex; gap: 8px; align-items: flex-start; padding: 5px 4px; cursor: pointer; font-weight: 500; border-radius: 4px; }
+    details summary::-webkit-details-marker { display: none; }
+    details summary::before { content: "▶"; flex: none; font-size: 11px; line-height: 26px; color: var(--mute); transition: transform .15s; }
+    details[open] summary::before { transform: rotate(90deg); }
+    details summary:hover { background: var(--hover); }
+    details .ans { padding: 2px 4px 10px 26px; }
+
+    .sign { display: flex; align-items: center; gap: 12px; margin-top: 18px; }
+    .sign img { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; }
+    .sign small { display: block; color: var(--mute); font-size: 13px; }
+    .foot { margin-top: 40px; padding-top: 16px; border-top: 1px solid var(--line); color: var(--mute); font-size: 13px; }
+
+    /* contents dashes (desktop), like Notion */
+    .toc { position: fixed; right: 18px; top: 50%; transform: translateY(-50%); display: none; flex-direction: column; gap: 10px; z-index: 4; }
+    .toc a { display: block; width: 16px; height: 2px; background: var(--line); border-radius: 2px; text-decoration: none; position: relative; }
+    .toc a.on { background: var(--tx); width: 20px; }
+    .toc a span { position: absolute; right: 28px; top: 50%; transform: translateY(-50%); white-space: nowrap; padding: 3px 8px; border-radius: 4px; background: var(--tx); color: var(--bg); font-size: 12px; opacity: 0; pointer-events: none; transition: opacity .15s; }
+    .toc a:hover span { opacity: 1; }
+    @media (min-width: 1100px) { .toc { display: flex; } }
+
+    /* phone sizes measured from Notion's mobile page: title 28px, headings 20px, body 16px/22px */
+    @media (max-width: 520px) {
+      body { line-height: 1.375; }
+      .cover { height: 160px; }
+      .icon { font-size: 56px; margin-top: -30px; }
+      h1 { font-size: 28px; }
+      h2 { font-size: 20px; margin-top: 30px; }
+      .caption, .flow span small, ul.plain li small { font-size: 14px; }
+      .callout { padding: 14px 14px; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  </style>
+</head>
+<body>
+  <div class="top">
+    <a class="crumb" href="/">🚗 <span>Panduan Beli Perodua</span></a>
+    <a class="wa-mini" data-wa="Salam Shah, saya baca Panduan Beli Perodua. Saya nak tanya." href="#">WhatsApp</a>
+  </div>
+
+  <div class="cover"><img src="/myvi/img/myvi-cranberry-red.jpg" alt="Perodua Myvi" width="690" height="363" /></div>
+
+  <main class="page">
+    <div class="icon" aria-hidden="true">🚗</div>
+    <h1>Panduan Beli Perodua ✨</h1>
+    <p class="caption">Semua yang awak perlu tahu, dalam satu page. Baca 5 minit je 🧡</p>
+
+    <div class="callout pink">
+      <span class="e">👋</span>
+      <div><b>Hai, saya Shah, Sales Advisor Perodua.</b> Ramai tanya “macam mana nak mula?” dan “lepas ni apa?”. Jadi saya tunjuk flow penuh di sini, dari pilih kereta sampai kunci di tangan. Tak perlu pening, ikut je satu-satu.</div>
+    </div>
+
+    <h2 id="dapat">🎁 Apa awak dapat?</h2>
+    <ul class="plain">
+      <li><span class="e">🚚</span><div><b>Hantar percuma satu Malaysia</b><small>Kereta naik lori sampai depan rumah. Perlis sampai Johor, Sabah &amp; Sarawak.</small></div></li>
+      <li><span class="e">🧾</span><div><b>Tiada hidden cost</b><small>Setiap kos diterangkan. Tiada add-on yang awak tak minta.</small></div></li>
+      <li><span class="e">🏦</span><div><b>Team loan yang teliti</b><small>Kami kira DSR &amp; bulanan dulu, supaya credit scoring awak tak rosak.</small></div></li>
+      <li><span class="e">🛡️</span><div><b>Bantu transfer NCD</b><small>Jimat premium insurans kereta baru.</small></div></li>
+    </ul>
+
+    <hr />
+
+    <h2 id="flow">🗺️ Flow beli kereta</h2>
+    <p>Dari mula sampai kereta di rumah, ada 9 langkah. Tekan mana-mana langkah untuk baca lebih.</p>
+    <div class="legend"><span><em class="tag you">Awak</em> awak buat</span><span><em class="tag us">Kami</em> kami uruskan</span><span><em class="tag bank">Bank</em> bank proses</span></div>
+    <ol class="flow">
+      <li><a href="#s1"><i>1</i><span><b>Kenali kereta</b><small>Pilih model &amp; varian</small></span><em class="tag you">Awak</em></a></li>
+      <li><a href="#s2"><i>2</i><span><b>Tetapkan bajet bulanan</b><small>Kira bulanan &amp; semak kelayakan</small></span><em class="tag you">Awak</em></a></li>
+      <li><a href="#s3"><i>3</i><span><b>Submit loan &amp; booking</b><small>Hantar 4 dokumen</small></span><em class="tag you">Awak</em></a></li>
+      <li><a href="#s4"><i>4</i><span><b>Tunggu proses loan</b><small>Lebih kurang 3 hingga 7 hari</small></span><em class="tag bank">Bank</em></a></li>
+      <li><a href="#s5"><i>5</i><span><b>Loan lulus 🎉</b><small>Beli nombor plat &amp; sign agreement</small></span><em class="tag you">Awak</em></a></li>
+      <li><a href="#s6"><i>6</i><span><b>Tunggu casis kereta baru</b><small>Kereta awak diperuntukkan</small></span><em class="tag us">Kami</em></a></li>
+      <li><a href="#s7"><i>7</i><span><b>Buat bayaran</b><small>Bila casis dah ada</small></span><em class="tag you">Awak</em></a></li>
+      <li><a href="#s8"><i>8</i><span><b>Daftar kereta</b><small>Pendaftaran JPJ</small></span><em class="tag us">Kami</em></a></li>
+      <li><a href="#s9"><i>9</i><span><b>Set delivery &amp; terima kunci 🔑</b><small>Hantar ke rumah atau ambil di cawangan</small></span><em class="tag us">Kami</em></a></li>
+    </ol>
+
+    <hr />
+
+    <h2 id="s1"><span class="n">1 ·</span> Kenali kereta 🚗</h2>
+    <p>Mula dengan pilih <b>model</b> yang sesuai dengan keluarga &amp; kegunaan awak. Lepas tu tengok beza setiap <b>varian</b>. Tekan model untuk tengok harga, varian &amp; warna.</p>
+    <div class="models" id="models"></div>
+    <div class="callout yellow">
+      <span class="e">💡</span>
+      <div>Belum pasti model mana? Cuba <a href="/kuiz/">kuiz 1 minit</a> ni dulu, nanti dia cadangkan model yang sesuai.</div>
+    </div>
+
+    <h2 id="s2"><span class="n">2 ·</span> Tetapkan bajet bulanan 🧮</h2>
+    <p>Jangan ikut harga kereta je. Fikir <b>bulanan berapa yang selesa</b> untuk awak bayar setiap bulan. Kemudian semak <b>boleh lulus atau tak</b>, sebelum hantar ke bank.</p>
+    <div class="btns">
+      <a class="btn ghost" href="/kalkulator/">🧮 Kira bulanan</a>
+      <a class="btn ghost" href="/semak-layak/">✅ Semak kelayakan (DSR)</a>
+    </div>
+    <p style="margin-top:18px">Dah tahu model &amp; bajet? <b>Copy</b> mesej ni dan hantar ke WhatsApp saya:</p>
+    <div class="code" id="msg">Salam Shah, saya berminat nak beli Perodua.
+Model: ____
+Bajet bulanan: RM____
+Negeri: ____</div>
+    <div class="btns">
+      <a class="btn" id="waMsg" href="#">💬 Hantar ke WhatsApp</a>
+    </div>
+
+    <h2 id="s3"><span class="n">3 ·</span> Submit loan &amp; booking 📄</h2>
+    <p>Sediakan 4 dokumen ni. Tick bila dah siap:</p>
+    <ul class="todo">
+      <li><input type="checkbox" id="d1" /><span><label for="d1">Kad pengenalan</label></span></li>
+      <li><input type="checkbox" id="d2" /><span><label for="d2">Lesen memandu</label></span></li>
+      <li><input type="checkbox" id="d3" /><span><label for="d3">Slip gaji 3 bulan terkini</label></span></li>
+      <li><input type="checkbox" id="d4" /><span><label for="d4">Penyata bank 3 bulan terkini</label></span></li>
+    </ul>
+    <p>Hantar semua dalam <b>satu PDF</b> yang jelas, siap dalam 3 minit:</p>
+    <div class="btns"><a class="btn ghost" href="/dokumen/">📤 Hantar dokumen loan</a></div>
+    <p style="margin-top:14px">Serentak dengan tu, kami buat <b>booking</b> dan hantar <b>quotation penuh</b> termasuk insurans. Ada kereta lama? Boleh <a href="/trade-in/">trade-in</a>, tak perlu urus JPJ &amp; PUSPAKOM sendiri.</p>
+
+    <h2 id="s4"><span class="n">4 ·</span> Tunggu proses loan ⏳</h2>
+    <p>Bank semak permohonan awak. Biasanya ambil masa <b>3 hingga 7 hari</b>. Awak tak perlu buat apa-apa. Kalau bank minta dokumen tambahan, kami terus WhatsApp awak.</p>
+
+    <h2 id="s5"><span class="n">5 ·</span> Loan lulus 🎉</h2>
+    <p>Tahniah! Lepas loan lulus, ada 2 benda awak boleh buat:</p>
+    <ul class="plain">
+      <li><span class="e">🔢</span><div><b>Beli nombor plat</b> (kalau nak nombor pilihan)<small>Boleh beli sendiri di <a href="https://public.jpj.gov.my/public/login.zul" target="_blank" rel="noopener">portal JPJeBid</a>.</small></div></li>
+      <li><span class="e">✍️</span><div><b>Sign agreement</b><small>Tandatangan perjanjian loan. Boleh sign di tempat awak.</small></div></li>
+    </ul>
+
+    <h2 id="s6"><span class="n">6 ·</span> Tunggu casis kereta baru 🏭</h2>
+    <p>Kami tunggu <b>nombor casis</b> kereta baru awak masuk. Maksudnya, ada satu kereta betul-betul diperuntukkan untuk awak. Tempoh menunggu ikut model, warna &amp; stok. Kami update awak bila casis dah ada.</p>
+
+    <h2 id="s7"><span class="n">7 ·</span> Buat bayaran 💳</h2>
+    <p>Bila casis dah ada, awak buat bayaran ikut <b>quotation</b>. Semua jumlah dah diterangkan dari awal, jadi tiada kejutan.</p>
+
+    <h2 id="s8"><span class="n">8 ·</span> Daftar kereta 🪪</h2>
+    <p>Kami uruskan <b>pendaftaran JPJ</b> dan nombor plat kereta awak.</p>
+
+    <h2 id="s9"><span class="n">9 ·</span> Set delivery &amp; terima kunci 🔑</h2>
+    <p>Kita set tarikh delivery. Kereta <b>dihantar naik lori ke rumah awak</b>, atau awak ambil sendiri di cawangan. Nak tahu kereta dah sampai tahap mana? <a href="/status/">Semak status kereta</a>.</p>
+    <div class="callout green">
+      <span class="e">🎉</span>
+      <div><b>Siap!</b> Enjoy your journey. Ada apa-apa lepas ni, just get back to us 🤝</div>
+    </div>
+
+    <div class="callout gray">
+      <span class="e">🔗</span>
+      <div><b>Nombor WhatsApp saya:</b> <a data-wa="Salam Shah, saya nak tanya pasal kereta Perodua." href="#">013-725 8194</a></div>
+    </div>
+
+    <h2 id="faq">❓ Soalan lazim</h2>
+    <details><summary>Ada rebate bulan ni?</summary><div class="ans" id="rebateAns">WhatsApp saya untuk rebate &amp; promo terkini.</div></details>
+    <details><summary>Berapa lama sampai dapat kereta?</summary><div class="ans">Proses loan biasanya 3 hingga 7 hari. Lepas tu bergantung pada bila casis kereta masuk, ikut model, warna &amp; stok. Kami update awak setiap tahap, dan awak boleh <a href="/status/">semak status</a> bila-bila masa.</div></details>
+    <details><summary>Saya duduk jauh. Boleh beli juga?</summary><div class="ans">Boleh. Kami urus dari mana-mana negeri, dan kereta dihantar naik lori ke tempat awak, tanpa caj.</div></details>
+    <details><summary>Takut loan tak lulus…</summary><div class="ans">Sebab tu <a href="#s2">langkah 2</a> penting. Kami semak DSR dulu sebelum hantar ke bank. Nak faham lebih, baca <a href="/ebook/">ebook percuma: Rahsia Loan Approved</a>.</div></details>
+    <details><summary>Ada kos tersembunyi?</summary><div class="ans">Tiada. Semua kos ada dalam quotation dan diterangkan satu-satu sebelum awak bayar.</div></details>
+    <details><summary>Saya ada NCD insurans kereta lama. Boleh guna?</summary><div class="ans">Boleh. Kami bantu transfer NCD masa uruskan quotation, supaya premium insurans lebih murah.</div></details>
+
+    <div class="sign">
+      <img src="/img/shah.jpg" alt="Shah Mahpob" width="44" height="44" />
+      <div><b>Shah Mahpob</b><small>Ketua Team · Sales Advisor Perodua · <a href="https://www.tiktok.com/@salesteamperodua" target="_blank" rel="noopener">TikTok @salesteamperodua</a></small></div>
+    </div>
+
+    <p class="foot">Laman peribadi Sales Advisor. Bukan laman rasmi Perodua. Harga, rebate &amp; promo tertakluk pada terma semasa.</p>
+  </main>
+
+  <nav class="toc" id="toc" aria-label="Kandungan"></nav>
+
+  <script src="/rebate.js"></script>
+  <script>
+    const WA = "60137258194";
+    const wa = (m) => `https://wa.me/${WA}?text=${encodeURIComponent(m)}`;
+    document.querySelectorAll("[data-wa]").forEach((a) => { a.href = wa(a.dataset.wa); a.target = "_blank"; a.rel = "noopener"; });
+
+    // Step 1: copy + send template message
+    const msg = document.getElementById("msg");
+    const copy = document.createElement("button"); copy.type = "button"; copy.textContent = "Copy";
+    copy.onclick = async () => {
+      try { await navigator.clipboard.writeText(msg.firstChild.textContent); copy.textContent = "Copied ✓"; }
+      catch { copy.textContent = "Tekan lama untuk copy"; }
+      setTimeout(() => (copy.textContent = "Copy"), 1800);
+    };
+    msg.appendChild(copy);
+    const waMsg = document.getElementById("waMsg");
+    waMsg.href = wa(msg.firstChild.textContent); waMsg.target = "_blank"; waMsg.rel = "noopener";
+
+    // Models
+    const MODELS = [
+      ["Axia", "Hatchback ekonomi", "/axia/", "/axia/img/axia-coral-blue.jpg"],
+      ["Bezza", "Sedan jimat", "/bezza/", "/bezza/img/bezza-ocean-blue.jpg"],
+      ["Myvi", "Hatchback popular", "/myvi/", "/myvi/img/myvi-cranberry-red.jpg"],
+      ["Ativa", "SUV kompak", "/ativa/", "/ativa/img/ativa-cobalt-blue.jpg"],
+      ["Traz", "SUV 1.5L baharu", "/traz/", "/traz/img/traz-electric-blue-2tone.jpg"],
+      ["Alza", "MPV 7 tempat duduk", "/alza/", "/alza/img/alza-garnet-red.jpg"],
+      ["Aruz", "SUV 7 tempat duduk", null, null],
+    ];
+    const box = document.getElementById("models");
+    MODELS.forEach(([n, d, href, img]) => {
+      const a = document.createElement("a"); a.className = "model";
+      if (href) a.href = href; else { a.href = wa(`Salam Shah, saya nak tanya harga & promo Perodua ${n}.`); a.target = "_blank"; a.rel = "noopener"; }
+      a.innerHTML = `<div class="pic${img ? "" : " none"}">${img ? `<img src="${img}" alt="Perodua ${n}" loading="lazy">` : "🚙"}</div><div class="t"><b>${n}</b><small>${d}${href ? "" : " · tanya harga"}</small></div>`;
+      box.appendChild(a);
+    });
+
+    // Rebate answer from rebate.js (updated monthly)
+    try {
+      const R = window.REBATE;
+      if (R && Date.now() < Date.parse(R.tamat) && R.sehingga) {
+        const end = new Date(R.tamat).toLocaleDateString("ms-MY", { day: "numeric", month: "long", year: "numeric", timeZone: "Asia/Kuala_Lumpur" });
+        document.getElementById("rebateAns").innerHTML = `Ada. Rebate sehingga <b>RM${R.sehingga.toLocaleString("en-US")}</b>, sampai ${end} (sementara stok ada). Jumlah ikut model &amp; varian. <a href="/kalkulator/">Kira bulanan dengan rebate</a>.`;
+      }
+    } catch {}
+
+    // Notion-style contents dashes
+    const toc = document.getElementById("toc");
+    const hs = [...document.querySelectorAll("h2[id]")];
+    hs.forEach((h) => { const a = document.createElement("a"); a.href = "#" + h.id; a.innerHTML = `<span>${h.textContent}</span>`; toc.appendChild(a); });
+    const links = [...toc.children];
+    const mark = () => { let i = 0; hs.forEach((h, k) => { if (h.getBoundingClientRect().top < 160) i = k; }); links.forEach((l, k) => l.classList.toggle("on", k === i)); };
+    addEventListener("scroll", mark, { passive: true }); mark();
+  </script>
+</body>
+</html>
